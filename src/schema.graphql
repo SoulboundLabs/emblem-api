@@ -1987,6 +1987,70 @@ type Mutation {
     """
     input: UpdateRoleByIdInput!
   ): UpdateRolePayload
+
+  """Upserts a single `Account`."""
+  upsertAccount(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpsertAccountInput!
+  ): UpsertAccountPayload
+
+  """Upserts a single `Award`."""
+  upsertAward(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpsertAwardInput!
+  ): UpsertAwardPayload
+
+  """Upserts a single `Definition`."""
+  upsertDefinition(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpsertDefinitionInput!
+  ): UpsertDefinitionPayload
+
+  """Upserts a single `KnexMigration`."""
+  upsertKnexMigration(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpsertKnexMigrationInput!
+  ): UpsertKnexMigrationPayload
+
+  """Upserts a single `KnexMigrationsLock`."""
+  upsertKnexMigrationsLock(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpsertKnexMigrationsLockInput!
+  ): UpsertKnexMigrationsLockPayload
+
+  """Upserts a single `Protocol`."""
+  upsertProtocol(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpsertProtocolInput!
+  ): UpsertProtocolPayload
+
+  """Upserts a single `Ranking`."""
+  upsertRanking(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpsertRankingInput!
+  ): UpsertRankingPayload
+
+  """Upserts a single `Role`."""
+  upsertRole(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpsertRoleInput!
+  ): UpsertRolePayload
 }
 
 """An object with a globally unique `ID`."""
@@ -3404,6 +3468,243 @@ type UpdateRolePayload {
   query: Query
 
   """The `Role` that was updated by this mutation."""
+  role: Role
+}
+
+"""All input for the upsert `Account` mutation."""
+input UpsertAccountInput {
+  """The `Account` to be upserted by this mutation."""
+  account: AccountInput!
+
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+}
+
+"""The output of our upsert `Account` mutation."""
+type UpsertAccountPayload {
+  """The `Account` that were upserted by this mutation."""
+  account: Account
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the upsert `Award` mutation."""
+input UpsertAwardInput {
+  """The `Award` to be upserted by this mutation."""
+  award: AwardInput!
+
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+}
+
+"""The output of our upsert `Award` mutation."""
+type UpsertAwardPayload {
+  """Reads a single `Account` that is related to this `Award`."""
+  accountByAccountId: Account
+
+  """The `Award` that were upserted by this mutation."""
+  award: Award
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """Reads a single `Definition` that is related to this `Award`."""
+  definitionByDefinitionId: Definition
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the upsert `Definition` mutation."""
+input UpsertDefinitionInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Definition` to be upserted by this mutation."""
+  definition: DefinitionInput!
+}
+
+"""The output of our upsert `Definition` mutation."""
+type UpsertDefinitionPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Definition` that were upserted by this mutation."""
+  definition: Definition
+
+  """Reads a single `Protocol` that is related to this `Definition`."""
+  protocolByProtocolId: Protocol
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Role` that is related to this `Definition`."""
+  roleByRoleId: Role
+}
+
+"""All input for the upsert `KnexMigration` mutation."""
+input UpsertKnexMigrationInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `KnexMigration` to be upserted by this mutation."""
+  knexMigration: KnexMigrationInput!
+}
+
+"""The output of our upsert `KnexMigration` mutation."""
+type UpsertKnexMigrationPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `KnexMigration` that were upserted by this mutation."""
+  knexMigration: KnexMigration
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the upsert `KnexMigrationsLock` mutation."""
+input UpsertKnexMigrationsLockInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `KnexMigrationsLock` to be upserted by this mutation."""
+  knexMigrationsLock: KnexMigrationsLockInput!
+}
+
+"""The output of our upsert `KnexMigrationsLock` mutation."""
+type UpsertKnexMigrationsLockPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `KnexMigrationsLock` that were upserted by this mutation."""
+  knexMigrationsLock: KnexMigrationsLock
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the upsert `Protocol` mutation."""
+input UpsertProtocolInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Protocol` to be upserted by this mutation."""
+  protocol: ProtocolInput!
+}
+
+"""The output of our upsert `Protocol` mutation."""
+type UpsertProtocolPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Protocol` that were upserted by this mutation."""
+  protocol: Protocol
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the upsert `Ranking` mutation."""
+input UpsertRankingInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Ranking` to be upserted by this mutation."""
+  ranking: RankingInput!
+}
+
+"""The output of our upsert `Ranking` mutation."""
+type UpsertRankingPayload {
+  """Reads a single `Account` that is related to this `Ranking`."""
+  accountByAccountId: Account
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """Reads a single `Protocol` that is related to this `Ranking`."""
+  protocolByProtocolId: Protocol
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """The `Ranking` that were upserted by this mutation."""
+  ranking: Ranking
+}
+
+"""All input for the upsert `Role` mutation."""
+input UpsertRoleInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Role` to be upserted by this mutation."""
+  role: RoleInput!
+}
+
+"""The output of our upsert `Role` mutation."""
+type UpsertRolePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """Reads a single `Protocol` that is related to this `Role`."""
+  protocolByProtocolId: Protocol
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """The `Role` that were upserted by this mutation."""
   role: Role
 }
 

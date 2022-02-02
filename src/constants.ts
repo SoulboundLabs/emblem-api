@@ -1,6 +1,5 @@
 import { Contract } from "@ethersproject/contracts";
 import { InfuraProvider } from "@ethersproject/providers";
-import * as functions from "firebase-functions";
 import ReverseRecordsABI from "./abis/ReverseRecords.json";
 
 /* Protocols */
@@ -25,12 +24,13 @@ export const BADGE_TRACKS = "badgeTracks";
 export const BADGE_AWARDS = "badgesAwarded";
 
 /* Subgraphs */
-const subgraph = (name: string): string => functions.config().subgraph[name];
-export const subgraphTheGraphBadges = subgraph("badges-the-graph-mainnet");
-export const subgraphTheGraphNetwork = subgraph("the-graph-network");
+export const subgraphTheGraphBadges = process.env
+  .SUBGRAPH_THE_GRAPH_BADGES as string;
+export const subgraphTheGraphNetwork = process.env
+  .SUBGRAPH_THE_GRAPH_NETWORK as string;
 
 /* Smart Contracts */
-const infuraKey = functions.config().infura.key;
+const infuraKey = process.env.INFURA_KEY;
 export const mainnetProvider = new InfuraProvider("mainnet", infuraKey);
 export const ensRecordsMainnetAddress =
   "0x3671aE578E63FdF66ad4F3E12CC0c0d71Ac7510C";
