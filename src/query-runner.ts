@@ -32,7 +32,7 @@ export async function makeQueryRunner(
     operationName = null
   ) => {
     // Whatever you need to appease your pgSettings function, if you have one, should be put in here.
-    const fakeRequest = { headers: {} };
+    // const fakeRequest = { headers: {} };
 
     // pgSettings and additionalContextFromRequest cannot be functions at this point
     // const pgSettings =

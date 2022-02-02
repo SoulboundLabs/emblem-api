@@ -1,10 +1,10 @@
 import express = require("express");
 import { Request, Response } from "express";
 import { postgraphile } from "postgraphile";
-import { database, options, port, schemas } from "./database";
+import { connectionString, options, port, schemas } from "./database";
 import { makeQueryRunner } from "./query-runner";
 
-const middleware = postgraphile(database, schemas, options);
+const middleware = postgraphile(connectionString, schemas, options);
 
 const app = express();
 app.use(middleware);
@@ -14,7 +14,7 @@ const server = app.listen(port, () => {
 });
 
 const populateAccount = async () => {
-  const queryRunner = await makeQueryRunner(database, schemas, options);
+  const queryRunner = await makeQueryRunner(connectionString, schemas, options);
 
   const result = await queryRunner.query(`query {allAccounts {
     edges {

@@ -1,13 +1,9 @@
 import PgPubsub from "@graphile/pg-pubsub";
-import {
-  gql,
-  makeExtendSchemaPlugin,
-  makePluginHook,
-  PostGraphileOptions,
-} from "postgraphile";
+import { makePluginHook, PostGraphileOptions } from "postgraphile";
+const PostGraphileNestedMutations = require("postgraphile-plugin-nested-mutations");
 
 // Connection string (or pg.Pool) for PostGraphile to use
-export const database: string = process.env.DATABASE_URL || "emblem";
+export const connectionString: string = process.env.DATABASE_URL || "emblem";
 
 // Database schemas to use
 export const schemas: string | string[] = ["public"];
@@ -15,36 +11,10 @@ export const schemas: string | string[] = ["public"];
 // @ts-ignore `@graphile/pg-pubsub` pulls types from npm `postgraphile` module rather than local version.
 const pluginHook = makePluginHook([PgPubsub]);
 
-const MySubscriptionPlugin = makeExtendSchemaPlugin((build) => {
-  return {
-    typeDefs: gql`
-      type TimePayload {
-        currentTimestamp: String
-        query: Query
-      }
-      extend type Subscription {
-        time: TimePayload @pgSubscription(topic: "time")
-      }
-    `,
-    resolvers: {
-      Subscription: {
-        time(event) {
-          return event;
-        },
-      },
-      TimePayload: {
-        query() {
-          return build.$$isQuery;
-        },
-      },
-    },
-  };
-});
-
 // PostGraphile options; see https://www.graphile.org/postgraphile/usage-library/#api-postgraphilepgconfig-schemaname-options
 export const options: PostGraphileOptions = {
   pluginHook,
-  appendPlugins: [MySubscriptionPlugin],
+  appendPlugins: [PostGraphileNestedMutations],
   pgSettings(req) {
     // Adding this to ensure that all servers pass through the request in a
     // good enough way that we can extract headers.

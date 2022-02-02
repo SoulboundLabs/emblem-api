@@ -65,6 +65,16 @@ type Account implements Node {
   ): RankingsConnection!
 }
 
+"""The fields on `account` to look up the row to connect."""
+input AccountAccountsPkeyConnect {
+  id: String!
+}
+
+"""The fields on `account` to look up the row to delete."""
+input AccountAccountsPkeyDelete {
+  id: String!
+}
+
 """
 A condition to be used against `Account` object types. All fields are tested for equality and combined with a logical ‘and.’
 """
@@ -78,7 +88,69 @@ input AccountCondition {
 
 """An input for mutations affecting `Account`"""
 input AccountInput {
+  awardsUsingId: AwardsAccountIdForeignInverseInput
   ens: String
+  id: String!
+  rankingsUsingId: RankingsAccountIdForeignInverseInput
+}
+
+"""The globally unique `ID` look up for the row to connect."""
+input AccountNodeIdConnect {
+  """
+  The globally unique `ID` which identifies a single `account` to be connected.
+  """
+  nodeId: ID!
+}
+
+"""The globally unique `ID` look up for the row to delete."""
+input AccountNodeIdDelete {
+  """
+  The globally unique `ID` which identifies a single `account` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""The globally unique `ID` look up for the row to update."""
+input AccountOnAwardForAwardsAccountIdForeignNodeIdUpdate {
+  """
+  An object where the defined keys will be set on the `award` being updated.
+  """
+  awardPatch: AwardPatch!
+
+  """
+  The globally unique `ID` which identifies a single `award` to be connected.
+  """
+  nodeId: ID!
+}
+
+"""The fields on `account` to look up the row to update."""
+input AccountOnAwardForAwardsAccountIdForeignUsingAccountsPkeyUpdate {
+  """
+  An object where the defined keys will be set on the `account` being updated.
+  """
+  accountPatch: updateAccountOnAwardForAwardsAccountIdForeignPatch!
+  id: String!
+}
+
+"""The globally unique `ID` look up for the row to update."""
+input AccountOnRankingForRankingsAccountIdForeignNodeIdUpdate {
+  """
+  The globally unique `ID` which identifies a single `ranking` to be connected.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `ranking` being updated.
+  """
+  rankingPatch: RankingPatch!
+}
+
+"""The fields on `account` to look up the row to update."""
+input AccountOnRankingForRankingsAccountIdForeignUsingAccountsPkeyUpdate {
+  """
+  An object where the defined keys will be set on the `account` being updated.
+  """
+  accountPatch: updateAccountOnRankingForRankingsAccountIdForeignPatch!
   id: String!
 }
 
@@ -86,8 +158,10 @@ input AccountInput {
 Represents an update to a `Account`. Fields that are set will be updated.
 """
 input AccountPatch {
+  awardsUsingId: AwardsAccountIdForeignInverseInput
   ens: String
   id: String
+  rankingsUsingId: RankingsAccountIdForeignInverseInput
 }
 
 """A connection to a list of `Account` values."""
@@ -147,6 +221,16 @@ type Award implements Node {
   transactionHash: String
 }
 
+"""The fields on `award` to look up the row to connect."""
+input AwardAwardsPkeyConnect {
+  id: Int!
+}
+
+"""The fields on `award` to look up the row to delete."""
+input AwardAwardsPkeyDelete {
+  id: Int!
+}
+
 """
 A condition to be used against `Award` object types. All fields are tested for equality and combined with a logical ‘and.’
 """
@@ -175,13 +259,75 @@ input AwardCondition {
 
 """An input for mutations affecting `Award`"""
 input AwardInput {
-  accountId: String!
+  accountId: String
+  accountToAccountId: AwardsAccountIdForeignInput
   awardNumber: String
   blockAwarded: Int
-  definitionId: Int!
+  definitionId: Int
+  definitionToDefinitionId: AwardsDefinitionIdForeignInput
   globalAwardNumber: String
   id: Int
   transactionHash: String
+}
+
+"""The globally unique `ID` look up for the row to connect."""
+input AwardNodeIdConnect {
+  """
+  The globally unique `ID` which identifies a single `award` to be connected.
+  """
+  nodeId: ID!
+}
+
+"""The globally unique `ID` look up for the row to delete."""
+input AwardNodeIdDelete {
+  """
+  The globally unique `ID` which identifies a single `award` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""The globally unique `ID` look up for the row to update."""
+input AwardOnAwardForAwardsAccountIdForeignNodeIdUpdate {
+  """
+  An object where the defined keys will be set on the `account` being updated.
+  """
+  accountPatch: AccountPatch!
+
+  """
+  The globally unique `ID` which identifies a single `account` to be connected.
+  """
+  nodeId: ID!
+}
+
+"""The fields on `award` to look up the row to update."""
+input AwardOnAwardForAwardsAccountIdForeignUsingAwardsPkeyUpdate {
+  """
+  An object where the defined keys will be set on the `award` being updated.
+  """
+  awardPatch: updateAwardOnAwardForAwardsAccountIdForeignPatch!
+  id: Int!
+}
+
+"""The globally unique `ID` look up for the row to update."""
+input AwardOnAwardForAwardsDefinitionIdForeignNodeIdUpdate {
+  """
+  An object where the defined keys will be set on the `definition` being updated.
+  """
+  definitionPatch: DefinitionPatch!
+
+  """
+  The globally unique `ID` which identifies a single `definition` to be connected.
+  """
+  nodeId: ID!
+}
+
+"""The fields on `award` to look up the row to update."""
+input AwardOnAwardForAwardsDefinitionIdForeignUsingAwardsPkeyUpdate {
+  """
+  An object where the defined keys will be set on the `award` being updated.
+  """
+  awardPatch: updateAwardOnAwardForAwardsDefinitionIdForeignPatch!
+  id: Int!
 }
 
 """
@@ -189,12 +335,103 @@ Represents an update to a `Award`. Fields that are set will be updated.
 """
 input AwardPatch {
   accountId: String
+  accountToAccountId: AwardsAccountIdForeignInput
   awardNumber: String
   blockAwarded: Int
   definitionId: Int
+  definitionToDefinitionId: AwardsDefinitionIdForeignInput
   globalAwardNumber: String
   id: Int
   transactionHash: String
+}
+
+"""The `account` to be created by this mutation."""
+input AwardsAccountIdForeignAccountsCreateInput {
+  awardsUsingId: AwardsAccountIdForeignInverseInput
+  ens: String
+  id: String!
+  rankingsUsingId: RankingsAccountIdForeignInverseInput
+}
+
+"""The `award` to be created by this mutation."""
+input AwardsAccountIdForeignAwardsCreateInput {
+  accountToAccountId: AwardsAccountIdForeignInput
+  awardNumber: String
+  blockAwarded: Int
+  definitionId: Int
+  definitionToDefinitionId: AwardsDefinitionIdForeignInput
+  globalAwardNumber: String
+  id: Int
+  transactionHash: String
+}
+
+"""
+Input for the nested mutation of `account` in the `AwardInput` mutation.
+"""
+input AwardsAccountIdForeignInput {
+  """The primary key(s) for `account` for the far side of the relationship."""
+  connectById: AccountAccountsPkeyConnect
+
+  """The primary key(s) for `account` for the far side of the relationship."""
+  connectByNodeId: AccountNodeIdConnect
+
+  """
+  A `AccountInput` object that will be created and connected to this object.
+  """
+  create: AwardsAccountIdForeignAccountsCreateInput
+
+  """The primary key(s) for `account` for the far side of the relationship."""
+  deleteById: AccountAccountsPkeyDelete
+
+  """The primary key(s) for `account` for the far side of the relationship."""
+  deleteByNodeId: AccountNodeIdDelete
+
+  """
+  The primary key(s) and patch data for `account` for the far side of the relationship.
+  """
+  updateById: AccountOnAwardForAwardsAccountIdForeignUsingAccountsPkeyUpdate
+
+  """
+  The primary key(s) and patch data for `account` for the far side of the relationship.
+  """
+  updateByNodeId: AwardOnAwardForAwardsAccountIdForeignNodeIdUpdate
+}
+
+"""
+Input for the nested mutation of `award` in the `AccountInput` mutation.
+"""
+input AwardsAccountIdForeignInverseInput {
+  """The primary key(s) for `award` for the far side of the relationship."""
+  connectById: [AwardAwardsPkeyConnect!]
+
+  """The primary key(s) for `award` for the far side of the relationship."""
+  connectByNodeId: [AwardNodeIdConnect!]
+
+  """
+  A `AwardInput` object that will be created and connected to this object.
+  """
+  create: [AwardsAccountIdForeignAwardsCreateInput!]
+
+  """The primary key(s) for `award` for the far side of the relationship."""
+  deleteById: [AwardAwardsPkeyDelete!]
+
+  """The primary key(s) for `award` for the far side of the relationship."""
+  deleteByNodeId: [AwardNodeIdDelete!]
+
+  """
+  Flag indicating whether all other `award` records that match this relationship should be removed.
+  """
+  deleteOthers: Boolean
+
+  """
+  The primary key(s) and patch data for `award` for the far side of the relationship.
+  """
+  updateById: [AwardOnAwardForAwardsAccountIdForeignUsingAwardsPkeyUpdate!]
+
+  """
+  The primary key(s) and patch data for `award` for the far side of the relationship.
+  """
+  updateByNodeId: [AccountOnAwardForAwardsAccountIdForeignNodeIdUpdate!]
 }
 
 """A connection to a list of `Award` values."""
@@ -212,6 +449,110 @@ type AwardsConnection {
 
   """The count of *all* `Award` you could get from the connection."""
   totalCount: Int!
+}
+
+"""The `award` to be created by this mutation."""
+input AwardsDefinitionIdForeignAwardsCreateInput {
+  accountId: String
+  accountToAccountId: AwardsAccountIdForeignInput
+  awardNumber: String
+  blockAwarded: Int
+  definitionToDefinitionId: AwardsDefinitionIdForeignInput
+  globalAwardNumber: String
+  id: Int
+  transactionHash: String
+}
+
+"""The `definition` to be created by this mutation."""
+input AwardsDefinitionIdForeignDefinitionsCreateInput {
+  awardsUsingId: AwardsDefinitionIdForeignInverseInput
+  definition: String
+  id: Int
+  ipfs: String
+  metric: String
+  name: String!
+  protocolId: Int
+  protocolToProtocolId: DefinitionsProtocolIdForeignInput
+  roleId: Int
+  roleToRoleId: DefinitionsRoleIdForeignInput
+  threshold: String
+}
+
+"""
+Input for the nested mutation of `definition` in the `AwardInput` mutation.
+"""
+input AwardsDefinitionIdForeignInput {
+  """
+  The primary key(s) for `definition` for the far side of the relationship.
+  """
+  connectById: DefinitionDefinitionsPkeyConnect
+
+  """
+  The primary key(s) for `definition` for the far side of the relationship.
+  """
+  connectByNodeId: DefinitionNodeIdConnect
+
+  """
+  A `DefinitionInput` object that will be created and connected to this object.
+  """
+  create: AwardsDefinitionIdForeignDefinitionsCreateInput
+
+  """
+  The primary key(s) for `definition` for the far side of the relationship.
+  """
+  deleteById: DefinitionDefinitionsPkeyDelete
+
+  """
+  The primary key(s) for `definition` for the far side of the relationship.
+  """
+  deleteByNodeId: DefinitionNodeIdDelete
+
+  """
+  The primary key(s) and patch data for `definition` for the far side of the relationship.
+  """
+  updateById: DefinitionOnAwardForAwardsDefinitionIdForeignUsingDefinitionsPkeyUpdate
+
+  """
+  The primary key(s) and patch data for `definition` for the far side of the relationship.
+  """
+  updateByNodeId: AwardOnAwardForAwardsDefinitionIdForeignNodeIdUpdate
+}
+
+"""
+Input for the nested mutation of `award` in the `DefinitionInput` mutation.
+"""
+input AwardsDefinitionIdForeignInverseInput {
+  """The primary key(s) for `award` for the far side of the relationship."""
+  connectById: [AwardAwardsPkeyConnect!]
+
+  """The primary key(s) for `award` for the far side of the relationship."""
+  connectByNodeId: [AwardNodeIdConnect!]
+
+  """
+  A `AwardInput` object that will be created and connected to this object.
+  """
+  create: [AwardsDefinitionIdForeignAwardsCreateInput!]
+
+  """The primary key(s) for `award` for the far side of the relationship."""
+  deleteById: [AwardAwardsPkeyDelete!]
+
+  """The primary key(s) for `award` for the far side of the relationship."""
+  deleteByNodeId: [AwardNodeIdDelete!]
+
+  """
+  Flag indicating whether all other `award` records that match this relationship should be removed.
+  """
+  deleteOthers: Boolean
+
+  """
+  The primary key(s) and patch data for `award` for the far side of the relationship.
+  """
+  updateById: [AwardOnAwardForAwardsDefinitionIdForeignUsingAwardsPkeyUpdate!]
+
+  """
+  The primary key(s) and patch data for `award` for the far side of the relationship.
+  """
+  updateByNodeId: [DefinitionOnAwardForAwardsDefinitionIdForeignNodeIdUpdate!]
 }
 
 """A `Award` edge in the connection."""
@@ -634,29 +975,127 @@ input DefinitionCondition {
   threshold: String
 }
 
+"""The fields on `definition` to look up the row to connect."""
+input DefinitionDefinitionsPkeyConnect {
+  id: Int!
+}
+
+"""The fields on `definition` to look up the row to delete."""
+input DefinitionDefinitionsPkeyDelete {
+  id: Int!
+}
+
 """An input for mutations affecting `Definition`"""
 input DefinitionInput {
+  awardsUsingId: AwardsDefinitionIdForeignInverseInput
   definition: String
   id: Int
   ipfs: String
   metric: String
   name: String!
-  protocolId: Int!
-  roleId: Int!
+  protocolId: Int
+  protocolToProtocolId: DefinitionsProtocolIdForeignInput
+  roleId: Int
+  roleToRoleId: DefinitionsRoleIdForeignInput
   threshold: String
+}
+
+"""The globally unique `ID` look up for the row to connect."""
+input DefinitionNodeIdConnect {
+  """
+  The globally unique `ID` which identifies a single `definition` to be connected.
+  """
+  nodeId: ID!
+}
+
+"""The globally unique `ID` look up for the row to delete."""
+input DefinitionNodeIdDelete {
+  """
+  The globally unique `ID` which identifies a single `definition` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""The globally unique `ID` look up for the row to update."""
+input DefinitionOnAwardForAwardsDefinitionIdForeignNodeIdUpdate {
+  """
+  An object where the defined keys will be set on the `award` being updated.
+  """
+  awardPatch: AwardPatch!
+
+  """
+  The globally unique `ID` which identifies a single `award` to be connected.
+  """
+  nodeId: ID!
+}
+
+"""The fields on `definition` to look up the row to update."""
+input DefinitionOnAwardForAwardsDefinitionIdForeignUsingDefinitionsPkeyUpdate {
+  """
+  An object where the defined keys will be set on the `definition` being updated.
+  """
+  definitionPatch: updateDefinitionOnAwardForAwardsDefinitionIdForeignPatch!
+  id: Int!
+}
+
+"""The globally unique `ID` look up for the row to update."""
+input DefinitionOnDefinitionForDefinitionsProtocolIdForeignNodeIdUpdate {
+  """
+  The globally unique `ID` which identifies a single `protocol` to be connected.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `protocol` being updated.
+  """
+  protocolPatch: ProtocolPatch!
+}
+
+"""The fields on `definition` to look up the row to update."""
+input DefinitionOnDefinitionForDefinitionsProtocolIdForeignUsingDefinitionsPkeyUpdate {
+  """
+  An object where the defined keys will be set on the `definition` being updated.
+  """
+  definitionPatch: updateDefinitionOnDefinitionForDefinitionsProtocolIdForeignPatch!
+  id: Int!
+}
+
+"""The globally unique `ID` look up for the row to update."""
+input DefinitionOnDefinitionForDefinitionsRoleIdForeignNodeIdUpdate {
+  """
+  The globally unique `ID` which identifies a single `role` to be connected.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `role` being updated.
+  """
+  rolePatch: RolePatch!
+}
+
+"""The fields on `definition` to look up the row to update."""
+input DefinitionOnDefinitionForDefinitionsRoleIdForeignUsingDefinitionsPkeyUpdate {
+  """
+  An object where the defined keys will be set on the `definition` being updated.
+  """
+  definitionPatch: updateDefinitionOnDefinitionForDefinitionsRoleIdForeignPatch!
+  id: Int!
 }
 
 """
 Represents an update to a `Definition`. Fields that are set will be updated.
 """
 input DefinitionPatch {
+  awardsUsingId: AwardsDefinitionIdForeignInverseInput
   definition: String
   id: Int
   ipfs: String
   metric: String
   name: String
   protocolId: Int
+  protocolToProtocolId: DefinitionsProtocolIdForeignInput
   roleId: Int
+  roleToRoleId: DefinitionsRoleIdForeignInput
   threshold: String
 }
 
@@ -707,6 +1146,214 @@ enum DefinitionsOrderBy {
   ROLE_ID_DESC
   THRESHOLD_ASC
   THRESHOLD_DESC
+}
+
+"""The `definition` to be created by this mutation."""
+input DefinitionsProtocolIdForeignDefinitionsCreateInput {
+  awardsUsingId: AwardsDefinitionIdForeignInverseInput
+  definition: String
+  id: Int
+  ipfs: String
+  metric: String
+  name: String!
+  protocolToProtocolId: DefinitionsProtocolIdForeignInput
+  roleId: Int
+  roleToRoleId: DefinitionsRoleIdForeignInput
+  threshold: String
+}
+
+"""
+Input for the nested mutation of `protocol` in the `DefinitionInput` mutation.
+"""
+input DefinitionsProtocolIdForeignInput {
+  """
+  The primary key(s) for `protocol` for the far side of the relationship.
+  """
+  connectById: ProtocolProtocolsPkeyConnect
+
+  """
+  The primary key(s) for `protocol` for the far side of the relationship.
+  """
+  connectByNodeId: ProtocolNodeIdConnect
+
+  """
+  A `ProtocolInput` object that will be created and connected to this object.
+  """
+  create: DefinitionsProtocolIdForeignProtocolsCreateInput
+
+  """
+  The primary key(s) for `protocol` for the far side of the relationship.
+  """
+  deleteById: ProtocolProtocolsPkeyDelete
+
+  """
+  The primary key(s) for `protocol` for the far side of the relationship.
+  """
+  deleteByNodeId: ProtocolNodeIdDelete
+
+  """
+  The primary key(s) and patch data for `protocol` for the far side of the relationship.
+  """
+  updateById: ProtocolOnDefinitionForDefinitionsProtocolIdForeignUsingProtocolsPkeyUpdate
+
+  """
+  The primary key(s) and patch data for `protocol` for the far side of the relationship.
+  """
+  updateByNodeId: DefinitionOnDefinitionForDefinitionsProtocolIdForeignNodeIdUpdate
+}
+
+"""
+Input for the nested mutation of `definition` in the `ProtocolInput` mutation.
+"""
+input DefinitionsProtocolIdForeignInverseInput {
+  """
+  The primary key(s) for `definition` for the far side of the relationship.
+  """
+  connectById: [DefinitionDefinitionsPkeyConnect!]
+
+  """
+  The primary key(s) for `definition` for the far side of the relationship.
+  """
+  connectByNodeId: [DefinitionNodeIdConnect!]
+
+  """
+  A `DefinitionInput` object that will be created and connected to this object.
+  """
+  create: [DefinitionsProtocolIdForeignDefinitionsCreateInput!]
+
+  """
+  The primary key(s) for `definition` for the far side of the relationship.
+  """
+  deleteById: [DefinitionDefinitionsPkeyDelete!]
+
+  """
+  The primary key(s) for `definition` for the far side of the relationship.
+  """
+  deleteByNodeId: [DefinitionNodeIdDelete!]
+
+  """
+  Flag indicating whether all other `definition` records that match this relationship should be removed.
+  """
+  deleteOthers: Boolean
+
+  """
+  The primary key(s) and patch data for `definition` for the far side of the relationship.
+  """
+  updateById: [DefinitionOnDefinitionForDefinitionsProtocolIdForeignUsingDefinitionsPkeyUpdate!]
+
+  """
+  The primary key(s) and patch data for `definition` for the far side of the relationship.
+  """
+  updateByNodeId: [ProtocolOnDefinitionForDefinitionsProtocolIdForeignNodeIdUpdate!]
+}
+
+"""The `protocol` to be created by this mutation."""
+input DefinitionsProtocolIdForeignProtocolsCreateInput {
+  definitionsUsingId: DefinitionsProtocolIdForeignInverseInput
+  id: Int
+  name: String!
+  rankingsUsingId: RankingsProtocolIdForeignInverseInput
+  rolesUsingId: RolesProtocolIdForeignInverseInput
+}
+
+"""The `definition` to be created by this mutation."""
+input DefinitionsRoleIdForeignDefinitionsCreateInput {
+  awardsUsingId: AwardsDefinitionIdForeignInverseInput
+  definition: String
+  id: Int
+  ipfs: String
+  metric: String
+  name: String!
+  protocolId: Int
+  protocolToProtocolId: DefinitionsProtocolIdForeignInput
+  roleToRoleId: DefinitionsRoleIdForeignInput
+  threshold: String
+}
+
+"""
+Input for the nested mutation of `role` in the `DefinitionInput` mutation.
+"""
+input DefinitionsRoleIdForeignInput {
+  """The primary key(s) for `role` for the far side of the relationship."""
+  connectById: RoleRolesPkeyConnect
+
+  """The primary key(s) for `role` for the far side of the relationship."""
+  connectByNodeId: RoleNodeIdConnect
+
+  """
+  A `RoleInput` object that will be created and connected to this object.
+  """
+  create: DefinitionsRoleIdForeignRolesCreateInput
+
+  """The primary key(s) for `role` for the far side of the relationship."""
+  deleteById: RoleRolesPkeyDelete
+
+  """The primary key(s) for `role` for the far side of the relationship."""
+  deleteByNodeId: RoleNodeIdDelete
+
+  """
+  The primary key(s) and patch data for `role` for the far side of the relationship.
+  """
+  updateById: RoleOnDefinitionForDefinitionsRoleIdForeignUsingRolesPkeyUpdate
+
+  """
+  The primary key(s) and patch data for `role` for the far side of the relationship.
+  """
+  updateByNodeId: DefinitionOnDefinitionForDefinitionsRoleIdForeignNodeIdUpdate
+}
+
+"""
+Input for the nested mutation of `definition` in the `RoleInput` mutation.
+"""
+input DefinitionsRoleIdForeignInverseInput {
+  """
+  The primary key(s) for `definition` for the far side of the relationship.
+  """
+  connectById: [DefinitionDefinitionsPkeyConnect!]
+
+  """
+  The primary key(s) for `definition` for the far side of the relationship.
+  """
+  connectByNodeId: [DefinitionNodeIdConnect!]
+
+  """
+  A `DefinitionInput` object that will be created and connected to this object.
+  """
+  create: [DefinitionsRoleIdForeignDefinitionsCreateInput!]
+
+  """
+  The primary key(s) for `definition` for the far side of the relationship.
+  """
+  deleteById: [DefinitionDefinitionsPkeyDelete!]
+
+  """
+  The primary key(s) for `definition` for the far side of the relationship.
+  """
+  deleteByNodeId: [DefinitionNodeIdDelete!]
+
+  """
+  Flag indicating whether all other `definition` records that match this relationship should be removed.
+  """
+  deleteOthers: Boolean
+
+  """
+  The primary key(s) and patch data for `definition` for the far side of the relationship.
+  """
+  updateById: [DefinitionOnDefinitionForDefinitionsRoleIdForeignUsingDefinitionsPkeyUpdate!]
+
+  """
+  The primary key(s) and patch data for `definition` for the far side of the relationship.
+  """
+  updateByNodeId: [RoleOnDefinitionForDefinitionsRoleIdForeignNodeIdUpdate!]
+}
+
+"""The `role` to be created by this mutation."""
+input DefinitionsRoleIdForeignRolesCreateInput {
+  definitionsUsingId: DefinitionsRoleIdForeignInverseInput
+  id: Int
+  name: String!
+  protocolId: Int
+  protocolToProtocolId: RolesProtocolIdForeignInput
 }
 
 """All input for the `deleteAccountById` mutation."""
@@ -1742,16 +2389,117 @@ input ProtocolCondition {
 
 """An input for mutations affecting `Protocol`"""
 input ProtocolInput {
+  definitionsUsingId: DefinitionsProtocolIdForeignInverseInput
   id: Int
   name: String!
+  rankingsUsingId: RankingsProtocolIdForeignInverseInput
+  rolesUsingId: RolesProtocolIdForeignInverseInput
+}
+
+"""The globally unique `ID` look up for the row to connect."""
+input ProtocolNodeIdConnect {
+  """
+  The globally unique `ID` which identifies a single `protocol` to be connected.
+  """
+  nodeId: ID!
+}
+
+"""The globally unique `ID` look up for the row to delete."""
+input ProtocolNodeIdDelete {
+  """
+  The globally unique `ID` which identifies a single `protocol` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""The globally unique `ID` look up for the row to update."""
+input ProtocolOnDefinitionForDefinitionsProtocolIdForeignNodeIdUpdate {
+  """
+  An object where the defined keys will be set on the `definition` being updated.
+  """
+  definitionPatch: DefinitionPatch!
+
+  """
+  The globally unique `ID` which identifies a single `definition` to be connected.
+  """
+  nodeId: ID!
+}
+
+"""The fields on `protocol` to look up the row to update."""
+input ProtocolOnDefinitionForDefinitionsProtocolIdForeignUsingProtocolsPkeyUpdate {
+  id: Int!
+
+  """
+  An object where the defined keys will be set on the `protocol` being updated.
+  """
+  protocolPatch: updateProtocolOnDefinitionForDefinitionsProtocolIdForeignPatch!
+}
+
+"""The globally unique `ID` look up for the row to update."""
+input ProtocolOnRankingForRankingsProtocolIdForeignNodeIdUpdate {
+  """
+  The globally unique `ID` which identifies a single `ranking` to be connected.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `ranking` being updated.
+  """
+  rankingPatch: RankingPatch!
+}
+
+"""The fields on `protocol` to look up the row to update."""
+input ProtocolOnRankingForRankingsProtocolIdForeignUsingProtocolsPkeyUpdate {
+  id: Int!
+
+  """
+  An object where the defined keys will be set on the `protocol` being updated.
+  """
+  protocolPatch: updateProtocolOnRankingForRankingsProtocolIdForeignPatch!
+}
+
+"""The globally unique `ID` look up for the row to update."""
+input ProtocolOnRoleForRolesProtocolIdForeignNodeIdUpdate {
+  """
+  The globally unique `ID` which identifies a single `role` to be connected.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `role` being updated.
+  """
+  rolePatch: RolePatch!
+}
+
+"""The fields on `protocol` to look up the row to update."""
+input ProtocolOnRoleForRolesProtocolIdForeignUsingProtocolsPkeyUpdate {
+  id: Int!
+
+  """
+  An object where the defined keys will be set on the `protocol` being updated.
+  """
+  protocolPatch: updateProtocolOnRoleForRolesProtocolIdForeignPatch!
 }
 
 """
 Represents an update to a `Protocol`. Fields that are set will be updated.
 """
 input ProtocolPatch {
+  definitionsUsingId: DefinitionsProtocolIdForeignInverseInput
   id: Int
   name: String
+  rankingsUsingId: RankingsProtocolIdForeignInverseInput
+  rolesUsingId: RolesProtocolIdForeignInverseInput
+}
+
+"""The fields on `protocol` to look up the row to connect."""
+input ProtocolProtocolsPkeyConnect {
+  id: Int!
+}
+
+"""The fields on `protocol` to look up the row to delete."""
+input ProtocolProtocolsPkeyDelete {
+  id: Int!
 }
 
 """A connection to a list of `Protocol` values."""
@@ -2141,10 +2889,74 @@ input RankingCondition {
 
 """An input for mutations affecting `Ranking`"""
 input RankingInput {
-  accountId: String!
+  accountId: String
+  accountToAccountId: RankingsAccountIdForeignInput
   id: Int
-  protocolId: Int!
+  protocolId: Int
+  protocolToProtocolId: RankingsProtocolIdForeignInput
   rank: Int!
+}
+
+"""The globally unique `ID` look up for the row to connect."""
+input RankingNodeIdConnect {
+  """
+  The globally unique `ID` which identifies a single `ranking` to be connected.
+  """
+  nodeId: ID!
+}
+
+"""The globally unique `ID` look up for the row to delete."""
+input RankingNodeIdDelete {
+  """
+  The globally unique `ID` which identifies a single `ranking` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""The globally unique `ID` look up for the row to update."""
+input RankingOnRankingForRankingsAccountIdForeignNodeIdUpdate {
+  """
+  An object where the defined keys will be set on the `account` being updated.
+  """
+  accountPatch: AccountPatch!
+
+  """
+  The globally unique `ID` which identifies a single `account` to be connected.
+  """
+  nodeId: ID!
+}
+
+"""The fields on `ranking` to look up the row to update."""
+input RankingOnRankingForRankingsAccountIdForeignUsingRankingsPkeyUpdate {
+  id: Int!
+
+  """
+  An object where the defined keys will be set on the `ranking` being updated.
+  """
+  rankingPatch: updateRankingOnRankingForRankingsAccountIdForeignPatch!
+}
+
+"""The globally unique `ID` look up for the row to update."""
+input RankingOnRankingForRankingsProtocolIdForeignNodeIdUpdate {
+  """
+  The globally unique `ID` which identifies a single `protocol` to be connected.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `protocol` being updated.
+  """
+  protocolPatch: ProtocolPatch!
+}
+
+"""The fields on `ranking` to look up the row to update."""
+input RankingOnRankingForRankingsProtocolIdForeignUsingRankingsPkeyUpdate {
+  id: Int!
+
+  """
+  An object where the defined keys will be set on the `ranking` being updated.
+  """
+  rankingPatch: updateRankingOnRankingForRankingsProtocolIdForeignPatch!
 }
 
 """
@@ -2152,9 +2964,107 @@ Represents an update to a `Ranking`. Fields that are set will be updated.
 """
 input RankingPatch {
   accountId: String
+  accountToAccountId: RankingsAccountIdForeignInput
   id: Int
   protocolId: Int
+  protocolToProtocolId: RankingsProtocolIdForeignInput
   rank: Int
+}
+
+"""The fields on `ranking` to look up the row to connect."""
+input RankingRankingsPkeyConnect {
+  id: Int!
+}
+
+"""The fields on `ranking` to look up the row to delete."""
+input RankingRankingsPkeyDelete {
+  id: Int!
+}
+
+"""The `account` to be created by this mutation."""
+input RankingsAccountIdForeignAccountsCreateInput {
+  awardsUsingId: AwardsAccountIdForeignInverseInput
+  ens: String
+  id: String!
+  rankingsUsingId: RankingsAccountIdForeignInverseInput
+}
+
+"""
+Input for the nested mutation of `account` in the `RankingInput` mutation.
+"""
+input RankingsAccountIdForeignInput {
+  """The primary key(s) for `account` for the far side of the relationship."""
+  connectById: AccountAccountsPkeyConnect
+
+  """The primary key(s) for `account` for the far side of the relationship."""
+  connectByNodeId: AccountNodeIdConnect
+
+  """
+  A `AccountInput` object that will be created and connected to this object.
+  """
+  create: RankingsAccountIdForeignAccountsCreateInput
+
+  """The primary key(s) for `account` for the far side of the relationship."""
+  deleteById: AccountAccountsPkeyDelete
+
+  """The primary key(s) for `account` for the far side of the relationship."""
+  deleteByNodeId: AccountNodeIdDelete
+
+  """
+  The primary key(s) and patch data for `account` for the far side of the relationship.
+  """
+  updateById: AccountOnRankingForRankingsAccountIdForeignUsingAccountsPkeyUpdate
+
+  """
+  The primary key(s) and patch data for `account` for the far side of the relationship.
+  """
+  updateByNodeId: RankingOnRankingForRankingsAccountIdForeignNodeIdUpdate
+}
+
+"""
+Input for the nested mutation of `ranking` in the `AccountInput` mutation.
+"""
+input RankingsAccountIdForeignInverseInput {
+  """The primary key(s) for `ranking` for the far side of the relationship."""
+  connectById: [RankingRankingsPkeyConnect!]
+
+  """The primary key(s) for `ranking` for the far side of the relationship."""
+  connectByNodeId: [RankingNodeIdConnect!]
+
+  """
+  A `RankingInput` object that will be created and connected to this object.
+  """
+  create: [RankingsAccountIdForeignRankingsCreateInput!]
+
+  """The primary key(s) for `ranking` for the far side of the relationship."""
+  deleteById: [RankingRankingsPkeyDelete!]
+
+  """The primary key(s) for `ranking` for the far side of the relationship."""
+  deleteByNodeId: [RankingNodeIdDelete!]
+
+  """
+  Flag indicating whether all other `ranking` records that match this relationship should be removed.
+  """
+  deleteOthers: Boolean
+
+  """
+  The primary key(s) and patch data for `ranking` for the far side of the relationship.
+  """
+  updateById: [RankingOnRankingForRankingsAccountIdForeignUsingRankingsPkeyUpdate!]
+
+  """
+  The primary key(s) and patch data for `ranking` for the far side of the relationship.
+  """
+  updateByNodeId: [AccountOnRankingForRankingsAccountIdForeignNodeIdUpdate!]
+}
+
+"""The `ranking` to be created by this mutation."""
+input RankingsAccountIdForeignRankingsCreateInput {
+  accountToAccountId: RankingsAccountIdForeignInput
+  id: Int
+  protocolId: Int
+  protocolToProtocolId: RankingsProtocolIdForeignInput
+  rank: Int!
 }
 
 """A connection to a list of `Ranking` values."""
@@ -2196,6 +3106,101 @@ enum RankingsOrderBy {
   PROTOCOL_ID_DESC
   RANK_ASC
   RANK_DESC
+}
+
+"""
+Input for the nested mutation of `protocol` in the `RankingInput` mutation.
+"""
+input RankingsProtocolIdForeignInput {
+  """
+  The primary key(s) for `protocol` for the far side of the relationship.
+  """
+  connectById: ProtocolProtocolsPkeyConnect
+
+  """
+  The primary key(s) for `protocol` for the far side of the relationship.
+  """
+  connectByNodeId: ProtocolNodeIdConnect
+
+  """
+  A `ProtocolInput` object that will be created and connected to this object.
+  """
+  create: RankingsProtocolIdForeignProtocolsCreateInput
+
+  """
+  The primary key(s) for `protocol` for the far side of the relationship.
+  """
+  deleteById: ProtocolProtocolsPkeyDelete
+
+  """
+  The primary key(s) for `protocol` for the far side of the relationship.
+  """
+  deleteByNodeId: ProtocolNodeIdDelete
+
+  """
+  The primary key(s) and patch data for `protocol` for the far side of the relationship.
+  """
+  updateById: ProtocolOnRankingForRankingsProtocolIdForeignUsingProtocolsPkeyUpdate
+
+  """
+  The primary key(s) and patch data for `protocol` for the far side of the relationship.
+  """
+  updateByNodeId: RankingOnRankingForRankingsProtocolIdForeignNodeIdUpdate
+}
+
+"""
+Input for the nested mutation of `ranking` in the `ProtocolInput` mutation.
+"""
+input RankingsProtocolIdForeignInverseInput {
+  """The primary key(s) for `ranking` for the far side of the relationship."""
+  connectById: [RankingRankingsPkeyConnect!]
+
+  """The primary key(s) for `ranking` for the far side of the relationship."""
+  connectByNodeId: [RankingNodeIdConnect!]
+
+  """
+  A `RankingInput` object that will be created and connected to this object.
+  """
+  create: [RankingsProtocolIdForeignRankingsCreateInput!]
+
+  """The primary key(s) for `ranking` for the far side of the relationship."""
+  deleteById: [RankingRankingsPkeyDelete!]
+
+  """The primary key(s) for `ranking` for the far side of the relationship."""
+  deleteByNodeId: [RankingNodeIdDelete!]
+
+  """
+  Flag indicating whether all other `ranking` records that match this relationship should be removed.
+  """
+  deleteOthers: Boolean
+
+  """
+  The primary key(s) and patch data for `ranking` for the far side of the relationship.
+  """
+  updateById: [RankingOnRankingForRankingsProtocolIdForeignUsingRankingsPkeyUpdate!]
+
+  """
+  The primary key(s) and patch data for `ranking` for the far side of the relationship.
+  """
+  updateByNodeId: [ProtocolOnRankingForRankingsProtocolIdForeignNodeIdUpdate!]
+}
+
+"""The `protocol` to be created by this mutation."""
+input RankingsProtocolIdForeignProtocolsCreateInput {
+  definitionsUsingId: DefinitionsProtocolIdForeignInverseInput
+  id: Int
+  name: String!
+  rankingsUsingId: RankingsProtocolIdForeignInverseInput
+  rolesUsingId: RolesProtocolIdForeignInverseInput
+}
+
+"""The `ranking` to be created by this mutation."""
+input RankingsProtocolIdForeignRankingsCreateInput {
+  accountId: String
+  accountToAccountId: RankingsAccountIdForeignInput
+  id: Int
+  protocolToProtocolId: RankingsProtocolIdForeignInput
+  rank: Int!
 }
 
 type Role implements Node {
@@ -2256,16 +3261,92 @@ input RoleCondition {
 
 """An input for mutations affecting `Role`"""
 input RoleInput {
+  definitionsUsingId: DefinitionsRoleIdForeignInverseInput
   id: Int
   name: String!
-  protocolId: Int!
+  protocolId: Int
+  protocolToProtocolId: RolesProtocolIdForeignInput
+}
+
+"""The globally unique `ID` look up for the row to connect."""
+input RoleNodeIdConnect {
+  """
+  The globally unique `ID` which identifies a single `role` to be connected.
+  """
+  nodeId: ID!
+}
+
+"""The globally unique `ID` look up for the row to delete."""
+input RoleNodeIdDelete {
+  """
+  The globally unique `ID` which identifies a single `role` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""The globally unique `ID` look up for the row to update."""
+input RoleOnDefinitionForDefinitionsRoleIdForeignNodeIdUpdate {
+  """
+  An object where the defined keys will be set on the `definition` being updated.
+  """
+  definitionPatch: DefinitionPatch!
+
+  """
+  The globally unique `ID` which identifies a single `definition` to be connected.
+  """
+  nodeId: ID!
+}
+
+"""The fields on `role` to look up the row to update."""
+input RoleOnDefinitionForDefinitionsRoleIdForeignUsingRolesPkeyUpdate {
+  id: Int!
+
+  """
+  An object where the defined keys will be set on the `role` being updated.
+  """
+  rolePatch: updateRoleOnDefinitionForDefinitionsRoleIdForeignPatch!
+}
+
+"""The globally unique `ID` look up for the row to update."""
+input RoleOnRoleForRolesProtocolIdForeignNodeIdUpdate {
+  """
+  The globally unique `ID` which identifies a single `protocol` to be connected.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `protocol` being updated.
+  """
+  protocolPatch: ProtocolPatch!
+}
+
+"""The fields on `role` to look up the row to update."""
+input RoleOnRoleForRolesProtocolIdForeignUsingRolesPkeyUpdate {
+  id: Int!
+
+  """
+  An object where the defined keys will be set on the `role` being updated.
+  """
+  rolePatch: updateRoleOnRoleForRolesProtocolIdForeignPatch!
 }
 
 """Represents an update to a `Role`. Fields that are set will be updated."""
 input RolePatch {
+  definitionsUsingId: DefinitionsRoleIdForeignInverseInput
   id: Int
   name: String
   protocolId: Int
+  protocolToProtocolId: RolesProtocolIdForeignInput
+}
+
+"""The fields on `role` to look up the row to connect."""
+input RoleRolesPkeyConnect {
+  id: Int!
+}
+
+"""The fields on `role` to look up the row to delete."""
+input RoleRolesPkeyDelete {
+  id: Int!
 }
 
 """A connection to a list of `Role` values."""
@@ -2308,15 +3389,97 @@ enum RolesOrderBy {
 }
 
 """
-The root subscription type: contains realtime events you can subscribe to with the `subscription` operation.
+Input for the nested mutation of `protocol` in the `RoleInput` mutation.
 """
-type Subscription {
-  time: TimePayload
+input RolesProtocolIdForeignInput {
+  """
+  The primary key(s) for `protocol` for the far side of the relationship.
+  """
+  connectById: ProtocolProtocolsPkeyConnect
+
+  """
+  The primary key(s) for `protocol` for the far side of the relationship.
+  """
+  connectByNodeId: ProtocolNodeIdConnect
+
+  """
+  A `ProtocolInput` object that will be created and connected to this object.
+  """
+  create: RolesProtocolIdForeignProtocolsCreateInput
+
+  """
+  The primary key(s) for `protocol` for the far side of the relationship.
+  """
+  deleteById: ProtocolProtocolsPkeyDelete
+
+  """
+  The primary key(s) for `protocol` for the far side of the relationship.
+  """
+  deleteByNodeId: ProtocolNodeIdDelete
+
+  """
+  The primary key(s) and patch data for `protocol` for the far side of the relationship.
+  """
+  updateById: ProtocolOnRoleForRolesProtocolIdForeignUsingProtocolsPkeyUpdate
+
+  """
+  The primary key(s) and patch data for `protocol` for the far side of the relationship.
+  """
+  updateByNodeId: RoleOnRoleForRolesProtocolIdForeignNodeIdUpdate
 }
 
-type TimePayload {
-  currentTimestamp: String
-  query: Query
+"""
+Input for the nested mutation of `role` in the `ProtocolInput` mutation.
+"""
+input RolesProtocolIdForeignInverseInput {
+  """The primary key(s) for `role` for the far side of the relationship."""
+  connectById: [RoleRolesPkeyConnect!]
+
+  """The primary key(s) for `role` for the far side of the relationship."""
+  connectByNodeId: [RoleNodeIdConnect!]
+
+  """
+  A `RoleInput` object that will be created and connected to this object.
+  """
+  create: [RolesProtocolIdForeignRolesCreateInput!]
+
+  """The primary key(s) for `role` for the far side of the relationship."""
+  deleteById: [RoleRolesPkeyDelete!]
+
+  """The primary key(s) for `role` for the far side of the relationship."""
+  deleteByNodeId: [RoleNodeIdDelete!]
+
+  """
+  Flag indicating whether all other `role` records that match this relationship should be removed.
+  """
+  deleteOthers: Boolean
+
+  """
+  The primary key(s) and patch data for `role` for the far side of the relationship.
+  """
+  updateById: [RoleOnRoleForRolesProtocolIdForeignUsingRolesPkeyUpdate!]
+
+  """
+  The primary key(s) and patch data for `role` for the far side of the relationship.
+  """
+  updateByNodeId: [ProtocolOnRoleForRolesProtocolIdForeignNodeIdUpdate!]
+}
+
+"""The `protocol` to be created by this mutation."""
+input RolesProtocolIdForeignProtocolsCreateInput {
+  definitionsUsingId: DefinitionsProtocolIdForeignInverseInput
+  id: Int
+  name: String!
+  rankingsUsingId: RankingsProtocolIdForeignInverseInput
+  rolesUsingId: RolesProtocolIdForeignInverseInput
+}
+
+"""The `role` to be created by this mutation."""
+input RolesProtocolIdForeignRolesCreateInput {
+  definitionsUsingId: DefinitionsRoleIdForeignInverseInput
+  id: Int
+  name: String!
+  protocolToProtocolId: RolesProtocolIdForeignInput
 }
 
 """All input for the `updateAccountById` mutation."""
@@ -2794,4 +3957,177 @@ type UpdateRolePayload {
     """The method to use when ordering `Role`."""
     orderBy: [RolesOrderBy!] = [PRIMARY_KEY_ASC]
   ): RolesEdge
+}
+
+"""
+An object where the defined keys will be set on the `account` being updated.
+"""
+input updateAccountOnAwardForAwardsAccountIdForeignPatch {
+  awardsUsingId: AwardsAccountIdForeignInverseInput
+  ens: String
+  id: String
+  rankingsUsingId: RankingsAccountIdForeignInverseInput
+}
+
+"""
+An object where the defined keys will be set on the `account` being updated.
+"""
+input updateAccountOnRankingForRankingsAccountIdForeignPatch {
+  awardsUsingId: AwardsAccountIdForeignInverseInput
+  ens: String
+  id: String
+  rankingsUsingId: RankingsAccountIdForeignInverseInput
+}
+
+"""
+An object where the defined keys will be set on the `award` being updated.
+"""
+input updateAwardOnAwardForAwardsAccountIdForeignPatch {
+  accountToAccountId: AwardsAccountIdForeignInput
+  awardNumber: String
+  blockAwarded: Int
+  definitionId: Int
+  definitionToDefinitionId: AwardsDefinitionIdForeignInput
+  globalAwardNumber: String
+  id: Int
+  transactionHash: String
+}
+
+"""
+An object where the defined keys will be set on the `award` being updated.
+"""
+input updateAwardOnAwardForAwardsDefinitionIdForeignPatch {
+  accountId: String
+  accountToAccountId: AwardsAccountIdForeignInput
+  awardNumber: String
+  blockAwarded: Int
+  definitionToDefinitionId: AwardsDefinitionIdForeignInput
+  globalAwardNumber: String
+  id: Int
+  transactionHash: String
+}
+
+"""
+An object where the defined keys will be set on the `definition` being updated.
+"""
+input updateDefinitionOnAwardForAwardsDefinitionIdForeignPatch {
+  awardsUsingId: AwardsDefinitionIdForeignInverseInput
+  definition: String
+  id: Int
+  ipfs: String
+  metric: String
+  name: String
+  protocolId: Int
+  protocolToProtocolId: DefinitionsProtocolIdForeignInput
+  roleId: Int
+  roleToRoleId: DefinitionsRoleIdForeignInput
+  threshold: String
+}
+
+"""
+An object where the defined keys will be set on the `definition` being updated.
+"""
+input updateDefinitionOnDefinitionForDefinitionsProtocolIdForeignPatch {
+  awardsUsingId: AwardsDefinitionIdForeignInverseInput
+  definition: String
+  id: Int
+  ipfs: String
+  metric: String
+  name: String
+  protocolToProtocolId: DefinitionsProtocolIdForeignInput
+  roleId: Int
+  roleToRoleId: DefinitionsRoleIdForeignInput
+  threshold: String
+}
+
+"""
+An object where the defined keys will be set on the `definition` being updated.
+"""
+input updateDefinitionOnDefinitionForDefinitionsRoleIdForeignPatch {
+  awardsUsingId: AwardsDefinitionIdForeignInverseInput
+  definition: String
+  id: Int
+  ipfs: String
+  metric: String
+  name: String
+  protocolId: Int
+  protocolToProtocolId: DefinitionsProtocolIdForeignInput
+  roleToRoleId: DefinitionsRoleIdForeignInput
+  threshold: String
+}
+
+"""
+An object where the defined keys will be set on the `protocol` being updated.
+"""
+input updateProtocolOnDefinitionForDefinitionsProtocolIdForeignPatch {
+  definitionsUsingId: DefinitionsProtocolIdForeignInverseInput
+  id: Int
+  name: String
+  rankingsUsingId: RankingsProtocolIdForeignInverseInput
+  rolesUsingId: RolesProtocolIdForeignInverseInput
+}
+
+"""
+An object where the defined keys will be set on the `protocol` being updated.
+"""
+input updateProtocolOnRankingForRankingsProtocolIdForeignPatch {
+  definitionsUsingId: DefinitionsProtocolIdForeignInverseInput
+  id: Int
+  name: String
+  rankingsUsingId: RankingsProtocolIdForeignInverseInput
+  rolesUsingId: RolesProtocolIdForeignInverseInput
+}
+
+"""
+An object where the defined keys will be set on the `protocol` being updated.
+"""
+input updateProtocolOnRoleForRolesProtocolIdForeignPatch {
+  definitionsUsingId: DefinitionsProtocolIdForeignInverseInput
+  id: Int
+  name: String
+  rankingsUsingId: RankingsProtocolIdForeignInverseInput
+  rolesUsingId: RolesProtocolIdForeignInverseInput
+}
+
+"""
+An object where the defined keys will be set on the `ranking` being updated.
+"""
+input updateRankingOnRankingForRankingsAccountIdForeignPatch {
+  accountToAccountId: RankingsAccountIdForeignInput
+  id: Int
+  protocolId: Int
+  protocolToProtocolId: RankingsProtocolIdForeignInput
+  rank: Int
+}
+
+"""
+An object where the defined keys will be set on the `ranking` being updated.
+"""
+input updateRankingOnRankingForRankingsProtocolIdForeignPatch {
+  accountId: String
+  accountToAccountId: RankingsAccountIdForeignInput
+  id: Int
+  protocolToProtocolId: RankingsProtocolIdForeignInput
+  rank: Int
+}
+
+"""
+An object where the defined keys will be set on the `role` being updated.
+"""
+input updateRoleOnDefinitionForDefinitionsRoleIdForeignPatch {
+  definitionsUsingId: DefinitionsRoleIdForeignInverseInput
+  id: Int
+  name: String
+  protocolId: Int
+  protocolToProtocolId: RolesProtocolIdForeignInput
+}
+
+"""
+An object where the defined keys will be set on the `role` being updated.
+"""
+input updateRoleOnRoleForRolesProtocolIdForeignPatch {
+  definitionsUsingId: DefinitionsRoleIdForeignInverseInput
+  id: Int
+  name: String
+  protocolToProtocolId: RolesProtocolIdForeignInput
 }
