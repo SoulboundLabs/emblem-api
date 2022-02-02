@@ -32,6 +32,7 @@ export const options: PostGraphileOptions = {
   enhanceGraphiql: true,
   subscriptions: true,
   dynamicJson: true,
+  simpleCollections: "only", // adds 'List' suffix to models for simpler querying
   setofFunctionsContainNulls: false,
   ignoreRBAC: false,
   showErrorStack: "json",

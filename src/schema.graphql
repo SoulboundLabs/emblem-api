@@ -1,12 +1,6 @@
 type Account implements Node {
   """Reads and enables pagination through a set of `Award`."""
-  awardsByAccountId(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
+  awardsByAccountIdList(
     """
     A condition to be used in determining which values should be returned by the collection.
     """
@@ -15,18 +9,12 @@ type Account implements Node {
     """Only read the first `n` values of the set."""
     first: Int
 
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
+    """Skip the first `n` values."""
     offset: Int
 
     """The method to use when ordering `Award`."""
-    orderBy: [AwardsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): AwardsConnection!
+    orderBy: [AwardsOrderBy!]
+  ): [Award!]!
   ens: String
   id: String!
 
@@ -36,13 +24,7 @@ type Account implements Node {
   nodeId: ID!
 
   """Reads and enables pagination through a set of `Ranking`."""
-  rankingsByAccountId(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
+  rankingsByAccountIdList(
     """
     A condition to be used in determining which values should be returned by the collection.
     """
@@ -51,18 +33,12 @@ type Account implements Node {
     """Only read the first `n` values of the set."""
     first: Int
 
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
+    """Skip the first `n` values."""
     offset: Int
 
     """The method to use when ordering `Ranking`."""
-    orderBy: [RankingsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): RankingsConnection!
+    orderBy: [RankingsOrderBy!]
+  ): [Ranking!]!
 }
 
 """The fields on `account` to look up the row to connect."""
@@ -162,32 +138,6 @@ input AccountPatch {
   ens: String
   id: String
   rankingsUsingId: RankingsAccountIdForeignInverseInput
-}
-
-"""A connection to a list of `Account` values."""
-type AccountsConnection {
-  """
-  A list of edges which contains the `Account` and cursor to aid in pagination.
-  """
-  edges: [AccountsEdge!]!
-
-  """A list of `Account` objects."""
-  nodes: [Account!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """The count of *all* `Account` you could get from the connection."""
-  totalCount: Int!
-}
-
-"""A `Account` edge in the connection."""
-type AccountsEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
-
-  """The `Account` at the end of the edge."""
-  node: Account!
 }
 
 """Methods to use when ordering `Account`."""
@@ -434,23 +384,6 @@ input AwardsAccountIdForeignInverseInput {
   updateByNodeId: [AccountOnAwardForAwardsAccountIdForeignNodeIdUpdate!]
 }
 
-"""A connection to a list of `Award` values."""
-type AwardsConnection {
-  """
-  A list of edges which contains the `Award` and cursor to aid in pagination.
-  """
-  edges: [AwardsEdge!]!
-
-  """A list of `Award` objects."""
-  nodes: [Award!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """The count of *all* `Award` you could get from the connection."""
-  totalCount: Int!
-}
-
 """The `award` to be created by this mutation."""
 input AwardsDefinitionIdForeignAwardsCreateInput {
   accountId: String
@@ -555,15 +488,6 @@ input AwardsDefinitionIdForeignInverseInput {
   updateByNodeId: [DefinitionOnAwardForAwardsDefinitionIdForeignNodeIdUpdate!]
 }
 
-"""A `Award` edge in the connection."""
-type AwardsEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
-
-  """The `Award` at the end of the edge."""
-  node: Award!
-}
-
 """Methods to use when ordering `Award`."""
 enum AwardsOrderBy {
   ACCOUNT_ID_ASC
@@ -602,12 +526,6 @@ type CreateAccountPayload {
   """The `Account` that was created by this mutation."""
   account: Account
 
-  """An edge for our `Account`. May be used by Relay 1."""
-  accountEdge(
-    """The method to use when ordering `Account`."""
-    orderBy: [AccountsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): AccountsEdge
-
   """
   The exact same `clientMutationId` that was provided in the mutation input,
   unchanged and unused. May be used by a client to track mutations.
@@ -639,12 +557,6 @@ type CreateAwardPayload {
 
   """The `Award` that was created by this mutation."""
   award: Award
-
-  """An edge for our `Award`. May be used by Relay 1."""
-  awardEdge(
-    """The method to use when ordering `Award`."""
-    orderBy: [AwardsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): AwardsEdge
 
   """
   The exact same `clientMutationId` that was provided in the mutation input,
@@ -684,12 +596,6 @@ type CreateDefinitionPayload {
   """The `Definition` that was created by this mutation."""
   definition: Definition
 
-  """An edge for our `Definition`. May be used by Relay 1."""
-  definitionEdge(
-    """The method to use when ordering `Definition`."""
-    orderBy: [DefinitionsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): DefinitionsEdge
-
   """Reads a single `Protocol` that is related to this `Definition`."""
   protocolByProtocolId: Protocol
 
@@ -725,12 +631,6 @@ type CreateKnexMigrationPayload {
   """The `KnexMigration` that was created by this mutation."""
   knexMigration: KnexMigration
 
-  """An edge for our `KnexMigration`. May be used by Relay 1."""
-  knexMigrationEdge(
-    """The method to use when ordering `KnexMigration`."""
-    orderBy: [KnexMigrationsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): KnexMigrationsEdge
-
   """
   Our root query field type. Allows us to run any query from our mutation payload.
   """
@@ -760,12 +660,6 @@ type CreateKnexMigrationsLockPayload {
   """The `KnexMigrationsLock` that was created by this mutation."""
   knexMigrationsLock: KnexMigrationsLock
 
-  """An edge for our `KnexMigrationsLock`. May be used by Relay 1."""
-  knexMigrationsLockEdge(
-    """The method to use when ordering `KnexMigrationsLock`."""
-    orderBy: [KnexMigrationsLocksOrderBy!] = [PRIMARY_KEY_ASC]
-  ): KnexMigrationsLocksEdge
-
   """
   Our root query field type. Allows us to run any query from our mutation payload.
   """
@@ -794,12 +688,6 @@ type CreateProtocolPayload {
 
   """The `Protocol` that was created by this mutation."""
   protocol: Protocol
-
-  """An edge for our `Protocol`. May be used by Relay 1."""
-  protocolEdge(
-    """The method to use when ordering `Protocol`."""
-    orderBy: [ProtocolsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): ProtocolsEdge
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.
@@ -840,12 +728,6 @@ type CreateRankingPayload {
 
   """The `Ranking` that was created by this mutation."""
   ranking: Ranking
-
-  """An edge for our `Ranking`. May be used by Relay 1."""
-  rankingEdge(
-    """The method to use when ordering `Ranking`."""
-    orderBy: [RankingsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): RankingsEdge
 }
 
 """All input for the create `Role` mutation."""
@@ -878,16 +760,7 @@ type CreateRolePayload {
 
   """The `Role` that was created by this mutation."""
   role: Role
-
-  """An edge for our `Role`. May be used by Relay 1."""
-  roleEdge(
-    """The method to use when ordering `Role`."""
-    orderBy: [RolesOrderBy!] = [PRIMARY_KEY_ASC]
-  ): RolesEdge
 }
-
-"""A location in a connection that can be used for resuming pagination."""
-scalar Cursor
 
 """
 A point in time as described by the [ISO
@@ -897,13 +770,7 @@ scalar Datetime
 
 type Definition implements Node {
   """Reads and enables pagination through a set of `Award`."""
-  awardsByDefinitionId(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
+  awardsByDefinitionIdList(
     """
     A condition to be used in determining which values should be returned by the collection.
     """
@@ -912,18 +779,12 @@ type Definition implements Node {
     """Only read the first `n` values of the set."""
     first: Int
 
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
+    """Skip the first `n` values."""
     offset: Int
 
     """The method to use when ordering `Award`."""
-    orderBy: [AwardsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): AwardsConnection!
+    orderBy: [AwardsOrderBy!]
+  ): [Award!]!
   definition: String
   id: Int!
   ipfs: String
@@ -1097,32 +958,6 @@ input DefinitionPatch {
   roleId: Int
   roleToRoleId: DefinitionsRoleIdForeignInput
   threshold: String
-}
-
-"""A connection to a list of `Definition` values."""
-type DefinitionsConnection {
-  """
-  A list of edges which contains the `Definition` and cursor to aid in pagination.
-  """
-  edges: [DefinitionsEdge!]!
-
-  """A list of `Definition` objects."""
-  nodes: [Definition!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """The count of *all* `Definition` you could get from the connection."""
-  totalCount: Int!
-}
-
-"""A `Definition` edge in the connection."""
-type DefinitionsEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
-
-  """The `Definition` at the end of the edge."""
-  node: Definition!
 }
 
 """Methods to use when ordering `Definition`."""
@@ -1385,12 +1220,6 @@ type DeleteAccountPayload {
   """The `Account` that was deleted by this mutation."""
   account: Account
 
-  """An edge for our `Account`. May be used by Relay 1."""
-  accountEdge(
-    """The method to use when ordering `Account`."""
-    orderBy: [AccountsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): AccountsEdge
-
   """
   The exact same `clientMutationId` that was provided in the mutation input,
   unchanged and unused. May be used by a client to track mutations.
@@ -1435,12 +1264,6 @@ type DeleteAwardPayload {
 
   """The `Award` that was deleted by this mutation."""
   award: Award
-
-  """An edge for our `Award`. May be used by Relay 1."""
-  awardEdge(
-    """The method to use when ordering `Award`."""
-    orderBy: [AwardsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): AwardsEdge
 
   """
   The exact same `clientMutationId` that was provided in the mutation input,
@@ -1492,12 +1315,6 @@ type DeleteDefinitionPayload {
 
   """The `Definition` that was deleted by this mutation."""
   definition: Definition
-
-  """An edge for our `Definition`. May be used by Relay 1."""
-  definitionEdge(
-    """The method to use when ordering `Definition`."""
-    orderBy: [DefinitionsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): DefinitionsEdge
   deletedDefinitionId: ID
 
   """Reads a single `Protocol` that is related to this `Definition`."""
@@ -1548,12 +1365,6 @@ type DeleteKnexMigrationPayload {
   """The `KnexMigration` that was deleted by this mutation."""
   knexMigration: KnexMigration
 
-  """An edge for our `KnexMigration`. May be used by Relay 1."""
-  knexMigrationEdge(
-    """The method to use when ordering `KnexMigration`."""
-    orderBy: [KnexMigrationsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): KnexMigrationsEdge
-
   """
   Our root query field type. Allows us to run any query from our mutation payload.
   """
@@ -1596,12 +1407,6 @@ type DeleteKnexMigrationsLockPayload {
   """The `KnexMigrationsLock` that was deleted by this mutation."""
   knexMigrationsLock: KnexMigrationsLock
 
-  """An edge for our `KnexMigrationsLock`. May be used by Relay 1."""
-  knexMigrationsLockEdge(
-    """The method to use when ordering `KnexMigrationsLock`."""
-    orderBy: [KnexMigrationsLocksOrderBy!] = [PRIMARY_KEY_ASC]
-  ): KnexMigrationsLocksEdge
-
   """
   Our root query field type. Allows us to run any query from our mutation payload.
   """
@@ -1643,12 +1448,6 @@ type DeleteProtocolPayload {
 
   """The `Protocol` that was deleted by this mutation."""
   protocol: Protocol
-
-  """An edge for our `Protocol`. May be used by Relay 1."""
-  protocolEdge(
-    """The method to use when ordering `Protocol`."""
-    orderBy: [ProtocolsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): ProtocolsEdge
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.
@@ -1702,12 +1501,6 @@ type DeleteRankingPayload {
 
   """The `Ranking` that was deleted by this mutation."""
   ranking: Ranking
-
-  """An edge for our `Ranking`. May be used by Relay 1."""
-  rankingEdge(
-    """The method to use when ordering `Ranking`."""
-    orderBy: [RankingsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): RankingsEdge
 }
 
 """All input for the `deleteRoleById` mutation."""
@@ -1753,12 +1546,6 @@ type DeleteRolePayload {
 
   """The `Role` that was deleted by this mutation."""
   role: Role
-
-  """An edge for our `Role`. May be used by Relay 1."""
-  roleEdge(
-    """The method to use when ordering `Role`."""
-    orderBy: [RolesOrderBy!] = [PRIMARY_KEY_ASC]
-  ): RolesEdge
 }
 
 type KnexMigration implements Node {
@@ -1809,32 +1596,6 @@ input KnexMigrationPatch {
   name: String
 }
 
-"""A connection to a list of `KnexMigration` values."""
-type KnexMigrationsConnection {
-  """
-  A list of edges which contains the `KnexMigration` and cursor to aid in pagination.
-  """
-  edges: [KnexMigrationsEdge!]!
-
-  """A list of `KnexMigration` objects."""
-  nodes: [KnexMigration!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """The count of *all* `KnexMigration` you could get from the connection."""
-  totalCount: Int!
-}
-
-"""A `KnexMigration` edge in the connection."""
-type KnexMigrationsEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
-
-  """The `KnexMigration` at the end of the edge."""
-  node: KnexMigration!
-}
-
 type KnexMigrationsLock implements Node {
   index: Int!
   isLocked: Int
@@ -1869,34 +1630,6 @@ Represents an update to a `KnexMigrationsLock`. Fields that are set will be upda
 input KnexMigrationsLockPatch {
   index: Int
   isLocked: Int
-}
-
-"""A connection to a list of `KnexMigrationsLock` values."""
-type KnexMigrationsLocksConnection {
-  """
-  A list of edges which contains the `KnexMigrationsLock` and cursor to aid in pagination.
-  """
-  edges: [KnexMigrationsLocksEdge!]!
-
-  """A list of `KnexMigrationsLock` objects."""
-  nodes: [KnexMigrationsLock!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """
-  The count of *all* `KnexMigrationsLock` you could get from the connection.
-  """
-  totalCount: Int!
-}
-
-"""A `KnexMigrationsLock` edge in the connection."""
-type KnexMigrationsLocksEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
-
-  """The `KnexMigrationsLock` at the end of the edge."""
-  node: KnexMigrationsLock!
 }
 
 """Methods to use when ordering `KnexMigrationsLock`."""
@@ -2264,30 +1997,9 @@ interface Node {
   nodeId: ID!
 }
 
-"""Information about pagination in a connection."""
-type PageInfo {
-  """When paginating forwards, the cursor to continue."""
-  endCursor: Cursor
-
-  """When paginating forwards, are there more items?"""
-  hasNextPage: Boolean!
-
-  """When paginating backwards, are there more items?"""
-  hasPreviousPage: Boolean!
-
-  """When paginating backwards, the cursor to continue."""
-  startCursor: Cursor
-}
-
 type Protocol implements Node {
   """Reads and enables pagination through a set of `Definition`."""
-  definitionsByProtocolId(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
+  definitionsByProtocolIdList(
     """
     A condition to be used in determining which values should be returned by the collection.
     """
@@ -2296,18 +2008,12 @@ type Protocol implements Node {
     """Only read the first `n` values of the set."""
     first: Int
 
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
+    """Skip the first `n` values."""
     offset: Int
 
     """The method to use when ordering `Definition`."""
-    orderBy: [DefinitionsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): DefinitionsConnection!
+    orderBy: [DefinitionsOrderBy!]
+  ): [Definition!]!
   id: Int!
   name: String!
 
@@ -2317,13 +2023,7 @@ type Protocol implements Node {
   nodeId: ID!
 
   """Reads and enables pagination through a set of `Ranking`."""
-  rankingsByProtocolId(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
+  rankingsByProtocolIdList(
     """
     A condition to be used in determining which values should be returned by the collection.
     """
@@ -2332,27 +2032,15 @@ type Protocol implements Node {
     """Only read the first `n` values of the set."""
     first: Int
 
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
+    """Skip the first `n` values."""
     offset: Int
 
     """The method to use when ordering `Ranking`."""
-    orderBy: [RankingsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): RankingsConnection!
+    orderBy: [RankingsOrderBy!]
+  ): [Ranking!]!
 
   """Reads and enables pagination through a set of `Role`."""
-  rolesByProtocolId(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
+  rolesByProtocolIdList(
     """
     A condition to be used in determining which values should be returned by the collection.
     """
@@ -2361,18 +2049,12 @@ type Protocol implements Node {
     """Only read the first `n` values of the set."""
     first: Int
 
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
+    """Skip the first `n` values."""
     offset: Int
 
     """The method to use when ordering `Role`."""
-    orderBy: [RolesOrderBy!] = [PRIMARY_KEY_ASC]
-  ): RolesConnection!
+    orderBy: [RolesOrderBy!]
+  ): [Role!]!
 }
 
 """
@@ -2502,32 +2184,6 @@ input ProtocolProtocolsPkeyDelete {
   id: Int!
 }
 
-"""A connection to a list of `Protocol` values."""
-type ProtocolsConnection {
-  """
-  A list of edges which contains the `Protocol` and cursor to aid in pagination.
-  """
-  edges: [ProtocolsEdge!]!
-
-  """A list of `Protocol` objects."""
-  nodes: [Protocol!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """The count of *all* `Protocol` you could get from the connection."""
-  totalCount: Int!
-}
-
-"""A `Protocol` edge in the connection."""
-type ProtocolsEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
-
-  """The `Protocol` at the end of the edge."""
-  node: Protocol!
-}
-
 """Methods to use when ordering `Protocol`."""
 enum ProtocolsOrderBy {
   ID_ASC
@@ -2548,14 +2204,8 @@ type Query implements Node {
   ): Account
   accountById(id: String!): Account
 
-  """Reads and enables pagination through a set of `Account`."""
-  allAccounts(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
+  """Reads a set of `Account`."""
+  allAccountsList(
     """
     A condition to be used in determining which values should be returned by the collection.
     """
@@ -2564,27 +2214,15 @@ type Query implements Node {
     """Only read the first `n` values of the set."""
     first: Int
 
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
+    """Skip the first `n` values."""
     offset: Int
 
     """The method to use when ordering `Account`."""
-    orderBy: [AccountsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): AccountsConnection
+    orderBy: [AccountsOrderBy!]
+  ): [Account!]
 
-  """Reads and enables pagination through a set of `Award`."""
-  allAwards(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
+  """Reads a set of `Award`."""
+  allAwardsList(
     """
     A condition to be used in determining which values should be returned by the collection.
     """
@@ -2593,27 +2231,15 @@ type Query implements Node {
     """Only read the first `n` values of the set."""
     first: Int
 
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
+    """Skip the first `n` values."""
     offset: Int
 
     """The method to use when ordering `Award`."""
-    orderBy: [AwardsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): AwardsConnection
+    orderBy: [AwardsOrderBy!]
+  ): [Award!]
 
-  """Reads and enables pagination through a set of `Definition`."""
-  allDefinitions(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
+  """Reads a set of `Definition`."""
+  allDefinitionsList(
     """
     A condition to be used in determining which values should be returned by the collection.
     """
@@ -2622,27 +2248,15 @@ type Query implements Node {
     """Only read the first `n` values of the set."""
     first: Int
 
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
+    """Skip the first `n` values."""
     offset: Int
 
     """The method to use when ordering `Definition`."""
-    orderBy: [DefinitionsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): DefinitionsConnection
+    orderBy: [DefinitionsOrderBy!]
+  ): [Definition!]
 
-  """Reads and enables pagination through a set of `KnexMigration`."""
-  allKnexMigrations(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
+  """Reads a set of `KnexMigration`."""
+  allKnexMigrationsList(
     """
     A condition to be used in determining which values should be returned by the collection.
     """
@@ -2651,27 +2265,15 @@ type Query implements Node {
     """Only read the first `n` values of the set."""
     first: Int
 
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
+    """Skip the first `n` values."""
     offset: Int
 
     """The method to use when ordering `KnexMigration`."""
-    orderBy: [KnexMigrationsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): KnexMigrationsConnection
+    orderBy: [KnexMigrationsOrderBy!]
+  ): [KnexMigration!]
 
-  """Reads and enables pagination through a set of `KnexMigrationsLock`."""
-  allKnexMigrationsLocks(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
+  """Reads a set of `KnexMigrationsLock`."""
+  allKnexMigrationsLocksList(
     """
     A condition to be used in determining which values should be returned by the collection.
     """
@@ -2680,27 +2282,15 @@ type Query implements Node {
     """Only read the first `n` values of the set."""
     first: Int
 
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
+    """Skip the first `n` values."""
     offset: Int
 
     """The method to use when ordering `KnexMigrationsLock`."""
-    orderBy: [KnexMigrationsLocksOrderBy!] = [PRIMARY_KEY_ASC]
-  ): KnexMigrationsLocksConnection
+    orderBy: [KnexMigrationsLocksOrderBy!]
+  ): [KnexMigrationsLock!]
 
-  """Reads and enables pagination through a set of `Protocol`."""
-  allProtocols(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
+  """Reads a set of `Protocol`."""
+  allProtocolsList(
     """
     A condition to be used in determining which values should be returned by the collection.
     """
@@ -2709,27 +2299,15 @@ type Query implements Node {
     """Only read the first `n` values of the set."""
     first: Int
 
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
+    """Skip the first `n` values."""
     offset: Int
 
     """The method to use when ordering `Protocol`."""
-    orderBy: [ProtocolsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): ProtocolsConnection
+    orderBy: [ProtocolsOrderBy!]
+  ): [Protocol!]
 
-  """Reads and enables pagination through a set of `Ranking`."""
-  allRankings(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
+  """Reads a set of `Ranking`."""
+  allRankingsList(
     """
     A condition to be used in determining which values should be returned by the collection.
     """
@@ -2738,27 +2316,15 @@ type Query implements Node {
     """Only read the first `n` values of the set."""
     first: Int
 
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
+    """Skip the first `n` values."""
     offset: Int
 
     """The method to use when ordering `Ranking`."""
-    orderBy: [RankingsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): RankingsConnection
+    orderBy: [RankingsOrderBy!]
+  ): [Ranking!]
 
-  """Reads and enables pagination through a set of `Role`."""
-  allRoles(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
+  """Reads a set of `Role`."""
+  allRolesList(
     """
     A condition to be used in determining which values should be returned by the collection.
     """
@@ -2767,18 +2333,12 @@ type Query implements Node {
     """Only read the first `n` values of the set."""
     first: Int
 
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
+    """Skip the first `n` values."""
     offset: Int
 
     """The method to use when ordering `Role`."""
-    orderBy: [RolesOrderBy!] = [PRIMARY_KEY_ASC]
-  ): RolesConnection
+    orderBy: [RolesOrderBy!]
+  ): [Role!]
 
   """Reads a single `Award` using its globally unique `ID`."""
   award(
@@ -3067,32 +2627,6 @@ input RankingsAccountIdForeignRankingsCreateInput {
   rank: Int!
 }
 
-"""A connection to a list of `Ranking` values."""
-type RankingsConnection {
-  """
-  A list of edges which contains the `Ranking` and cursor to aid in pagination.
-  """
-  edges: [RankingsEdge!]!
-
-  """A list of `Ranking` objects."""
-  nodes: [Ranking!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """The count of *all* `Ranking` you could get from the connection."""
-  totalCount: Int!
-}
-
-"""A `Ranking` edge in the connection."""
-type RankingsEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
-
-  """The `Ranking` at the end of the edge."""
-  node: Ranking!
-}
-
 """Methods to use when ordering `Ranking`."""
 enum RankingsOrderBy {
   ACCOUNT_ID_ASC
@@ -3205,13 +2739,7 @@ input RankingsProtocolIdForeignRankingsCreateInput {
 
 type Role implements Node {
   """Reads and enables pagination through a set of `Definition`."""
-  definitionsByRoleId(
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
+  definitionsByRoleIdList(
     """
     A condition to be used in determining which values should be returned by the collection.
     """
@@ -3220,18 +2748,12 @@ type Role implements Node {
     """Only read the first `n` values of the set."""
     first: Int
 
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
+    """Skip the first `n` values."""
     offset: Int
 
     """The method to use when ordering `Definition`."""
-    orderBy: [DefinitionsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): DefinitionsConnection!
+    orderBy: [DefinitionsOrderBy!]
+  ): [Definition!]!
   id: Int!
   name: String!
 
@@ -3347,32 +2869,6 @@ input RoleRolesPkeyConnect {
 """The fields on `role` to look up the row to delete."""
 input RoleRolesPkeyDelete {
   id: Int!
-}
-
-"""A connection to a list of `Role` values."""
-type RolesConnection {
-  """
-  A list of edges which contains the `Role` and cursor to aid in pagination.
-  """
-  edges: [RolesEdge!]!
-
-  """A list of `Role` objects."""
-  nodes: [Role!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """The count of *all* `Role` you could get from the connection."""
-  totalCount: Int!
-}
-
-"""A `Role` edge in the connection."""
-type RolesEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
-
-  """The `Role` at the end of the edge."""
-  node: Role!
 }
 
 """Methods to use when ordering `Role`."""
@@ -3521,12 +3017,6 @@ type UpdateAccountPayload {
   """The `Account` that was updated by this mutation."""
   account: Account
 
-  """An edge for our `Account`. May be used by Relay 1."""
-  accountEdge(
-    """The method to use when ordering `Account`."""
-    orderBy: [AccountsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): AccountsEdge
-
   """
   The exact same `clientMutationId` that was provided in the mutation input,
   unchanged and unused. May be used by a client to track mutations.
@@ -3580,12 +3070,6 @@ type UpdateAwardPayload {
 
   """The `Award` that was updated by this mutation."""
   award: Award
-
-  """An edge for our `Award`. May be used by Relay 1."""
-  awardEdge(
-    """The method to use when ordering `Award`."""
-    orderBy: [AwardsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): AwardsEdge
 
   """
   The exact same `clientMutationId` that was provided in the mutation input,
@@ -3647,12 +3131,6 @@ type UpdateDefinitionPayload {
   """The `Definition` that was updated by this mutation."""
   definition: Definition
 
-  """An edge for our `Definition`. May be used by Relay 1."""
-  definitionEdge(
-    """The method to use when ordering `Definition`."""
-    orderBy: [DefinitionsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): DefinitionsEdge
-
   """Reads a single `Protocol` that is related to this `Definition`."""
   protocolByProtocolId: Protocol
 
@@ -3710,12 +3188,6 @@ type UpdateKnexMigrationPayload {
   """The `KnexMigration` that was updated by this mutation."""
   knexMigration: KnexMigration
 
-  """An edge for our `KnexMigration`. May be used by Relay 1."""
-  knexMigrationEdge(
-    """The method to use when ordering `KnexMigration`."""
-    orderBy: [KnexMigrationsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): KnexMigrationsEdge
-
   """
   Our root query field type. Allows us to run any query from our mutation payload.
   """
@@ -3767,12 +3239,6 @@ type UpdateKnexMigrationsLockPayload {
   """The `KnexMigrationsLock` that was updated by this mutation."""
   knexMigrationsLock: KnexMigrationsLock
 
-  """An edge for our `KnexMigrationsLock`. May be used by Relay 1."""
-  knexMigrationsLockEdge(
-    """The method to use when ordering `KnexMigrationsLock`."""
-    orderBy: [KnexMigrationsLocksOrderBy!] = [PRIMARY_KEY_ASC]
-  ): KnexMigrationsLocksEdge
-
   """
   Our root query field type. Allows us to run any query from our mutation payload.
   """
@@ -3823,12 +3289,6 @@ type UpdateProtocolPayload {
 
   """The `Protocol` that was updated by this mutation."""
   protocol: Protocol
-
-  """An edge for our `Protocol`. May be used by Relay 1."""
-  protocolEdge(
-    """The method to use when ordering `Protocol`."""
-    orderBy: [ProtocolsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): ProtocolsEdge
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.
@@ -3891,12 +3351,6 @@ type UpdateRankingPayload {
 
   """The `Ranking` that was updated by this mutation."""
   ranking: Ranking
-
-  """An edge for our `Ranking`. May be used by Relay 1."""
-  rankingEdge(
-    """The method to use when ordering `Ranking`."""
-    orderBy: [RankingsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): RankingsEdge
 }
 
 """All input for the `updateRoleById` mutation."""
@@ -3951,12 +3405,6 @@ type UpdateRolePayload {
 
   """The `Role` that was updated by this mutation."""
   role: Role
-
-  """An edge for our `Role`. May be used by Relay 1."""
-  roleEdge(
-    """The method to use when ordering `Role`."""
-    orderBy: [RolesOrderBy!] = [PRIMARY_KEY_ASC]
-  ): RolesEdge
 }
 
 """
