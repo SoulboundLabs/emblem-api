@@ -1,8 +1,8 @@
 import { Model } from "objection";
 
-export class Account extends Model {
+export class Winner extends Model {
   static get tableName() {
-    return "accounts";
+    return "winners";
   }
 
   static get jsonSchema() {
@@ -24,7 +24,7 @@ export class Account extends Model {
         relation: Model.HasManyRelation,
         modelClass: Heart,
         join: {
-          from: "accounts.id",
+          from: "winners.id",
           to: "hearts.receiverId",
         },
       },
@@ -33,7 +33,7 @@ export class Account extends Model {
         relation: Model.HasManyRelation,
         modelClass: Heart,
         join: {
-          from: "accounts.id",
+          from: "winners.id",
           to: "hearts.giverId",
         },
       },

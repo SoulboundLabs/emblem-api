@@ -1,10 +1,13 @@
 import PgPubsub from "@graphile/pg-pubsub";
-import { Pool } from "pg";
-import { gql, makeExtendSchemaPlugin, PostGraphileOptions } from "postgraphile";
+import {
+  gql,
+  makeExtendSchemaPlugin,
+  makePluginHook,
+  PostGraphileOptions,
+} from "postgraphile";
 
 // Connection string (or pg.Pool) for PostGraphile to use
-export const database: string | Pool =
-  process.env.DATABASE_URL || "postgraphile";
+export const database: string = process.env.DATABASE_URL || "emblem";
 
 // Database schemas to use
 export const schemas: string | string[] = ["public"];
@@ -71,4 +74,4 @@ export const options: PostGraphileOptions = {
 
 export const port: number = process.env.PORT
   ? parseInt(process.env.PORT, 10)
-  : 3000;
+  : 4000;

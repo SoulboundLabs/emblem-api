@@ -1,0 +1,2797 @@
+type Account implements Node {
+  """Reads and enables pagination through a set of `Award`."""
+  awardsByAccountId(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: AwardCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `Award`."""
+    orderBy: [AwardsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): AwardsConnection!
+  ens: String
+  id: String!
+
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+
+  """Reads and enables pagination through a set of `Ranking`."""
+  rankingsByAccountId(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: RankingCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `Ranking`."""
+    orderBy: [RankingsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): RankingsConnection!
+}
+
+"""
+A condition to be used against `Account` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input AccountCondition {
+  """Checks for equality with the object’s `ens` field."""
+  ens: String
+
+  """Checks for equality with the object’s `id` field."""
+  id: String
+}
+
+"""An input for mutations affecting `Account`"""
+input AccountInput {
+  ens: String
+  id: String!
+}
+
+"""
+Represents an update to a `Account`. Fields that are set will be updated.
+"""
+input AccountPatch {
+  ens: String
+  id: String
+}
+
+"""A connection to a list of `Account` values."""
+type AccountsConnection {
+  """
+  A list of edges which contains the `Account` and cursor to aid in pagination.
+  """
+  edges: [AccountsEdge!]!
+
+  """A list of `Account` objects."""
+  nodes: [Account!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Account` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `Account` edge in the connection."""
+type AccountsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Account` at the end of the edge."""
+  node: Account!
+}
+
+"""Methods to use when ordering `Account`."""
+enum AccountsOrderBy {
+  ENS_ASC
+  ENS_DESC
+  ID_ASC
+  ID_DESC
+  NATURAL
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+type Award implements Node {
+  """Reads a single `Account` that is related to this `Award`."""
+  accountByAccountId: Account
+  accountId: String!
+  awardNumber: String
+  blockAwarded: Int
+
+  """Reads a single `Definition` that is related to this `Award`."""
+  definitionByDefinitionId: Definition
+  definitionId: Int!
+  globalAwardNumber: String
+  id: Int!
+
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  transactionHash: String
+}
+
+"""
+A condition to be used against `Award` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input AwardCondition {
+  """Checks for equality with the object’s `accountId` field."""
+  accountId: String
+
+  """Checks for equality with the object’s `awardNumber` field."""
+  awardNumber: String
+
+  """Checks for equality with the object’s `blockAwarded` field."""
+  blockAwarded: Int
+
+  """Checks for equality with the object’s `definitionId` field."""
+  definitionId: Int
+
+  """Checks for equality with the object’s `globalAwardNumber` field."""
+  globalAwardNumber: String
+
+  """Checks for equality with the object’s `id` field."""
+  id: Int
+
+  """Checks for equality with the object’s `transactionHash` field."""
+  transactionHash: String
+}
+
+"""An input for mutations affecting `Award`"""
+input AwardInput {
+  accountId: String!
+  awardNumber: String
+  blockAwarded: Int
+  definitionId: Int!
+  globalAwardNumber: String
+  id: Int
+  transactionHash: String
+}
+
+"""
+Represents an update to a `Award`. Fields that are set will be updated.
+"""
+input AwardPatch {
+  accountId: String
+  awardNumber: String
+  blockAwarded: Int
+  definitionId: Int
+  globalAwardNumber: String
+  id: Int
+  transactionHash: String
+}
+
+"""A connection to a list of `Award` values."""
+type AwardsConnection {
+  """
+  A list of edges which contains the `Award` and cursor to aid in pagination.
+  """
+  edges: [AwardsEdge!]!
+
+  """A list of `Award` objects."""
+  nodes: [Award!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Award` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `Award` edge in the connection."""
+type AwardsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Award` at the end of the edge."""
+  node: Award!
+}
+
+"""Methods to use when ordering `Award`."""
+enum AwardsOrderBy {
+  ACCOUNT_ID_ASC
+  ACCOUNT_ID_DESC
+  AWARD_NUMBER_ASC
+  AWARD_NUMBER_DESC
+  BLOCK_AWARDED_ASC
+  BLOCK_AWARDED_DESC
+  DEFINITION_ID_ASC
+  DEFINITION_ID_DESC
+  GLOBAL_AWARD_NUMBER_ASC
+  GLOBAL_AWARD_NUMBER_DESC
+  ID_ASC
+  ID_DESC
+  NATURAL
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+  TRANSACTION_HASH_ASC
+  TRANSACTION_HASH_DESC
+}
+
+"""All input for the create `Account` mutation."""
+input CreateAccountInput {
+  """The `Account` to be created by this mutation."""
+  account: AccountInput!
+
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+}
+
+"""The output of our create `Account` mutation."""
+type CreateAccountPayload {
+  """The `Account` that was created by this mutation."""
+  account: Account
+
+  """An edge for our `Account`. May be used by Relay 1."""
+  accountEdge(
+    """The method to use when ordering `Account`."""
+    orderBy: [AccountsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): AccountsEdge
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the create `Award` mutation."""
+input CreateAwardInput {
+  """The `Award` to be created by this mutation."""
+  award: AwardInput!
+
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+}
+
+"""The output of our create `Award` mutation."""
+type CreateAwardPayload {
+  """Reads a single `Account` that is related to this `Award`."""
+  accountByAccountId: Account
+
+  """The `Award` that was created by this mutation."""
+  award: Award
+
+  """An edge for our `Award`. May be used by Relay 1."""
+  awardEdge(
+    """The method to use when ordering `Award`."""
+    orderBy: [AwardsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): AwardsEdge
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """Reads a single `Definition` that is related to this `Award`."""
+  definitionByDefinitionId: Definition
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the create `Definition` mutation."""
+input CreateDefinitionInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Definition` to be created by this mutation."""
+  definition: DefinitionInput!
+}
+
+"""The output of our create `Definition` mutation."""
+type CreateDefinitionPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Definition` that was created by this mutation."""
+  definition: Definition
+
+  """An edge for our `Definition`. May be used by Relay 1."""
+  definitionEdge(
+    """The method to use when ordering `Definition`."""
+    orderBy: [DefinitionsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): DefinitionsEdge
+
+  """Reads a single `Protocol` that is related to this `Definition`."""
+  protocolByProtocolId: Protocol
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Role` that is related to this `Definition`."""
+  roleByRoleId: Role
+}
+
+"""All input for the create `KnexMigration` mutation."""
+input CreateKnexMigrationInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `KnexMigration` to be created by this mutation."""
+  knexMigration: KnexMigrationInput!
+}
+
+"""The output of our create `KnexMigration` mutation."""
+type CreateKnexMigrationPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `KnexMigration` that was created by this mutation."""
+  knexMigration: KnexMigration
+
+  """An edge for our `KnexMigration`. May be used by Relay 1."""
+  knexMigrationEdge(
+    """The method to use when ordering `KnexMigration`."""
+    orderBy: [KnexMigrationsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): KnexMigrationsEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the create `KnexMigrationsLock` mutation."""
+input CreateKnexMigrationsLockInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `KnexMigrationsLock` to be created by this mutation."""
+  knexMigrationsLock: KnexMigrationsLockInput!
+}
+
+"""The output of our create `KnexMigrationsLock` mutation."""
+type CreateKnexMigrationsLockPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `KnexMigrationsLock` that was created by this mutation."""
+  knexMigrationsLock: KnexMigrationsLock
+
+  """An edge for our `KnexMigrationsLock`. May be used by Relay 1."""
+  knexMigrationsLockEdge(
+    """The method to use when ordering `KnexMigrationsLock`."""
+    orderBy: [KnexMigrationsLocksOrderBy!] = [PRIMARY_KEY_ASC]
+  ): KnexMigrationsLocksEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the create `Protocol` mutation."""
+input CreateProtocolInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Protocol` to be created by this mutation."""
+  protocol: ProtocolInput!
+}
+
+"""The output of our create `Protocol` mutation."""
+type CreateProtocolPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Protocol` that was created by this mutation."""
+  protocol: Protocol
+
+  """An edge for our `Protocol`. May be used by Relay 1."""
+  protocolEdge(
+    """The method to use when ordering `Protocol`."""
+    orderBy: [ProtocolsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): ProtocolsEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the create `Ranking` mutation."""
+input CreateRankingInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Ranking` to be created by this mutation."""
+  ranking: RankingInput!
+}
+
+"""The output of our create `Ranking` mutation."""
+type CreateRankingPayload {
+  """Reads a single `Account` that is related to this `Ranking`."""
+  accountByAccountId: Account
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """Reads a single `Protocol` that is related to this `Ranking`."""
+  protocolByProtocolId: Protocol
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """The `Ranking` that was created by this mutation."""
+  ranking: Ranking
+
+  """An edge for our `Ranking`. May be used by Relay 1."""
+  rankingEdge(
+    """The method to use when ordering `Ranking`."""
+    orderBy: [RankingsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): RankingsEdge
+}
+
+"""All input for the create `Role` mutation."""
+input CreateRoleInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Role` to be created by this mutation."""
+  role: RoleInput!
+}
+
+"""The output of our create `Role` mutation."""
+type CreateRolePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """Reads a single `Protocol` that is related to this `Role`."""
+  protocolByProtocolId: Protocol
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """The `Role` that was created by this mutation."""
+  role: Role
+
+  """An edge for our `Role`. May be used by Relay 1."""
+  roleEdge(
+    """The method to use when ordering `Role`."""
+    orderBy: [RolesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): RolesEdge
+}
+
+"""A location in a connection that can be used for resuming pagination."""
+scalar Cursor
+
+"""
+A point in time as described by the [ISO
+8601](https://en.wikipedia.org/wiki/ISO_8601) standard. May or may not include a timezone.
+"""
+scalar Datetime
+
+type Definition implements Node {
+  """Reads and enables pagination through a set of `Award`."""
+  awardsByDefinitionId(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: AwardCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `Award`."""
+    orderBy: [AwardsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): AwardsConnection!
+  definition: String
+  id: Int!
+  ipfs: String
+  metric: String
+  name: String!
+
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+
+  """Reads a single `Protocol` that is related to this `Definition`."""
+  protocolByProtocolId: Protocol
+  protocolId: Int!
+
+  """Reads a single `Role` that is related to this `Definition`."""
+  roleByRoleId: Role
+  roleId: Int!
+  threshold: String
+}
+
+"""
+A condition to be used against `Definition` object types. All fields are tested
+for equality and combined with a logical ‘and.’
+"""
+input DefinitionCondition {
+  """Checks for equality with the object’s `definition` field."""
+  definition: String
+
+  """Checks for equality with the object’s `id` field."""
+  id: Int
+
+  """Checks for equality with the object’s `ipfs` field."""
+  ipfs: String
+
+  """Checks for equality with the object’s `metric` field."""
+  metric: String
+
+  """Checks for equality with the object’s `name` field."""
+  name: String
+
+  """Checks for equality with the object’s `protocolId` field."""
+  protocolId: Int
+
+  """Checks for equality with the object’s `roleId` field."""
+  roleId: Int
+
+  """Checks for equality with the object’s `threshold` field."""
+  threshold: String
+}
+
+"""An input for mutations affecting `Definition`"""
+input DefinitionInput {
+  definition: String
+  id: Int
+  ipfs: String
+  metric: String
+  name: String!
+  protocolId: Int!
+  roleId: Int!
+  threshold: String
+}
+
+"""
+Represents an update to a `Definition`. Fields that are set will be updated.
+"""
+input DefinitionPatch {
+  definition: String
+  id: Int
+  ipfs: String
+  metric: String
+  name: String
+  protocolId: Int
+  roleId: Int
+  threshold: String
+}
+
+"""A connection to a list of `Definition` values."""
+type DefinitionsConnection {
+  """
+  A list of edges which contains the `Definition` and cursor to aid in pagination.
+  """
+  edges: [DefinitionsEdge!]!
+
+  """A list of `Definition` objects."""
+  nodes: [Definition!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Definition` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `Definition` edge in the connection."""
+type DefinitionsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Definition` at the end of the edge."""
+  node: Definition!
+}
+
+"""Methods to use when ordering `Definition`."""
+enum DefinitionsOrderBy {
+  DEFINITION_ASC
+  DEFINITION_DESC
+  ID_ASC
+  ID_DESC
+  IPFS_ASC
+  IPFS_DESC
+  METRIC_ASC
+  METRIC_DESC
+  NAME_ASC
+  NAME_DESC
+  NATURAL
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+  PROTOCOL_ID_ASC
+  PROTOCOL_ID_DESC
+  ROLE_ID_ASC
+  ROLE_ID_DESC
+  THRESHOLD_ASC
+  THRESHOLD_DESC
+}
+
+"""All input for the `deleteAccountById` mutation."""
+input DeleteAccountByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: String!
+}
+
+"""All input for the `deleteAccount` mutation."""
+input DeleteAccountInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Account` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""The output of our delete `Account` mutation."""
+type DeleteAccountPayload {
+  """The `Account` that was deleted by this mutation."""
+  account: Account
+
+  """An edge for our `Account`. May be used by Relay 1."""
+  accountEdge(
+    """The method to use when ordering `Account`."""
+    orderBy: [AccountsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): AccountsEdge
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  deletedAccountId: ID
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `deleteAwardById` mutation."""
+input DeleteAwardByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: Int!
+}
+
+"""All input for the `deleteAward` mutation."""
+input DeleteAwardInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Award` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""The output of our delete `Award` mutation."""
+type DeleteAwardPayload {
+  """Reads a single `Account` that is related to this `Award`."""
+  accountByAccountId: Account
+
+  """The `Award` that was deleted by this mutation."""
+  award: Award
+
+  """An edge for our `Award`. May be used by Relay 1."""
+  awardEdge(
+    """The method to use when ordering `Award`."""
+    orderBy: [AwardsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): AwardsEdge
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """Reads a single `Definition` that is related to this `Award`."""
+  definitionByDefinitionId: Definition
+  deletedAwardId: ID
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `deleteDefinitionById` mutation."""
+input DeleteDefinitionByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: Int!
+}
+
+"""All input for the `deleteDefinition` mutation."""
+input DeleteDefinitionInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Definition` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""The output of our delete `Definition` mutation."""
+type DeleteDefinitionPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Definition` that was deleted by this mutation."""
+  definition: Definition
+
+  """An edge for our `Definition`. May be used by Relay 1."""
+  definitionEdge(
+    """The method to use when ordering `Definition`."""
+    orderBy: [DefinitionsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): DefinitionsEdge
+  deletedDefinitionId: ID
+
+  """Reads a single `Protocol` that is related to this `Definition`."""
+  protocolByProtocolId: Protocol
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Role` that is related to this `Definition`."""
+  roleByRoleId: Role
+}
+
+"""All input for the `deleteKnexMigrationById` mutation."""
+input DeleteKnexMigrationByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: Int!
+}
+
+"""All input for the `deleteKnexMigration` mutation."""
+input DeleteKnexMigrationInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `KnexMigration` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""The output of our delete `KnexMigration` mutation."""
+type DeleteKnexMigrationPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  deletedKnexMigrationId: ID
+
+  """The `KnexMigration` that was deleted by this mutation."""
+  knexMigration: KnexMigration
+
+  """An edge for our `KnexMigration`. May be used by Relay 1."""
+  knexMigrationEdge(
+    """The method to use when ordering `KnexMigration`."""
+    orderBy: [KnexMigrationsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): KnexMigrationsEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `deleteKnexMigrationsLockByIndex` mutation."""
+input DeleteKnexMigrationsLockByIndexInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  index: Int!
+}
+
+"""All input for the `deleteKnexMigrationsLock` mutation."""
+input DeleteKnexMigrationsLockInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `KnexMigrationsLock` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""The output of our delete `KnexMigrationsLock` mutation."""
+type DeleteKnexMigrationsLockPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  deletedKnexMigrationsLockId: ID
+
+  """The `KnexMigrationsLock` that was deleted by this mutation."""
+  knexMigrationsLock: KnexMigrationsLock
+
+  """An edge for our `KnexMigrationsLock`. May be used by Relay 1."""
+  knexMigrationsLockEdge(
+    """The method to use when ordering `KnexMigrationsLock`."""
+    orderBy: [KnexMigrationsLocksOrderBy!] = [PRIMARY_KEY_ASC]
+  ): KnexMigrationsLocksEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `deleteProtocolById` mutation."""
+input DeleteProtocolByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: Int!
+}
+
+"""All input for the `deleteProtocol` mutation."""
+input DeleteProtocolInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Protocol` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""The output of our delete `Protocol` mutation."""
+type DeleteProtocolPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  deletedProtocolId: ID
+
+  """The `Protocol` that was deleted by this mutation."""
+  protocol: Protocol
+
+  """An edge for our `Protocol`. May be used by Relay 1."""
+  protocolEdge(
+    """The method to use when ordering `Protocol`."""
+    orderBy: [ProtocolsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): ProtocolsEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `deleteRankingById` mutation."""
+input DeleteRankingByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: Int!
+}
+
+"""All input for the `deleteRanking` mutation."""
+input DeleteRankingInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Ranking` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""The output of our delete `Ranking` mutation."""
+type DeleteRankingPayload {
+  """Reads a single `Account` that is related to this `Ranking`."""
+  accountByAccountId: Account
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  deletedRankingId: ID
+
+  """Reads a single `Protocol` that is related to this `Ranking`."""
+  protocolByProtocolId: Protocol
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """The `Ranking` that was deleted by this mutation."""
+  ranking: Ranking
+
+  """An edge for our `Ranking`. May be used by Relay 1."""
+  rankingEdge(
+    """The method to use when ordering `Ranking`."""
+    orderBy: [RankingsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): RankingsEdge
+}
+
+"""All input for the `deleteRoleById` mutation."""
+input DeleteRoleByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: Int!
+}
+
+"""All input for the `deleteRole` mutation."""
+input DeleteRoleInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Role` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""The output of our delete `Role` mutation."""
+type DeleteRolePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  deletedRoleId: ID
+
+  """Reads a single `Protocol` that is related to this `Role`."""
+  protocolByProtocolId: Protocol
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """The `Role` that was deleted by this mutation."""
+  role: Role
+
+  """An edge for our `Role`. May be used by Relay 1."""
+  roleEdge(
+    """The method to use when ordering `Role`."""
+    orderBy: [RolesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): RolesEdge
+}
+
+type KnexMigration implements Node {
+  batch: Int
+  id: Int!
+  migrationTime: Datetime
+  name: String
+
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+}
+
+"""
+A condition to be used against `KnexMigration` object types. All fields are
+tested for equality and combined with a logical ‘and.’
+"""
+input KnexMigrationCondition {
+  """Checks for equality with the object’s `batch` field."""
+  batch: Int
+
+  """Checks for equality with the object’s `id` field."""
+  id: Int
+
+  """Checks for equality with the object’s `migrationTime` field."""
+  migrationTime: Datetime
+
+  """Checks for equality with the object’s `name` field."""
+  name: String
+}
+
+"""An input for mutations affecting `KnexMigration`"""
+input KnexMigrationInput {
+  batch: Int
+  id: Int
+  migrationTime: Datetime
+  name: String
+}
+
+"""
+Represents an update to a `KnexMigration`. Fields that are set will be updated.
+"""
+input KnexMigrationPatch {
+  batch: Int
+  id: Int
+  migrationTime: Datetime
+  name: String
+}
+
+"""A connection to a list of `KnexMigration` values."""
+type KnexMigrationsConnection {
+  """
+  A list of edges which contains the `KnexMigration` and cursor to aid in pagination.
+  """
+  edges: [KnexMigrationsEdge!]!
+
+  """A list of `KnexMigration` objects."""
+  nodes: [KnexMigration!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `KnexMigration` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `KnexMigration` edge in the connection."""
+type KnexMigrationsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `KnexMigration` at the end of the edge."""
+  node: KnexMigration!
+}
+
+type KnexMigrationsLock implements Node {
+  index: Int!
+  isLocked: Int
+
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+}
+
+"""
+A condition to be used against `KnexMigrationsLock` object types. All fields are
+tested for equality and combined with a logical ‘and.’
+"""
+input KnexMigrationsLockCondition {
+  """Checks for equality with the object’s `index` field."""
+  index: Int
+
+  """Checks for equality with the object’s `isLocked` field."""
+  isLocked: Int
+}
+
+"""An input for mutations affecting `KnexMigrationsLock`"""
+input KnexMigrationsLockInput {
+  index: Int
+  isLocked: Int
+}
+
+"""
+Represents an update to a `KnexMigrationsLock`. Fields that are set will be updated.
+"""
+input KnexMigrationsLockPatch {
+  index: Int
+  isLocked: Int
+}
+
+"""A connection to a list of `KnexMigrationsLock` values."""
+type KnexMigrationsLocksConnection {
+  """
+  A list of edges which contains the `KnexMigrationsLock` and cursor to aid in pagination.
+  """
+  edges: [KnexMigrationsLocksEdge!]!
+
+  """A list of `KnexMigrationsLock` objects."""
+  nodes: [KnexMigrationsLock!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """
+  The count of *all* `KnexMigrationsLock` you could get from the connection.
+  """
+  totalCount: Int!
+}
+
+"""A `KnexMigrationsLock` edge in the connection."""
+type KnexMigrationsLocksEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `KnexMigrationsLock` at the end of the edge."""
+  node: KnexMigrationsLock!
+}
+
+"""Methods to use when ordering `KnexMigrationsLock`."""
+enum KnexMigrationsLocksOrderBy {
+  INDEX_ASC
+  INDEX_DESC
+  IS_LOCKED_ASC
+  IS_LOCKED_DESC
+  NATURAL
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+"""Methods to use when ordering `KnexMigration`."""
+enum KnexMigrationsOrderBy {
+  BATCH_ASC
+  BATCH_DESC
+  ID_ASC
+  ID_DESC
+  MIGRATION_TIME_ASC
+  MIGRATION_TIME_DESC
+  NAME_ASC
+  NAME_DESC
+  NATURAL
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+"""
+The root mutation type which contains root level fields which mutate data.
+"""
+type Mutation {
+  """Creates a single `Account`."""
+  createAccount(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateAccountInput!
+  ): CreateAccountPayload
+
+  """Creates a single `Award`."""
+  createAward(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateAwardInput!
+  ): CreateAwardPayload
+
+  """Creates a single `Definition`."""
+  createDefinition(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateDefinitionInput!
+  ): CreateDefinitionPayload
+
+  """Creates a single `KnexMigration`."""
+  createKnexMigration(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateKnexMigrationInput!
+  ): CreateKnexMigrationPayload
+
+  """Creates a single `KnexMigrationsLock`."""
+  createKnexMigrationsLock(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateKnexMigrationsLockInput!
+  ): CreateKnexMigrationsLockPayload
+
+  """Creates a single `Protocol`."""
+  createProtocol(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateProtocolInput!
+  ): CreateProtocolPayload
+
+  """Creates a single `Ranking`."""
+  createRanking(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateRankingInput!
+  ): CreateRankingPayload
+
+  """Creates a single `Role`."""
+  createRole(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateRoleInput!
+  ): CreateRolePayload
+
+  """Deletes a single `Account` using its globally unique id."""
+  deleteAccount(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteAccountInput!
+  ): DeleteAccountPayload
+
+  """Deletes a single `Account` using a unique key."""
+  deleteAccountById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteAccountByIdInput!
+  ): DeleteAccountPayload
+
+  """Deletes a single `Award` using its globally unique id."""
+  deleteAward(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteAwardInput!
+  ): DeleteAwardPayload
+
+  """Deletes a single `Award` using a unique key."""
+  deleteAwardById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteAwardByIdInput!
+  ): DeleteAwardPayload
+
+  """Deletes a single `Definition` using its globally unique id."""
+  deleteDefinition(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteDefinitionInput!
+  ): DeleteDefinitionPayload
+
+  """Deletes a single `Definition` using a unique key."""
+  deleteDefinitionById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteDefinitionByIdInput!
+  ): DeleteDefinitionPayload
+
+  """Deletes a single `KnexMigration` using its globally unique id."""
+  deleteKnexMigration(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteKnexMigrationInput!
+  ): DeleteKnexMigrationPayload
+
+  """Deletes a single `KnexMigration` using a unique key."""
+  deleteKnexMigrationById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteKnexMigrationByIdInput!
+  ): DeleteKnexMigrationPayload
+
+  """Deletes a single `KnexMigrationsLock` using its globally unique id."""
+  deleteKnexMigrationsLock(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteKnexMigrationsLockInput!
+  ): DeleteKnexMigrationsLockPayload
+
+  """Deletes a single `KnexMigrationsLock` using a unique key."""
+  deleteKnexMigrationsLockByIndex(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteKnexMigrationsLockByIndexInput!
+  ): DeleteKnexMigrationsLockPayload
+
+  """Deletes a single `Protocol` using its globally unique id."""
+  deleteProtocol(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteProtocolInput!
+  ): DeleteProtocolPayload
+
+  """Deletes a single `Protocol` using a unique key."""
+  deleteProtocolById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteProtocolByIdInput!
+  ): DeleteProtocolPayload
+
+  """Deletes a single `Ranking` using its globally unique id."""
+  deleteRanking(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteRankingInput!
+  ): DeleteRankingPayload
+
+  """Deletes a single `Ranking` using a unique key."""
+  deleteRankingById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteRankingByIdInput!
+  ): DeleteRankingPayload
+
+  """Deletes a single `Role` using its globally unique id."""
+  deleteRole(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteRoleInput!
+  ): DeleteRolePayload
+
+  """Deletes a single `Role` using a unique key."""
+  deleteRoleById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteRoleByIdInput!
+  ): DeleteRolePayload
+
+  """Updates a single `Account` using its globally unique id and a patch."""
+  updateAccount(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateAccountInput!
+  ): UpdateAccountPayload
+
+  """Updates a single `Account` using a unique key and a patch."""
+  updateAccountById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateAccountByIdInput!
+  ): UpdateAccountPayload
+
+  """Updates a single `Award` using its globally unique id and a patch."""
+  updateAward(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateAwardInput!
+  ): UpdateAwardPayload
+
+  """Updates a single `Award` using a unique key and a patch."""
+  updateAwardById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateAwardByIdInput!
+  ): UpdateAwardPayload
+
+  """
+  Updates a single `Definition` using its globally unique id and a patch.
+  """
+  updateDefinition(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateDefinitionInput!
+  ): UpdateDefinitionPayload
+
+  """Updates a single `Definition` using a unique key and a patch."""
+  updateDefinitionById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateDefinitionByIdInput!
+  ): UpdateDefinitionPayload
+
+  """
+  Updates a single `KnexMigration` using its globally unique id and a patch.
+  """
+  updateKnexMigration(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateKnexMigrationInput!
+  ): UpdateKnexMigrationPayload
+
+  """Updates a single `KnexMigration` using a unique key and a patch."""
+  updateKnexMigrationById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateKnexMigrationByIdInput!
+  ): UpdateKnexMigrationPayload
+
+  """
+  Updates a single `KnexMigrationsLock` using its globally unique id and a patch.
+  """
+  updateKnexMigrationsLock(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateKnexMigrationsLockInput!
+  ): UpdateKnexMigrationsLockPayload
+
+  """Updates a single `KnexMigrationsLock` using a unique key and a patch."""
+  updateKnexMigrationsLockByIndex(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateKnexMigrationsLockByIndexInput!
+  ): UpdateKnexMigrationsLockPayload
+
+  """Updates a single `Protocol` using its globally unique id and a patch."""
+  updateProtocol(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateProtocolInput!
+  ): UpdateProtocolPayload
+
+  """Updates a single `Protocol` using a unique key and a patch."""
+  updateProtocolById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateProtocolByIdInput!
+  ): UpdateProtocolPayload
+
+  """Updates a single `Ranking` using its globally unique id and a patch."""
+  updateRanking(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateRankingInput!
+  ): UpdateRankingPayload
+
+  """Updates a single `Ranking` using a unique key and a patch."""
+  updateRankingById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateRankingByIdInput!
+  ): UpdateRankingPayload
+
+  """Updates a single `Role` using its globally unique id and a patch."""
+  updateRole(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateRoleInput!
+  ): UpdateRolePayload
+
+  """Updates a single `Role` using a unique key and a patch."""
+  updateRoleById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateRoleByIdInput!
+  ): UpdateRolePayload
+}
+
+"""An object with a globally unique `ID`."""
+interface Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, the cursor to continue."""
+  endCursor: Cursor
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: Cursor
+}
+
+type Protocol implements Node {
+  """Reads and enables pagination through a set of `Definition`."""
+  definitionsByProtocolId(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: DefinitionCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `Definition`."""
+    orderBy: [DefinitionsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): DefinitionsConnection!
+  id: Int!
+  name: String!
+
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+
+  """Reads and enables pagination through a set of `Ranking`."""
+  rankingsByProtocolId(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: RankingCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `Ranking`."""
+    orderBy: [RankingsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): RankingsConnection!
+
+  """Reads and enables pagination through a set of `Role`."""
+  rolesByProtocolId(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: RoleCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `Role`."""
+    orderBy: [RolesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): RolesConnection!
+}
+
+"""
+A condition to be used against `Protocol` object types. All fields are tested
+for equality and combined with a logical ‘and.’
+"""
+input ProtocolCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: Int
+
+  """Checks for equality with the object’s `name` field."""
+  name: String
+}
+
+"""An input for mutations affecting `Protocol`"""
+input ProtocolInput {
+  id: Int
+  name: String!
+}
+
+"""
+Represents an update to a `Protocol`. Fields that are set will be updated.
+"""
+input ProtocolPatch {
+  id: Int
+  name: String
+}
+
+"""A connection to a list of `Protocol` values."""
+type ProtocolsConnection {
+  """
+  A list of edges which contains the `Protocol` and cursor to aid in pagination.
+  """
+  edges: [ProtocolsEdge!]!
+
+  """A list of `Protocol` objects."""
+  nodes: [Protocol!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Protocol` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `Protocol` edge in the connection."""
+type ProtocolsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Protocol` at the end of the edge."""
+  node: Protocol!
+}
+
+"""Methods to use when ordering `Protocol`."""
+enum ProtocolsOrderBy {
+  ID_ASC
+  ID_DESC
+  NAME_ASC
+  NAME_DESC
+  NATURAL
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+"""The root query type which gives access points into the data universe."""
+type Query implements Node {
+  """Reads a single `Account` using its globally unique `ID`."""
+  account(
+    """The globally unique `ID` to be used in selecting a single `Account`."""
+    nodeId: ID!
+  ): Account
+  accountById(id: String!): Account
+
+  """Reads and enables pagination through a set of `Account`."""
+  allAccounts(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: AccountCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `Account`."""
+    orderBy: [AccountsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): AccountsConnection
+
+  """Reads and enables pagination through a set of `Award`."""
+  allAwards(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: AwardCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `Award`."""
+    orderBy: [AwardsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): AwardsConnection
+
+  """Reads and enables pagination through a set of `Definition`."""
+  allDefinitions(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: DefinitionCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `Definition`."""
+    orderBy: [DefinitionsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): DefinitionsConnection
+
+  """Reads and enables pagination through a set of `KnexMigration`."""
+  allKnexMigrations(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: KnexMigrationCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `KnexMigration`."""
+    orderBy: [KnexMigrationsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): KnexMigrationsConnection
+
+  """Reads and enables pagination through a set of `KnexMigrationsLock`."""
+  allKnexMigrationsLocks(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: KnexMigrationsLockCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `KnexMigrationsLock`."""
+    orderBy: [KnexMigrationsLocksOrderBy!] = [PRIMARY_KEY_ASC]
+  ): KnexMigrationsLocksConnection
+
+  """Reads and enables pagination through a set of `Protocol`."""
+  allProtocols(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: ProtocolCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `Protocol`."""
+    orderBy: [ProtocolsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): ProtocolsConnection
+
+  """Reads and enables pagination through a set of `Ranking`."""
+  allRankings(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: RankingCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `Ranking`."""
+    orderBy: [RankingsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): RankingsConnection
+
+  """Reads and enables pagination through a set of `Role`."""
+  allRoles(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: RoleCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `Role`."""
+    orderBy: [RolesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): RolesConnection
+
+  """Reads a single `Award` using its globally unique `ID`."""
+  award(
+    """The globally unique `ID` to be used in selecting a single `Award`."""
+    nodeId: ID!
+  ): Award
+  awardById(id: Int!): Award
+
+  """Reads a single `Definition` using its globally unique `ID`."""
+  definition(
+    """
+    The globally unique `ID` to be used in selecting a single `Definition`.
+    """
+    nodeId: ID!
+  ): Definition
+  definitionById(id: Int!): Definition
+
+  """Reads a single `KnexMigration` using its globally unique `ID`."""
+  knexMigration(
+    """
+    The globally unique `ID` to be used in selecting a single `KnexMigration`.
+    """
+    nodeId: ID!
+  ): KnexMigration
+  knexMigrationById(id: Int!): KnexMigration
+
+  """Reads a single `KnexMigrationsLock` using its globally unique `ID`."""
+  knexMigrationsLock(
+    """
+    The globally unique `ID` to be used in selecting a single `KnexMigrationsLock`.
+    """
+    nodeId: ID!
+  ): KnexMigrationsLock
+  knexMigrationsLockByIndex(index: Int!): KnexMigrationsLock
+
+  """Fetches an object given its globally unique `ID`."""
+  node(
+    """The globally unique `ID`."""
+    nodeId: ID!
+  ): Node
+
+  """
+  The root query type must be a `Node` to work well with Relay 1 mutations. This just resolves to `query`.
+  """
+  nodeId: ID!
+
+  """Reads a single `Protocol` using its globally unique `ID`."""
+  protocol(
+    """The globally unique `ID` to be used in selecting a single `Protocol`."""
+    nodeId: ID!
+  ): Protocol
+  protocolById(id: Int!): Protocol
+
+  """
+  Exposes the root query type nested one level down. This is helpful for Relay 1
+  which can only query top level fields if they are in a particular form.
+  """
+  query: Query!
+
+  """Reads a single `Ranking` using its globally unique `ID`."""
+  ranking(
+    """The globally unique `ID` to be used in selecting a single `Ranking`."""
+    nodeId: ID!
+  ): Ranking
+  rankingById(id: Int!): Ranking
+
+  """Reads a single `Role` using its globally unique `ID`."""
+  role(
+    """The globally unique `ID` to be used in selecting a single `Role`."""
+    nodeId: ID!
+  ): Role
+  roleById(id: Int!): Role
+}
+
+type Ranking implements Node {
+  """Reads a single `Account` that is related to this `Ranking`."""
+  accountByAccountId: Account
+  accountId: String!
+  id: Int!
+
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+
+  """Reads a single `Protocol` that is related to this `Ranking`."""
+  protocolByProtocolId: Protocol
+  protocolId: Int!
+  rank: Int!
+}
+
+"""
+A condition to be used against `Ranking` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input RankingCondition {
+  """Checks for equality with the object’s `accountId` field."""
+  accountId: String
+
+  """Checks for equality with the object’s `id` field."""
+  id: Int
+
+  """Checks for equality with the object’s `protocolId` field."""
+  protocolId: Int
+
+  """Checks for equality with the object’s `rank` field."""
+  rank: Int
+}
+
+"""An input for mutations affecting `Ranking`"""
+input RankingInput {
+  accountId: String!
+  id: Int
+  protocolId: Int!
+  rank: Int!
+}
+
+"""
+Represents an update to a `Ranking`. Fields that are set will be updated.
+"""
+input RankingPatch {
+  accountId: String
+  id: Int
+  protocolId: Int
+  rank: Int
+}
+
+"""A connection to a list of `Ranking` values."""
+type RankingsConnection {
+  """
+  A list of edges which contains the `Ranking` and cursor to aid in pagination.
+  """
+  edges: [RankingsEdge!]!
+
+  """A list of `Ranking` objects."""
+  nodes: [Ranking!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Ranking` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `Ranking` edge in the connection."""
+type RankingsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Ranking` at the end of the edge."""
+  node: Ranking!
+}
+
+"""Methods to use when ordering `Ranking`."""
+enum RankingsOrderBy {
+  ACCOUNT_ID_ASC
+  ACCOUNT_ID_DESC
+  ID_ASC
+  ID_DESC
+  NATURAL
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+  PROTOCOL_ID_ASC
+  PROTOCOL_ID_DESC
+  RANK_ASC
+  RANK_DESC
+}
+
+type Role implements Node {
+  """Reads and enables pagination through a set of `Definition`."""
+  definitionsByRoleId(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: DefinitionCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `Definition`."""
+    orderBy: [DefinitionsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): DefinitionsConnection!
+  id: Int!
+  name: String!
+
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+
+  """Reads a single `Protocol` that is related to this `Role`."""
+  protocolByProtocolId: Protocol
+  protocolId: Int!
+}
+
+"""
+A condition to be used against `Role` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input RoleCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: Int
+
+  """Checks for equality with the object’s `name` field."""
+  name: String
+
+  """Checks for equality with the object’s `protocolId` field."""
+  protocolId: Int
+}
+
+"""An input for mutations affecting `Role`"""
+input RoleInput {
+  id: Int
+  name: String!
+  protocolId: Int!
+}
+
+"""Represents an update to a `Role`. Fields that are set will be updated."""
+input RolePatch {
+  id: Int
+  name: String
+  protocolId: Int
+}
+
+"""A connection to a list of `Role` values."""
+type RolesConnection {
+  """
+  A list of edges which contains the `Role` and cursor to aid in pagination.
+  """
+  edges: [RolesEdge!]!
+
+  """A list of `Role` objects."""
+  nodes: [Role!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Role` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `Role` edge in the connection."""
+type RolesEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Role` at the end of the edge."""
+  node: Role!
+}
+
+"""Methods to use when ordering `Role`."""
+enum RolesOrderBy {
+  ID_ASC
+  ID_DESC
+  NAME_ASC
+  NAME_DESC
+  NATURAL
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+  PROTOCOL_ID_ASC
+  PROTOCOL_ID_DESC
+}
+
+"""
+The root subscription type: contains realtime events you can subscribe to with the `subscription` operation.
+"""
+type Subscription {
+  time: TimePayload
+}
+
+type TimePayload {
+  currentTimestamp: String
+  query: Query
+}
+
+"""All input for the `updateAccountById` mutation."""
+input UpdateAccountByIdInput {
+  """
+  An object where the defined keys will be set on the `Account` being updated.
+  """
+  accountPatch: AccountPatch!
+
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: String!
+}
+
+"""All input for the `updateAccount` mutation."""
+input UpdateAccountInput {
+  """
+  An object where the defined keys will be set on the `Account` being updated.
+  """
+  accountPatch: AccountPatch!
+
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Account` to be updated.
+  """
+  nodeId: ID!
+}
+
+"""The output of our update `Account` mutation."""
+type UpdateAccountPayload {
+  """The `Account` that was updated by this mutation."""
+  account: Account
+
+  """An edge for our `Account`. May be used by Relay 1."""
+  accountEdge(
+    """The method to use when ordering `Account`."""
+    orderBy: [AccountsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): AccountsEdge
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `updateAwardById` mutation."""
+input UpdateAwardByIdInput {
+  """
+  An object where the defined keys will be set on the `Award` being updated.
+  """
+  awardPatch: AwardPatch!
+
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: Int!
+}
+
+"""All input for the `updateAward` mutation."""
+input UpdateAwardInput {
+  """
+  An object where the defined keys will be set on the `Award` being updated.
+  """
+  awardPatch: AwardPatch!
+
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Award` to be updated.
+  """
+  nodeId: ID!
+}
+
+"""The output of our update `Award` mutation."""
+type UpdateAwardPayload {
+  """Reads a single `Account` that is related to this `Award`."""
+  accountByAccountId: Account
+
+  """The `Award` that was updated by this mutation."""
+  award: Award
+
+  """An edge for our `Award`. May be used by Relay 1."""
+  awardEdge(
+    """The method to use when ordering `Award`."""
+    orderBy: [AwardsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): AwardsEdge
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """Reads a single `Definition` that is related to this `Award`."""
+  definitionByDefinitionId: Definition
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `updateDefinitionById` mutation."""
+input UpdateDefinitionByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `Definition` being updated.
+  """
+  definitionPatch: DefinitionPatch!
+  id: Int!
+}
+
+"""All input for the `updateDefinition` mutation."""
+input UpdateDefinitionInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `Definition` being updated.
+  """
+  definitionPatch: DefinitionPatch!
+
+  """
+  The globally unique `ID` which will identify a single `Definition` to be updated.
+  """
+  nodeId: ID!
+}
+
+"""The output of our update `Definition` mutation."""
+type UpdateDefinitionPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Definition` that was updated by this mutation."""
+  definition: Definition
+
+  """An edge for our `Definition`. May be used by Relay 1."""
+  definitionEdge(
+    """The method to use when ordering `Definition`."""
+    orderBy: [DefinitionsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): DefinitionsEdge
+
+  """Reads a single `Protocol` that is related to this `Definition`."""
+  protocolByProtocolId: Protocol
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Role` that is related to this `Definition`."""
+  roleByRoleId: Role
+}
+
+"""All input for the `updateKnexMigrationById` mutation."""
+input UpdateKnexMigrationByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: Int!
+
+  """
+  An object where the defined keys will be set on the `KnexMigration` being updated.
+  """
+  knexMigrationPatch: KnexMigrationPatch!
+}
+
+"""All input for the `updateKnexMigration` mutation."""
+input UpdateKnexMigrationInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `KnexMigration` being updated.
+  """
+  knexMigrationPatch: KnexMigrationPatch!
+
+  """
+  The globally unique `ID` which will identify a single `KnexMigration` to be updated.
+  """
+  nodeId: ID!
+}
+
+"""The output of our update `KnexMigration` mutation."""
+type UpdateKnexMigrationPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `KnexMigration` that was updated by this mutation."""
+  knexMigration: KnexMigration
+
+  """An edge for our `KnexMigration`. May be used by Relay 1."""
+  knexMigrationEdge(
+    """The method to use when ordering `KnexMigration`."""
+    orderBy: [KnexMigrationsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): KnexMigrationsEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `updateKnexMigrationsLockByIndex` mutation."""
+input UpdateKnexMigrationsLockByIndexInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  index: Int!
+
+  """
+  An object where the defined keys will be set on the `KnexMigrationsLock` being updated.
+  """
+  knexMigrationsLockPatch: KnexMigrationsLockPatch!
+}
+
+"""All input for the `updateKnexMigrationsLock` mutation."""
+input UpdateKnexMigrationsLockInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `KnexMigrationsLock` being updated.
+  """
+  knexMigrationsLockPatch: KnexMigrationsLockPatch!
+
+  """
+  The globally unique `ID` which will identify a single `KnexMigrationsLock` to be updated.
+  """
+  nodeId: ID!
+}
+
+"""The output of our update `KnexMigrationsLock` mutation."""
+type UpdateKnexMigrationsLockPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `KnexMigrationsLock` that was updated by this mutation."""
+  knexMigrationsLock: KnexMigrationsLock
+
+  """An edge for our `KnexMigrationsLock`. May be used by Relay 1."""
+  knexMigrationsLockEdge(
+    """The method to use when ordering `KnexMigrationsLock`."""
+    orderBy: [KnexMigrationsLocksOrderBy!] = [PRIMARY_KEY_ASC]
+  ): KnexMigrationsLocksEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `updateProtocolById` mutation."""
+input UpdateProtocolByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: Int!
+
+  """
+  An object where the defined keys will be set on the `Protocol` being updated.
+  """
+  protocolPatch: ProtocolPatch!
+}
+
+"""All input for the `updateProtocol` mutation."""
+input UpdateProtocolInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Protocol` to be updated.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `Protocol` being updated.
+  """
+  protocolPatch: ProtocolPatch!
+}
+
+"""The output of our update `Protocol` mutation."""
+type UpdateProtocolPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Protocol` that was updated by this mutation."""
+  protocol: Protocol
+
+  """An edge for our `Protocol`. May be used by Relay 1."""
+  protocolEdge(
+    """The method to use when ordering `Protocol`."""
+    orderBy: [ProtocolsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): ProtocolsEdge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `updateRankingById` mutation."""
+input UpdateRankingByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: Int!
+
+  """
+  An object where the defined keys will be set on the `Ranking` being updated.
+  """
+  rankingPatch: RankingPatch!
+}
+
+"""All input for the `updateRanking` mutation."""
+input UpdateRankingInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Ranking` to be updated.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `Ranking` being updated.
+  """
+  rankingPatch: RankingPatch!
+}
+
+"""The output of our update `Ranking` mutation."""
+type UpdateRankingPayload {
+  """Reads a single `Account` that is related to this `Ranking`."""
+  accountByAccountId: Account
+
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """Reads a single `Protocol` that is related to this `Ranking`."""
+  protocolByProtocolId: Protocol
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """The `Ranking` that was updated by this mutation."""
+  ranking: Ranking
+
+  """An edge for our `Ranking`. May be used by Relay 1."""
+  rankingEdge(
+    """The method to use when ordering `Ranking`."""
+    orderBy: [RankingsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): RankingsEdge
+}
+
+"""All input for the `updateRoleById` mutation."""
+input UpdateRoleByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: Int!
+
+  """
+  An object where the defined keys will be set on the `Role` being updated.
+  """
+  rolePatch: RolePatch!
+}
+
+"""All input for the `updateRole` mutation."""
+input UpdateRoleInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Role` to be updated.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `Role` being updated.
+  """
+  rolePatch: RolePatch!
+}
+
+"""The output of our update `Role` mutation."""
+type UpdateRolePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """Reads a single `Protocol` that is related to this `Role`."""
+  protocolByProtocolId: Protocol
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """The `Role` that was updated by this mutation."""
+  role: Role
+
+  """An edge for our `Role`. May be used by Relay 1."""
+  roleEdge(
+    """The method to use when ordering `Role`."""
+    orderBy: [RolesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): RolesEdge
+}

@@ -30,7 +30,7 @@ export class Heart extends Model {
         modelClass: Heart,
         join: {
           from: "hearts.receiverId",
-          to: "accounts.id",
+          to: "winners.id",
         },
       },
 
@@ -39,7 +39,7 @@ export class Heart extends Model {
         modelClass: Heart,
         join: {
           from: "hearts.giverId",
-          to: "accounts.id",
+          to: "winners.id",
         },
       },
     };
