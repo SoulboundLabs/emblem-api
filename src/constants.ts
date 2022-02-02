@@ -1,6 +1,9 @@
 import { Contract } from "@ethersproject/contracts";
 import { InfuraProvider } from "@ethersproject/providers";
+import dotenv from "dotenv";
 import ReverseRecordsABI from "./abis/ReverseRecords.json";
+
+dotenv.config();
 
 /* Protocols */
 export const THE_GRAPH = "the-graph";

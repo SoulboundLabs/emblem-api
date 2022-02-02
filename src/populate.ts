@@ -13,6 +13,7 @@ export const populateBadgeTracksAndDefinitions = async (
   protocol: string,
   queryRunner: any
 ) => {
+  console.log("subgraphTheGraphBadges", subgraphTheGraphBadges);
   const { badgeDefinitions }: { badgeDefinitions: BadgeDefinitionType[] } =
     await querySubgraph({
       query: queryAllBadgeDefinitions,
@@ -23,6 +24,8 @@ export const populateBadgeTracksAndDefinitions = async (
     const trackName = removeRomanNumerals(definition.id);
     return acc.includes(trackName) ? acc : [...acc, trackName];
   }, []);
+
+  console.log(badgeTracks);
 
   await queryRunner.query(upsertProtocol, {
     id: protocol,

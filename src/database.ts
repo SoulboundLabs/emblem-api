@@ -35,12 +35,15 @@ export const options: PostGraphileOptions = {
   simpleCollections: "only", // adds 'List' suffix to models for simpler querying
   setofFunctionsContainNulls: false,
   ignoreRBAC: false,
-  showErrorStack: "json",
-  extendedErrors: ["hint", "detail", "errcode"],
+  // showErrorStack: "json",
+  // extendedErrors: ["hint", "detail", "errcode"],
   allowExplain: true,
   legacyRelations: "omit",
   exportGqlSchemaPath: `${__dirname}/schema.graphql`,
   sortExport: true,
+  handleErrors: (errors, req, res) => {
+    throw new Error("EERRRROR");
+  },
 };
 
 export const port: number = process.env.PORT

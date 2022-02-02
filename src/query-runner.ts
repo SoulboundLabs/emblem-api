@@ -44,7 +44,7 @@ export async function makeQueryRunner(
     //     ? options.additionalContextFromRequest(fakeRequest)
     //     : options.additionalContextFromRequest;
 
-    return await withPostGraphileContext(
+    const response = await withPostGraphileContext(
       {
         ...options,
         pgPool,
@@ -67,6 +67,12 @@ export async function makeQueryRunner(
         );
       }
     );
+
+    if (response.errors) {
+      throw new Error(response.errors);
+    }
+
+    return response;
   };
 
   // Should we need to release this query runner, the cleanup tasks:
