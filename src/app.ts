@@ -2,6 +2,7 @@ import express = require("express");
 import { Request, Response } from "express";
 import { postgraphile } from "postgraphile";
 import { connectionString, options, port, schemas } from "./database";
+import { createAccount } from "./mutations";
 import { makeQueryRunner } from "./query-runner";
 
 const middleware = postgraphile(connectionString, schemas, options);
@@ -16,14 +17,7 @@ const server = app.listen(port, () => {
 const populateAccount = async () => {
   const queryRunner = await makeQueryRunner(connectionString, schemas, options);
 
-  const result = await queryRunner.query(`query {allAccounts {
-    edges {
-      node {
-        id
-      }
-    }
-  }}
-  `);
+  const result = await queryRunner.query(createAccount, { ens: "Wee" });
 
   await queryRunner.release();
 
