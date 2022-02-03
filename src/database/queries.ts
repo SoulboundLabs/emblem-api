@@ -5,9 +5,10 @@ export const queryLastEarnedBadge = gql`
     allEarnedBadgesList(
       filter: { protocolId: { equalTo: $protocolId } }
       first: 1
-      orderBy: BLOCK_AWARDED_DESC
+      orderBy: GLOBAL_AWARD_NUMBER_DESC
     ) {
       id
+      globalAwardNumber
     }
   }
 `;

@@ -57,9 +57,8 @@ export const populateEarnedBadges = async (
     protocolId,
   });
 
-  // console.log(data.allDefinitionsList);
-
-  const globalAwardNumberSync = 0;
+  const globalAwardNumberSync =
+    data.allEarnedBadgesList[0]?.globalAwardNumber || 0;
 
   const response: { earnedBadges: EarnedBadge[] } = await querySubgraph({
     query: queryAllEarnedBadges,
