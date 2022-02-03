@@ -33,11 +33,10 @@ export const queryAllBadgeDefinitions = gql`
 
 export const queryAllBadgeAwards = gql`
   query AllBadgeAwards($globalAwardNumberSync: Int) {
-    badgeAwards(first: ${MAX_FIRESTORE_BATCH}, orderBy: globalAwardNumber, orderDirection: asc, where: { globalAwardNumber_gt: $globalAwardNumberSync }) {
+    earnedBadges(first: ${MAX_FIRESTORE_BATCH}, orderBy: globalAwardNumber, orderDirection: asc, where: { globalAwardNumber_gt: $globalAwardNumberSync }) {
       id
-      winner {
+      badgeWinner {
         id
-        awardCount
       }
       blockAwarded
       transactionHash
@@ -50,10 +49,6 @@ export const queryAllBadgeAwards = gql`
       }
       definition {
         id
-        badgeTrack {
-          id
-          protocolRole
-        }
       }
     }
   }

@@ -4,13 +4,17 @@ import {
   upsertProtocol,
   upsertTrack,
 } from "./database/mutations";
+import { queryLastBadgeAward } from "./database/queries";
 import { removeRomanNumerals } from "./string";
-import { queryAllBadgeDefinitions } from "./subgraph/queries";
-import { BadgeDefinition as BadgeDefinitionType } from "./types";
+import {
+  queryAllBadgeAwards,
+  queryAllBadgeDefinitions,
+} from "./subgraph/queries";
+import { BadgeAward, BadgeDefinition as BadgeDefinitionType } from "./types";
 import { querySubgraph } from "./utils";
 
 export const populateBadgeTracksAndDefinitions = async (
-  protocol: string,
+  protocolId: string,
   queryRunner: any
 ) => {
   const { badgeDefinitions }: { badgeDefinitions: BadgeDefinitionType[] } =
@@ -27,60 +31,59 @@ export const populateBadgeTracksAndDefinitions = async (
   }, []);
 
   await queryRunner.query(upsertProtocol, {
-    id: protocol,
+    id: protocolId,
   });
 
   for (const definition of badgeDefinitionsWithTrack) {
     await queryRunner.query(upsertTrack, {
       id: definition.trackId,
-      protocolId: protocol,
+      protocolId,
     });
 
     await queryRunner.query(upsertBadgeDefinition, {
       ...definition,
-      protocolId: protocol,
+      protocolId,
     });
   }
 };
 
-// export const populateBadgeAwards = async (protocol: string, queryRunner) => {
-//   await queryRunner.query(queryLastBadgeAward, {
-//     id: protocol,
-//   });
+export const populateBadgeAwards = async (
+  protocolId: string,
+  queryRunner: any
+) => {
+  const { data } = await queryRunner.query(queryLastBadgeAward, {
+    protocolId,
+  });
 
-//   const response: { badgeAwards: BadgeAward[] } = await querySubgraph({
-//     query: queryAllBadgeAwards,
-//     subgraph: subgraphTheGraphBadges,
-//     variables: { globalAwardNumberSync },
-//   });
+  console.log(data.allDefinitionsList);
 
-//   const badgeAwards = response.badgeAwards.map((award: BadgeAward) => ({
-//     ...award,
-//     blockAwarded: Number(award.blockAwarded),
-//     timestampAwarded: Number(award.timestampAwarded),
-//     definition: badgeDefinitionWithProtocol(award.definition, protocol),
-//   }));
+  const globalAwardNumberSync = 0;
 
-//   const batch = firestore.batch();
+  const response: { badgeAwards: BadgeAward[] } = await querySubgraph({
+    query: queryAllBadgeAwards,
+    subgraph: subgraphTheGraphBadges,
+    variables: { globalAwardNumberSync },
+  });
 
-//   badgeAwards.forEach((award) => {
-//     const badgeAwardRef = getBadgeAwardRef(firestore, protocol, award.id);
-//     batch.set(badgeAwardRef, award);
-//   });
+  console.log(response);
 
-//   const lastBadgeAwarded = badgeAwards[badgeAwards.length - 1];
+  return;
 
-//   if (lastBadgeAwarded) {
-//     const globalAwardNumberSync = lastBadgeAwarded.globalAwardNumber;
-//     const lastBlockAwardedSync = lastBadgeAwarded.blockAwarded;
-//     batch.set(
-//       protocolRef,
-//       { globalAwardNumberSync, lastBlockAwardedSync },
-//       { merge: true }
-//     );
-//   }
+  const badgeAwards = response.badgeAwards.map((award: BadgeAward) => ({
+    ...award,
+    blockAwarded: Number(award.blockAwarded),
+    timestampAwarded: Number(award.timestampAwarded),
+    definitionId: award.definition.id,
+    protocolId: protocolId,
+  }));
 
-//   await batch.commit();
+  const lastBadgeAwarded = badgeAwards[badgeAwards.length - 1];
 
-//   return badgeAwards;
-// };
+  if (lastBadgeAwarded) {
+    const globalAwardNumberSync = lastBadgeAwarded.globalAwardNumber;
+    const lastBlockAwardedSync = lastBadgeAwarded.blockAwarded;
+    console.log({ globalAwardNumberSync, lastBlockAwardedSync });
+  }
+
+  return badgeAwards;
+};

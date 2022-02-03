@@ -1,10 +1,9 @@
-import { gql } from "postgraphile";
-
+import { gql } from "graphql-request";
 // TODO REplace with badgeAwards
 export const queryLastBadgeAward = gql`
-  query MyQuery {
+  query LastBadgeAwarded($protocolId: String!) {
     allDefinitionsList(
-      filter: { protocolId: { equalTo: "the-graph" } }
+      filter: { protocolId: { equalTo: $protocolId } }
       first: 1
       orderBy: ID_DESC
     ) {
