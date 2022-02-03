@@ -1,5 +1,6 @@
 import { gql } from "postgraphile";
 
+// TODO REplace with badgeAwards
 export const queryLastBadgeAward = gql`
   query MyQuery {
     allDefinitionsList(
