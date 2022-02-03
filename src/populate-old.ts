@@ -120,11 +120,11 @@ export const populateEarnedBadges = async (
     batch.set(badgeAwardRef, award);
   });
 
-  const lastEarnedBadgeed = badgeAwards[badgeAwards.length - 1];
+  const lastEarnedBadge = badgeAwards[badgeAwards.length - 1];
 
-  if (lastEarnedBadgeed) {
-    const globalAwardNumberSync = lastEarnedBadgeed.globalAwardNumber;
-    const lastBlockAwardedSync = lastEarnedBadgeed.blockAwarded;
+  if (lastEarnedBadge) {
+    const globalAwardNumberSync = lastEarnedBadge.globalAwardNumber;
+    const lastBlockAwardedSync = lastEarnedBadge.blockAwarded;
     batch.set(
       protocolRef,
       { globalAwardNumberSync, lastBlockAwardedSync },

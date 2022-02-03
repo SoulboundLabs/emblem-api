@@ -32,6 +32,59 @@ export const upsertTrack = gql`
   }
 `;
 
+export const upsertWinner = gql`
+  mutation UpsertWinnner($id: String!) {
+    upsertWinner(input: { winner: { id: $id } }) {
+      winner {
+        id
+      }
+    }
+  }
+`;
+
+export const upsertEarnedBadge = gql`
+  mutation UpsertEarnedBadge(
+    $id: String!
+    $blockAwarded: Int!
+    $transactionHash: String!
+    $timestampAwarded: Int!
+    $globalAwardNumber: Int!
+    $awardNumber: Int!
+    $metadata: JSON!
+    $definitionId: String!
+    $protocolId: String!
+    $winnerId: String!
+  ) {
+    upsertEarnedBadge(
+      input: {
+        earnedBadge: {
+          id: $id
+          blockAwarded: $blockAwarded
+          transactionHash: $transactionHash
+          timestampAwarded: $timestampAwarded
+          globalAwardNumber: $globalAwardNumber
+          awardNumber: $awardNumber
+          metadata: $metadata
+          definitionId: $definitionId
+          protocolId: $protocolId
+          winnerId: $winnerId
+        }
+      }
+    ) {
+      earnedBadge {
+        blockAwarded
+        transactionHash
+        timestampAwarded
+        globalAwardNumber
+        awardNumber
+        metadata
+        definitionId
+        protocolId
+      }
+    }
+  }
+`;
+
 export const upsertBadgeDefinition = gql`
   mutation UpsertBadgeDefinition(
     $id: String!

@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon src/app.ts",
     "prod": "node dist/app.js",
-    "build": "tsc"
+    "build": "tsc",
+    "remigrate": "npx knex migrate:rollback && npx knex migrate:latest;"
   },
   "author": "",
   "license": "ISC",

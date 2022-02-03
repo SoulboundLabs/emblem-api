@@ -1,6 +1,6 @@
 export interface EarnedBadge {
   id: string;
-  winner: Winner;
+  badgeWinner: Winner;
   blockAwarded: number;
   timestampAwarded: number;
   timestampAwardedFormatted: string;
@@ -38,7 +38,7 @@ export interface Winner {
   badges: EarnedBadge[];
   ens?: string;
   protocolRoles: string[];
-  lastEarnedBadgeed: EarnedBadge;
+  lastEarnedBadge: EarnedBadge;
   graphAccount?: GraphAccount;
   tokenLockWalletID?: string;
 }

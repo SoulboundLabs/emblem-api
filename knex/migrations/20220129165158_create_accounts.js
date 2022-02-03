@@ -54,13 +54,15 @@ const createTracks = (knex) => {
 
 const createEarnedBadges = (knex) => {
   return knex.schema.createTable("earned_badges", (table) => {
-    table.increments("id").primary();
+    table.string("id").primary();
     table.string("definition_id").references("definitions.id").notNullable();
+    table.string("protocol_id").references("protocols.id").notNullable();
     table.string("winner_id").references("winners.id").notNullable();
     table.integer("block_awarded");
     table.string("transaction_hash");
-    table.string("award_number");
-    table.string("global_award_number");
+    table.integer("timestampAwarded");
+    table.integer("award_number");
+    table.integer("global_award_number");
     table.jsonb("metadata");
   });
 };

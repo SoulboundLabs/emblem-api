@@ -35,14 +35,14 @@ export const queryAllEarnedBadges = gql`
   query AllEarnedBadges($globalAwardNumberSync: Int) {
     earnedBadges(first: ${MAX_FIRESTORE_BATCH}, orderBy: globalAwardNumber, orderDirection: asc, where: { globalAwardNumber_gt: $globalAwardNumberSync }) {
       id
-      badgeWinner {
-        id
-      }
       blockAwarded
       transactionHash
       timestampAwarded
       globalAwardNumber
       awardNumber
+      badgeWinner {
+        id
+      }
       metadata {
         name
         value
@@ -50,6 +50,7 @@ export const queryAllEarnedBadges = gql`
       definition {
         id
       }
+     
     }
   }
 `;

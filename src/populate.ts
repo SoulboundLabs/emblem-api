@@ -1,8 +1,10 @@
 import { subgraphTheGraphBadges } from "./constants";
 import {
   upsertBadgeDefinition,
+  upsertEarnedBadge,
   upsertProtocol,
   upsertTrack,
+  upsertWinner,
 } from "./database/mutations";
 import { queryLastEarnedBadge } from "./database/queries";
 import { removeRomanNumerals } from "./string";
@@ -65,8 +67,6 @@ export const populateEarnedBadges = async (
     variables: { globalAwardNumberSync },
   });
 
-  console.log(response);
-
   const earnedBadges = response.earnedBadges.map((award: EarnedBadge) => ({
     ...award,
     blockAwarded: Number(award.blockAwarded),
@@ -76,12 +76,16 @@ export const populateEarnedBadges = async (
     metadata: JSON.stringify(award.metadata),
   }));
 
-  const lastEarnedBadgeed = earnedBadges[earnedBadges.length - 1];
-
-  if (lastEarnedBadgeed) {
-    const globalAwardNumberSync = lastEarnedBadgeed.globalAwardNumber;
-    const lastBlockAwardedSync = lastEarnedBadgeed.blockAwarded;
-    console.log({ earnedBadges, globalAwardNumberSync, lastBlockAwardedSync });
+  for (const earnedBadge of earnedBadges) {
+    await queryRunner.query(upsertWinner, {
+      id: earnedBadge.badgeWinner.id,
+    });
+    await queryRunner.query(upsertEarnedBadge, {
+      ...earnedBadge,
+      protocolId,
+      definitionId: earnedBadge.definition.id,
+      winnerId: earnedBadge.badgeWinner.id,
+    });
   }
 
   return earnedBadges;
