@@ -1992,6 +1992,7 @@ type Mutation {
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
     """
     input: UpsertAwardInput!
+    where: UpsertAwardWhere
   ): UpsertAwardPayload
 
   """Upserts a single `Definition`."""
@@ -2000,6 +2001,7 @@ type Mutation {
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
     """
     input: UpsertDefinitionInput!
+    where: UpsertDefinitionWhere
   ): UpsertDefinitionPayload
 
   """Upserts a single `KnexMigration`."""
@@ -2008,6 +2010,7 @@ type Mutation {
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
     """
     input: UpsertKnexMigrationInput!
+    where: UpsertKnexMigrationWhere
   ): UpsertKnexMigrationPayload
 
   """Upserts a single `KnexMigrationsLock`."""
@@ -2016,6 +2019,7 @@ type Mutation {
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
     """
     input: UpsertKnexMigrationsLockInput!
+    where: UpsertKnexMigrationsLockWhere
   ): UpsertKnexMigrationsLockPayload
 
   """Upserts a single `Protocol`."""
@@ -2024,6 +2028,7 @@ type Mutation {
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
     """
     input: UpsertProtocolInput!
+    where: UpsertProtocolWhere
   ): UpsertProtocolPayload
 
   """Upserts a single `Ranking`."""
@@ -2032,6 +2037,7 @@ type Mutation {
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
     """
     input: UpsertRankingInput!
+    where: UpsertRankingWhere
   ): UpsertRankingPayload
 
   """Upserts a single `Role`."""
@@ -2040,6 +2046,7 @@ type Mutation {
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
     """
     input: UpsertRoleInput!
+    where: UpsertRoleWhere
   ): UpsertRolePayload
 
   """Upserts a single `Winner`."""
@@ -2048,6 +2055,7 @@ type Mutation {
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
     """
     input: UpsertWinnerInput!
+    where: UpsertWinnerWhere
   ): UpsertWinnerPayload
 }
 
@@ -3543,7 +3551,7 @@ input UpsertAwardInput {
 
 """The output of our upsert `Award` mutation."""
 type UpsertAwardPayload {
-  """The `Award` that were upserted by this mutation."""
+  """The `Award` that was upserted by this mutation."""
   award: Award
 
   """
@@ -3561,6 +3569,11 @@ type UpsertAwardPayload {
 
   """Reads a single `Winner` that is related to this `Award`."""
   winnerByWinnerId: Winner
+}
+
+"""Where conditions for the upsert `Award` mutation."""
+input UpsertAwardWhere {
+  id: Int
 }
 
 """All input for the upsert `Definition` mutation."""
@@ -3581,7 +3594,7 @@ type UpsertDefinitionPayload {
   """
   clientMutationId: String
 
-  """The `Definition` that were upserted by this mutation."""
+  """The `Definition` that was upserted by this mutation."""
   definition: Definition
 
   """Reads a single `Protocol` that is related to this `Definition`."""
@@ -3594,6 +3607,12 @@ type UpsertDefinitionPayload {
 
   """Reads a single `Role` that is related to this `Definition`."""
   roleByRoleId: Role
+}
+
+"""Where conditions for the upsert `Definition` mutation."""
+input UpsertDefinitionWhere {
+  id: String
+  protocolId: String
 }
 
 """All input for the upsert `KnexMigration` mutation."""
@@ -3614,13 +3633,18 @@ type UpsertKnexMigrationPayload {
   """
   clientMutationId: String
 
-  """The `KnexMigration` that were upserted by this mutation."""
+  """The `KnexMigration` that was upserted by this mutation."""
   knexMigration: KnexMigration
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.
   """
   query: Query
+}
+
+"""Where conditions for the upsert `KnexMigration` mutation."""
+input UpsertKnexMigrationWhere {
+  id: Int
 }
 
 """All input for the upsert `KnexMigrationsLock` mutation."""
@@ -3641,13 +3665,18 @@ type UpsertKnexMigrationsLockPayload {
   """
   clientMutationId: String
 
-  """The `KnexMigrationsLock` that were upserted by this mutation."""
+  """The `KnexMigrationsLock` that was upserted by this mutation."""
   knexMigrationsLock: KnexMigrationsLock
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.
   """
   query: Query
+}
+
+"""Where conditions for the upsert `KnexMigrationsLock` mutation."""
+input UpsertKnexMigrationsLockWhere {
+  index: Int
 }
 
 """All input for the upsert `Protocol` mutation."""
@@ -3668,13 +3697,18 @@ type UpsertProtocolPayload {
   """
   clientMutationId: String
 
-  """The `Protocol` that were upserted by this mutation."""
+  """The `Protocol` that was upserted by this mutation."""
   protocol: Protocol
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.
   """
   query: Query
+}
+
+"""Where conditions for the upsert `Protocol` mutation."""
+input UpsertProtocolWhere {
+  id: String
 }
 
 """All input for the upsert `Ranking` mutation."""
@@ -3703,11 +3737,16 @@ type UpsertRankingPayload {
   """
   query: Query
 
-  """The `Ranking` that were upserted by this mutation."""
+  """The `Ranking` that was upserted by this mutation."""
   ranking: Ranking
 
   """Reads a single `Winner` that is related to this `Ranking`."""
   winnerByWinnerId: Winner
+}
+
+"""Where conditions for the upsert `Ranking` mutation."""
+input UpsertRankingWhere {
+  id: Int
 }
 
 """All input for the upsert `Role` mutation."""
@@ -3736,8 +3775,14 @@ type UpsertRolePayload {
   """
   query: Query
 
-  """The `Role` that were upserted by this mutation."""
+  """The `Role` that was upserted by this mutation."""
   role: Role
+}
+
+"""Where conditions for the upsert `Role` mutation."""
+input UpsertRoleWhere {
+  id: String
+  protocolId: String
 }
 
 """All input for the upsert `Winner` mutation."""
@@ -3763,8 +3808,13 @@ type UpsertWinnerPayload {
   """
   query: Query
 
-  """The `Winner` that were upserted by this mutation."""
+  """The `Winner` that was upserted by this mutation."""
   winner: Winner
+}
+
+"""Where conditions for the upsert `Winner` mutation."""
+input UpsertWinnerWhere {
+  id: String
 }
 
 type Winner implements Node {

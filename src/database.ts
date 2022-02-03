@@ -1,7 +1,7 @@
 import PgPubsub from "@graphile/pg-pubsub";
 import { makePluginHook, PostGraphileOptions } from "postgraphile";
+import { PgMutationUpsertPlugin } from "postgraphile-upsert-plugin";
 const PostGraphileNestedMutations = require("postgraphile-plugin-nested-mutations");
-const PostGraphileUpsertPlugin = require("graphile-upsert-plugin");
 // Connection string (or pg.Pool) for PostGraphile to use
 export const connectionString: string = process.env.DATABASE_URL || "emblem";
 
@@ -14,7 +14,7 @@ const pluginHook = makePluginHook([PgPubsub]);
 // PostGraphile options; see https://www.graphile.org/postgraphile/usage-library/#api-postgraphilepgconfig-schemaname-options
 export const options: PostGraphileOptions = {
   pluginHook,
-  appendPlugins: [PostGraphileNestedMutations, PostGraphileUpsertPlugin],
+  appendPlugins: [PostGraphileNestedMutations, PgMutationUpsertPlugin],
   pgSettings(req) {
     // Adding this to ensure that all servers pass through the request in a
     // good enough way that we can extract headers.
@@ -35,15 +35,12 @@ export const options: PostGraphileOptions = {
   simpleCollections: "only", // adds 'List' suffix to models for simpler querying
   setofFunctionsContainNulls: false,
   ignoreRBAC: false,
-  // showErrorStack: "json",
-  // extendedErrors: ["hint", "detail", "errcode"],
+  showErrorStack: "json",
+  extendedErrors: ["hint", "detail", "errcode"],
   allowExplain: true,
   legacyRelations: "omit",
   exportGqlSchemaPath: `${__dirname}/schema.graphql`,
   sortExport: true,
-  handleErrors: (errors, req, res) => {
-    throw new Error("EERRRROR");
-  },
 };
 
 export const port: number = process.env.PORT
