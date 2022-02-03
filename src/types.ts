@@ -1,4 +1,4 @@
-export interface BadgeAward {
+export interface EarnedBadge {
   id: string;
   winner: Winner;
   blockAwarded: number;
@@ -8,6 +8,7 @@ export interface BadgeAward {
   transactionHash: string;
   globalAwardNumber: number;
   awardNumber: number;
+  metadata: string;
 }
 
 export interface MiniWinner {
@@ -15,7 +16,7 @@ export interface MiniWinner {
   ens: string;
   lastAwarded: Record<string, number>;
   roles: Record<string, Record<string, boolean>>;
-  awards: Record<string, Record<string, Partial<BadgeAward>>>;
+  awards: Record<string, Record<string, Partial<EarnedBadge>>>;
 }
 export interface TokenLockWallet {
   id: string;
@@ -34,10 +35,10 @@ export interface Winner {
   id: string;
   awardCount: number;
   rank: number | null;
-  badges: BadgeAward[];
+  badges: EarnedBadge[];
   ens?: string;
   protocolRoles: string[];
-  lastBadgeAwarded: BadgeAward;
+  lastEarnedBadgeed: EarnedBadge;
   graphAccount?: GraphAccount;
   tokenLockWalletID?: string;
 }

@@ -4,13 +4,13 @@ import {
   upsertProtocol,
   upsertTrack,
 } from "./database/mutations";
-import { queryLastBadgeAward } from "./database/queries";
+import { queryLastEarnedBadge } from "./database/queries";
 import { removeRomanNumerals } from "./string";
 import {
-  queryAllBadgeAwards,
   queryAllBadgeDefinitions,
+  queryAllEarnedBadges,
 } from "./subgraph/queries";
-import { BadgeAward, BadgeDefinition as BadgeDefinitionType } from "./types";
+import { BadgeDefinition as BadgeDefinitionType, EarnedBadge } from "./types";
 import { querySubgraph } from "./utils";
 
 export const populateBadgeTracksAndDefinitions = async (
@@ -47,43 +47,42 @@ export const populateBadgeTracksAndDefinitions = async (
   }
 };
 
-export const populateBadgeAwards = async (
+export const populateEarnedBadges = async (
   protocolId: string,
   queryRunner: any
 ) => {
-  const { data } = await queryRunner.query(queryLastBadgeAward, {
+  const { data } = await queryRunner.query(queryLastEarnedBadge, {
     protocolId,
   });
 
-  console.log(data.allDefinitionsList);
+  // console.log(data.allDefinitionsList);
 
   const globalAwardNumberSync = 0;
 
-  const response: { badgeAwards: BadgeAward[] } = await querySubgraph({
-    query: queryAllBadgeAwards,
+  const response: { earnedBadges: EarnedBadge[] } = await querySubgraph({
+    query: queryAllEarnedBadges,
     subgraph: subgraphTheGraphBadges,
     variables: { globalAwardNumberSync },
   });
 
   console.log(response);
 
-  return;
-
-  const badgeAwards = response.badgeAwards.map((award: BadgeAward) => ({
+  const earnedBadges = response.earnedBadges.map((award: EarnedBadge) => ({
     ...award,
     blockAwarded: Number(award.blockAwarded),
     timestampAwarded: Number(award.timestampAwarded),
     definitionId: award.definition.id,
     protocolId: protocolId,
+    metadata: JSON.stringify(award.metadata),
   }));
 
-  const lastBadgeAwarded = badgeAwards[badgeAwards.length - 1];
+  const lastEarnedBadgeed = earnedBadges[earnedBadges.length - 1];
 
-  if (lastBadgeAwarded) {
-    const globalAwardNumberSync = lastBadgeAwarded.globalAwardNumber;
-    const lastBlockAwardedSync = lastBadgeAwarded.blockAwarded;
-    console.log({ globalAwardNumberSync, lastBlockAwardedSync });
+  if (lastEarnedBadgeed) {
+    const globalAwardNumberSync = lastEarnedBadgeed.globalAwardNumber;
+    const lastBlockAwardedSync = lastEarnedBadgeed.blockAwarded;
+    console.log({ earnedBadges, globalAwardNumberSync, lastBlockAwardedSync });
   }
 
-  return badgeAwards;
+  return earnedBadges;
 };

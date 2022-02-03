@@ -52,8 +52,8 @@ const createTracks = (knex) => {
   });
 };
 
-const createAwards = (knex) => {
-  return knex.schema.createTable("awards", (table) => {
+const createEarnedBadges = (knex) => {
+  return knex.schema.createTable("earned_badges", (table) => {
     table.increments("id").primary();
     table.string("definition_id").references("definitions.id").notNullable();
     table.string("winner_id").references("winners.id").notNullable();
@@ -61,6 +61,7 @@ const createAwards = (knex) => {
     table.string("transaction_hash");
     table.string("award_number");
     table.string("global_award_number");
+    table.jsonb("metadata");
   });
 };
 
@@ -72,7 +73,7 @@ exports.up = async function (knex) {
   await createRoles(knex);
   await createRankings(knex);
   await createDefinitions(knex);
-  await createAwards(knex);
+  await createEarnedBadges(knex);
   return true;
 };
 
@@ -82,7 +83,7 @@ const tables = [
   "rankings",
   "roles",
   "definitions",
-  "awards",
+  "earned_badges",
   "tracks",
 ];
 

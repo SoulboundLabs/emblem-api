@@ -11,19 +11,19 @@ import {
 } from "./database/mutations";
 import { removeRomanNumerals } from "./string";
 import {
-  queryAllBadgeAwards,
   queryAllBadgeDefinitions,
+  queryAllEarnedBadges,
   queryGraphAccountsMainnetNetwork,
 } from "./subgraph/queries";
 import {
-  BadgeAward,
   BadgeDefinition as BadgeDefinitionType,
+  EarnedBadge,
   GraphAccount,
   MiniWinner,
 } from "./types";
 import {
-  getBadgeAwardRef,
   getBadgeDefinitionsRef,
+  getEarnedBadgeRef,
   getProtocolRef,
   getWinnerRef,
   getWinnersRef,
@@ -92,7 +92,7 @@ export const populateBadgeDefinitions = async (
   await batch.commit();
 };
 
-export const populateBadgeAwards = async (
+export const populateEarnedBadges = async (
   firestore: FirebaseFirestore.Firestore,
   protocol: string
 ) => {
@@ -100,13 +100,13 @@ export const populateBadgeAwards = async (
   const snapshot = await protocolRef.get();
   const { globalAwardNumberSync = 0 } = snapshot.data() || {};
 
-  const response: { badgeAwards: BadgeAward[] } = await querySubgraph({
-    query: queryAllBadgeAwards,
+  const response: { badgeAwards: EarnedBadge[] } = await querySubgraph({
+    query: queryAllEarnedBadges,
     subgraph: subgraphTheGraphBadges,
     variables: { globalAwardNumberSync },
   });
 
-  const badgeAwards = response.badgeAwards.map((award: BadgeAward) => ({
+  const badgeAwards = response.badgeAwards.map((award: EarnedBadge) => ({
     ...award,
     blockAwarded: Number(award.blockAwarded),
     timestampAwarded: Number(award.timestampAwarded),
@@ -116,15 +116,15 @@ export const populateBadgeAwards = async (
   const batch = firestore.batch();
 
   badgeAwards.forEach((award) => {
-    const badgeAwardRef = getBadgeAwardRef(firestore, protocol, award.id);
+    const badgeAwardRef = getEarnedBadgeRef(firestore, protocol, award.id);
     batch.set(badgeAwardRef, award);
   });
 
-  const lastBadgeAwarded = badgeAwards[badgeAwards.length - 1];
+  const lastEarnedBadgeed = badgeAwards[badgeAwards.length - 1];
 
-  if (lastBadgeAwarded) {
-    const globalAwardNumberSync = lastBadgeAwarded.globalAwardNumber;
-    const lastBlockAwardedSync = lastBadgeAwarded.blockAwarded;
+  if (lastEarnedBadgeed) {
+    const globalAwardNumberSync = lastEarnedBadgeed.globalAwardNumber;
+    const lastBlockAwardedSync = lastEarnedBadgeed.blockAwarded;
     batch.set(
       protocolRef,
       { globalAwardNumberSync, lastBlockAwardedSync },
@@ -140,7 +140,7 @@ export const populateBadgeAwards = async (
 export const populateWinners = async (
   firestore: FirebaseFirestore.Firestore,
   protocol: string,
-  badgeAwards: BadgeAward[]
+  badgeAwards: EarnedBadge[]
 ) => {
   const winnerIDs = badgeAwards.map((award) => award.winner.id);
 
@@ -234,7 +234,7 @@ export const populateWinnersGraphDisplayName = async (
   return winners;
 };
 
-export const mergeWinnerBackToBadgeAwards = async (
+export const mergeWinnerBackToEarnedBadges = async (
   firestore: FirebaseFirestore.Firestore,
   protocol: string,
   winners: MiniWinner[]
@@ -242,19 +242,21 @@ export const mergeWinnerBackToBadgeAwards = async (
   const batch = firestore.batch();
 
   winners.forEach((winner) => {
-    Object.values(winner.awards[protocol]).forEach((badgeAward: BadgeAward) => {
-      const ref = getBadgeAwardRef(firestore, protocol, badgeAward.id);
-      batch.set(
-        ref,
-        {
-          winner: {
-            id: winner.id,
-            ens: winner.ens,
+    Object.values(winner.awards[protocol]).forEach(
+      (badgeAward: EarnedBadge) => {
+        const ref = getEarnedBadgeRef(firestore, protocol, badgeAward.id);
+        batch.set(
+          ref,
+          {
+            winner: {
+              id: winner.id,
+              ens: winner.ens,
+            },
           },
-        },
-        { merge: true }
-      );
-    });
+          { merge: true }
+        );
+      }
+    );
   });
 
   await batch.commit();

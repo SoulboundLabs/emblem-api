@@ -1,7 +1,7 @@
 import { gql } from "graphql-request";
 // TODO REplace with badgeAwards
-export const queryLastBadgeAward = gql`
-  query LastBadgeAwarded($protocolId: String!) {
+export const queryLastEarnedBadge = gql`
+  query LastEarnedBadgeed($protocolId: String!) {
     allDefinitionsList(
       filter: { protocolId: { equalTo: $protocolId } }
       first: 1

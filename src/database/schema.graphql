@@ -1,9 +1,6 @@
 type Award implements Node {
   awardNumber: String
   blockAwarded: Int
-
-  """Reads a single `Definition` that is related to this `Award`."""
-  definitionByDefinitionId: Definition
   definitionId: String!
   globalAwardNumber: String
   id: Int!
@@ -13,20 +10,7 @@ type Award implements Node {
   """
   nodeId: ID!
   transactionHash: String
-
-  """Reads a single `Winner` that is related to this `Award`."""
-  winnerByWinnerId: Winner
   winnerId: String!
-}
-
-"""The fields on `award` to look up the row to connect."""
-input AwardAwardsPkeyConnect {
-  id: Int!
-}
-
-"""The fields on `award` to look up the row to delete."""
-input AwardAwardsPkeyDelete {
-  id: Int!
 }
 
 """
@@ -94,73 +78,11 @@ input AwardFilter {
 input AwardInput {
   awardNumber: String
   blockAwarded: Int
-  definitionId: String
-  definitionToDefinitionId: AwardsDefinitionIdForeignInput
+  definitionId: String!
   globalAwardNumber: String
   id: Int
   transactionHash: String
-  winnerId: String
-  winnerToWinnerId: AwardsWinnerIdForeignInput
-}
-
-"""The globally unique `ID` look up for the row to connect."""
-input AwardNodeIdConnect {
-  """
-  The globally unique `ID` which identifies a single `award` to be connected.
-  """
-  nodeId: ID!
-}
-
-"""The globally unique `ID` look up for the row to delete."""
-input AwardNodeIdDelete {
-  """
-  The globally unique `ID` which identifies a single `award` to be deleted.
-  """
-  nodeId: ID!
-}
-
-"""The globally unique `ID` look up for the row to update."""
-input AwardOnAwardForAwardsDefinitionIdForeignNodeIdUpdate {
-  """
-  An object where the defined keys will be set on the `definition` being updated.
-  """
-  definitionPatch: DefinitionPatch!
-
-  """
-  The globally unique `ID` which identifies a single `definition` to be connected.
-  """
-  nodeId: ID!
-}
-
-"""The fields on `award` to look up the row to update."""
-input AwardOnAwardForAwardsDefinitionIdForeignUsingAwardsPkeyUpdate {
-  """
-  An object where the defined keys will be set on the `award` being updated.
-  """
-  awardPatch: updateAwardOnAwardForAwardsDefinitionIdForeignPatch!
-  id: Int!
-}
-
-"""The globally unique `ID` look up for the row to update."""
-input AwardOnAwardForAwardsWinnerIdForeignNodeIdUpdate {
-  """
-  The globally unique `ID` which identifies a single `winner` to be connected.
-  """
-  nodeId: ID!
-
-  """
-  An object where the defined keys will be set on the `winner` being updated.
-  """
-  winnerPatch: WinnerPatch!
-}
-
-"""The fields on `award` to look up the row to update."""
-input AwardOnAwardForAwardsWinnerIdForeignUsingAwardsPkeyUpdate {
-  """
-  An object where the defined keys will be set on the `award` being updated.
-  """
-  awardPatch: updateAwardOnAwardForAwardsWinnerIdForeignPatch!
-  id: Int!
+  winnerId: String!
 }
 
 """
@@ -170,132 +92,10 @@ input AwardPatch {
   awardNumber: String
   blockAwarded: Int
   definitionId: String
-  definitionToDefinitionId: AwardsDefinitionIdForeignInput
   globalAwardNumber: String
   id: Int
   transactionHash: String
   winnerId: String
-  winnerToWinnerId: AwardsWinnerIdForeignInput
-}
-
-"""The `award` to be created by this mutation."""
-input AwardsDefinitionIdForeignAwardsCreateInput {
-  awardNumber: String
-  blockAwarded: Int
-  definitionToDefinitionId: AwardsDefinitionIdForeignInput
-  globalAwardNumber: String
-  id: Int
-  transactionHash: String
-  winnerId: String
-  winnerToWinnerId: AwardsWinnerIdForeignInput
-}
-
-"""The `definition` to be created by this mutation."""
-input AwardsDefinitionIdForeignDefinitionsCreateInput {
-  awardsUsingId: AwardsDefinitionIdForeignInverseInput
-  definition: String
-  id: String!
-  ipfsUri: String
-  metric: String
-  protocolId: String
-  protocolToProtocolId: DefinitionsProtocolIdForeignInput
-  roleId: String
-  roleToRoleId: DefinitionsRoleIdForeignInput
-  threshold: String
-  trackId: String
-  trackToTrackId: DefinitionsTrackIdForeignInput
-}
-
-"""
-Input for the nested mutation of `definition` in the `AwardInput` mutation.
-"""
-input AwardsDefinitionIdForeignInput {
-  """
-  The primary key(s) for `definition` for the far side of the relationship.
-  """
-  connectById: DefinitionDefinitionsPkeyConnect
-
-  """
-  The primary key(s) for `definition` for the far side of the relationship.
-  """
-  connectByIdAndProtocolId: DefinitionDefinitionsIdProtocolIdUniqueConnect
-
-  """
-  The primary key(s) for `definition` for the far side of the relationship.
-  """
-  connectByNodeId: DefinitionNodeIdConnect
-
-  """
-  A `DefinitionInput` object that will be created and connected to this object.
-  """
-  create: AwardsDefinitionIdForeignDefinitionsCreateInput
-
-  """
-  The primary key(s) for `definition` for the far side of the relationship.
-  """
-  deleteById: DefinitionDefinitionsPkeyDelete
-
-  """
-  The primary key(s) for `definition` for the far side of the relationship.
-  """
-  deleteByIdAndProtocolId: DefinitionDefinitionsIdProtocolIdUniqueDelete
-
-  """
-  The primary key(s) for `definition` for the far side of the relationship.
-  """
-  deleteByNodeId: DefinitionNodeIdDelete
-
-  """
-  The primary key(s) and patch data for `definition` for the far side of the relationship.
-  """
-  updateById: DefinitionOnAwardForAwardsDefinitionIdForeignUsingDefinitionsPkeyUpdate
-
-  """
-  The primary key(s) and patch data for `definition` for the far side of the relationship.
-  """
-  updateByIdAndProtocolId: DefinitionOnAwardForAwardsDefinitionIdForeignUsingDefinitionsIdProtocolIdUniqueUpdate
-
-  """
-  The primary key(s) and patch data for `definition` for the far side of the relationship.
-  """
-  updateByNodeId: AwardOnAwardForAwardsDefinitionIdForeignNodeIdUpdate
-}
-
-"""
-Input for the nested mutation of `award` in the `DefinitionInput` mutation.
-"""
-input AwardsDefinitionIdForeignInverseInput {
-  """The primary key(s) for `award` for the far side of the relationship."""
-  connectById: [AwardAwardsPkeyConnect!]
-
-  """The primary key(s) for `award` for the far side of the relationship."""
-  connectByNodeId: [AwardNodeIdConnect!]
-
-  """
-  A `AwardInput` object that will be created and connected to this object.
-  """
-  create: [AwardsDefinitionIdForeignAwardsCreateInput!]
-
-  """The primary key(s) for `award` for the far side of the relationship."""
-  deleteById: [AwardAwardsPkeyDelete!]
-
-  """The primary key(s) for `award` for the far side of the relationship."""
-  deleteByNodeId: [AwardNodeIdDelete!]
-
-  """
-  Flag indicating whether all other `award` records that match this relationship should be removed.
-  """
-  deleteOthers: Boolean
-
-  """
-  The primary key(s) and patch data for `award` for the far side of the relationship.
-  """
-  updateById: [AwardOnAwardForAwardsDefinitionIdForeignUsingAwardsPkeyUpdate!]
-
-  """
-  The primary key(s) and patch data for `award` for the far side of the relationship.
-  """
-  updateByNodeId: [DefinitionOnAwardForAwardsDefinitionIdForeignNodeIdUpdate!]
 }
 
 """Methods to use when ordering `Award`."""
@@ -317,95 +117,6 @@ enum AwardsOrderBy {
   TRANSACTION_HASH_DESC
   WINNER_ID_ASC
   WINNER_ID_DESC
-}
-
-"""The `award` to be created by this mutation."""
-input AwardsWinnerIdForeignAwardsCreateInput {
-  awardNumber: String
-  blockAwarded: Int
-  definitionId: String
-  definitionToDefinitionId: AwardsDefinitionIdForeignInput
-  globalAwardNumber: String
-  id: Int
-  transactionHash: String
-  winnerToWinnerId: AwardsWinnerIdForeignInput
-}
-
-"""
-Input for the nested mutation of `winner` in the `AwardInput` mutation.
-"""
-input AwardsWinnerIdForeignInput {
-  """The primary key(s) for `winner` for the far side of the relationship."""
-  connectById: WinnerWinnersPkeyConnect
-
-  """The primary key(s) for `winner` for the far side of the relationship."""
-  connectByNodeId: WinnerNodeIdConnect
-
-  """
-  A `WinnerInput` object that will be created and connected to this object.
-  """
-  create: AwardsWinnerIdForeignWinnersCreateInput
-
-  """The primary key(s) for `winner` for the far side of the relationship."""
-  deleteById: WinnerWinnersPkeyDelete
-
-  """The primary key(s) for `winner` for the far side of the relationship."""
-  deleteByNodeId: WinnerNodeIdDelete
-
-  """
-  The primary key(s) and patch data for `winner` for the far side of the relationship.
-  """
-  updateById: WinnerOnAwardForAwardsWinnerIdForeignUsingWinnersPkeyUpdate
-
-  """
-  The primary key(s) and patch data for `winner` for the far side of the relationship.
-  """
-  updateByNodeId: AwardOnAwardForAwardsWinnerIdForeignNodeIdUpdate
-}
-
-"""
-Input for the nested mutation of `award` in the `WinnerInput` mutation.
-"""
-input AwardsWinnerIdForeignInverseInput {
-  """The primary key(s) for `award` for the far side of the relationship."""
-  connectById: [AwardAwardsPkeyConnect!]
-
-  """The primary key(s) for `award` for the far side of the relationship."""
-  connectByNodeId: [AwardNodeIdConnect!]
-
-  """
-  A `AwardInput` object that will be created and connected to this object.
-  """
-  create: [AwardsWinnerIdForeignAwardsCreateInput!]
-
-  """The primary key(s) for `award` for the far side of the relationship."""
-  deleteById: [AwardAwardsPkeyDelete!]
-
-  """The primary key(s) for `award` for the far side of the relationship."""
-  deleteByNodeId: [AwardNodeIdDelete!]
-
-  """
-  Flag indicating whether all other `award` records that match this relationship should be removed.
-  """
-  deleteOthers: Boolean
-
-  """
-  The primary key(s) and patch data for `award` for the far side of the relationship.
-  """
-  updateById: [AwardOnAwardForAwardsWinnerIdForeignUsingAwardsPkeyUpdate!]
-
-  """
-  The primary key(s) and patch data for `award` for the far side of the relationship.
-  """
-  updateByNodeId: [WinnerOnAwardForAwardsWinnerIdForeignNodeIdUpdate!]
-}
-
-"""The `winner` to be created by this mutation."""
-input AwardsWinnerIdForeignWinnersCreateInput {
-  awardsUsingId: AwardsWinnerIdForeignInverseInput
-  ens: String
-  id: String!
-  rankingsUsingId: RankingsWinnerIdForeignInverseInput
 }
 
 """All input for the create `Award` mutation."""
@@ -431,16 +142,10 @@ type CreateAwardPayload {
   """
   clientMutationId: String
 
-  """Reads a single `Definition` that is related to this `Award`."""
-  definitionByDefinitionId: Definition
-
   """
   Our root query field type. Allows us to run any query from our mutation payload.
   """
   query: Query
-
-  """Reads a single `Winner` that is related to this `Award`."""
-  winnerByWinnerId: Winner
 }
 
 """All input for the create `Definition` mutation."""
@@ -479,6 +184,41 @@ type CreateDefinitionPayload {
 
   """Reads a single `Track` that is related to this `Definition`."""
   trackByTrackId: Track
+}
+
+"""All input for the create `EarnedBadge` mutation."""
+input CreateEarnedBadgeInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `EarnedBadge` to be created by this mutation."""
+  earnedBadge: EarnedBadgeInput!
+}
+
+"""The output of our create `EarnedBadge` mutation."""
+type CreateEarnedBadgePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """Reads a single `Definition` that is related to this `EarnedBadge`."""
+  definitionByDefinitionId: Definition
+
+  """The `EarnedBadge` that was created by this mutation."""
+  earnedBadge: EarnedBadge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Winner` that is related to this `EarnedBadge`."""
+  winnerByWinnerId: Winner
 }
 
 """All input for the create `KnexMigration` mutation."""
@@ -745,17 +485,19 @@ input DatetimeFilter {
 }
 
 type Definition implements Node {
-  """Reads and enables pagination through a set of `Award`."""
-  awardsByDefinitionIdList(
+  definition: String
+
+  """Reads and enables pagination through a set of `EarnedBadge`."""
+  earnedBadgesByDefinitionIdList(
     """
     A condition to be used in determining which values should be returned by the collection.
     """
-    condition: AwardCondition
+    condition: EarnedBadgeCondition
 
     """
     A filter to be used in determining which values should be returned by the collection.
     """
-    filter: AwardFilter
+    filter: EarnedBadgeFilter
 
     """Only read the first `n` values of the set."""
     first: Int
@@ -763,10 +505,9 @@ type Definition implements Node {
     """Skip the first `n` values."""
     offset: Int
 
-    """The method to use when ordering `Award`."""
-    orderBy: [AwardsOrderBy!]
-  ): [Award!]!
-  definition: String
+    """The method to use when ordering `EarnedBadge`."""
+    orderBy: [EarnedBadgesOrderBy!]
+  ): [EarnedBadge!]!
   id: String!
   ipfsUri: String
   metric: String
@@ -882,8 +623,8 @@ input DefinitionFilter {
 
 """An input for mutations affecting `Definition`"""
 input DefinitionInput {
-  awardsUsingId: AwardsDefinitionIdForeignInverseInput
   definition: String
+  earnedBadgesUsingId: EarnedBadgesDefinitionIdForeignInverseInput
   id: String!
   ipfsUri: String
   metric: String
@@ -910,38 +651,6 @@ input DefinitionNodeIdDelete {
   The globally unique `ID` which identifies a single `definition` to be deleted.
   """
   nodeId: ID!
-}
-
-"""The globally unique `ID` look up for the row to update."""
-input DefinitionOnAwardForAwardsDefinitionIdForeignNodeIdUpdate {
-  """
-  An object where the defined keys will be set on the `award` being updated.
-  """
-  awardPatch: AwardPatch!
-
-  """
-  The globally unique `ID` which identifies a single `award` to be connected.
-  """
-  nodeId: ID!
-}
-
-"""The fields on `definition` to look up the row to update."""
-input DefinitionOnAwardForAwardsDefinitionIdForeignUsingDefinitionsIdProtocolIdUniqueUpdate {
-  """
-  An object where the defined keys will be set on the `definition` being updated.
-  """
-  definitionPatch: updateDefinitionOnAwardForAwardsDefinitionIdForeignPatch!
-  id: String!
-  protocolId: String!
-}
-
-"""The fields on `definition` to look up the row to update."""
-input DefinitionOnAwardForAwardsDefinitionIdForeignUsingDefinitionsPkeyUpdate {
-  """
-  An object where the defined keys will be set on the `definition` being updated.
-  """
-  definitionPatch: updateDefinitionOnAwardForAwardsDefinitionIdForeignPatch!
-  id: String!
 }
 
 """The globally unique `ID` look up for the row to update."""
@@ -1040,12 +749,44 @@ input DefinitionOnDefinitionForDefinitionsTrackIdForeignUsingDefinitionsPkeyUpda
   id: String!
 }
 
+"""The globally unique `ID` look up for the row to update."""
+input DefinitionOnEarnedBadgeForEarnedBadgesDefinitionIdForeignNodeIdUpdate {
+  """
+  An object where the defined keys will be set on the `earnedBadge` being updated.
+  """
+  earnedBadgePatch: EarnedBadgePatch!
+
+  """
+  The globally unique `ID` which identifies a single `earnedBadge` to be connected.
+  """
+  nodeId: ID!
+}
+
+"""The fields on `definition` to look up the row to update."""
+input DefinitionOnEarnedBadgeForEarnedBadgesDefinitionIdForeignUsingDefinitionsIdProtocolIdUniqueUpdate {
+  """
+  An object where the defined keys will be set on the `definition` being updated.
+  """
+  definitionPatch: updateDefinitionOnEarnedBadgeForEarnedBadgesDefinitionIdForeignPatch!
+  id: String!
+  protocolId: String!
+}
+
+"""The fields on `definition` to look up the row to update."""
+input DefinitionOnEarnedBadgeForEarnedBadgesDefinitionIdForeignUsingDefinitionsPkeyUpdate {
+  """
+  An object where the defined keys will be set on the `definition` being updated.
+  """
+  definitionPatch: updateDefinitionOnEarnedBadgeForEarnedBadgesDefinitionIdForeignPatch!
+  id: String!
+}
+
 """
 Represents an update to a `Definition`. Fields that are set will be updated.
 """
 input DefinitionPatch {
-  awardsUsingId: AwardsDefinitionIdForeignInverseInput
   definition: String
+  earnedBadgesUsingId: EarnedBadgesDefinitionIdForeignInverseInput
   id: String
   ipfsUri: String
   metric: String
@@ -1083,8 +824,8 @@ enum DefinitionsOrderBy {
 
 """The `definition` to be created by this mutation."""
 input DefinitionsProtocolIdForeignDefinitionsCreateInput {
-  awardsUsingId: AwardsDefinitionIdForeignInverseInput
   definition: String
+  earnedBadgesUsingId: EarnedBadgesDefinitionIdForeignInverseInput
   id: String!
   ipfsUri: String
   metric: String
@@ -1207,8 +948,8 @@ input DefinitionsProtocolIdForeignProtocolsCreateInput {
 
 """The `definition` to be created by this mutation."""
 input DefinitionsRoleIdForeignDefinitionsCreateInput {
-  awardsUsingId: AwardsDefinitionIdForeignInverseInput
   definition: String
+  earnedBadgesUsingId: EarnedBadgesDefinitionIdForeignInverseInput
   id: String!
   ipfsUri: String
   metric: String
@@ -1333,8 +1074,8 @@ input DefinitionsRoleIdForeignRolesCreateInput {
 
 """The `definition` to be created by this mutation."""
 input DefinitionsTrackIdForeignDefinitionsCreateInput {
-  awardsUsingId: AwardsDefinitionIdForeignInverseInput
   definition: String
+  earnedBadgesUsingId: EarnedBadgesDefinitionIdForeignInverseInput
   id: String!
   ipfsUri: String
   metric: String
@@ -1491,18 +1232,12 @@ type DeleteAwardPayload {
   unchanged and unused. May be used by a client to track mutations.
   """
   clientMutationId: String
-
-  """Reads a single `Definition` that is related to this `Award`."""
-  definitionByDefinitionId: Definition
   deletedAwardId: ID
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.
   """
   query: Query
-
-  """Reads a single `Winner` that is related to this `Award`."""
-  winnerByWinnerId: Winner
 }
 
 """All input for the `deleteDefinitionByIdAndProtocolId` mutation."""
@@ -1565,6 +1300,54 @@ type DeleteDefinitionPayload {
 
   """Reads a single `Track` that is related to this `Definition`."""
   trackByTrackId: Track
+}
+
+"""All input for the `deleteEarnedBadgeById` mutation."""
+input DeleteEarnedBadgeByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: Int!
+}
+
+"""All input for the `deleteEarnedBadge` mutation."""
+input DeleteEarnedBadgeInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `EarnedBadge` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""The output of our delete `EarnedBadge` mutation."""
+type DeleteEarnedBadgePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """Reads a single `Definition` that is related to this `EarnedBadge`."""
+  definitionByDefinitionId: Definition
+  deletedEarnedBadgeId: ID
+
+  """The `EarnedBadge` that was deleted by this mutation."""
+  earnedBadge: EarnedBadge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Winner` that is related to this `EarnedBadge`."""
+  winnerByWinnerId: Winner
 }
 
 """All input for the `deleteKnexMigrationById` mutation."""
@@ -1895,6 +1678,446 @@ type DeleteWinnerPayload {
   winner: Winner
 }
 
+type EarnedBadge implements Node {
+  awardNumber: String
+  blockAwarded: Int
+
+  """Reads a single `Definition` that is related to this `EarnedBadge`."""
+  definitionByDefinitionId: Definition
+  definitionId: String!
+  globalAwardNumber: String
+  id: Int!
+  metadata: JSON
+
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  transactionHash: String
+
+  """Reads a single `Winner` that is related to this `EarnedBadge`."""
+  winnerByWinnerId: Winner
+  winnerId: String!
+}
+
+"""
+A condition to be used against `EarnedBadge` object types. All fields are tested
+for equality and combined with a logical ‘and.’
+"""
+input EarnedBadgeCondition {
+  """Checks for equality with the object’s `awardNumber` field."""
+  awardNumber: String
+
+  """Checks for equality with the object’s `blockAwarded` field."""
+  blockAwarded: Int
+
+  """Checks for equality with the object’s `definitionId` field."""
+  definitionId: String
+
+  """Checks for equality with the object’s `globalAwardNumber` field."""
+  globalAwardNumber: String
+
+  """Checks for equality with the object’s `id` field."""
+  id: Int
+
+  """Checks for equality with the object’s `metadata` field."""
+  metadata: JSON
+
+  """Checks for equality with the object’s `transactionHash` field."""
+  transactionHash: String
+
+  """Checks for equality with the object’s `winnerId` field."""
+  winnerId: String
+}
+
+"""The fields on `earnedBadge` to look up the row to connect."""
+input EarnedBadgeEarnedBadgesPkeyConnect {
+  id: Int!
+}
+
+"""The fields on `earnedBadge` to look up the row to delete."""
+input EarnedBadgeEarnedBadgesPkeyDelete {
+  id: Int!
+}
+
+"""
+A filter to be used against `EarnedBadge` object types. All fields are combined with a logical ‘and.’
+"""
+input EarnedBadgeFilter {
+  """Checks for all expressions in this list."""
+  and: [EarnedBadgeFilter!]
+
+  """Filter by the object’s `awardNumber` field."""
+  awardNumber: StringFilter
+
+  """Filter by the object’s `blockAwarded` field."""
+  blockAwarded: IntFilter
+
+  """Filter by the object’s `definitionId` field."""
+  definitionId: StringFilter
+
+  """Filter by the object’s `globalAwardNumber` field."""
+  globalAwardNumber: StringFilter
+
+  """Filter by the object’s `id` field."""
+  id: IntFilter
+
+  """Filter by the object’s `metadata` field."""
+  metadata: JSONFilter
+
+  """Negates the expression."""
+  not: EarnedBadgeFilter
+
+  """Checks for any expressions in this list."""
+  or: [EarnedBadgeFilter!]
+
+  """Filter by the object’s `transactionHash` field."""
+  transactionHash: StringFilter
+
+  """Filter by the object’s `winnerId` field."""
+  winnerId: StringFilter
+}
+
+"""An input for mutations affecting `EarnedBadge`"""
+input EarnedBadgeInput {
+  awardNumber: String
+  blockAwarded: Int
+  definitionId: String
+  definitionToDefinitionId: EarnedBadgesDefinitionIdForeignInput
+  globalAwardNumber: String
+  id: Int
+  metadata: JSON
+  transactionHash: String
+  winnerId: String
+  winnerToWinnerId: EarnedBadgesWinnerIdForeignInput
+}
+
+"""The globally unique `ID` look up for the row to connect."""
+input EarnedBadgeNodeIdConnect {
+  """
+  The globally unique `ID` which identifies a single `earnedBadge` to be connected.
+  """
+  nodeId: ID!
+}
+
+"""The globally unique `ID` look up for the row to delete."""
+input EarnedBadgeNodeIdDelete {
+  """
+  The globally unique `ID` which identifies a single `earnedBadge` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""The globally unique `ID` look up for the row to update."""
+input EarnedBadgeOnEarnedBadgeForEarnedBadgesDefinitionIdForeignNodeIdUpdate {
+  """
+  An object where the defined keys will be set on the `definition` being updated.
+  """
+  definitionPatch: DefinitionPatch!
+
+  """
+  The globally unique `ID` which identifies a single `definition` to be connected.
+  """
+  nodeId: ID!
+}
+
+"""The fields on `earnedBadge` to look up the row to update."""
+input EarnedBadgeOnEarnedBadgeForEarnedBadgesDefinitionIdForeignUsingEarnedBadgesPkeyUpdate {
+  """
+  An object where the defined keys will be set on the `earnedBadge` being updated.
+  """
+  earnedBadgePatch: updateEarnedBadgeOnEarnedBadgeForEarnedBadgesDefinitionIdForeignPatch!
+  id: Int!
+}
+
+"""The globally unique `ID` look up for the row to update."""
+input EarnedBadgeOnEarnedBadgeForEarnedBadgesWinnerIdForeignNodeIdUpdate {
+  """
+  The globally unique `ID` which identifies a single `winner` to be connected.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `winner` being updated.
+  """
+  winnerPatch: WinnerPatch!
+}
+
+"""The fields on `earnedBadge` to look up the row to update."""
+input EarnedBadgeOnEarnedBadgeForEarnedBadgesWinnerIdForeignUsingEarnedBadgesPkeyUpdate {
+  """
+  An object where the defined keys will be set on the `earnedBadge` being updated.
+  """
+  earnedBadgePatch: updateEarnedBadgeOnEarnedBadgeForEarnedBadgesWinnerIdForeignPatch!
+  id: Int!
+}
+
+"""
+Represents an update to a `EarnedBadge`. Fields that are set will be updated.
+"""
+input EarnedBadgePatch {
+  awardNumber: String
+  blockAwarded: Int
+  definitionId: String
+  definitionToDefinitionId: EarnedBadgesDefinitionIdForeignInput
+  globalAwardNumber: String
+  id: Int
+  metadata: JSON
+  transactionHash: String
+  winnerId: String
+  winnerToWinnerId: EarnedBadgesWinnerIdForeignInput
+}
+
+"""The `definition` to be created by this mutation."""
+input EarnedBadgesDefinitionIdForeignDefinitionsCreateInput {
+  definition: String
+  earnedBadgesUsingId: EarnedBadgesDefinitionIdForeignInverseInput
+  id: String!
+  ipfsUri: String
+  metric: String
+  protocolId: String
+  protocolToProtocolId: DefinitionsProtocolIdForeignInput
+  roleId: String
+  roleToRoleId: DefinitionsRoleIdForeignInput
+  threshold: String
+  trackId: String
+  trackToTrackId: DefinitionsTrackIdForeignInput
+}
+
+"""The `earnedBadge` to be created by this mutation."""
+input EarnedBadgesDefinitionIdForeignEarnedBadgesCreateInput {
+  awardNumber: String
+  blockAwarded: Int
+  definitionToDefinitionId: EarnedBadgesDefinitionIdForeignInput
+  globalAwardNumber: String
+  id: Int
+  metadata: JSON
+  transactionHash: String
+  winnerId: String
+  winnerToWinnerId: EarnedBadgesWinnerIdForeignInput
+}
+
+"""
+Input for the nested mutation of `definition` in the `EarnedBadgeInput` mutation.
+"""
+input EarnedBadgesDefinitionIdForeignInput {
+  """
+  The primary key(s) for `definition` for the far side of the relationship.
+  """
+  connectById: DefinitionDefinitionsPkeyConnect
+
+  """
+  The primary key(s) for `definition` for the far side of the relationship.
+  """
+  connectByIdAndProtocolId: DefinitionDefinitionsIdProtocolIdUniqueConnect
+
+  """
+  The primary key(s) for `definition` for the far side of the relationship.
+  """
+  connectByNodeId: DefinitionNodeIdConnect
+
+  """
+  A `DefinitionInput` object that will be created and connected to this object.
+  """
+  create: EarnedBadgesDefinitionIdForeignDefinitionsCreateInput
+
+  """
+  The primary key(s) for `definition` for the far side of the relationship.
+  """
+  deleteById: DefinitionDefinitionsPkeyDelete
+
+  """
+  The primary key(s) for `definition` for the far side of the relationship.
+  """
+  deleteByIdAndProtocolId: DefinitionDefinitionsIdProtocolIdUniqueDelete
+
+  """
+  The primary key(s) for `definition` for the far side of the relationship.
+  """
+  deleteByNodeId: DefinitionNodeIdDelete
+
+  """
+  The primary key(s) and patch data for `definition` for the far side of the relationship.
+  """
+  updateById: DefinitionOnEarnedBadgeForEarnedBadgesDefinitionIdForeignUsingDefinitionsPkeyUpdate
+
+  """
+  The primary key(s) and patch data for `definition` for the far side of the relationship.
+  """
+  updateByIdAndProtocolId: DefinitionOnEarnedBadgeForEarnedBadgesDefinitionIdForeignUsingDefinitionsIdProtocolIdUniqueUpdate
+
+  """
+  The primary key(s) and patch data for `definition` for the far side of the relationship.
+  """
+  updateByNodeId: EarnedBadgeOnEarnedBadgeForEarnedBadgesDefinitionIdForeignNodeIdUpdate
+}
+
+"""
+Input for the nested mutation of `earnedBadge` in the `DefinitionInput` mutation.
+"""
+input EarnedBadgesDefinitionIdForeignInverseInput {
+  """
+  The primary key(s) for `earnedBadge` for the far side of the relationship.
+  """
+  connectById: [EarnedBadgeEarnedBadgesPkeyConnect!]
+
+  """
+  The primary key(s) for `earnedBadge` for the far side of the relationship.
+  """
+  connectByNodeId: [EarnedBadgeNodeIdConnect!]
+
+  """
+  A `EarnedBadgeInput` object that will be created and connected to this object.
+  """
+  create: [EarnedBadgesDefinitionIdForeignEarnedBadgesCreateInput!]
+
+  """
+  The primary key(s) for `earnedBadge` for the far side of the relationship.
+  """
+  deleteById: [EarnedBadgeEarnedBadgesPkeyDelete!]
+
+  """
+  The primary key(s) for `earnedBadge` for the far side of the relationship.
+  """
+  deleteByNodeId: [EarnedBadgeNodeIdDelete!]
+
+  """
+  Flag indicating whether all other `earnedBadge` records that match this relationship should be removed.
+  """
+  deleteOthers: Boolean
+
+  """
+  The primary key(s) and patch data for `earnedBadge` for the far side of the relationship.
+  """
+  updateById: [EarnedBadgeOnEarnedBadgeForEarnedBadgesDefinitionIdForeignUsingEarnedBadgesPkeyUpdate!]
+
+  """
+  The primary key(s) and patch data for `earnedBadge` for the far side of the relationship.
+  """
+  updateByNodeId: [DefinitionOnEarnedBadgeForEarnedBadgesDefinitionIdForeignNodeIdUpdate!]
+}
+
+"""Methods to use when ordering `EarnedBadge`."""
+enum EarnedBadgesOrderBy {
+  AWARD_NUMBER_ASC
+  AWARD_NUMBER_DESC
+  BLOCK_AWARDED_ASC
+  BLOCK_AWARDED_DESC
+  DEFINITION_ID_ASC
+  DEFINITION_ID_DESC
+  GLOBAL_AWARD_NUMBER_ASC
+  GLOBAL_AWARD_NUMBER_DESC
+  ID_ASC
+  ID_DESC
+  METADATA_ASC
+  METADATA_DESC
+  NATURAL
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+  TRANSACTION_HASH_ASC
+  TRANSACTION_HASH_DESC
+  WINNER_ID_ASC
+  WINNER_ID_DESC
+}
+
+"""The `earnedBadge` to be created by this mutation."""
+input EarnedBadgesWinnerIdForeignEarnedBadgesCreateInput {
+  awardNumber: String
+  blockAwarded: Int
+  definitionId: String
+  definitionToDefinitionId: EarnedBadgesDefinitionIdForeignInput
+  globalAwardNumber: String
+  id: Int
+  metadata: JSON
+  transactionHash: String
+  winnerToWinnerId: EarnedBadgesWinnerIdForeignInput
+}
+
+"""
+Input for the nested mutation of `winner` in the `EarnedBadgeInput` mutation.
+"""
+input EarnedBadgesWinnerIdForeignInput {
+  """The primary key(s) for `winner` for the far side of the relationship."""
+  connectById: WinnerWinnersPkeyConnect
+
+  """The primary key(s) for `winner` for the far side of the relationship."""
+  connectByNodeId: WinnerNodeIdConnect
+
+  """
+  A `WinnerInput` object that will be created and connected to this object.
+  """
+  create: EarnedBadgesWinnerIdForeignWinnersCreateInput
+
+  """The primary key(s) for `winner` for the far side of the relationship."""
+  deleteById: WinnerWinnersPkeyDelete
+
+  """The primary key(s) for `winner` for the far side of the relationship."""
+  deleteByNodeId: WinnerNodeIdDelete
+
+  """
+  The primary key(s) and patch data for `winner` for the far side of the relationship.
+  """
+  updateById: WinnerOnEarnedBadgeForEarnedBadgesWinnerIdForeignUsingWinnersPkeyUpdate
+
+  """
+  The primary key(s) and patch data for `winner` for the far side of the relationship.
+  """
+  updateByNodeId: EarnedBadgeOnEarnedBadgeForEarnedBadgesWinnerIdForeignNodeIdUpdate
+}
+
+"""
+Input for the nested mutation of `earnedBadge` in the `WinnerInput` mutation.
+"""
+input EarnedBadgesWinnerIdForeignInverseInput {
+  """
+  The primary key(s) for `earnedBadge` for the far side of the relationship.
+  """
+  connectById: [EarnedBadgeEarnedBadgesPkeyConnect!]
+
+  """
+  The primary key(s) for `earnedBadge` for the far side of the relationship.
+  """
+  connectByNodeId: [EarnedBadgeNodeIdConnect!]
+
+  """
+  A `EarnedBadgeInput` object that will be created and connected to this object.
+  """
+  create: [EarnedBadgesWinnerIdForeignEarnedBadgesCreateInput!]
+
+  """
+  The primary key(s) for `earnedBadge` for the far side of the relationship.
+  """
+  deleteById: [EarnedBadgeEarnedBadgesPkeyDelete!]
+
+  """
+  The primary key(s) for `earnedBadge` for the far side of the relationship.
+  """
+  deleteByNodeId: [EarnedBadgeNodeIdDelete!]
+
+  """
+  Flag indicating whether all other `earnedBadge` records that match this relationship should be removed.
+  """
+  deleteOthers: Boolean
+
+  """
+  The primary key(s) and patch data for `earnedBadge` for the far side of the relationship.
+  """
+  updateById: [EarnedBadgeOnEarnedBadgeForEarnedBadgesWinnerIdForeignUsingEarnedBadgesPkeyUpdate!]
+
+  """
+  The primary key(s) and patch data for `earnedBadge` for the far side of the relationship.
+  """
+  updateByNodeId: [WinnerOnEarnedBadgeForEarnedBadgesWinnerIdForeignNodeIdUpdate!]
+}
+
+"""The `winner` to be created by this mutation."""
+input EarnedBadgesWinnerIdForeignWinnersCreateInput {
+  earnedBadgesUsingId: EarnedBadgesWinnerIdForeignInverseInput
+  ens: String
+  id: String!
+  rankingsUsingId: RankingsWinnerIdForeignInverseInput
+}
+
 """
 A filter to be used against Int fields. All fields are combined with a logical ‘and.’
 """
@@ -1935,6 +2158,68 @@ input IntFilter {
 
   """Not included in the specified list."""
   notIn: [Int!]
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+"""
+A filter to be used against JSON fields. All fields are combined with a logical ‘and.’
+"""
+input JSONFilter {
+  """Contained by the specified JSON."""
+  containedBy: JSON
+
+  """Contains the specified JSON."""
+  contains: JSON
+
+  """Contains all of the specified keys."""
+  containsAllKeys: [String!]
+
+  """Contains any of the specified keys."""
+  containsAnyKeys: [String!]
+
+  """Contains the specified key."""
+  containsKey: String
+
+  """
+  Not equal to the specified value, treating null like an ordinary value.
+  """
+  distinctFrom: JSON
+
+  """Equal to the specified value."""
+  equalTo: JSON
+
+  """Greater than the specified value."""
+  greaterThan: JSON
+
+  """Greater than or equal to the specified value."""
+  greaterThanOrEqualTo: JSON
+
+  """Included in the specified list."""
+  in: [JSON!]
+
+  """
+  Is null (if `true` is specified) or is not null (if `false` is specified).
+  """
+  isNull: Boolean
+
+  """Less than the specified value."""
+  lessThan: JSON
+
+  """Less than or equal to the specified value."""
+  lessThanOrEqualTo: JSON
+
+  """Equal to the specified value, treating null like an ordinary value."""
+  notDistinctFrom: JSON
+
+  """Not equal to the specified value."""
+  notEqualTo: JSON
+
+  """Not included in the specified list."""
+  notIn: [JSON!]
 }
 
 type KnexMigration implements Node {
@@ -2113,6 +2398,14 @@ type Mutation {
     input: CreateDefinitionInput!
   ): CreateDefinitionPayload
 
+  """Creates a single `EarnedBadge`."""
+  createEarnedBadge(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateEarnedBadgeInput!
+  ): CreateEarnedBadgePayload
+
   """Creates a single `KnexMigration`."""
   createKnexMigration(
     """
@@ -2208,6 +2501,22 @@ type Mutation {
     """
     input: DeleteDefinitionByIdAndProtocolIdInput!
   ): DeleteDefinitionPayload
+
+  """Deletes a single `EarnedBadge` using its globally unique id."""
+  deleteEarnedBadge(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteEarnedBadgeInput!
+  ): DeleteEarnedBadgePayload
+
+  """Deletes a single `EarnedBadge` using a unique key."""
+  deleteEarnedBadgeById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteEarnedBadgeByIdInput!
+  ): DeleteEarnedBadgePayload
 
   """Deletes a single `KnexMigration` using its globally unique id."""
   deleteKnexMigration(
@@ -2380,6 +2689,24 @@ type Mutation {
   ): UpdateDefinitionPayload
 
   """
+  Updates a single `EarnedBadge` using its globally unique id and a patch.
+  """
+  updateEarnedBadge(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateEarnedBadgeInput!
+  ): UpdateEarnedBadgePayload
+
+  """Updates a single `EarnedBadge` using a unique key and a patch."""
+  updateEarnedBadgeById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateEarnedBadgeByIdInput!
+  ): UpdateEarnedBadgePayload
+
+  """
   Updates a single `KnexMigration` using its globally unique id and a patch.
   """
   updateKnexMigration(
@@ -2528,6 +2855,15 @@ type Mutation {
     input: UpsertDefinitionInput!
     where: UpsertDefinitionWhere
   ): UpsertDefinitionPayload
+
+  """Upserts a single `EarnedBadge`."""
+  upsertEarnedBadge(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpsertEarnedBadgeInput!
+    where: UpsertEarnedBadgeWhere
+  ): UpsertEarnedBadgePayload
 
   """Upserts a single `KnexMigration`."""
   upsertKnexMigration(
@@ -2916,6 +3252,28 @@ type Query implements Node {
     orderBy: [DefinitionsOrderBy!]
   ): [Definition!]
 
+  """Reads a set of `EarnedBadge`."""
+  allEarnedBadgesList(
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: EarnedBadgeCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: EarnedBadgeFilter
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Skip the first `n` values."""
+    offset: Int
+
+    """The method to use when ordering `EarnedBadge`."""
+    orderBy: [EarnedBadgesOrderBy!]
+  ): [EarnedBadge!]
+
   """Reads a set of `KnexMigration`."""
   allKnexMigrationsList(
     """
@@ -3086,6 +3444,15 @@ type Query implements Node {
   ): Definition
   definitionById(id: String!): Definition
   definitionByIdAndProtocolId(id: String!, protocolId: String!): Definition
+
+  """Reads a single `EarnedBadge` using its globally unique `ID`."""
+  earnedBadge(
+    """
+    The globally unique `ID` to be used in selecting a single `EarnedBadge`.
+    """
+    nodeId: ID!
+  ): EarnedBadge
+  earnedBadgeById(id: Int!): EarnedBadge
 
   """Reads a single `KnexMigration` using its globally unique `ID`."""
   knexMigration(
@@ -3505,7 +3872,7 @@ input RankingsWinnerIdForeignRankingsCreateInput {
 
 """The `winner` to be created by this mutation."""
 input RankingsWinnerIdForeignWinnersCreateInput {
-  awardsUsingId: AwardsWinnerIdForeignInverseInput
+  earnedBadgesUsingId: EarnedBadgesWinnerIdForeignInverseInput
   ens: String
   id: String!
   rankingsUsingId: RankingsWinnerIdForeignInverseInput
@@ -4294,16 +4661,10 @@ type UpdateAwardPayload {
   """
   clientMutationId: String
 
-  """Reads a single `Definition` that is related to this `Award`."""
-  definitionByDefinitionId: Definition
-
   """
   Our root query field type. Allows us to run any query from our mutation payload.
   """
   query: Query
-
-  """Reads a single `Winner` that is related to this `Award`."""
-  winnerByWinnerId: Winner
 }
 
 """All input for the `updateDefinitionByIdAndProtocolId` mutation."""
@@ -4380,6 +4741,63 @@ type UpdateDefinitionPayload {
 
   """Reads a single `Track` that is related to this `Definition`."""
   trackByTrackId: Track
+}
+
+"""All input for the `updateEarnedBadgeById` mutation."""
+input UpdateEarnedBadgeByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `EarnedBadge` being updated.
+  """
+  earnedBadgePatch: EarnedBadgePatch!
+  id: Int!
+}
+
+"""All input for the `updateEarnedBadge` mutation."""
+input UpdateEarnedBadgeInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `EarnedBadge` being updated.
+  """
+  earnedBadgePatch: EarnedBadgePatch!
+
+  """
+  The globally unique `ID` which will identify a single `EarnedBadge` to be updated.
+  """
+  nodeId: ID!
+}
+
+"""The output of our update `EarnedBadge` mutation."""
+type UpdateEarnedBadgePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """Reads a single `Definition` that is related to this `EarnedBadge`."""
+  definitionByDefinitionId: Definition
+
+  """The `EarnedBadge` that was updated by this mutation."""
+  earnedBadge: EarnedBadge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Winner` that is related to this `EarnedBadge`."""
+  winnerByWinnerId: Winner
 }
 
 """All input for the `updateKnexMigrationById` mutation."""
@@ -4804,16 +5222,10 @@ type UpsertAwardPayload {
   """
   clientMutationId: String
 
-  """Reads a single `Definition` that is related to this `Award`."""
-  definitionByDefinitionId: Definition
-
   """
   Our root query field type. Allows us to run any query from our mutation payload.
   """
   query: Query
-
-  """Reads a single `Winner` that is related to this `Award`."""
-  winnerByWinnerId: Winner
 }
 
 """Where conditions for the upsert `Award` mutation."""
@@ -4861,6 +5273,44 @@ type UpsertDefinitionPayload {
 input UpsertDefinitionWhere {
   id: String
   protocolId: String
+}
+
+"""All input for the upsert `EarnedBadge` mutation."""
+input UpsertEarnedBadgeInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `EarnedBadge` to be upserted by this mutation."""
+  earnedBadge: EarnedBadgeInput!
+}
+
+"""The output of our upsert `EarnedBadge` mutation."""
+type UpsertEarnedBadgePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """Reads a single `Definition` that is related to this `EarnedBadge`."""
+  definitionByDefinitionId: Definition
+
+  """The `EarnedBadge` that was upserted by this mutation."""
+  earnedBadge: EarnedBadge
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Winner` that is related to this `EarnedBadge`."""
+  winnerByWinnerId: Winner
+}
+
+"""Where conditions for the upsert `EarnedBadge` mutation."""
+input UpsertEarnedBadgeWhere {
+  id: Int
 }
 
 """All input for the upsert `KnexMigration` mutation."""
@@ -5102,17 +5552,17 @@ input UpsertWinnerWhere {
 }
 
 type Winner implements Node {
-  """Reads and enables pagination through a set of `Award`."""
-  awardsByWinnerIdList(
+  """Reads and enables pagination through a set of `EarnedBadge`."""
+  earnedBadgesByWinnerIdList(
     """
     A condition to be used in determining which values should be returned by the collection.
     """
-    condition: AwardCondition
+    condition: EarnedBadgeCondition
 
     """
     A filter to be used in determining which values should be returned by the collection.
     """
-    filter: AwardFilter
+    filter: EarnedBadgeFilter
 
     """Only read the first `n` values of the set."""
     first: Int
@@ -5120,9 +5570,9 @@ type Winner implements Node {
     """Skip the first `n` values."""
     offset: Int
 
-    """The method to use when ordering `Award`."""
-    orderBy: [AwardsOrderBy!]
-  ): [Award!]!
+    """The method to use when ordering `EarnedBadge`."""
+    orderBy: [EarnedBadgesOrderBy!]
+  ): [EarnedBadge!]!
   ens: String
   id: String!
 
@@ -5187,7 +5637,7 @@ input WinnerFilter {
 
 """An input for mutations affecting `Winner`"""
 input WinnerInput {
-  awardsUsingId: AwardsWinnerIdForeignInverseInput
+  earnedBadgesUsingId: EarnedBadgesWinnerIdForeignInverseInput
   ens: String
   id: String!
   rankingsUsingId: RankingsWinnerIdForeignInverseInput
@@ -5210,26 +5660,26 @@ input WinnerNodeIdDelete {
 }
 
 """The globally unique `ID` look up for the row to update."""
-input WinnerOnAwardForAwardsWinnerIdForeignNodeIdUpdate {
+input WinnerOnEarnedBadgeForEarnedBadgesWinnerIdForeignNodeIdUpdate {
   """
-  An object where the defined keys will be set on the `award` being updated.
+  An object where the defined keys will be set on the `earnedBadge` being updated.
   """
-  awardPatch: AwardPatch!
+  earnedBadgePatch: EarnedBadgePatch!
 
   """
-  The globally unique `ID` which identifies a single `award` to be connected.
+  The globally unique `ID` which identifies a single `earnedBadge` to be connected.
   """
   nodeId: ID!
 }
 
 """The fields on `winner` to look up the row to update."""
-input WinnerOnAwardForAwardsWinnerIdForeignUsingWinnersPkeyUpdate {
+input WinnerOnEarnedBadgeForEarnedBadgesWinnerIdForeignUsingWinnersPkeyUpdate {
   id: String!
 
   """
   An object where the defined keys will be set on the `winner` being updated.
   """
-  winnerPatch: updateWinnerOnAwardForAwardsWinnerIdForeignPatch!
+  winnerPatch: updateWinnerOnEarnedBadgeForEarnedBadgesWinnerIdForeignPatch!
 }
 
 """The globally unique `ID` look up for the row to update."""
@@ -5259,7 +5709,7 @@ input WinnerOnRankingForRankingsWinnerIdForeignUsingWinnersPkeyUpdate {
 Represents an update to a `Winner`. Fields that are set will be updated.
 """
 input WinnerPatch {
-  awardsUsingId: AwardsWinnerIdForeignInverseInput
+  earnedBadgesUsingId: EarnedBadgesWinnerIdForeignInverseInput
   ens: String
   id: String
   rankingsUsingId: RankingsWinnerIdForeignInverseInput
@@ -5287,57 +5737,11 @@ enum WinnersOrderBy {
 }
 
 """
-An object where the defined keys will be set on the `award` being updated.
-"""
-input updateAwardOnAwardForAwardsDefinitionIdForeignPatch {
-  awardNumber: String
-  blockAwarded: Int
-  definitionToDefinitionId: AwardsDefinitionIdForeignInput
-  globalAwardNumber: String
-  id: Int
-  transactionHash: String
-  winnerId: String
-  winnerToWinnerId: AwardsWinnerIdForeignInput
-}
-
-"""
-An object where the defined keys will be set on the `award` being updated.
-"""
-input updateAwardOnAwardForAwardsWinnerIdForeignPatch {
-  awardNumber: String
-  blockAwarded: Int
-  definitionId: String
-  definitionToDefinitionId: AwardsDefinitionIdForeignInput
-  globalAwardNumber: String
-  id: Int
-  transactionHash: String
-  winnerToWinnerId: AwardsWinnerIdForeignInput
-}
-
-"""
-An object where the defined keys will be set on the `definition` being updated.
-"""
-input updateDefinitionOnAwardForAwardsDefinitionIdForeignPatch {
-  awardsUsingId: AwardsDefinitionIdForeignInverseInput
-  definition: String
-  id: String
-  ipfsUri: String
-  metric: String
-  protocolId: String
-  protocolToProtocolId: DefinitionsProtocolIdForeignInput
-  roleId: String
-  roleToRoleId: DefinitionsRoleIdForeignInput
-  threshold: String
-  trackId: String
-  trackToTrackId: DefinitionsTrackIdForeignInput
-}
-
-"""
 An object where the defined keys will be set on the `definition` being updated.
 """
 input updateDefinitionOnDefinitionForDefinitionsProtocolIdForeignPatch {
-  awardsUsingId: AwardsDefinitionIdForeignInverseInput
   definition: String
+  earnedBadgesUsingId: EarnedBadgesDefinitionIdForeignInverseInput
   id: String
   ipfsUri: String
   metric: String
@@ -5353,8 +5757,8 @@ input updateDefinitionOnDefinitionForDefinitionsProtocolIdForeignPatch {
 An object where the defined keys will be set on the `definition` being updated.
 """
 input updateDefinitionOnDefinitionForDefinitionsRoleIdForeignPatch {
-  awardsUsingId: AwardsDefinitionIdForeignInverseInput
   definition: String
+  earnedBadgesUsingId: EarnedBadgesDefinitionIdForeignInverseInput
   id: String
   ipfsUri: String
   metric: String
@@ -5370,8 +5774,8 @@ input updateDefinitionOnDefinitionForDefinitionsRoleIdForeignPatch {
 An object where the defined keys will be set on the `definition` being updated.
 """
 input updateDefinitionOnDefinitionForDefinitionsTrackIdForeignPatch {
-  awardsUsingId: AwardsDefinitionIdForeignInverseInput
   definition: String
+  earnedBadgesUsingId: EarnedBadgesDefinitionIdForeignInverseInput
   id: String
   ipfsUri: String
   metric: String
@@ -5381,6 +5785,54 @@ input updateDefinitionOnDefinitionForDefinitionsTrackIdForeignPatch {
   roleToRoleId: DefinitionsRoleIdForeignInput
   threshold: String
   trackToTrackId: DefinitionsTrackIdForeignInput
+}
+
+"""
+An object where the defined keys will be set on the `definition` being updated.
+"""
+input updateDefinitionOnEarnedBadgeForEarnedBadgesDefinitionIdForeignPatch {
+  definition: String
+  earnedBadgesUsingId: EarnedBadgesDefinitionIdForeignInverseInput
+  id: String
+  ipfsUri: String
+  metric: String
+  protocolId: String
+  protocolToProtocolId: DefinitionsProtocolIdForeignInput
+  roleId: String
+  roleToRoleId: DefinitionsRoleIdForeignInput
+  threshold: String
+  trackId: String
+  trackToTrackId: DefinitionsTrackIdForeignInput
+}
+
+"""
+An object where the defined keys will be set on the `earnedBadge` being updated.
+"""
+input updateEarnedBadgeOnEarnedBadgeForEarnedBadgesDefinitionIdForeignPatch {
+  awardNumber: String
+  blockAwarded: Int
+  definitionToDefinitionId: EarnedBadgesDefinitionIdForeignInput
+  globalAwardNumber: String
+  id: Int
+  metadata: JSON
+  transactionHash: String
+  winnerId: String
+  winnerToWinnerId: EarnedBadgesWinnerIdForeignInput
+}
+
+"""
+An object where the defined keys will be set on the `earnedBadge` being updated.
+"""
+input updateEarnedBadgeOnEarnedBadgeForEarnedBadgesWinnerIdForeignPatch {
+  awardNumber: String
+  blockAwarded: Int
+  definitionId: String
+  definitionToDefinitionId: EarnedBadgesDefinitionIdForeignInput
+  globalAwardNumber: String
+  id: Int
+  metadata: JSON
+  transactionHash: String
+  winnerToWinnerId: EarnedBadgesWinnerIdForeignInput
 }
 
 """
@@ -5490,8 +5942,8 @@ input updateTrackOnTrackForTracksProtocolIdForeignPatch {
 """
 An object where the defined keys will be set on the `winner` being updated.
 """
-input updateWinnerOnAwardForAwardsWinnerIdForeignPatch {
-  awardsUsingId: AwardsWinnerIdForeignInverseInput
+input updateWinnerOnEarnedBadgeForEarnedBadgesWinnerIdForeignPatch {
+  earnedBadgesUsingId: EarnedBadgesWinnerIdForeignInverseInput
   ens: String
   id: String
   rankingsUsingId: RankingsWinnerIdForeignInverseInput
@@ -5501,7 +5953,7 @@ input updateWinnerOnAwardForAwardsWinnerIdForeignPatch {
 An object where the defined keys will be set on the `winner` being updated.
 """
 input updateWinnerOnRankingForRankingsWinnerIdForeignPatch {
-  awardsUsingId: AwardsWinnerIdForeignInverseInput
+  earnedBadgesUsingId: EarnedBadgesWinnerIdForeignInverseInput
   ens: String
   id: String
   rankingsUsingId: RankingsWinnerIdForeignInverseInput
