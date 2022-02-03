@@ -22,11 +22,11 @@ export const upsertProtocol = gql`
 `;
 
 export const upsertTrack = gql`
-  mutation UpsertTrack($id: String!, $protocol: String!) {
-    upsertTrack(input: { track: { id: $id, protocol: $protocol } }) {
+  mutation UpsertTrack($id: String!, $protocolId: String!) {
+    upsertTrack(input: { track: { id: $id, protocolId: $protocolId } }) {
       track {
         id
-        protocol
+        protocolId
       }
     }
   }
@@ -35,25 +35,27 @@ export const upsertTrack = gql`
 export const upsertBadgeDefinition = gql`
   mutation UpsertBadgeDefinition(
     $id: String!
-    $protocol_id: String!
+    $protocolId: String!
     $threshold: String!
     $metric: String!
     $ipfsURI: String
+    $trackId: String!
   ) {
-    upsertBadgeDefinition(
+    upsertDefinition(
       input: {
-        track: {
+        definition: {
           id: $id
           metric: $metric
           threshold: $threshold
-          protocol_id: $protocol
-          ipfsURI: $ipfsURI
+          ipfsUri: $ipfsURI
+          trackId: $trackId
+          protocolId: $protocolId
         }
       }
     ) {
-      badgeDefinition {
+      definition {
         id
-        protocol
+        protocolId
       }
     }
   }

@@ -13,35 +13,32 @@ export const populateBadgeTracksAndDefinitions = async (
   protocol: string,
   queryRunner: any
 ) => {
-  console.log("subgraphTheGraphBadges", subgraphTheGraphBadges);
   const { badgeDefinitions }: { badgeDefinitions: BadgeDefinitionType[] } =
     await querySubgraph({
       query: queryAllBadgeDefinitions,
       subgraph: subgraphTheGraphBadges,
     });
 
-  const badgeTracks = badgeDefinitions.reduce<string[]>((acc, definition) => {
-    const trackName = removeRomanNumerals(definition.id);
-    return acc.includes(trackName) ? acc : [...acc, trackName];
+  const badgeDefinitionsWithTrack = badgeDefinitions.reduce<
+    BadgeDefinitionType[]
+  >((acc, definition) => {
+    const trackId = removeRomanNumerals(definition.id);
+    return [...acc, { ...definition, trackId }];
   }, []);
-
-  console.log(badgeTracks);
 
   await queryRunner.query(upsertProtocol, {
     id: protocol,
   });
 
-  badgeTracks.forEach(async (badgeTrack) => {
+  for (const definition of badgeDefinitionsWithTrack) {
     await queryRunner.query(upsertTrack, {
-      id: badgeTrack,
-      protocol_id: protocol,
+      id: definition.trackId,
+      protocolId: protocol,
     });
-  });
 
-  badgeDefinitions.forEach(async (def) => {
     await queryRunner.query(upsertBadgeDefinition, {
-      ...def,
-      protocol_id: protocol,
+      ...definition,
+      protocolId: protocol,
     });
-  });
+  }
 };

@@ -68,9 +68,9 @@ export async function makeQueryRunner(
       }
     );
 
-    // if (response.errors) {
-    //   throw new Error(response.errors);
-    // }
+    if (response.errors) {
+      throw new Error(response.errors);
+    }
 
     return response;
   };

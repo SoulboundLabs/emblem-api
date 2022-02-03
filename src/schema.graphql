@@ -162,12 +162,13 @@ input AwardsDefinitionIdForeignDefinitionsCreateInput {
   id: String!
   ipfsUri: String
   metric: String
-  name: String!
   protocolId: String
   protocolToProtocolId: DefinitionsProtocolIdForeignInput
   roleId: String
   roleToRoleId: DefinitionsRoleIdForeignInput
   threshold: String
+  trackId: String
+  trackToTrackId: DefinitionsTrackIdForeignInput
 }
 
 """
@@ -440,6 +441,9 @@ type CreateDefinitionPayload {
 
   """Reads a single `Role` that is related to this `Definition`."""
   roleByRoleId: Role
+
+  """Reads a single `Track` that is related to this `Definition`."""
+  trackByTrackId: Track
 }
 
 """All input for the create `KnexMigration` mutation."""
@@ -596,6 +600,38 @@ type CreateRolePayload {
   role: Role
 }
 
+"""All input for the create `Track` mutation."""
+input CreateTrackInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Track` to be created by this mutation."""
+  track: TrackInput!
+}
+
+"""The output of our create `Track` mutation."""
+type CreateTrackPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """Reads a single `Protocol` that is related to this `Track`."""
+  protocolByProtocolId: Protocol
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """The `Track` that was created by this mutation."""
+  track: Track
+}
+
 """All input for the create `Winner` mutation."""
 input CreateWinnerInput {
   """
@@ -652,7 +688,6 @@ type Definition implements Node {
   id: String!
   ipfsUri: String
   metric: String
-  name: String!
 
   """
   A globally unique identifier. Can be used in various places throughout the system to identify this single value.
@@ -665,8 +700,12 @@ type Definition implements Node {
 
   """Reads a single `Role` that is related to this `Definition`."""
   roleByRoleId: Role
-  roleId: String!
+  roleId: String
   threshold: String
+
+  """Reads a single `Track` that is related to this `Definition`."""
+  trackByTrackId: Track
+  trackId: String!
 }
 
 """
@@ -686,9 +725,6 @@ input DefinitionCondition {
   """Checks for equality with the object’s `metric` field."""
   metric: String
 
-  """Checks for equality with the object’s `name` field."""
-  name: String
-
   """Checks for equality with the object’s `protocolId` field."""
   protocolId: String
 
@@ -697,6 +733,9 @@ input DefinitionCondition {
 
   """Checks for equality with the object’s `threshold` field."""
   threshold: String
+
+  """Checks for equality with the object’s `trackId` field."""
+  trackId: String
 }
 
 """The fields on `definition` to look up the row to connect."""
@@ -728,12 +767,13 @@ input DefinitionInput {
   id: String!
   ipfsUri: String
   metric: String
-  name: String!
   protocolId: String
   protocolToProtocolId: DefinitionsProtocolIdForeignInput
   roleId: String
   roleToRoleId: DefinitionsRoleIdForeignInput
   threshold: String
+  trackId: String
+  trackToTrackId: DefinitionsTrackIdForeignInput
 }
 
 """The globally unique `ID` look up for the row to connect."""
@@ -848,6 +888,38 @@ input DefinitionOnDefinitionForDefinitionsRoleIdForeignUsingDefinitionsPkeyUpdat
   id: String!
 }
 
+"""The globally unique `ID` look up for the row to update."""
+input DefinitionOnDefinitionForDefinitionsTrackIdForeignNodeIdUpdate {
+  """
+  The globally unique `ID` which identifies a single `track` to be connected.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `track` being updated.
+  """
+  trackPatch: TrackPatch!
+}
+
+"""The fields on `definition` to look up the row to update."""
+input DefinitionOnDefinitionForDefinitionsTrackIdForeignUsingDefinitionsIdProtocolIdUniqueUpdate {
+  """
+  An object where the defined keys will be set on the `definition` being updated.
+  """
+  definitionPatch: updateDefinitionOnDefinitionForDefinitionsTrackIdForeignPatch!
+  id: String!
+  protocolId: String!
+}
+
+"""The fields on `definition` to look up the row to update."""
+input DefinitionOnDefinitionForDefinitionsTrackIdForeignUsingDefinitionsPkeyUpdate {
+  """
+  An object where the defined keys will be set on the `definition` being updated.
+  """
+  definitionPatch: updateDefinitionOnDefinitionForDefinitionsTrackIdForeignPatch!
+  id: String!
+}
+
 """
 Represents an update to a `Definition`. Fields that are set will be updated.
 """
@@ -857,12 +929,13 @@ input DefinitionPatch {
   id: String
   ipfsUri: String
   metric: String
-  name: String
   protocolId: String
   protocolToProtocolId: DefinitionsProtocolIdForeignInput
   roleId: String
   roleToRoleId: DefinitionsRoleIdForeignInput
   threshold: String
+  trackId: String
+  trackToTrackId: DefinitionsTrackIdForeignInput
 }
 
 """Methods to use when ordering `Definition`."""
@@ -875,8 +948,6 @@ enum DefinitionsOrderBy {
   IPFS_URI_DESC
   METRIC_ASC
   METRIC_DESC
-  NAME_ASC
-  NAME_DESC
   NATURAL
   PRIMARY_KEY_ASC
   PRIMARY_KEY_DESC
@@ -886,6 +957,8 @@ enum DefinitionsOrderBy {
   ROLE_ID_DESC
   THRESHOLD_ASC
   THRESHOLD_DESC
+  TRACK_ID_ASC
+  TRACK_ID_DESC
 }
 
 """The `definition` to be created by this mutation."""
@@ -895,11 +968,12 @@ input DefinitionsProtocolIdForeignDefinitionsCreateInput {
   id: String!
   ipfsUri: String
   metric: String
-  name: String!
   protocolToProtocolId: DefinitionsProtocolIdForeignInput
   roleId: String
   roleToRoleId: DefinitionsRoleIdForeignInput
   threshold: String
+  trackId: String
+  trackToTrackId: DefinitionsTrackIdForeignInput
 }
 
 """
@@ -1008,6 +1082,7 @@ input DefinitionsProtocolIdForeignProtocolsCreateInput {
   id: String!
   rankingsUsingId: RankingsProtocolIdForeignInverseInput
   rolesUsingId: RolesProtocolIdForeignInverseInput
+  tracksUsingId: TracksProtocolIdForeignInverseInput
 }
 
 """The `definition` to be created by this mutation."""
@@ -1017,11 +1092,12 @@ input DefinitionsRoleIdForeignDefinitionsCreateInput {
   id: String!
   ipfsUri: String
   metric: String
-  name: String!
   protocolId: String
   protocolToProtocolId: DefinitionsProtocolIdForeignInput
   roleToRoleId: DefinitionsRoleIdForeignInput
   threshold: String
+  trackId: String
+  trackToTrackId: DefinitionsTrackIdForeignInput
 }
 
 """
@@ -1135,6 +1211,132 @@ input DefinitionsRoleIdForeignRolesCreateInput {
   protocolToProtocolId: RolesProtocolIdForeignInput
 }
 
+"""The `definition` to be created by this mutation."""
+input DefinitionsTrackIdForeignDefinitionsCreateInput {
+  awardsUsingId: AwardsDefinitionIdForeignInverseInput
+  definition: String
+  id: String!
+  ipfsUri: String
+  metric: String
+  protocolId: String
+  protocolToProtocolId: DefinitionsProtocolIdForeignInput
+  roleId: String
+  roleToRoleId: DefinitionsRoleIdForeignInput
+  threshold: String
+  trackToTrackId: DefinitionsTrackIdForeignInput
+}
+
+"""
+Input for the nested mutation of `track` in the `DefinitionInput` mutation.
+"""
+input DefinitionsTrackIdForeignInput {
+  """The primary key(s) for `track` for the far side of the relationship."""
+  connectById: TrackTracksPkeyConnect
+
+  """The primary key(s) for `track` for the far side of the relationship."""
+  connectByIdAndProtocolId: TrackTracksIdProtocolIdUniqueConnect
+
+  """The primary key(s) for `track` for the far side of the relationship."""
+  connectByNodeId: TrackNodeIdConnect
+
+  """
+  A `TrackInput` object that will be created and connected to this object.
+  """
+  create: DefinitionsTrackIdForeignTracksCreateInput
+
+  """The primary key(s) for `track` for the far side of the relationship."""
+  deleteById: TrackTracksPkeyDelete
+
+  """The primary key(s) for `track` for the far side of the relationship."""
+  deleteByIdAndProtocolId: TrackTracksIdProtocolIdUniqueDelete
+
+  """The primary key(s) for `track` for the far side of the relationship."""
+  deleteByNodeId: TrackNodeIdDelete
+
+  """
+  The primary key(s) and patch data for `track` for the far side of the relationship.
+  """
+  updateById: TrackOnDefinitionForDefinitionsTrackIdForeignUsingTracksPkeyUpdate
+
+  """
+  The primary key(s) and patch data for `track` for the far side of the relationship.
+  """
+  updateByIdAndProtocolId: TrackOnDefinitionForDefinitionsTrackIdForeignUsingTracksIdProtocolIdUniqueUpdate
+
+  """
+  The primary key(s) and patch data for `track` for the far side of the relationship.
+  """
+  updateByNodeId: DefinitionOnDefinitionForDefinitionsTrackIdForeignNodeIdUpdate
+}
+
+"""
+Input for the nested mutation of `definition` in the `TrackInput` mutation.
+"""
+input DefinitionsTrackIdForeignInverseInput {
+  """
+  The primary key(s) for `definition` for the far side of the relationship.
+  """
+  connectById: [DefinitionDefinitionsPkeyConnect!]
+
+  """
+  The primary key(s) for `definition` for the far side of the relationship.
+  """
+  connectByIdAndProtocolId: [DefinitionDefinitionsIdProtocolIdUniqueConnect!]
+
+  """
+  The primary key(s) for `definition` for the far side of the relationship.
+  """
+  connectByNodeId: [DefinitionNodeIdConnect!]
+
+  """
+  A `DefinitionInput` object that will be created and connected to this object.
+  """
+  create: [DefinitionsTrackIdForeignDefinitionsCreateInput!]
+
+  """
+  The primary key(s) for `definition` for the far side of the relationship.
+  """
+  deleteById: [DefinitionDefinitionsPkeyDelete!]
+
+  """
+  The primary key(s) for `definition` for the far side of the relationship.
+  """
+  deleteByIdAndProtocolId: [DefinitionDefinitionsIdProtocolIdUniqueDelete!]
+
+  """
+  The primary key(s) for `definition` for the far side of the relationship.
+  """
+  deleteByNodeId: [DefinitionNodeIdDelete!]
+
+  """
+  Flag indicating whether all other `definition` records that match this relationship should be removed.
+  """
+  deleteOthers: Boolean
+
+  """
+  The primary key(s) and patch data for `definition` for the far side of the relationship.
+  """
+  updateById: [DefinitionOnDefinitionForDefinitionsTrackIdForeignUsingDefinitionsPkeyUpdate!]
+
+  """
+  The primary key(s) and patch data for `definition` for the far side of the relationship.
+  """
+  updateByIdAndProtocolId: [DefinitionOnDefinitionForDefinitionsTrackIdForeignUsingDefinitionsIdProtocolIdUniqueUpdate!]
+
+  """
+  The primary key(s) and patch data for `definition` for the far side of the relationship.
+  """
+  updateByNodeId: [TrackOnDefinitionForDefinitionsTrackIdForeignNodeIdUpdate!]
+}
+
+"""The `track` to be created by this mutation."""
+input DefinitionsTrackIdForeignTracksCreateInput {
+  definitionsUsingId: DefinitionsTrackIdForeignInverseInput
+  id: String!
+  protocolId: String
+  protocolToProtocolId: TracksProtocolIdForeignInput
+}
+
 """All input for the `deleteAwardById` mutation."""
 input DeleteAwardByIdInput {
   """
@@ -1240,6 +1442,9 @@ type DeleteDefinitionPayload {
 
   """Reads a single `Role` that is related to this `Definition`."""
   roleByRoleId: Role
+
+  """Reads a single `Track` that is related to this `Definition`."""
+  trackByTrackId: Track
 }
 
 """All input for the `deleteKnexMigrationById` mutation."""
@@ -1472,6 +1677,62 @@ type DeleteRolePayload {
   role: Role
 }
 
+"""All input for the `deleteTrackByIdAndProtocolId` mutation."""
+input DeleteTrackByIdAndProtocolIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: String!
+  protocolId: String!
+}
+
+"""All input for the `deleteTrackById` mutation."""
+input DeleteTrackByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: String!
+}
+
+"""All input for the `deleteTrack` mutation."""
+input DeleteTrackInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Track` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""The output of our delete `Track` mutation."""
+type DeleteTrackPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  deletedTrackId: ID
+
+  """Reads a single `Protocol` that is related to this `Track`."""
+  protocolByProtocolId: Protocol
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """The `Track` that was deleted by this mutation."""
+  track: Track
+}
+
 """All input for the `deleteWinnerById` mutation."""
 input DeleteWinnerByIdInput {
   """
@@ -1684,6 +1945,14 @@ type Mutation {
     input: CreateRoleInput!
   ): CreateRolePayload
 
+  """Creates a single `Track`."""
+  createTrack(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateTrackInput!
+  ): CreateTrackPayload
+
   """Creates a single `Winner`."""
   createWinner(
     """
@@ -1819,6 +2088,30 @@ type Mutation {
     """
     input: DeleteRoleByIdAndProtocolIdInput!
   ): DeleteRolePayload
+
+  """Deletes a single `Track` using its globally unique id."""
+  deleteTrack(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteTrackInput!
+  ): DeleteTrackPayload
+
+  """Deletes a single `Track` using a unique key."""
+  deleteTrackById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteTrackByIdInput!
+  ): DeleteTrackPayload
+
+  """Deletes a single `Track` using a unique key."""
+  deleteTrackByIdAndProtocolId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteTrackByIdAndProtocolIdInput!
+  ): DeleteTrackPayload
 
   """Deletes a single `Winner` using its globally unique id."""
   deleteWinner(
@@ -1970,6 +2263,30 @@ type Mutation {
     input: UpdateRoleByIdAndProtocolIdInput!
   ): UpdateRolePayload
 
+  """Updates a single `Track` using its globally unique id and a patch."""
+  updateTrack(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateTrackInput!
+  ): UpdateTrackPayload
+
+  """Updates a single `Track` using a unique key and a patch."""
+  updateTrackById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateTrackByIdInput!
+  ): UpdateTrackPayload
+
+  """Updates a single `Track` using a unique key and a patch."""
+  updateTrackByIdAndProtocolId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateTrackByIdAndProtocolIdInput!
+  ): UpdateTrackPayload
+
   """Updates a single `Winner` using its globally unique id and a patch."""
   updateWinner(
     """
@@ -2049,6 +2366,15 @@ type Mutation {
     where: UpsertRoleWhere
   ): UpsertRolePayload
 
+  """Upserts a single `Track`."""
+  upsertTrack(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpsertTrackInput!
+    where: UpsertTrackWhere
+  ): UpsertTrackPayload
+
   """Upserts a single `Winner`."""
   upsertWinner(
     """
@@ -2124,6 +2450,23 @@ type Protocol implements Node {
     """The method to use when ordering `Role`."""
     orderBy: [RolesOrderBy!]
   ): [Role!]!
+
+  """Reads and enables pagination through a set of `Track`."""
+  tracksByProtocolIdList(
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: TrackCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Skip the first `n` values."""
+    offset: Int
+
+    """The method to use when ordering `Track`."""
+    orderBy: [TracksOrderBy!]
+  ): [Track!]!
 }
 
 """
@@ -2141,6 +2484,7 @@ input ProtocolInput {
   id: String!
   rankingsUsingId: RankingsProtocolIdForeignInverseInput
   rolesUsingId: RolesProtocolIdForeignInverseInput
+  tracksUsingId: TracksProtocolIdForeignInverseInput
 }
 
 """The globally unique `ID` look up for the row to connect."""
@@ -2228,6 +2572,29 @@ input ProtocolOnRoleForRolesProtocolIdForeignUsingProtocolsPkeyUpdate {
   protocolPatch: updateProtocolOnRoleForRolesProtocolIdForeignPatch!
 }
 
+"""The globally unique `ID` look up for the row to update."""
+input ProtocolOnTrackForTracksProtocolIdForeignNodeIdUpdate {
+  """
+  The globally unique `ID` which identifies a single `track` to be connected.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `track` being updated.
+  """
+  trackPatch: TrackPatch!
+}
+
+"""The fields on `protocol` to look up the row to update."""
+input ProtocolOnTrackForTracksProtocolIdForeignUsingProtocolsPkeyUpdate {
+  id: String!
+
+  """
+  An object where the defined keys will be set on the `protocol` being updated.
+  """
+  protocolPatch: updateProtocolOnTrackForTracksProtocolIdForeignPatch!
+}
+
 """
 Represents an update to a `Protocol`. Fields that are set will be updated.
 """
@@ -2236,6 +2603,7 @@ input ProtocolPatch {
   id: String
   rankingsUsingId: RankingsProtocolIdForeignInverseInput
   rolesUsingId: RolesProtocolIdForeignInverseInput
+  tracksUsingId: TracksProtocolIdForeignInverseInput
 }
 
 """The fields on `protocol` to look up the row to connect."""
@@ -2378,6 +2746,23 @@ type Query implements Node {
     orderBy: [RolesOrderBy!]
   ): [Role!]
 
+  """Reads a set of `Track`."""
+  allTracksList(
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: TrackCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Skip the first `n` values."""
+    offset: Int
+
+    """The method to use when ordering `Track`."""
+    orderBy: [TracksOrderBy!]
+  ): [Track!]
+
   """Reads a set of `Winner`."""
   allWinnersList(
     """
@@ -2468,6 +2853,14 @@ type Query implements Node {
   ): Role
   roleById(id: String!): Role
   roleByIdAndProtocolId(id: String!, protocolId: String!): Role
+
+  """Reads a single `Track` using its globally unique `ID`."""
+  track(
+    """The globally unique `ID` to be used in selecting a single `Track`."""
+    nodeId: ID!
+  ): Track
+  trackById(id: String!): Track
+  trackByIdAndProtocolId(id: String!, protocolId: String!): Track
 
   """Reads a single `Winner` using its globally unique `ID`."""
   winner(
@@ -2704,6 +3097,7 @@ input RankingsProtocolIdForeignProtocolsCreateInput {
   id: String!
   rankingsUsingId: RankingsProtocolIdForeignInverseInput
   rolesUsingId: RolesProtocolIdForeignInverseInput
+  tracksUsingId: TracksProtocolIdForeignInverseInput
 }
 
 """The `ranking` to be created by this mutation."""
@@ -3068,6 +3462,7 @@ input RolesProtocolIdForeignProtocolsCreateInput {
   id: String!
   rankingsUsingId: RankingsProtocolIdForeignInverseInput
   rolesUsingId: RolesProtocolIdForeignInverseInput
+  tracksUsingId: TracksProtocolIdForeignInverseInput
 }
 
 """The `role` to be created by this mutation."""
@@ -3075,6 +3470,285 @@ input RolesProtocolIdForeignRolesCreateInput {
   definitionsUsingId: DefinitionsRoleIdForeignInverseInput
   id: String!
   protocolToProtocolId: RolesProtocolIdForeignInput
+}
+
+type Track implements Node {
+  """Reads and enables pagination through a set of `Definition`."""
+  definitionsByTrackIdList(
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: DefinitionCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Skip the first `n` values."""
+    offset: Int
+
+    """The method to use when ordering `Definition`."""
+    orderBy: [DefinitionsOrderBy!]
+  ): [Definition!]!
+  id: String!
+
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+
+  """Reads a single `Protocol` that is related to this `Track`."""
+  protocolByProtocolId: Protocol
+  protocolId: String!
+}
+
+"""
+A condition to be used against `Track` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input TrackCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: String
+
+  """Checks for equality with the object’s `protocolId` field."""
+  protocolId: String
+}
+
+"""An input for mutations affecting `Track`"""
+input TrackInput {
+  definitionsUsingId: DefinitionsTrackIdForeignInverseInput
+  id: String!
+  protocolId: String
+  protocolToProtocolId: TracksProtocolIdForeignInput
+}
+
+"""The globally unique `ID` look up for the row to connect."""
+input TrackNodeIdConnect {
+  """
+  The globally unique `ID` which identifies a single `track` to be connected.
+  """
+  nodeId: ID!
+}
+
+"""The globally unique `ID` look up for the row to delete."""
+input TrackNodeIdDelete {
+  """
+  The globally unique `ID` which identifies a single `track` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""The globally unique `ID` look up for the row to update."""
+input TrackOnDefinitionForDefinitionsTrackIdForeignNodeIdUpdate {
+  """
+  An object where the defined keys will be set on the `definition` being updated.
+  """
+  definitionPatch: DefinitionPatch!
+
+  """
+  The globally unique `ID` which identifies a single `definition` to be connected.
+  """
+  nodeId: ID!
+}
+
+"""The fields on `track` to look up the row to update."""
+input TrackOnDefinitionForDefinitionsTrackIdForeignUsingTracksIdProtocolIdUniqueUpdate {
+  id: String!
+  protocolId: String!
+
+  """
+  An object where the defined keys will be set on the `track` being updated.
+  """
+  trackPatch: updateTrackOnDefinitionForDefinitionsTrackIdForeignPatch!
+}
+
+"""The fields on `track` to look up the row to update."""
+input TrackOnDefinitionForDefinitionsTrackIdForeignUsingTracksPkeyUpdate {
+  id: String!
+
+  """
+  An object where the defined keys will be set on the `track` being updated.
+  """
+  trackPatch: updateTrackOnDefinitionForDefinitionsTrackIdForeignPatch!
+}
+
+"""The globally unique `ID` look up for the row to update."""
+input TrackOnTrackForTracksProtocolIdForeignNodeIdUpdate {
+  """
+  The globally unique `ID` which identifies a single `protocol` to be connected.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `protocol` being updated.
+  """
+  protocolPatch: ProtocolPatch!
+}
+
+"""The fields on `track` to look up the row to update."""
+input TrackOnTrackForTracksProtocolIdForeignUsingTracksIdProtocolIdUniqueUpdate {
+  id: String!
+  protocolId: String!
+
+  """
+  An object where the defined keys will be set on the `track` being updated.
+  """
+  trackPatch: updateTrackOnTrackForTracksProtocolIdForeignPatch!
+}
+
+"""The fields on `track` to look up the row to update."""
+input TrackOnTrackForTracksProtocolIdForeignUsingTracksPkeyUpdate {
+  id: String!
+
+  """
+  An object where the defined keys will be set on the `track` being updated.
+  """
+  trackPatch: updateTrackOnTrackForTracksProtocolIdForeignPatch!
+}
+
+"""
+Represents an update to a `Track`. Fields that are set will be updated.
+"""
+input TrackPatch {
+  definitionsUsingId: DefinitionsTrackIdForeignInverseInput
+  id: String
+  protocolId: String
+  protocolToProtocolId: TracksProtocolIdForeignInput
+}
+
+"""The fields on `track` to look up the row to connect."""
+input TrackTracksIdProtocolIdUniqueConnect {
+  id: String!
+  protocolId: String!
+}
+
+"""The fields on `track` to look up the row to delete."""
+input TrackTracksIdProtocolIdUniqueDelete {
+  id: String!
+  protocolId: String!
+}
+
+"""The fields on `track` to look up the row to connect."""
+input TrackTracksPkeyConnect {
+  id: String!
+}
+
+"""The fields on `track` to look up the row to delete."""
+input TrackTracksPkeyDelete {
+  id: String!
+}
+
+"""Methods to use when ordering `Track`."""
+enum TracksOrderBy {
+  ID_ASC
+  ID_DESC
+  NATURAL
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+  PROTOCOL_ID_ASC
+  PROTOCOL_ID_DESC
+}
+
+"""
+Input for the nested mutation of `protocol` in the `TrackInput` mutation.
+"""
+input TracksProtocolIdForeignInput {
+  """
+  The primary key(s) for `protocol` for the far side of the relationship.
+  """
+  connectById: ProtocolProtocolsPkeyConnect
+
+  """
+  The primary key(s) for `protocol` for the far side of the relationship.
+  """
+  connectByNodeId: ProtocolNodeIdConnect
+
+  """
+  A `ProtocolInput` object that will be created and connected to this object.
+  """
+  create: TracksProtocolIdForeignProtocolsCreateInput
+
+  """
+  The primary key(s) for `protocol` for the far side of the relationship.
+  """
+  deleteById: ProtocolProtocolsPkeyDelete
+
+  """
+  The primary key(s) for `protocol` for the far side of the relationship.
+  """
+  deleteByNodeId: ProtocolNodeIdDelete
+
+  """
+  The primary key(s) and patch data for `protocol` for the far side of the relationship.
+  """
+  updateById: ProtocolOnTrackForTracksProtocolIdForeignUsingProtocolsPkeyUpdate
+
+  """
+  The primary key(s) and patch data for `protocol` for the far side of the relationship.
+  """
+  updateByNodeId: TrackOnTrackForTracksProtocolIdForeignNodeIdUpdate
+}
+
+"""
+Input for the nested mutation of `track` in the `ProtocolInput` mutation.
+"""
+input TracksProtocolIdForeignInverseInput {
+  """The primary key(s) for `track` for the far side of the relationship."""
+  connectById: [TrackTracksPkeyConnect!]
+
+  """The primary key(s) for `track` for the far side of the relationship."""
+  connectByIdAndProtocolId: [TrackTracksIdProtocolIdUniqueConnect!]
+
+  """The primary key(s) for `track` for the far side of the relationship."""
+  connectByNodeId: [TrackNodeIdConnect!]
+
+  """
+  A `TrackInput` object that will be created and connected to this object.
+  """
+  create: [TracksProtocolIdForeignTracksCreateInput!]
+
+  """The primary key(s) for `track` for the far side of the relationship."""
+  deleteById: [TrackTracksPkeyDelete!]
+
+  """The primary key(s) for `track` for the far side of the relationship."""
+  deleteByIdAndProtocolId: [TrackTracksIdProtocolIdUniqueDelete!]
+
+  """The primary key(s) for `track` for the far side of the relationship."""
+  deleteByNodeId: [TrackNodeIdDelete!]
+
+  """
+  Flag indicating whether all other `track` records that match this relationship should be removed.
+  """
+  deleteOthers: Boolean
+
+  """
+  The primary key(s) and patch data for `track` for the far side of the relationship.
+  """
+  updateById: [TrackOnTrackForTracksProtocolIdForeignUsingTracksPkeyUpdate!]
+
+  """
+  The primary key(s) and patch data for `track` for the far side of the relationship.
+  """
+  updateByIdAndProtocolId: [TrackOnTrackForTracksProtocolIdForeignUsingTracksIdProtocolIdUniqueUpdate!]
+
+  """
+  The primary key(s) and patch data for `track` for the far side of the relationship.
+  """
+  updateByNodeId: [ProtocolOnTrackForTracksProtocolIdForeignNodeIdUpdate!]
+}
+
+"""The `protocol` to be created by this mutation."""
+input TracksProtocolIdForeignProtocolsCreateInput {
+  definitionsUsingId: DefinitionsProtocolIdForeignInverseInput
+  id: String!
+  rankingsUsingId: RankingsProtocolIdForeignInverseInput
+  rolesUsingId: RolesProtocolIdForeignInverseInput
+  tracksUsingId: TracksProtocolIdForeignInverseInput
+}
+
+"""The `track` to be created by this mutation."""
+input TracksProtocolIdForeignTracksCreateInput {
+  definitionsUsingId: DefinitionsTrackIdForeignInverseInput
+  id: String!
+  protocolToProtocolId: TracksProtocolIdForeignInput
 }
 
 """All input for the `updateAwardById` mutation."""
@@ -3205,6 +3879,9 @@ type UpdateDefinitionPayload {
 
   """Reads a single `Role` that is related to this `Definition`."""
   roleByRoleId: Role
+
+  """Reads a single `Track` that is related to this `Definition`."""
+  trackByTrackId: Track
 }
 
 """All input for the `updateKnexMigrationById` mutation."""
@@ -3487,6 +4164,76 @@ type UpdateRolePayload {
   role: Role
 }
 
+"""All input for the `updateTrackByIdAndProtocolId` mutation."""
+input UpdateTrackByIdAndProtocolIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: String!
+  protocolId: String!
+
+  """
+  An object where the defined keys will be set on the `Track` being updated.
+  """
+  trackPatch: TrackPatch!
+}
+
+"""All input for the `updateTrackById` mutation."""
+input UpdateTrackByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: String!
+
+  """
+  An object where the defined keys will be set on the `Track` being updated.
+  """
+  trackPatch: TrackPatch!
+}
+
+"""All input for the `updateTrack` mutation."""
+input UpdateTrackInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Track` to be updated.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `Track` being updated.
+  """
+  trackPatch: TrackPatch!
+}
+
+"""The output of our update `Track` mutation."""
+type UpdateTrackPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """Reads a single `Protocol` that is related to this `Track`."""
+  protocolByProtocolId: Protocol
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """The `Track` that was updated by this mutation."""
+  track: Track
+}
+
 """All input for the `updateWinnerById` mutation."""
 input UpdateWinnerByIdInput {
   """
@@ -3607,6 +4354,9 @@ type UpsertDefinitionPayload {
 
   """Reads a single `Role` that is related to this `Definition`."""
   roleByRoleId: Role
+
+  """Reads a single `Track` that is related to this `Definition`."""
+  trackByTrackId: Track
 }
 
 """Where conditions for the upsert `Definition` mutation."""
@@ -3781,6 +4531,42 @@ type UpsertRolePayload {
 
 """Where conditions for the upsert `Role` mutation."""
 input UpsertRoleWhere {
+  id: String
+  protocolId: String
+}
+
+"""All input for the upsert `Track` mutation."""
+input UpsertTrackInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Track` to be upserted by this mutation."""
+  track: TrackInput!
+}
+
+"""The output of our upsert `Track` mutation."""
+type UpsertTrackPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """Reads a single `Protocol` that is related to this `Track`."""
+  protocolByProtocolId: Protocol
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """The `Track` that was upserted by this mutation."""
+  track: Track
+}
+
+"""Where conditions for the upsert `Track` mutation."""
+input UpsertTrackWhere {
   id: String
   protocolId: String
 }
@@ -4009,12 +4795,13 @@ input updateDefinitionOnAwardForAwardsDefinitionIdForeignPatch {
   id: String
   ipfsUri: String
   metric: String
-  name: String
   protocolId: String
   protocolToProtocolId: DefinitionsProtocolIdForeignInput
   roleId: String
   roleToRoleId: DefinitionsRoleIdForeignInput
   threshold: String
+  trackId: String
+  trackToTrackId: DefinitionsTrackIdForeignInput
 }
 
 """
@@ -4026,11 +4813,12 @@ input updateDefinitionOnDefinitionForDefinitionsProtocolIdForeignPatch {
   id: String
   ipfsUri: String
   metric: String
-  name: String
   protocolToProtocolId: DefinitionsProtocolIdForeignInput
   roleId: String
   roleToRoleId: DefinitionsRoleIdForeignInput
   threshold: String
+  trackId: String
+  trackToTrackId: DefinitionsTrackIdForeignInput
 }
 
 """
@@ -4042,11 +4830,29 @@ input updateDefinitionOnDefinitionForDefinitionsRoleIdForeignPatch {
   id: String
   ipfsUri: String
   metric: String
-  name: String
   protocolId: String
   protocolToProtocolId: DefinitionsProtocolIdForeignInput
   roleToRoleId: DefinitionsRoleIdForeignInput
   threshold: String
+  trackId: String
+  trackToTrackId: DefinitionsTrackIdForeignInput
+}
+
+"""
+An object where the defined keys will be set on the `definition` being updated.
+"""
+input updateDefinitionOnDefinitionForDefinitionsTrackIdForeignPatch {
+  awardsUsingId: AwardsDefinitionIdForeignInverseInput
+  definition: String
+  id: String
+  ipfsUri: String
+  metric: String
+  protocolId: String
+  protocolToProtocolId: DefinitionsProtocolIdForeignInput
+  roleId: String
+  roleToRoleId: DefinitionsRoleIdForeignInput
+  threshold: String
+  trackToTrackId: DefinitionsTrackIdForeignInput
 }
 
 """
@@ -4057,6 +4863,7 @@ input updateProtocolOnDefinitionForDefinitionsProtocolIdForeignPatch {
   id: String
   rankingsUsingId: RankingsProtocolIdForeignInverseInput
   rolesUsingId: RolesProtocolIdForeignInverseInput
+  tracksUsingId: TracksProtocolIdForeignInverseInput
 }
 
 """
@@ -4067,6 +4874,7 @@ input updateProtocolOnRankingForRankingsProtocolIdForeignPatch {
   id: String
   rankingsUsingId: RankingsProtocolIdForeignInverseInput
   rolesUsingId: RolesProtocolIdForeignInverseInput
+  tracksUsingId: TracksProtocolIdForeignInverseInput
 }
 
 """
@@ -4077,6 +4885,18 @@ input updateProtocolOnRoleForRolesProtocolIdForeignPatch {
   id: String
   rankingsUsingId: RankingsProtocolIdForeignInverseInput
   rolesUsingId: RolesProtocolIdForeignInverseInput
+  tracksUsingId: TracksProtocolIdForeignInverseInput
+}
+
+"""
+An object where the defined keys will be set on the `protocol` being updated.
+"""
+input updateProtocolOnTrackForTracksProtocolIdForeignPatch {
+  definitionsUsingId: DefinitionsProtocolIdForeignInverseInput
+  id: String
+  rankingsUsingId: RankingsProtocolIdForeignInverseInput
+  rolesUsingId: RolesProtocolIdForeignInverseInput
+  tracksUsingId: TracksProtocolIdForeignInverseInput
 }
 
 """
@@ -4118,6 +4938,25 @@ input updateRoleOnRoleForRolesProtocolIdForeignPatch {
   definitionsUsingId: DefinitionsRoleIdForeignInverseInput
   id: String
   protocolToProtocolId: RolesProtocolIdForeignInput
+}
+
+"""
+An object where the defined keys will be set on the `track` being updated.
+"""
+input updateTrackOnDefinitionForDefinitionsTrackIdForeignPatch {
+  definitionsUsingId: DefinitionsTrackIdForeignInverseInput
+  id: String
+  protocolId: String
+  protocolToProtocolId: TracksProtocolIdForeignInput
+}
+
+"""
+An object where the defined keys will be set on the `track` being updated.
+"""
+input updateTrackOnTrackForTracksProtocolIdForeignPatch {
+  definitionsUsingId: DefinitionsTrackIdForeignInverseInput
+  id: String
+  protocolToProtocolId: TracksProtocolIdForeignInput
 }
 
 """
