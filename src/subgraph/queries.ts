@@ -1,5 +1,5 @@
 import { gql } from "graphql-request";
-import { MAX_FIRESTORE_BATCH } from "./constants";
+import { MAX_FIRESTORE_BATCH } from "../constants";
 
 export const queryAllBadgeTracks = gql`
   query AllBadgeTracks {

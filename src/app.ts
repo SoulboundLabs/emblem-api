@@ -2,9 +2,9 @@ import dotenv from "dotenv";
 import express, { Request, Response } from "express";
 import { postgraphile } from "postgraphile";
 import { THE_GRAPH } from "./constants";
-import { connectionString, options, port, schemas } from "./database";
+import { connectionString, options, port, schemas } from "./database/database";
+import { makeQueryRunner } from "./database/query-runner";
 import { populateBadgeTracksAndDefinitions } from "./populate";
-import { makeQueryRunner } from "./query-runner";
 
 require("express-async-errors");
 

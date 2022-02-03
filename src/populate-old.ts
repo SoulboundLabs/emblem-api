@@ -8,13 +8,13 @@ import {
   upsertBadgeDefinition,
   upsertProtocol,
   upsertTrack,
-} from "./mutations";
+} from "./database/mutations";
+import { removeRomanNumerals } from "./string";
 import {
   queryAllBadgeAwards,
   queryAllBadgeDefinitions,
   queryGraphAccountsMainnetNetwork,
-} from "./queries";
-import { removeRomanNumerals } from "./string";
+} from "./subgraph/queries";
 import {
   BadgeAward,
   BadgeDefinition as BadgeDefinitionType,

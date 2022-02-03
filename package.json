@@ -25,6 +25,7 @@
     "objection": "^3.0.1",
     "pg": "^8.7.1",
     "postgraphile": "^4.12.8",
+    "postgraphile-plugin-connection-filter": "^2.2.2",
     "postgraphile-plugin-nested-mutations": "^1.1.0",
     "postgraphile-upsert-plugin": "^2.1.1"
   },
