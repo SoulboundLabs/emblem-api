@@ -32,8 +32,8 @@ export const queryAllBadgeDefinitions = gql`
 `;
 
 export const queryAllEarnedBadges = gql`
-  query AllEarnedBadges($globalAwardNumberSync: Int) {
-    earnedBadges(first: ${MAX_FIRESTORE_BATCH}, orderBy: globalAwardNumber, orderDirection: asc, where: { globalAwardNumber_gt: $globalAwardNumberSync }) {
+  query AllEarnedBadges($lastGlobalAwardNumberSynced: Int) {
+    earnedBadges(first: ${MAX_FIRESTORE_BATCH}, orderBy: globalAwardNumber, orderDirection: asc, where: { globalAwardNumber_gt: $lastGlobalAwardNumberSynced }) {
       id
       blockAwarded
       transactionHash

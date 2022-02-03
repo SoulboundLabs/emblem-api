@@ -596,6 +596,12 @@ input DefinitionFilter {
   """Filter by the object’s `definition` field."""
   definition: StringFilter
 
+  """Filter by the object’s `earnedBadgesByDefinitionIdList` relation."""
+  earnedBadgesByDefinitionIdList: DefinitionToManyEarnedBadgeFilter
+
+  """Some related `earnedBadgesByDefinitionIdList` exist."""
+  earnedBadgesByDefinitionIdListExist: Boolean
+
   """Filter by the object’s `id` field."""
   id: StringFilter
 
@@ -611,14 +617,26 @@ input DefinitionFilter {
   """Checks for any expressions in this list."""
   or: [DefinitionFilter!]
 
+  """Filter by the object’s `protocolByProtocolId` relation."""
+  protocolByProtocolId: ProtocolFilter
+
   """Filter by the object’s `protocolId` field."""
   protocolId: StringFilter
+
+  """Filter by the object’s `roleByRoleId` relation."""
+  roleByRoleId: RoleFilter
+
+  """A related `roleByRoleId` exists."""
+  roleByRoleIdExists: Boolean
 
   """Filter by the object’s `roleId` field."""
   roleId: StringFilter
 
   """Filter by the object’s `threshold` field."""
   threshold: StringFilter
+
+  """Filter by the object’s `trackByTrackId` relation."""
+  trackByTrackId: TrackFilter
 
   """Filter by the object’s `trackId` field."""
   trackId: StringFilter
@@ -800,6 +818,26 @@ input DefinitionPatch {
   threshold: String
   trackId: String
   trackToTrackId: DefinitionsTrackIdForeignInput
+}
+
+"""
+A filter to be used against many `EarnedBadge` object types. All fields are combined with a logical ‘and.’
+"""
+input DefinitionToManyEarnedBadgeFilter {
+  """
+  Every related `EarnedBadge` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  every: EarnedBadgeFilter
+
+  """
+  No related `EarnedBadge` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  none: EarnedBadgeFilter
+
+  """
+  Some related `EarnedBadge` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  some: EarnedBadgeFilter
 }
 
 """Methods to use when ordering `Definition`."""
@@ -1771,6 +1809,9 @@ input EarnedBadgeFilter {
   """Filter by the object’s `blockAwarded` field."""
   blockAwarded: IntFilter
 
+  """Filter by the object’s `definitionByDefinitionId` relation."""
+  definitionByDefinitionId: DefinitionFilter
+
   """Filter by the object’s `definitionId` field."""
   definitionId: StringFilter
 
@@ -1789,6 +1830,9 @@ input EarnedBadgeFilter {
   """Checks for any expressions in this list."""
   or: [EarnedBadgeFilter!]
 
+  """Filter by the object’s `protocolByProtocolId` relation."""
+  protocolByProtocolId: ProtocolFilter
+
   """Filter by the object’s `protocolId` field."""
   protocolId: StringFilter
 
@@ -1797,6 +1841,9 @@ input EarnedBadgeFilter {
 
   """Filter by the object’s `transactionHash` field."""
   transactionHash: StringFilter
+
+  """Filter by the object’s `winnerByWinnerId` relation."""
+  winnerByWinnerId: WinnerFilter
 
   """Filter by the object’s `winnerId` field."""
   winnerId: StringFilter
@@ -3244,6 +3291,18 @@ input ProtocolFilter {
   """Checks for all expressions in this list."""
   and: [ProtocolFilter!]
 
+  """Filter by the object’s `definitionsByProtocolIdList` relation."""
+  definitionsByProtocolIdList: ProtocolToManyDefinitionFilter
+
+  """Some related `definitionsByProtocolIdList` exist."""
+  definitionsByProtocolIdListExist: Boolean
+
+  """Filter by the object’s `earnedBadgesByProtocolIdList` relation."""
+  earnedBadgesByProtocolIdList: ProtocolToManyEarnedBadgeFilter
+
+  """Some related `earnedBadgesByProtocolIdList` exist."""
+  earnedBadgesByProtocolIdListExist: Boolean
+
   """Filter by the object’s `id` field."""
   id: StringFilter
 
@@ -3252,6 +3311,24 @@ input ProtocolFilter {
 
   """Checks for any expressions in this list."""
   or: [ProtocolFilter!]
+
+  """Filter by the object’s `rankingsByProtocolIdList` relation."""
+  rankingsByProtocolIdList: ProtocolToManyRankingFilter
+
+  """Some related `rankingsByProtocolIdList` exist."""
+  rankingsByProtocolIdListExist: Boolean
+
+  """Filter by the object’s `rolesByProtocolIdList` relation."""
+  rolesByProtocolIdList: ProtocolToManyRoleFilter
+
+  """Some related `rolesByProtocolIdList` exist."""
+  rolesByProtocolIdListExist: Boolean
+
+  """Filter by the object’s `tracksByProtocolIdList` relation."""
+  tracksByProtocolIdList: ProtocolToManyTrackFilter
+
+  """Some related `tracksByProtocolIdList` exist."""
+  tracksByProtocolIdListExist: Boolean
 }
 
 """An input for mutations affecting `Protocol`"""
@@ -3415,6 +3492,106 @@ input ProtocolProtocolsPkeyConnect {
 """The fields on `protocol` to look up the row to delete."""
 input ProtocolProtocolsPkeyDelete {
   id: String!
+}
+
+"""
+A filter to be used against many `Definition` object types. All fields are combined with a logical ‘and.’
+"""
+input ProtocolToManyDefinitionFilter {
+  """
+  Every related `Definition` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  every: DefinitionFilter
+
+  """
+  No related `Definition` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  none: DefinitionFilter
+
+  """
+  Some related `Definition` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  some: DefinitionFilter
+}
+
+"""
+A filter to be used against many `EarnedBadge` object types. All fields are combined with a logical ‘and.’
+"""
+input ProtocolToManyEarnedBadgeFilter {
+  """
+  Every related `EarnedBadge` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  every: EarnedBadgeFilter
+
+  """
+  No related `EarnedBadge` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  none: EarnedBadgeFilter
+
+  """
+  Some related `EarnedBadge` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  some: EarnedBadgeFilter
+}
+
+"""
+A filter to be used against many `Ranking` object types. All fields are combined with a logical ‘and.’
+"""
+input ProtocolToManyRankingFilter {
+  """
+  Every related `Ranking` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  every: RankingFilter
+
+  """
+  No related `Ranking` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  none: RankingFilter
+
+  """
+  Some related `Ranking` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  some: RankingFilter
+}
+
+"""
+A filter to be used against many `Role` object types. All fields are combined with a logical ‘and.’
+"""
+input ProtocolToManyRoleFilter {
+  """
+  Every related `Role` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  every: RoleFilter
+
+  """
+  No related `Role` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  none: RoleFilter
+
+  """
+  Some related `Role` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  some: RoleFilter
+}
+
+"""
+A filter to be used against many `Track` object types. All fields are combined with a logical ‘and.’
+"""
+input ProtocolToManyTrackFilter {
+  """
+  Every related `Track` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  every: TrackFilter
+
+  """
+  No related `Track` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  none: TrackFilter
+
+  """
+  Some related `Track` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  some: TrackFilter
 }
 
 """Methods to use when ordering `Protocol`."""
@@ -3798,11 +3975,17 @@ input RankingFilter {
   """Checks for any expressions in this list."""
   or: [RankingFilter!]
 
+  """Filter by the object’s `protocolByProtocolId` relation."""
+  protocolByProtocolId: ProtocolFilter
+
   """Filter by the object’s `protocolId` field."""
   protocolId: StringFilter
 
   """Filter by the object’s `rank` field."""
   rank: IntFilter
+
+  """Filter by the object’s `winnerByWinnerId` relation."""
+  winnerByWinnerId: WinnerFilter
 
   """Filter by the object’s `winnerId` field."""
   winnerId: StringFilter
@@ -4151,6 +4334,12 @@ input RoleFilter {
   """Checks for all expressions in this list."""
   and: [RoleFilter!]
 
+  """Filter by the object’s `definitionsByRoleIdList` relation."""
+  definitionsByRoleIdList: RoleToManyDefinitionFilter
+
+  """Some related `definitionsByRoleIdList` exist."""
+  definitionsByRoleIdListExist: Boolean
+
   """Filter by the object’s `id` field."""
   id: StringFilter
 
@@ -4159,6 +4348,9 @@ input RoleFilter {
 
   """Checks for any expressions in this list."""
   or: [RoleFilter!]
+
+  """Filter by the object’s `protocolByProtocolId` relation."""
+  protocolByProtocolId: ProtocolFilter
 
   """Filter by the object’s `protocolId` field."""
   protocolId: StringFilter
@@ -4284,6 +4476,26 @@ input RoleRolesPkeyConnect {
 """The fields on `role` to look up the row to delete."""
 input RoleRolesPkeyDelete {
   id: String!
+}
+
+"""
+A filter to be used against many `Definition` object types. All fields are combined with a logical ‘and.’
+"""
+input RoleToManyDefinitionFilter {
+  """
+  Every related `Definition` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  every: DefinitionFilter
+
+  """
+  No related `Definition` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  none: DefinitionFilter
+
+  """
+  Some related `Definition` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  some: DefinitionFilter
 }
 
 """Methods to use when ordering `Role`."""
@@ -4586,6 +4798,12 @@ input TrackFilter {
   """Checks for all expressions in this list."""
   and: [TrackFilter!]
 
+  """Filter by the object’s `definitionsByTrackIdList` relation."""
+  definitionsByTrackIdList: TrackToManyDefinitionFilter
+
+  """Some related `definitionsByTrackIdList` exist."""
+  definitionsByTrackIdListExist: Boolean
+
   """Filter by the object’s `id` field."""
   id: StringFilter
 
@@ -4594,6 +4812,9 @@ input TrackFilter {
 
   """Checks for any expressions in this list."""
   or: [TrackFilter!]
+
+  """Filter by the object’s `protocolByProtocolId` relation."""
+  protocolByProtocolId: ProtocolFilter
 
   """Filter by the object’s `protocolId` field."""
   protocolId: StringFilter
@@ -4699,6 +4920,26 @@ input TrackPatch {
   id: String
   protocolId: String
   protocolToProtocolId: TracksProtocolIdForeignInput
+}
+
+"""
+A filter to be used against many `Definition` object types. All fields are combined with a logical ‘and.’
+"""
+input TrackToManyDefinitionFilter {
+  """
+  Every related `Definition` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  every: DefinitionFilter
+
+  """
+  No related `Definition` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  none: DefinitionFilter
+
+  """
+  Some related `Definition` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  some: DefinitionFilter
 }
 
 """The fields on `track` to look up the row to connect."""
@@ -5851,6 +6092,12 @@ input WinnerFilter {
   """Checks for all expressions in this list."""
   and: [WinnerFilter!]
 
+  """Filter by the object’s `earnedBadgesByWinnerIdList` relation."""
+  earnedBadgesByWinnerIdList: WinnerToManyEarnedBadgeFilter
+
+  """Some related `earnedBadgesByWinnerIdList` exist."""
+  earnedBadgesByWinnerIdListExist: Boolean
+
   """Filter by the object’s `ens` field."""
   ens: StringFilter
 
@@ -5862,6 +6109,12 @@ input WinnerFilter {
 
   """Checks for any expressions in this list."""
   or: [WinnerFilter!]
+
+  """Filter by the object’s `rankingsByWinnerIdList` relation."""
+  rankingsByWinnerIdList: WinnerToManyRankingFilter
+
+  """Some related `rankingsByWinnerIdList` exist."""
+  rankingsByWinnerIdListExist: Boolean
 }
 
 """An input for mutations affecting `Winner`"""
@@ -5942,6 +6195,46 @@ input WinnerPatch {
   ens: String
   id: String
   rankingsUsingId: RankingsWinnerIdForeignInverseInput
+}
+
+"""
+A filter to be used against many `EarnedBadge` object types. All fields are combined with a logical ‘and.’
+"""
+input WinnerToManyEarnedBadgeFilter {
+  """
+  Every related `EarnedBadge` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  every: EarnedBadgeFilter
+
+  """
+  No related `EarnedBadge` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  none: EarnedBadgeFilter
+
+  """
+  Some related `EarnedBadge` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  some: EarnedBadgeFilter
+}
+
+"""
+A filter to be used against many `Ranking` object types. All fields are combined with a logical ‘and.’
+"""
+input WinnerToManyRankingFilter {
+  """
+  Every related `Ranking` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  every: RankingFilter
+
+  """
+  No related `Ranking` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  none: RankingFilter
+
+  """
+  Some related `Ranking` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  some: RankingFilter
 }
 
 """The fields on `winner` to look up the row to connect."""

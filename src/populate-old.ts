@@ -98,12 +98,12 @@ export const populateEarnedBadges = async (
 ) => {
   const protocolRef = getProtocolRef(firestore, protocol);
   const snapshot = await protocolRef.get();
-  const { globalAwardNumberSync = 0 } = snapshot.data() || {};
+  const { lastGlobalAwardNumberSynced = 0 } = snapshot.data() || {};
 
   const response: { badgeAwards: EarnedBadge[] } = await querySubgraph({
     query: queryAllEarnedBadges,
     subgraph: subgraphTheGraphBadges,
-    variables: { globalAwardNumberSync },
+    variables: { lastGlobalAwardNumberSynced },
   });
 
   const badgeAwards = response.badgeAwards.map((award: EarnedBadge) => ({
@@ -123,11 +123,11 @@ export const populateEarnedBadges = async (
   const lastEarnedBadge = badgeAwards[badgeAwards.length - 1];
 
   if (lastEarnedBadge) {
-    const globalAwardNumberSync = lastEarnedBadge.globalAwardNumber;
+    const lastGlobalAwardNumberSynced = lastEarnedBadge.globalAwardNumber;
     const lastBlockAwardedSync = lastEarnedBadge.blockAwarded;
     batch.set(
       protocolRef,
-      { globalAwardNumberSync, lastBlockAwardedSync },
+      { lastGlobalAwardNumberSynced, lastBlockAwardedSync },
       { merge: true }
     );
   }

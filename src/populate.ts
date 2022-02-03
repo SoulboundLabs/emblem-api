@@ -6,7 +6,10 @@ import {
   upsertTrack,
   upsertWinner,
 } from "./database/mutations";
-import { queryLastEarnedBadge } from "./database/queries";
+import {
+  queryLastEarnedBadge,
+  queryWinnersByProtocol,
+} from "./database/queries";
 import { removeRomanNumerals } from "./string";
 import {
   queryAllBadgeDefinitions,
@@ -57,13 +60,13 @@ export const populateEarnedBadges = async (
     protocolId,
   });
 
-  const globalAwardNumberSync =
+  const lastGlobalAwardNumberSynced =
     data.allEarnedBadgesList[0]?.globalAwardNumber || 0;
 
   const response: { earnedBadges: EarnedBadge[] } = await querySubgraph({
     query: queryAllEarnedBadges,
     subgraph: subgraphTheGraphBadges,
-    variables: { globalAwardNumberSync },
+    variables: { lastGlobalAwardNumberSynced },
   });
 
   const earnedBadges = response.earnedBadges.map((award: EarnedBadge) => ({
@@ -88,4 +91,47 @@ export const populateEarnedBadges = async (
   }
 
   return earnedBadges;
+};
+
+export const populateWinnerMetadataAndRank = async (
+  protocolId: string,
+  queryRunner: any
+) => {
+  const { data } = await queryRunner.query(queryWinnersByProtocol, {
+    protocolId,
+  });
+
+  console.log(data);
+
+  // const lastGlobalAwardNumberSynced =
+  //   data.allEarnedBadgesList[0]?.globalAwardNumber || 0;
+
+  // const response: { earnedBadges: EarnedBadge[] } = await querySubgraph({
+  //   query: queryAllEarnedBadges,
+  //   subgraph: subgraphTheGraphBadges,
+  //   variables: { lastGlobalAwardNumberSynced },
+  // });
+
+  // const earnedBadges = response.earnedBadges.map((award: EarnedBadge) => ({
+  //   ...award,
+  //   blockAwarded: Number(award.blockAwarded),
+  //   timestampAwarded: Number(award.timestampAwarded),
+  //   definitionId: award.definition.id,
+  //   protocolId: protocolId,
+  //   metadata: JSON.stringify(award.metadata),
+  // }));
+
+  // for (const earnedBadge of earnedBadges) {
+  //   await queryRunner.query(upsertWinner, {
+  //     id: earnedBadge.badgeWinner.id,
+  //   });
+  //   await queryRunner.query(upsertEarnedBadge, {
+  //     ...earnedBadge,
+  //     protocolId,
+  //     definitionId: earnedBadge.definition.id,
+  //     winnerId: earnedBadge.badgeWinner.id,
+  //   });
+  // }
+
+  // return earnedBadges;
 };

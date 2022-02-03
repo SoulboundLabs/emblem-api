@@ -1,5 +1,5 @@
 import { gql } from "graphql-request";
-// TODO REplace with badgeAwards
+
 export const queryLastEarnedBadge = gql`
   query LastEarnedBadges($protocolId: String!) {
     allEarnedBadgesList(
@@ -9,6 +9,20 @@ export const queryLastEarnedBadge = gql`
     ) {
       id
       globalAwardNumber
+    }
+  }
+`;
+
+export const queryWinnersByProtocol = gql`
+  query WinnerByProtocol($protocolId: String!) {
+    allWinnersList(
+      filter: {
+        earnedBadgesByWinnerIdList: {
+          some: { protocolId: { equalTo: $protocolId } }
+        }
+      }
+    ) {
+      id
     }
   }
 `;

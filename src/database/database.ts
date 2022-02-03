@@ -33,6 +33,9 @@ export const options: PostGraphileOptions = {
         (req as any).normalizedConnectionParams?.["x-user-id"],
     };
   },
+  graphileBuildOptions: {
+    connectionFilterRelations: true,
+  },
   watchPg: true,
   graphiql: true,
   enhanceGraphiql: true,

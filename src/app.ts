@@ -7,6 +7,7 @@ import { makeQueryRunner } from "./database/query-runner";
 import {
   populateBadgeTracksAndDefinitions,
   populateEarnedBadges,
+  populateWinnerMetadataAndRank,
 } from "./populate";
 
 require("express-async-errors");
@@ -43,14 +44,7 @@ app.get("/populate-the-graph", async (req: Request, res: Response) => {
   const queryRunner = await makeQueryRunner(connectionString, schemas, options);
   await populateBadgeTracksAndDefinitions(THE_GRAPH, queryRunner);
   await populateEarnedBadges(THE_GRAPH, queryRunner);
-  // const badgeAwards = await populateEarnedBadges(THE_GRAPH);
-  // const winners = await populateWinners(THE_GRAPH, badgeAwards);
-  // const winnersWithNames = await populateWinnersGraphDisplayName(
-  //   firestore,
-  //   winners
-  // );
-  // await mergeWinnerBackToEarnedBadges(THE_GRAPH, winnersWithNames);
-  // await populateLeaderboardRankHandler(THE_GRAPH);
+  await populateWinnerMetadataAndRank(THE_GRAPH, queryRunner);
   await queryRunner.release();
   res.send(200);
 });
