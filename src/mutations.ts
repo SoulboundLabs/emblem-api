@@ -13,7 +13,7 @@ export const upsertAccount = gql`
 
 export const upsertProtocol = gql`
   mutation UpsertProtocol($id: String!) {
-    createProtocol(input: { id: { id: $id } }) {
+    upsertProtocol(input: { protocol: { id: $id } }) {
       protocol {
         id
       }

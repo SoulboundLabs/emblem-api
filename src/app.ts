@@ -4,6 +4,7 @@ import { postgraphile } from "postgraphile";
 import { THE_GRAPH } from "./constants";
 import { connectionString, options, port, schemas } from "./database";
 import { upsertProtocol } from "./mutations";
+import { populateBadgeTracksAndDefinitions } from "./populate";
 import { makeQueryRunner } from "./query-runner";
 
 require("express-async-errors");
@@ -40,7 +41,7 @@ app.get("/populate-the-graph", async (req: Request, res: Response) => {
     id: THE_GRAPH,
   });
   res.send(result);
-  // await populateBadgeTracksAndDefinitions(THE_GRAPH, queryRunner);
+  await populateBadgeTracksAndDefinitions(THE_GRAPH, queryRunner);
   res.send("winner inserted");
   // const badgeAwards = await populateBadgeAwards(THE_GRAPH);
   // const winners = await populateWinners(THE_GRAPH, badgeAwards);

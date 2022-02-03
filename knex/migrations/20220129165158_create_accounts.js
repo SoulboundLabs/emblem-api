@@ -1,5 +1,5 @@
-const createAccounts = (knex) => {
-  return knex.schema.createTable("accounts", (table) => {
+const createWinners = (knex) => {
+  return knex.schema.createTable("winners", (table) => {
     table.string("id").primary();
     table.string("ens");
   });
@@ -7,16 +7,16 @@ const createAccounts = (knex) => {
 
 const createProtocols = (knex) => {
   return knex.schema.createTable("protocols", (table) => {
-    table.increments("id").primary();
-    table.string("name").notNullable();
+    table.string("id").primary();
   });
 };
 
 const createRoles = (knex) => {
   return knex.schema.createTable("roles", (table) => {
-    table.increments("id").primary();
-    table.integer("protocol_id").references("protocols.id").notNullable();
-    table.string("name").notNullable();
+    table.string("id").primary();
+    table.string("protocol_id").references("protocols.id").notNullable();
+
+    table.unique(["id", "protocol_id"]);
   });
 };
 
@@ -24,29 +24,31 @@ const createRankings = (knex) => {
   return knex.schema.createTable("rankings", (table) => {
     table.increments("id").primary();
     table.integer("rank").notNullable();
-    table.string("account_id").references("accounts.id").notNullable();
-    table.integer("protocol_id").references("protocols.id").notNullable();
+    table.string("winner_id").references("winners.id").notNullable();
+    table.string("protocol_id").references("protocols.id").notNullable();
   });
 };
 
 const createDefinitions = (knex) => {
   return knex.schema.createTable("definitions", (table) => {
-    table.increments("id").primary();
-    table.integer("protocol_id").references("protocols.id").notNullable();
-    table.integer("role_id").references("roles.id").notNullable();
+    table.string("id").primary();
+    table.string("protocol_id").references("protocols.id").notNullable();
+    table.string("role_id").references("roles.id").notNullable();
     table.string("name").notNullable();
     table.string("definition");
     table.string("metric");
     table.string("threshold");
-    table.string("ipfs");
+    table.string("ipfs_uri");
+
+    table.unique(["id", "protocol_id"]);
   });
 };
 
 const createAwards = (knex) => {
   return knex.schema.createTable("awards", (table) => {
     table.increments("id").primary();
-    table.integer("definition_id").references("definitions.id").notNullable();
-    table.string("account_id").references("accounts.id").notNullable();
+    table.string("definition_id").references("definitions.id").notNullable();
+    table.string("winner_id").references("winners.id").notNullable();
     table.integer("block_awarded");
     table.string("transaction_hash");
     table.string("award_number");
@@ -55,7 +57,7 @@ const createAwards = (knex) => {
 };
 
 exports.up = async function (knex) {
-  await createAccounts(knex);
+  await createWinners(knex);
   await createProtocols(knex);
   await createRoles(knex);
   await createRankings(knex);
@@ -65,7 +67,7 @@ exports.up = async function (knex) {
 };
 
 const tables = [
-  "accounts",
+  "winners",
   "protocols",
   "rankings",
   "roles",

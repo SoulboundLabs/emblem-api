@@ -1,166 +1,10 @@
-type Account implements Node {
-  """Reads and enables pagination through a set of `Award`."""
-  awardsByAccountIdList(
-    """
-    A condition to be used in determining which values should be returned by the collection.
-    """
-    condition: AwardCondition
-
-    """Only read the first `n` values of the set."""
-    first: Int
-
-    """Skip the first `n` values."""
-    offset: Int
-
-    """The method to use when ordering `Award`."""
-    orderBy: [AwardsOrderBy!]
-  ): [Award!]!
-  ens: String
-  id: String!
-
-  """
-  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
-  """
-  nodeId: ID!
-
-  """Reads and enables pagination through a set of `Ranking`."""
-  rankingsByAccountIdList(
-    """
-    A condition to be used in determining which values should be returned by the collection.
-    """
-    condition: RankingCondition
-
-    """Only read the first `n` values of the set."""
-    first: Int
-
-    """Skip the first `n` values."""
-    offset: Int
-
-    """The method to use when ordering `Ranking`."""
-    orderBy: [RankingsOrderBy!]
-  ): [Ranking!]!
-}
-
-"""The fields on `account` to look up the row to connect."""
-input AccountAccountsPkeyConnect {
-  id: String!
-}
-
-"""The fields on `account` to look up the row to delete."""
-input AccountAccountsPkeyDelete {
-  id: String!
-}
-
-"""
-A condition to be used against `Account` object types. All fields are tested for equality and combined with a logical ‘and.’
-"""
-input AccountCondition {
-  """Checks for equality with the object’s `ens` field."""
-  ens: String
-
-  """Checks for equality with the object’s `id` field."""
-  id: String
-}
-
-"""An input for mutations affecting `Account`"""
-input AccountInput {
-  awardsUsingId: AwardsAccountIdForeignInverseInput
-  ens: String
-  id: String!
-  rankingsUsingId: RankingsAccountIdForeignInverseInput
-}
-
-"""The globally unique `ID` look up for the row to connect."""
-input AccountNodeIdConnect {
-  """
-  The globally unique `ID` which identifies a single `account` to be connected.
-  """
-  nodeId: ID!
-}
-
-"""The globally unique `ID` look up for the row to delete."""
-input AccountNodeIdDelete {
-  """
-  The globally unique `ID` which identifies a single `account` to be deleted.
-  """
-  nodeId: ID!
-}
-
-"""The globally unique `ID` look up for the row to update."""
-input AccountOnAwardForAwardsAccountIdForeignNodeIdUpdate {
-  """
-  An object where the defined keys will be set on the `award` being updated.
-  """
-  awardPatch: AwardPatch!
-
-  """
-  The globally unique `ID` which identifies a single `award` to be connected.
-  """
-  nodeId: ID!
-}
-
-"""The fields on `account` to look up the row to update."""
-input AccountOnAwardForAwardsAccountIdForeignUsingAccountsPkeyUpdate {
-  """
-  An object where the defined keys will be set on the `account` being updated.
-  """
-  accountPatch: updateAccountOnAwardForAwardsAccountIdForeignPatch!
-  id: String!
-}
-
-"""The globally unique `ID` look up for the row to update."""
-input AccountOnRankingForRankingsAccountIdForeignNodeIdUpdate {
-  """
-  The globally unique `ID` which identifies a single `ranking` to be connected.
-  """
-  nodeId: ID!
-
-  """
-  An object where the defined keys will be set on the `ranking` being updated.
-  """
-  rankingPatch: RankingPatch!
-}
-
-"""The fields on `account` to look up the row to update."""
-input AccountOnRankingForRankingsAccountIdForeignUsingAccountsPkeyUpdate {
-  """
-  An object where the defined keys will be set on the `account` being updated.
-  """
-  accountPatch: updateAccountOnRankingForRankingsAccountIdForeignPatch!
-  id: String!
-}
-
-"""
-Represents an update to a `Account`. Fields that are set will be updated.
-"""
-input AccountPatch {
-  awardsUsingId: AwardsAccountIdForeignInverseInput
-  ens: String
-  id: String
-  rankingsUsingId: RankingsAccountIdForeignInverseInput
-}
-
-"""Methods to use when ordering `Account`."""
-enum AccountsOrderBy {
-  ENS_ASC
-  ENS_DESC
-  ID_ASC
-  ID_DESC
-  NATURAL
-  PRIMARY_KEY_ASC
-  PRIMARY_KEY_DESC
-}
-
 type Award implements Node {
-  """Reads a single `Account` that is related to this `Award`."""
-  accountByAccountId: Account
-  accountId: String!
   awardNumber: String
   blockAwarded: Int
 
   """Reads a single `Definition` that is related to this `Award`."""
   definitionByDefinitionId: Definition
-  definitionId: Int!
+  definitionId: String!
   globalAwardNumber: String
   id: Int!
 
@@ -169,6 +13,10 @@ type Award implements Node {
   """
   nodeId: ID!
   transactionHash: String
+
+  """Reads a single `Winner` that is related to this `Award`."""
+  winnerByWinnerId: Winner
+  winnerId: String!
 }
 
 """The fields on `award` to look up the row to connect."""
@@ -185,9 +33,6 @@ input AwardAwardsPkeyDelete {
 A condition to be used against `Award` object types. All fields are tested for equality and combined with a logical ‘and.’
 """
 input AwardCondition {
-  """Checks for equality with the object’s `accountId` field."""
-  accountId: String
-
   """Checks for equality with the object’s `awardNumber` field."""
   awardNumber: String
 
@@ -195,7 +40,7 @@ input AwardCondition {
   blockAwarded: Int
 
   """Checks for equality with the object’s `definitionId` field."""
-  definitionId: Int
+  definitionId: String
 
   """Checks for equality with the object’s `globalAwardNumber` field."""
   globalAwardNumber: String
@@ -205,19 +50,22 @@ input AwardCondition {
 
   """Checks for equality with the object’s `transactionHash` field."""
   transactionHash: String
+
+  """Checks for equality with the object’s `winnerId` field."""
+  winnerId: String
 }
 
 """An input for mutations affecting `Award`"""
 input AwardInput {
-  accountId: String
-  accountToAccountId: AwardsAccountIdForeignInput
   awardNumber: String
   blockAwarded: Int
-  definitionId: Int
+  definitionId: String
   definitionToDefinitionId: AwardsDefinitionIdForeignInput
   globalAwardNumber: String
   id: Int
   transactionHash: String
+  winnerId: String
+  winnerToWinnerId: AwardsWinnerIdForeignInput
 }
 
 """The globally unique `ID` look up for the row to connect."""
@@ -234,28 +82,6 @@ input AwardNodeIdDelete {
   The globally unique `ID` which identifies a single `award` to be deleted.
   """
   nodeId: ID!
-}
-
-"""The globally unique `ID` look up for the row to update."""
-input AwardOnAwardForAwardsAccountIdForeignNodeIdUpdate {
-  """
-  An object where the defined keys will be set on the `account` being updated.
-  """
-  accountPatch: AccountPatch!
-
-  """
-  The globally unique `ID` which identifies a single `account` to be connected.
-  """
-  nodeId: ID!
-}
-
-"""The fields on `award` to look up the row to update."""
-input AwardOnAwardForAwardsAccountIdForeignUsingAwardsPkeyUpdate {
-  """
-  An object where the defined keys will be set on the `award` being updated.
-  """
-  awardPatch: updateAwardOnAwardForAwardsAccountIdForeignPatch!
-  id: Int!
 }
 
 """The globally unique `ID` look up for the row to update."""
@@ -280,133 +106,66 @@ input AwardOnAwardForAwardsDefinitionIdForeignUsingAwardsPkeyUpdate {
   id: Int!
 }
 
+"""The globally unique `ID` look up for the row to update."""
+input AwardOnAwardForAwardsWinnerIdForeignNodeIdUpdate {
+  """
+  The globally unique `ID` which identifies a single `winner` to be connected.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `winner` being updated.
+  """
+  winnerPatch: WinnerPatch!
+}
+
+"""The fields on `award` to look up the row to update."""
+input AwardOnAwardForAwardsWinnerIdForeignUsingAwardsPkeyUpdate {
+  """
+  An object where the defined keys will be set on the `award` being updated.
+  """
+  awardPatch: updateAwardOnAwardForAwardsWinnerIdForeignPatch!
+  id: Int!
+}
+
 """
 Represents an update to a `Award`. Fields that are set will be updated.
 """
 input AwardPatch {
-  accountId: String
-  accountToAccountId: AwardsAccountIdForeignInput
   awardNumber: String
   blockAwarded: Int
-  definitionId: Int
+  definitionId: String
   definitionToDefinitionId: AwardsDefinitionIdForeignInput
   globalAwardNumber: String
   id: Int
   transactionHash: String
-}
-
-"""The `account` to be created by this mutation."""
-input AwardsAccountIdForeignAccountsCreateInput {
-  awardsUsingId: AwardsAccountIdForeignInverseInput
-  ens: String
-  id: String!
-  rankingsUsingId: RankingsAccountIdForeignInverseInput
-}
-
-"""The `award` to be created by this mutation."""
-input AwardsAccountIdForeignAwardsCreateInput {
-  accountToAccountId: AwardsAccountIdForeignInput
-  awardNumber: String
-  blockAwarded: Int
-  definitionId: Int
-  definitionToDefinitionId: AwardsDefinitionIdForeignInput
-  globalAwardNumber: String
-  id: Int
-  transactionHash: String
-}
-
-"""
-Input for the nested mutation of `account` in the `AwardInput` mutation.
-"""
-input AwardsAccountIdForeignInput {
-  """The primary key(s) for `account` for the far side of the relationship."""
-  connectById: AccountAccountsPkeyConnect
-
-  """The primary key(s) for `account` for the far side of the relationship."""
-  connectByNodeId: AccountNodeIdConnect
-
-  """
-  A `AccountInput` object that will be created and connected to this object.
-  """
-  create: AwardsAccountIdForeignAccountsCreateInput
-
-  """The primary key(s) for `account` for the far side of the relationship."""
-  deleteById: AccountAccountsPkeyDelete
-
-  """The primary key(s) for `account` for the far side of the relationship."""
-  deleteByNodeId: AccountNodeIdDelete
-
-  """
-  The primary key(s) and patch data for `account` for the far side of the relationship.
-  """
-  updateById: AccountOnAwardForAwardsAccountIdForeignUsingAccountsPkeyUpdate
-
-  """
-  The primary key(s) and patch data for `account` for the far side of the relationship.
-  """
-  updateByNodeId: AwardOnAwardForAwardsAccountIdForeignNodeIdUpdate
-}
-
-"""
-Input for the nested mutation of `award` in the `AccountInput` mutation.
-"""
-input AwardsAccountIdForeignInverseInput {
-  """The primary key(s) for `award` for the far side of the relationship."""
-  connectById: [AwardAwardsPkeyConnect!]
-
-  """The primary key(s) for `award` for the far side of the relationship."""
-  connectByNodeId: [AwardNodeIdConnect!]
-
-  """
-  A `AwardInput` object that will be created and connected to this object.
-  """
-  create: [AwardsAccountIdForeignAwardsCreateInput!]
-
-  """The primary key(s) for `award` for the far side of the relationship."""
-  deleteById: [AwardAwardsPkeyDelete!]
-
-  """The primary key(s) for `award` for the far side of the relationship."""
-  deleteByNodeId: [AwardNodeIdDelete!]
-
-  """
-  Flag indicating whether all other `award` records that match this relationship should be removed.
-  """
-  deleteOthers: Boolean
-
-  """
-  The primary key(s) and patch data for `award` for the far side of the relationship.
-  """
-  updateById: [AwardOnAwardForAwardsAccountIdForeignUsingAwardsPkeyUpdate!]
-
-  """
-  The primary key(s) and patch data for `award` for the far side of the relationship.
-  """
-  updateByNodeId: [AccountOnAwardForAwardsAccountIdForeignNodeIdUpdate!]
+  winnerId: String
+  winnerToWinnerId: AwardsWinnerIdForeignInput
 }
 
 """The `award` to be created by this mutation."""
 input AwardsDefinitionIdForeignAwardsCreateInput {
-  accountId: String
-  accountToAccountId: AwardsAccountIdForeignInput
   awardNumber: String
   blockAwarded: Int
   definitionToDefinitionId: AwardsDefinitionIdForeignInput
   globalAwardNumber: String
   id: Int
   transactionHash: String
+  winnerId: String
+  winnerToWinnerId: AwardsWinnerIdForeignInput
 }
 
 """The `definition` to be created by this mutation."""
 input AwardsDefinitionIdForeignDefinitionsCreateInput {
   awardsUsingId: AwardsDefinitionIdForeignInverseInput
   definition: String
-  id: Int
-  ipfs: String
+  id: String!
+  ipfsUri: String
   metric: String
   name: String!
-  protocolId: Int
+  protocolId: String
   protocolToProtocolId: DefinitionsProtocolIdForeignInput
-  roleId: Int
+  roleId: String
   roleToRoleId: DefinitionsRoleIdForeignInput
   threshold: String
 }
@@ -419,6 +178,11 @@ input AwardsDefinitionIdForeignInput {
   The primary key(s) for `definition` for the far side of the relationship.
   """
   connectById: DefinitionDefinitionsPkeyConnect
+
+  """
+  The primary key(s) for `definition` for the far side of the relationship.
+  """
+  connectByIdAndProtocolId: DefinitionDefinitionsIdProtocolIdUniqueConnect
 
   """
   The primary key(s) for `definition` for the far side of the relationship.
@@ -438,12 +202,22 @@ input AwardsDefinitionIdForeignInput {
   """
   The primary key(s) for `definition` for the far side of the relationship.
   """
+  deleteByIdAndProtocolId: DefinitionDefinitionsIdProtocolIdUniqueDelete
+
+  """
+  The primary key(s) for `definition` for the far side of the relationship.
+  """
   deleteByNodeId: DefinitionNodeIdDelete
 
   """
   The primary key(s) and patch data for `definition` for the far side of the relationship.
   """
   updateById: DefinitionOnAwardForAwardsDefinitionIdForeignUsingDefinitionsPkeyUpdate
+
+  """
+  The primary key(s) and patch data for `definition` for the far side of the relationship.
+  """
+  updateByIdAndProtocolId: DefinitionOnAwardForAwardsDefinitionIdForeignUsingDefinitionsIdProtocolIdUniqueUpdate
 
   """
   The primary key(s) and patch data for `definition` for the far side of the relationship.
@@ -490,8 +264,6 @@ input AwardsDefinitionIdForeignInverseInput {
 
 """Methods to use when ordering `Award`."""
 enum AwardsOrderBy {
-  ACCOUNT_ID_ASC
-  ACCOUNT_ID_DESC
   AWARD_NUMBER_ASC
   AWARD_NUMBER_DESC
   BLOCK_AWARDED_ASC
@@ -507,35 +279,97 @@ enum AwardsOrderBy {
   PRIMARY_KEY_DESC
   TRANSACTION_HASH_ASC
   TRANSACTION_HASH_DESC
+  WINNER_ID_ASC
+  WINNER_ID_DESC
 }
 
-"""All input for the create `Account` mutation."""
-input CreateAccountInput {
-  """The `Account` to be created by this mutation."""
-  account: AccountInput!
-
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
+"""The `award` to be created by this mutation."""
+input AwardsWinnerIdForeignAwardsCreateInput {
+  awardNumber: String
+  blockAwarded: Int
+  definitionId: String
+  definitionToDefinitionId: AwardsDefinitionIdForeignInput
+  globalAwardNumber: String
+  id: Int
+  transactionHash: String
+  winnerToWinnerId: AwardsWinnerIdForeignInput
 }
 
-"""The output of our create `Account` mutation."""
-type CreateAccountPayload {
-  """The `Account` that was created by this mutation."""
-  account: Account
+"""
+Input for the nested mutation of `winner` in the `AwardInput` mutation.
+"""
+input AwardsWinnerIdForeignInput {
+  """The primary key(s) for `winner` for the far side of the relationship."""
+  connectById: WinnerWinnersPkeyConnect
+
+  """The primary key(s) for `winner` for the far side of the relationship."""
+  connectByNodeId: WinnerNodeIdConnect
 
   """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
+  A `WinnerInput` object that will be created and connected to this object.
   """
-  clientMutationId: String
+  create: AwardsWinnerIdForeignWinnersCreateInput
+
+  """The primary key(s) for `winner` for the far side of the relationship."""
+  deleteById: WinnerWinnersPkeyDelete
+
+  """The primary key(s) for `winner` for the far side of the relationship."""
+  deleteByNodeId: WinnerNodeIdDelete
 
   """
-  Our root query field type. Allows us to run any query from our mutation payload.
+  The primary key(s) and patch data for `winner` for the far side of the relationship.
   """
-  query: Query
+  updateById: WinnerOnAwardForAwardsWinnerIdForeignUsingWinnersPkeyUpdate
+
+  """
+  The primary key(s) and patch data for `winner` for the far side of the relationship.
+  """
+  updateByNodeId: AwardOnAwardForAwardsWinnerIdForeignNodeIdUpdate
+}
+
+"""
+Input for the nested mutation of `award` in the `WinnerInput` mutation.
+"""
+input AwardsWinnerIdForeignInverseInput {
+  """The primary key(s) for `award` for the far side of the relationship."""
+  connectById: [AwardAwardsPkeyConnect!]
+
+  """The primary key(s) for `award` for the far side of the relationship."""
+  connectByNodeId: [AwardNodeIdConnect!]
+
+  """
+  A `AwardInput` object that will be created and connected to this object.
+  """
+  create: [AwardsWinnerIdForeignAwardsCreateInput!]
+
+  """The primary key(s) for `award` for the far side of the relationship."""
+  deleteById: [AwardAwardsPkeyDelete!]
+
+  """The primary key(s) for `award` for the far side of the relationship."""
+  deleteByNodeId: [AwardNodeIdDelete!]
+
+  """
+  Flag indicating whether all other `award` records that match this relationship should be removed.
+  """
+  deleteOthers: Boolean
+
+  """
+  The primary key(s) and patch data for `award` for the far side of the relationship.
+  """
+  updateById: [AwardOnAwardForAwardsWinnerIdForeignUsingAwardsPkeyUpdate!]
+
+  """
+  The primary key(s) and patch data for `award` for the far side of the relationship.
+  """
+  updateByNodeId: [WinnerOnAwardForAwardsWinnerIdForeignNodeIdUpdate!]
+}
+
+"""The `winner` to be created by this mutation."""
+input AwardsWinnerIdForeignWinnersCreateInput {
+  awardsUsingId: AwardsWinnerIdForeignInverseInput
+  ens: String
+  id: String!
+  rankingsUsingId: RankingsWinnerIdForeignInverseInput
 }
 
 """All input for the create `Award` mutation."""
@@ -552,9 +386,6 @@ input CreateAwardInput {
 
 """The output of our create `Award` mutation."""
 type CreateAwardPayload {
-  """Reads a single `Account` that is related to this `Award`."""
-  accountByAccountId: Account
-
   """The `Award` that was created by this mutation."""
   award: Award
 
@@ -571,6 +402,9 @@ type CreateAwardPayload {
   Our root query field type. Allows us to run any query from our mutation payload.
   """
   query: Query
+
+  """Reads a single `Winner` that is related to this `Award`."""
+  winnerByWinnerId: Winner
 }
 
 """All input for the create `Definition` mutation."""
@@ -709,9 +543,6 @@ input CreateRankingInput {
 
 """The output of our create `Ranking` mutation."""
 type CreateRankingPayload {
-  """Reads a single `Account` that is related to this `Ranking`."""
-  accountByAccountId: Account
-
   """
   The exact same `clientMutationId` that was provided in the mutation input,
   unchanged and unused. May be used by a client to track mutations.
@@ -728,6 +559,9 @@ type CreateRankingPayload {
 
   """The `Ranking` that was created by this mutation."""
   ranking: Ranking
+
+  """Reads a single `Winner` that is related to this `Ranking`."""
+  winnerByWinnerId: Winner
 }
 
 """All input for the create `Role` mutation."""
@@ -762,6 +596,35 @@ type CreateRolePayload {
   role: Role
 }
 
+"""All input for the create `Winner` mutation."""
+input CreateWinnerInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Winner` to be created by this mutation."""
+  winner: WinnerInput!
+}
+
+"""The output of our create `Winner` mutation."""
+type CreateWinnerPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """The `Winner` that was created by this mutation."""
+  winner: Winner
+}
+
 """
 A point in time as described by the [ISO
 8601](https://en.wikipedia.org/wiki/ISO_8601) standard. May or may not include a timezone.
@@ -786,8 +649,8 @@ type Definition implements Node {
     orderBy: [AwardsOrderBy!]
   ): [Award!]!
   definition: String
-  id: Int!
-  ipfs: String
+  id: String!
+  ipfsUri: String
   metric: String
   name: String!
 
@@ -798,11 +661,11 @@ type Definition implements Node {
 
   """Reads a single `Protocol` that is related to this `Definition`."""
   protocolByProtocolId: Protocol
-  protocolId: Int!
+  protocolId: String!
 
   """Reads a single `Role` that is related to this `Definition`."""
   roleByRoleId: Role
-  roleId: Int!
+  roleId: String!
   threshold: String
 }
 
@@ -815,10 +678,10 @@ input DefinitionCondition {
   definition: String
 
   """Checks for equality with the object’s `id` field."""
-  id: Int
+  id: String
 
-  """Checks for equality with the object’s `ipfs` field."""
-  ipfs: String
+  """Checks for equality with the object’s `ipfsUri` field."""
+  ipfsUri: String
 
   """Checks for equality with the object’s `metric` field."""
   metric: String
@@ -827,36 +690,48 @@ input DefinitionCondition {
   name: String
 
   """Checks for equality with the object’s `protocolId` field."""
-  protocolId: Int
+  protocolId: String
 
   """Checks for equality with the object’s `roleId` field."""
-  roleId: Int
+  roleId: String
 
   """Checks for equality with the object’s `threshold` field."""
   threshold: String
 }
 
 """The fields on `definition` to look up the row to connect."""
+input DefinitionDefinitionsIdProtocolIdUniqueConnect {
+  id: String!
+  protocolId: String!
+}
+
+"""The fields on `definition` to look up the row to delete."""
+input DefinitionDefinitionsIdProtocolIdUniqueDelete {
+  id: String!
+  protocolId: String!
+}
+
+"""The fields on `definition` to look up the row to connect."""
 input DefinitionDefinitionsPkeyConnect {
-  id: Int!
+  id: String!
 }
 
 """The fields on `definition` to look up the row to delete."""
 input DefinitionDefinitionsPkeyDelete {
-  id: Int!
+  id: String!
 }
 
 """An input for mutations affecting `Definition`"""
 input DefinitionInput {
   awardsUsingId: AwardsDefinitionIdForeignInverseInput
   definition: String
-  id: Int
-  ipfs: String
+  id: String!
+  ipfsUri: String
   metric: String
   name: String!
-  protocolId: Int
+  protocolId: String
   protocolToProtocolId: DefinitionsProtocolIdForeignInput
-  roleId: Int
+  roleId: String
   roleToRoleId: DefinitionsRoleIdForeignInput
   threshold: String
 }
@@ -891,12 +766,22 @@ input DefinitionOnAwardForAwardsDefinitionIdForeignNodeIdUpdate {
 }
 
 """The fields on `definition` to look up the row to update."""
+input DefinitionOnAwardForAwardsDefinitionIdForeignUsingDefinitionsIdProtocolIdUniqueUpdate {
+  """
+  An object where the defined keys will be set on the `definition` being updated.
+  """
+  definitionPatch: updateDefinitionOnAwardForAwardsDefinitionIdForeignPatch!
+  id: String!
+  protocolId: String!
+}
+
+"""The fields on `definition` to look up the row to update."""
 input DefinitionOnAwardForAwardsDefinitionIdForeignUsingDefinitionsPkeyUpdate {
   """
   An object where the defined keys will be set on the `definition` being updated.
   """
   definitionPatch: updateDefinitionOnAwardForAwardsDefinitionIdForeignPatch!
-  id: Int!
+  id: String!
 }
 
 """The globally unique `ID` look up for the row to update."""
@@ -913,12 +798,22 @@ input DefinitionOnDefinitionForDefinitionsProtocolIdForeignNodeIdUpdate {
 }
 
 """The fields on `definition` to look up the row to update."""
+input DefinitionOnDefinitionForDefinitionsProtocolIdForeignUsingDefinitionsIdProtocolIdUniqueUpdate {
+  """
+  An object where the defined keys will be set on the `definition` being updated.
+  """
+  definitionPatch: updateDefinitionOnDefinitionForDefinitionsProtocolIdForeignPatch!
+  id: String!
+  protocolId: String!
+}
+
+"""The fields on `definition` to look up the row to update."""
 input DefinitionOnDefinitionForDefinitionsProtocolIdForeignUsingDefinitionsPkeyUpdate {
   """
   An object where the defined keys will be set on the `definition` being updated.
   """
   definitionPatch: updateDefinitionOnDefinitionForDefinitionsProtocolIdForeignPatch!
-  id: Int!
+  id: String!
 }
 
 """The globally unique `ID` look up for the row to update."""
@@ -935,12 +830,22 @@ input DefinitionOnDefinitionForDefinitionsRoleIdForeignNodeIdUpdate {
 }
 
 """The fields on `definition` to look up the row to update."""
+input DefinitionOnDefinitionForDefinitionsRoleIdForeignUsingDefinitionsIdProtocolIdUniqueUpdate {
+  """
+  An object where the defined keys will be set on the `definition` being updated.
+  """
+  definitionPatch: updateDefinitionOnDefinitionForDefinitionsRoleIdForeignPatch!
+  id: String!
+  protocolId: String!
+}
+
+"""The fields on `definition` to look up the row to update."""
 input DefinitionOnDefinitionForDefinitionsRoleIdForeignUsingDefinitionsPkeyUpdate {
   """
   An object where the defined keys will be set on the `definition` being updated.
   """
   definitionPatch: updateDefinitionOnDefinitionForDefinitionsRoleIdForeignPatch!
-  id: Int!
+  id: String!
 }
 
 """
@@ -949,13 +854,13 @@ Represents an update to a `Definition`. Fields that are set will be updated.
 input DefinitionPatch {
   awardsUsingId: AwardsDefinitionIdForeignInverseInput
   definition: String
-  id: Int
-  ipfs: String
+  id: String
+  ipfsUri: String
   metric: String
   name: String
-  protocolId: Int
+  protocolId: String
   protocolToProtocolId: DefinitionsProtocolIdForeignInput
-  roleId: Int
+  roleId: String
   roleToRoleId: DefinitionsRoleIdForeignInput
   threshold: String
 }
@@ -966,8 +871,8 @@ enum DefinitionsOrderBy {
   DEFINITION_DESC
   ID_ASC
   ID_DESC
-  IPFS_ASC
-  IPFS_DESC
+  IPFS_URI_ASC
+  IPFS_URI_DESC
   METRIC_ASC
   METRIC_DESC
   NAME_ASC
@@ -987,12 +892,12 @@ enum DefinitionsOrderBy {
 input DefinitionsProtocolIdForeignDefinitionsCreateInput {
   awardsUsingId: AwardsDefinitionIdForeignInverseInput
   definition: String
-  id: Int
-  ipfs: String
+  id: String!
+  ipfsUri: String
   metric: String
   name: String!
   protocolToProtocolId: DefinitionsProtocolIdForeignInput
-  roleId: Int
+  roleId: String
   roleToRoleId: DefinitionsRoleIdForeignInput
   threshold: String
 }
@@ -1049,6 +954,11 @@ input DefinitionsProtocolIdForeignInverseInput {
   """
   The primary key(s) for `definition` for the far side of the relationship.
   """
+  connectByIdAndProtocolId: [DefinitionDefinitionsIdProtocolIdUniqueConnect!]
+
+  """
+  The primary key(s) for `definition` for the far side of the relationship.
+  """
   connectByNodeId: [DefinitionNodeIdConnect!]
 
   """
@@ -1060,6 +970,11 @@ input DefinitionsProtocolIdForeignInverseInput {
   The primary key(s) for `definition` for the far side of the relationship.
   """
   deleteById: [DefinitionDefinitionsPkeyDelete!]
+
+  """
+  The primary key(s) for `definition` for the far side of the relationship.
+  """
+  deleteByIdAndProtocolId: [DefinitionDefinitionsIdProtocolIdUniqueDelete!]
 
   """
   The primary key(s) for `definition` for the far side of the relationship.
@@ -1079,14 +994,18 @@ input DefinitionsProtocolIdForeignInverseInput {
   """
   The primary key(s) and patch data for `definition` for the far side of the relationship.
   """
+  updateByIdAndProtocolId: [DefinitionOnDefinitionForDefinitionsProtocolIdForeignUsingDefinitionsIdProtocolIdUniqueUpdate!]
+
+  """
+  The primary key(s) and patch data for `definition` for the far side of the relationship.
+  """
   updateByNodeId: [ProtocolOnDefinitionForDefinitionsProtocolIdForeignNodeIdUpdate!]
 }
 
 """The `protocol` to be created by this mutation."""
 input DefinitionsProtocolIdForeignProtocolsCreateInput {
   definitionsUsingId: DefinitionsProtocolIdForeignInverseInput
-  id: Int
-  name: String!
+  id: String!
   rankingsUsingId: RankingsProtocolIdForeignInverseInput
   rolesUsingId: RolesProtocolIdForeignInverseInput
 }
@@ -1095,11 +1014,11 @@ input DefinitionsProtocolIdForeignProtocolsCreateInput {
 input DefinitionsRoleIdForeignDefinitionsCreateInput {
   awardsUsingId: AwardsDefinitionIdForeignInverseInput
   definition: String
-  id: Int
-  ipfs: String
+  id: String!
+  ipfsUri: String
   metric: String
   name: String!
-  protocolId: Int
+  protocolId: String
   protocolToProtocolId: DefinitionsProtocolIdForeignInput
   roleToRoleId: DefinitionsRoleIdForeignInput
   threshold: String
@@ -1113,6 +1032,9 @@ input DefinitionsRoleIdForeignInput {
   connectById: RoleRolesPkeyConnect
 
   """The primary key(s) for `role` for the far side of the relationship."""
+  connectByIdAndProtocolId: RoleRolesIdProtocolIdUniqueConnect
+
+  """The primary key(s) for `role` for the far side of the relationship."""
   connectByNodeId: RoleNodeIdConnect
 
   """
@@ -1124,12 +1046,20 @@ input DefinitionsRoleIdForeignInput {
   deleteById: RoleRolesPkeyDelete
 
   """The primary key(s) for `role` for the far side of the relationship."""
+  deleteByIdAndProtocolId: RoleRolesIdProtocolIdUniqueDelete
+
+  """The primary key(s) for `role` for the far side of the relationship."""
   deleteByNodeId: RoleNodeIdDelete
 
   """
   The primary key(s) and patch data for `role` for the far side of the relationship.
   """
   updateById: RoleOnDefinitionForDefinitionsRoleIdForeignUsingRolesPkeyUpdate
+
+  """
+  The primary key(s) and patch data for `role` for the far side of the relationship.
+  """
+  updateByIdAndProtocolId: RoleOnDefinitionForDefinitionsRoleIdForeignUsingRolesIdProtocolIdUniqueUpdate
 
   """
   The primary key(s) and patch data for `role` for the far side of the relationship.
@@ -1149,6 +1079,11 @@ input DefinitionsRoleIdForeignInverseInput {
   """
   The primary key(s) for `definition` for the far side of the relationship.
   """
+  connectByIdAndProtocolId: [DefinitionDefinitionsIdProtocolIdUniqueConnect!]
+
+  """
+  The primary key(s) for `definition` for the far side of the relationship.
+  """
   connectByNodeId: [DefinitionNodeIdConnect!]
 
   """
@@ -1160,6 +1095,11 @@ input DefinitionsRoleIdForeignInverseInput {
   The primary key(s) for `definition` for the far side of the relationship.
   """
   deleteById: [DefinitionDefinitionsPkeyDelete!]
+
+  """
+  The primary key(s) for `definition` for the far side of the relationship.
+  """
+  deleteByIdAndProtocolId: [DefinitionDefinitionsIdProtocolIdUniqueDelete!]
 
   """
   The primary key(s) for `definition` for the far side of the relationship.
@@ -1179,58 +1119,20 @@ input DefinitionsRoleIdForeignInverseInput {
   """
   The primary key(s) and patch data for `definition` for the far side of the relationship.
   """
+  updateByIdAndProtocolId: [DefinitionOnDefinitionForDefinitionsRoleIdForeignUsingDefinitionsIdProtocolIdUniqueUpdate!]
+
+  """
+  The primary key(s) and patch data for `definition` for the far side of the relationship.
+  """
   updateByNodeId: [RoleOnDefinitionForDefinitionsRoleIdForeignNodeIdUpdate!]
 }
 
 """The `role` to be created by this mutation."""
 input DefinitionsRoleIdForeignRolesCreateInput {
   definitionsUsingId: DefinitionsRoleIdForeignInverseInput
-  id: Int
-  name: String!
-  protocolId: Int
-  protocolToProtocolId: RolesProtocolIdForeignInput
-}
-
-"""All input for the `deleteAccountById` mutation."""
-input DeleteAccountByIdInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
   id: String!
-}
-
-"""All input for the `deleteAccount` mutation."""
-input DeleteAccountInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-
-  """
-  The globally unique `ID` which will identify a single `Account` to be deleted.
-  """
-  nodeId: ID!
-}
-
-"""The output of our delete `Account` mutation."""
-type DeleteAccountPayload {
-  """The `Account` that was deleted by this mutation."""
-  account: Account
-
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-  deletedAccountId: ID
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
+  protocolId: String
+  protocolToProtocolId: RolesProtocolIdForeignInput
 }
 
 """All input for the `deleteAwardById` mutation."""
@@ -1259,9 +1161,6 @@ input DeleteAwardInput {
 
 """The output of our delete `Award` mutation."""
 type DeleteAwardPayload {
-  """Reads a single `Account` that is related to this `Award`."""
-  accountByAccountId: Account
-
   """The `Award` that was deleted by this mutation."""
   award: Award
 
@@ -1279,6 +1178,20 @@ type DeleteAwardPayload {
   Our root query field type. Allows us to run any query from our mutation payload.
   """
   query: Query
+
+  """Reads a single `Winner` that is related to this `Award`."""
+  winnerByWinnerId: Winner
+}
+
+"""All input for the `deleteDefinitionByIdAndProtocolId` mutation."""
+input DeleteDefinitionByIdAndProtocolIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: String!
+  protocolId: String!
 }
 
 """All input for the `deleteDefinitionById` mutation."""
@@ -1288,7 +1201,7 @@ input DeleteDefinitionByIdInput {
   payload verbatim. May be used to track mutations by the client.
   """
   clientMutationId: String
-  id: Int!
+  id: String!
 }
 
 """All input for the `deleteDefinition` mutation."""
@@ -1420,7 +1333,7 @@ input DeleteProtocolByIdInput {
   payload verbatim. May be used to track mutations by the client.
   """
   clientMutationId: String
-  id: Int!
+  id: String!
 }
 
 """All input for the `deleteProtocol` mutation."""
@@ -1481,9 +1394,6 @@ input DeleteRankingInput {
 
 """The output of our delete `Ranking` mutation."""
 type DeleteRankingPayload {
-  """Reads a single `Account` that is related to this `Ranking`."""
-  accountByAccountId: Account
-
   """
   The exact same `clientMutationId` that was provided in the mutation input,
   unchanged and unused. May be used by a client to track mutations.
@@ -1501,6 +1411,20 @@ type DeleteRankingPayload {
 
   """The `Ranking` that was deleted by this mutation."""
   ranking: Ranking
+
+  """Reads a single `Winner` that is related to this `Ranking`."""
+  winnerByWinnerId: Winner
+}
+
+"""All input for the `deleteRoleByIdAndProtocolId` mutation."""
+input DeleteRoleByIdAndProtocolIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: String!
+  protocolId: String!
 }
 
 """All input for the `deleteRoleById` mutation."""
@@ -1510,7 +1434,7 @@ input DeleteRoleByIdInput {
   payload verbatim. May be used to track mutations by the client.
   """
   clientMutationId: String
-  id: Int!
+  id: String!
 }
 
 """All input for the `deleteRole` mutation."""
@@ -1546,6 +1470,48 @@ type DeleteRolePayload {
 
   """The `Role` that was deleted by this mutation."""
   role: Role
+}
+
+"""All input for the `deleteWinnerById` mutation."""
+input DeleteWinnerByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: String!
+}
+
+"""All input for the `deleteWinner` mutation."""
+input DeleteWinnerInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Winner` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""The output of our delete `Winner` mutation."""
+type DeleteWinnerPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  deletedWinnerId: ID
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """The `Winner` that was deleted by this mutation."""
+  winner: Winner
 }
 
 type KnexMigration implements Node {
@@ -1662,14 +1628,6 @@ enum KnexMigrationsOrderBy {
 The root mutation type which contains root level fields which mutate data.
 """
 type Mutation {
-  """Creates a single `Account`."""
-  createAccount(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: CreateAccountInput!
-  ): CreateAccountPayload
-
   """Creates a single `Award`."""
   createAward(
     """
@@ -1726,21 +1684,13 @@ type Mutation {
     input: CreateRoleInput!
   ): CreateRolePayload
 
-  """Deletes a single `Account` using its globally unique id."""
-  deleteAccount(
+  """Creates a single `Winner`."""
+  createWinner(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
     """
-    input: DeleteAccountInput!
-  ): DeleteAccountPayload
-
-  """Deletes a single `Account` using a unique key."""
-  deleteAccountById(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: DeleteAccountByIdInput!
-  ): DeleteAccountPayload
+    input: CreateWinnerInput!
+  ): CreateWinnerPayload
 
   """Deletes a single `Award` using its globally unique id."""
   deleteAward(
@@ -1772,6 +1722,14 @@ type Mutation {
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
     """
     input: DeleteDefinitionByIdInput!
+  ): DeleteDefinitionPayload
+
+  """Deletes a single `Definition` using a unique key."""
+  deleteDefinitionByIdAndProtocolId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteDefinitionByIdAndProtocolIdInput!
   ): DeleteDefinitionPayload
 
   """Deletes a single `KnexMigration` using its globally unique id."""
@@ -1854,21 +1812,29 @@ type Mutation {
     input: DeleteRoleByIdInput!
   ): DeleteRolePayload
 
-  """Updates a single `Account` using its globally unique id and a patch."""
-  updateAccount(
+  """Deletes a single `Role` using a unique key."""
+  deleteRoleByIdAndProtocolId(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
     """
-    input: UpdateAccountInput!
-  ): UpdateAccountPayload
+    input: DeleteRoleByIdAndProtocolIdInput!
+  ): DeleteRolePayload
 
-  """Updates a single `Account` using a unique key and a patch."""
-  updateAccountById(
+  """Deletes a single `Winner` using its globally unique id."""
+  deleteWinner(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
     """
-    input: UpdateAccountByIdInput!
-  ): UpdateAccountPayload
+    input: DeleteWinnerInput!
+  ): DeleteWinnerPayload
+
+  """Deletes a single `Winner` using a unique key."""
+  deleteWinnerById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteWinnerByIdInput!
+  ): DeleteWinnerPayload
 
   """Updates a single `Award` using its globally unique id and a patch."""
   updateAward(
@@ -1902,6 +1868,14 @@ type Mutation {
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
     """
     input: UpdateDefinitionByIdInput!
+  ): UpdateDefinitionPayload
+
+  """Updates a single `Definition` using a unique key and a patch."""
+  updateDefinitionByIdAndProtocolId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateDefinitionByIdAndProtocolIdInput!
   ): UpdateDefinitionPayload
 
   """
@@ -1988,13 +1962,29 @@ type Mutation {
     input: UpdateRoleByIdInput!
   ): UpdateRolePayload
 
-  """Upserts a single `Account`."""
-  upsertAccount(
+  """Updates a single `Role` using a unique key and a patch."""
+  updateRoleByIdAndProtocolId(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
     """
-    input: UpsertAccountInput!
-  ): UpsertAccountPayload
+    input: UpdateRoleByIdAndProtocolIdInput!
+  ): UpdateRolePayload
+
+  """Updates a single `Winner` using its globally unique id and a patch."""
+  updateWinner(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateWinnerInput!
+  ): UpdateWinnerPayload
+
+  """Updates a single `Winner` using a unique key and a patch."""
+  updateWinnerById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateWinnerByIdInput!
+  ): UpdateWinnerPayload
 
   """Upserts a single `Award`."""
   upsertAward(
@@ -2051,6 +2041,14 @@ type Mutation {
     """
     input: UpsertRoleInput!
   ): UpsertRolePayload
+
+  """Upserts a single `Winner`."""
+  upsertWinner(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpsertWinnerInput!
+  ): UpsertWinnerPayload
 }
 
 """An object with a globally unique `ID`."""
@@ -2078,8 +2076,7 @@ type Protocol implements Node {
     """The method to use when ordering `Definition`."""
     orderBy: [DefinitionsOrderBy!]
   ): [Definition!]!
-  id: Int!
-  name: String!
+  id: String!
 
   """
   A globally unique identifier. Can be used in various places throughout the system to identify this single value.
@@ -2127,17 +2124,13 @@ for equality and combined with a logical ‘and.’
 """
 input ProtocolCondition {
   """Checks for equality with the object’s `id` field."""
-  id: Int
-
-  """Checks for equality with the object’s `name` field."""
-  name: String
+  id: String
 }
 
 """An input for mutations affecting `Protocol`"""
 input ProtocolInput {
   definitionsUsingId: DefinitionsProtocolIdForeignInverseInput
-  id: Int
-  name: String!
+  id: String!
   rankingsUsingId: RankingsProtocolIdForeignInverseInput
   rolesUsingId: RolesProtocolIdForeignInverseInput
 }
@@ -2173,7 +2166,7 @@ input ProtocolOnDefinitionForDefinitionsProtocolIdForeignNodeIdUpdate {
 
 """The fields on `protocol` to look up the row to update."""
 input ProtocolOnDefinitionForDefinitionsProtocolIdForeignUsingProtocolsPkeyUpdate {
-  id: Int!
+  id: String!
 
   """
   An object where the defined keys will be set on the `protocol` being updated.
@@ -2196,7 +2189,7 @@ input ProtocolOnRankingForRankingsProtocolIdForeignNodeIdUpdate {
 
 """The fields on `protocol` to look up the row to update."""
 input ProtocolOnRankingForRankingsProtocolIdForeignUsingProtocolsPkeyUpdate {
-  id: Int!
+  id: String!
 
   """
   An object where the defined keys will be set on the `protocol` being updated.
@@ -2219,7 +2212,7 @@ input ProtocolOnRoleForRolesProtocolIdForeignNodeIdUpdate {
 
 """The fields on `protocol` to look up the row to update."""
 input ProtocolOnRoleForRolesProtocolIdForeignUsingProtocolsPkeyUpdate {
-  id: Int!
+  id: String!
 
   """
   An object where the defined keys will be set on the `protocol` being updated.
@@ -2232,28 +2225,25 @@ Represents an update to a `Protocol`. Fields that are set will be updated.
 """
 input ProtocolPatch {
   definitionsUsingId: DefinitionsProtocolIdForeignInverseInput
-  id: Int
-  name: String
+  id: String
   rankingsUsingId: RankingsProtocolIdForeignInverseInput
   rolesUsingId: RolesProtocolIdForeignInverseInput
 }
 
 """The fields on `protocol` to look up the row to connect."""
 input ProtocolProtocolsPkeyConnect {
-  id: Int!
+  id: String!
 }
 
 """The fields on `protocol` to look up the row to delete."""
 input ProtocolProtocolsPkeyDelete {
-  id: Int!
+  id: String!
 }
 
 """Methods to use when ordering `Protocol`."""
 enum ProtocolsOrderBy {
   ID_ASC
   ID_DESC
-  NAME_ASC
-  NAME_DESC
   NATURAL
   PRIMARY_KEY_ASC
   PRIMARY_KEY_DESC
@@ -2261,30 +2251,6 @@ enum ProtocolsOrderBy {
 
 """The root query type which gives access points into the data universe."""
 type Query implements Node {
-  """Reads a single `Account` using its globally unique `ID`."""
-  account(
-    """The globally unique `ID` to be used in selecting a single `Account`."""
-    nodeId: ID!
-  ): Account
-  accountById(id: String!): Account
-
-  """Reads a set of `Account`."""
-  allAccountsList(
-    """
-    A condition to be used in determining which values should be returned by the collection.
-    """
-    condition: AccountCondition
-
-    """Only read the first `n` values of the set."""
-    first: Int
-
-    """Skip the first `n` values."""
-    offset: Int
-
-    """The method to use when ordering `Account`."""
-    orderBy: [AccountsOrderBy!]
-  ): [Account!]
-
   """Reads a set of `Award`."""
   allAwardsList(
     """
@@ -2404,6 +2370,23 @@ type Query implements Node {
     orderBy: [RolesOrderBy!]
   ): [Role!]
 
+  """Reads a set of `Winner`."""
+  allWinnersList(
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: WinnerCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Skip the first `n` values."""
+    offset: Int
+
+    """The method to use when ordering `Winner`."""
+    orderBy: [WinnersOrderBy!]
+  ): [Winner!]
+
   """Reads a single `Award` using its globally unique `ID`."""
   award(
     """The globally unique `ID` to be used in selecting a single `Award`."""
@@ -2418,7 +2401,8 @@ type Query implements Node {
     """
     nodeId: ID!
   ): Definition
-  definitionById(id: Int!): Definition
+  definitionById(id: String!): Definition
+  definitionByIdAndProtocolId(id: String!, protocolId: String!): Definition
 
   """Reads a single `KnexMigration` using its globally unique `ID`."""
   knexMigration(
@@ -2454,7 +2438,7 @@ type Query implements Node {
     """The globally unique `ID` to be used in selecting a single `Protocol`."""
     nodeId: ID!
   ): Protocol
-  protocolById(id: Int!): Protocol
+  protocolById(id: String!): Protocol
 
   """
   Exposes the root query type nested one level down. This is helpful for Relay 1
@@ -2474,13 +2458,18 @@ type Query implements Node {
     """The globally unique `ID` to be used in selecting a single `Role`."""
     nodeId: ID!
   ): Role
-  roleById(id: Int!): Role
+  roleById(id: String!): Role
+  roleByIdAndProtocolId(id: String!, protocolId: String!): Role
+
+  """Reads a single `Winner` using its globally unique `ID`."""
+  winner(
+    """The globally unique `ID` to be used in selecting a single `Winner`."""
+    nodeId: ID!
+  ): Winner
+  winnerById(id: String!): Winner
 }
 
 type Ranking implements Node {
-  """Reads a single `Account` that is related to this `Ranking`."""
-  accountByAccountId: Account
-  accountId: String!
   id: Int!
 
   """
@@ -2490,35 +2479,39 @@ type Ranking implements Node {
 
   """Reads a single `Protocol` that is related to this `Ranking`."""
   protocolByProtocolId: Protocol
-  protocolId: Int!
+  protocolId: String!
   rank: Int!
+
+  """Reads a single `Winner` that is related to this `Ranking`."""
+  winnerByWinnerId: Winner
+  winnerId: String!
 }
 
 """
 A condition to be used against `Ranking` object types. All fields are tested for equality and combined with a logical ‘and.’
 """
 input RankingCondition {
-  """Checks for equality with the object’s `accountId` field."""
-  accountId: String
-
   """Checks for equality with the object’s `id` field."""
   id: Int
 
   """Checks for equality with the object’s `protocolId` field."""
-  protocolId: Int
+  protocolId: String
 
   """Checks for equality with the object’s `rank` field."""
   rank: Int
+
+  """Checks for equality with the object’s `winnerId` field."""
+  winnerId: String
 }
 
 """An input for mutations affecting `Ranking`"""
 input RankingInput {
-  accountId: String
-  accountToAccountId: RankingsAccountIdForeignInput
   id: Int
-  protocolId: Int
+  protocolId: String
   protocolToProtocolId: RankingsProtocolIdForeignInput
   rank: Int!
+  winnerId: String
+  winnerToWinnerId: RankingsWinnerIdForeignInput
 }
 
 """The globally unique `ID` look up for the row to connect."""
@@ -2535,29 +2528,6 @@ input RankingNodeIdDelete {
   The globally unique `ID` which identifies a single `ranking` to be deleted.
   """
   nodeId: ID!
-}
-
-"""The globally unique `ID` look up for the row to update."""
-input RankingOnRankingForRankingsAccountIdForeignNodeIdUpdate {
-  """
-  An object where the defined keys will be set on the `account` being updated.
-  """
-  accountPatch: AccountPatch!
-
-  """
-  The globally unique `ID` which identifies a single `account` to be connected.
-  """
-  nodeId: ID!
-}
-
-"""The fields on `ranking` to look up the row to update."""
-input RankingOnRankingForRankingsAccountIdForeignUsingRankingsPkeyUpdate {
-  id: Int!
-
-  """
-  An object where the defined keys will be set on the `ranking` being updated.
-  """
-  rankingPatch: updateRankingOnRankingForRankingsAccountIdForeignPatch!
 }
 
 """The globally unique `ID` look up for the row to update."""
@@ -2583,16 +2553,39 @@ input RankingOnRankingForRankingsProtocolIdForeignUsingRankingsPkeyUpdate {
   rankingPatch: updateRankingOnRankingForRankingsProtocolIdForeignPatch!
 }
 
+"""The globally unique `ID` look up for the row to update."""
+input RankingOnRankingForRankingsWinnerIdForeignNodeIdUpdate {
+  """
+  The globally unique `ID` which identifies a single `winner` to be connected.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `winner` being updated.
+  """
+  winnerPatch: WinnerPatch!
+}
+
+"""The fields on `ranking` to look up the row to update."""
+input RankingOnRankingForRankingsWinnerIdForeignUsingRankingsPkeyUpdate {
+  id: Int!
+
+  """
+  An object where the defined keys will be set on the `ranking` being updated.
+  """
+  rankingPatch: updateRankingOnRankingForRankingsWinnerIdForeignPatch!
+}
+
 """
 Represents an update to a `Ranking`. Fields that are set will be updated.
 """
 input RankingPatch {
-  accountId: String
-  accountToAccountId: RankingsAccountIdForeignInput
   id: Int
-  protocolId: Int
+  protocolId: String
   protocolToProtocolId: RankingsProtocolIdForeignInput
   rank: Int
+  winnerId: String
+  winnerToWinnerId: RankingsWinnerIdForeignInput
 }
 
 """The fields on `ranking` to look up the row to connect."""
@@ -2605,96 +2598,8 @@ input RankingRankingsPkeyDelete {
   id: Int!
 }
 
-"""The `account` to be created by this mutation."""
-input RankingsAccountIdForeignAccountsCreateInput {
-  awardsUsingId: AwardsAccountIdForeignInverseInput
-  ens: String
-  id: String!
-  rankingsUsingId: RankingsAccountIdForeignInverseInput
-}
-
-"""
-Input for the nested mutation of `account` in the `RankingInput` mutation.
-"""
-input RankingsAccountIdForeignInput {
-  """The primary key(s) for `account` for the far side of the relationship."""
-  connectById: AccountAccountsPkeyConnect
-
-  """The primary key(s) for `account` for the far side of the relationship."""
-  connectByNodeId: AccountNodeIdConnect
-
-  """
-  A `AccountInput` object that will be created and connected to this object.
-  """
-  create: RankingsAccountIdForeignAccountsCreateInput
-
-  """The primary key(s) for `account` for the far side of the relationship."""
-  deleteById: AccountAccountsPkeyDelete
-
-  """The primary key(s) for `account` for the far side of the relationship."""
-  deleteByNodeId: AccountNodeIdDelete
-
-  """
-  The primary key(s) and patch data for `account` for the far side of the relationship.
-  """
-  updateById: AccountOnRankingForRankingsAccountIdForeignUsingAccountsPkeyUpdate
-
-  """
-  The primary key(s) and patch data for `account` for the far side of the relationship.
-  """
-  updateByNodeId: RankingOnRankingForRankingsAccountIdForeignNodeIdUpdate
-}
-
-"""
-Input for the nested mutation of `ranking` in the `AccountInput` mutation.
-"""
-input RankingsAccountIdForeignInverseInput {
-  """The primary key(s) for `ranking` for the far side of the relationship."""
-  connectById: [RankingRankingsPkeyConnect!]
-
-  """The primary key(s) for `ranking` for the far side of the relationship."""
-  connectByNodeId: [RankingNodeIdConnect!]
-
-  """
-  A `RankingInput` object that will be created and connected to this object.
-  """
-  create: [RankingsAccountIdForeignRankingsCreateInput!]
-
-  """The primary key(s) for `ranking` for the far side of the relationship."""
-  deleteById: [RankingRankingsPkeyDelete!]
-
-  """The primary key(s) for `ranking` for the far side of the relationship."""
-  deleteByNodeId: [RankingNodeIdDelete!]
-
-  """
-  Flag indicating whether all other `ranking` records that match this relationship should be removed.
-  """
-  deleteOthers: Boolean
-
-  """
-  The primary key(s) and patch data for `ranking` for the far side of the relationship.
-  """
-  updateById: [RankingOnRankingForRankingsAccountIdForeignUsingRankingsPkeyUpdate!]
-
-  """
-  The primary key(s) and patch data for `ranking` for the far side of the relationship.
-  """
-  updateByNodeId: [AccountOnRankingForRankingsAccountIdForeignNodeIdUpdate!]
-}
-
-"""The `ranking` to be created by this mutation."""
-input RankingsAccountIdForeignRankingsCreateInput {
-  accountToAccountId: RankingsAccountIdForeignInput
-  id: Int
-  protocolId: Int
-  protocolToProtocolId: RankingsProtocolIdForeignInput
-  rank: Int!
-}
-
 """Methods to use when ordering `Ranking`."""
 enum RankingsOrderBy {
-  ACCOUNT_ID_ASC
-  ACCOUNT_ID_DESC
   ID_ASC
   ID_DESC
   NATURAL
@@ -2704,6 +2609,8 @@ enum RankingsOrderBy {
   PROTOCOL_ID_DESC
   RANK_ASC
   RANK_DESC
+  WINNER_ID_ASC
+  WINNER_ID_DESC
 }
 
 """
@@ -2786,19 +2693,104 @@ input RankingsProtocolIdForeignInverseInput {
 """The `protocol` to be created by this mutation."""
 input RankingsProtocolIdForeignProtocolsCreateInput {
   definitionsUsingId: DefinitionsProtocolIdForeignInverseInput
-  id: Int
-  name: String!
+  id: String!
   rankingsUsingId: RankingsProtocolIdForeignInverseInput
   rolesUsingId: RolesProtocolIdForeignInverseInput
 }
 
 """The `ranking` to be created by this mutation."""
 input RankingsProtocolIdForeignRankingsCreateInput {
-  accountId: String
-  accountToAccountId: RankingsAccountIdForeignInput
   id: Int
   protocolToProtocolId: RankingsProtocolIdForeignInput
   rank: Int!
+  winnerId: String
+  winnerToWinnerId: RankingsWinnerIdForeignInput
+}
+
+"""
+Input for the nested mutation of `winner` in the `RankingInput` mutation.
+"""
+input RankingsWinnerIdForeignInput {
+  """The primary key(s) for `winner` for the far side of the relationship."""
+  connectById: WinnerWinnersPkeyConnect
+
+  """The primary key(s) for `winner` for the far side of the relationship."""
+  connectByNodeId: WinnerNodeIdConnect
+
+  """
+  A `WinnerInput` object that will be created and connected to this object.
+  """
+  create: RankingsWinnerIdForeignWinnersCreateInput
+
+  """The primary key(s) for `winner` for the far side of the relationship."""
+  deleteById: WinnerWinnersPkeyDelete
+
+  """The primary key(s) for `winner` for the far side of the relationship."""
+  deleteByNodeId: WinnerNodeIdDelete
+
+  """
+  The primary key(s) and patch data for `winner` for the far side of the relationship.
+  """
+  updateById: WinnerOnRankingForRankingsWinnerIdForeignUsingWinnersPkeyUpdate
+
+  """
+  The primary key(s) and patch data for `winner` for the far side of the relationship.
+  """
+  updateByNodeId: RankingOnRankingForRankingsWinnerIdForeignNodeIdUpdate
+}
+
+"""
+Input for the nested mutation of `ranking` in the `WinnerInput` mutation.
+"""
+input RankingsWinnerIdForeignInverseInput {
+  """The primary key(s) for `ranking` for the far side of the relationship."""
+  connectById: [RankingRankingsPkeyConnect!]
+
+  """The primary key(s) for `ranking` for the far side of the relationship."""
+  connectByNodeId: [RankingNodeIdConnect!]
+
+  """
+  A `RankingInput` object that will be created and connected to this object.
+  """
+  create: [RankingsWinnerIdForeignRankingsCreateInput!]
+
+  """The primary key(s) for `ranking` for the far side of the relationship."""
+  deleteById: [RankingRankingsPkeyDelete!]
+
+  """The primary key(s) for `ranking` for the far side of the relationship."""
+  deleteByNodeId: [RankingNodeIdDelete!]
+
+  """
+  Flag indicating whether all other `ranking` records that match this relationship should be removed.
+  """
+  deleteOthers: Boolean
+
+  """
+  The primary key(s) and patch data for `ranking` for the far side of the relationship.
+  """
+  updateById: [RankingOnRankingForRankingsWinnerIdForeignUsingRankingsPkeyUpdate!]
+
+  """
+  The primary key(s) and patch data for `ranking` for the far side of the relationship.
+  """
+  updateByNodeId: [WinnerOnRankingForRankingsWinnerIdForeignNodeIdUpdate!]
+}
+
+"""The `ranking` to be created by this mutation."""
+input RankingsWinnerIdForeignRankingsCreateInput {
+  id: Int
+  protocolId: String
+  protocolToProtocolId: RankingsProtocolIdForeignInput
+  rank: Int!
+  winnerToWinnerId: RankingsWinnerIdForeignInput
+}
+
+"""The `winner` to be created by this mutation."""
+input RankingsWinnerIdForeignWinnersCreateInput {
+  awardsUsingId: AwardsWinnerIdForeignInverseInput
+  ens: String
+  id: String!
+  rankingsUsingId: RankingsWinnerIdForeignInverseInput
 }
 
 type Role implements Node {
@@ -2818,8 +2810,7 @@ type Role implements Node {
     """The method to use when ordering `Definition`."""
     orderBy: [DefinitionsOrderBy!]
   ): [Definition!]!
-  id: Int!
-  name: String!
+  id: String!
 
   """
   A globally unique identifier. Can be used in various places throughout the system to identify this single value.
@@ -2828,7 +2819,7 @@ type Role implements Node {
 
   """Reads a single `Protocol` that is related to this `Role`."""
   protocolByProtocolId: Protocol
-  protocolId: Int!
+  protocolId: String!
 }
 
 """
@@ -2836,21 +2827,17 @@ A condition to be used against `Role` object types. All fields are tested for eq
 """
 input RoleCondition {
   """Checks for equality with the object’s `id` field."""
-  id: Int
-
-  """Checks for equality with the object’s `name` field."""
-  name: String
+  id: String
 
   """Checks for equality with the object’s `protocolId` field."""
-  protocolId: Int
+  protocolId: String
 }
 
 """An input for mutations affecting `Role`"""
 input RoleInput {
   definitionsUsingId: DefinitionsRoleIdForeignInverseInput
-  id: Int
-  name: String!
-  protocolId: Int
+  id: String!
+  protocolId: String
   protocolToProtocolId: RolesProtocolIdForeignInput
 }
 
@@ -2884,8 +2871,19 @@ input RoleOnDefinitionForDefinitionsRoleIdForeignNodeIdUpdate {
 }
 
 """The fields on `role` to look up the row to update."""
+input RoleOnDefinitionForDefinitionsRoleIdForeignUsingRolesIdProtocolIdUniqueUpdate {
+  id: String!
+  protocolId: String!
+
+  """
+  An object where the defined keys will be set on the `role` being updated.
+  """
+  rolePatch: updateRoleOnDefinitionForDefinitionsRoleIdForeignPatch!
+}
+
+"""The fields on `role` to look up the row to update."""
 input RoleOnDefinitionForDefinitionsRoleIdForeignUsingRolesPkeyUpdate {
-  id: Int!
+  id: String!
 
   """
   An object where the defined keys will be set on the `role` being updated.
@@ -2907,8 +2905,19 @@ input RoleOnRoleForRolesProtocolIdForeignNodeIdUpdate {
 }
 
 """The fields on `role` to look up the row to update."""
+input RoleOnRoleForRolesProtocolIdForeignUsingRolesIdProtocolIdUniqueUpdate {
+  id: String!
+  protocolId: String!
+
+  """
+  An object where the defined keys will be set on the `role` being updated.
+  """
+  rolePatch: updateRoleOnRoleForRolesProtocolIdForeignPatch!
+}
+
+"""The fields on `role` to look up the row to update."""
 input RoleOnRoleForRolesProtocolIdForeignUsingRolesPkeyUpdate {
-  id: Int!
+  id: String!
 
   """
   An object where the defined keys will be set on the `role` being updated.
@@ -2919,28 +2928,37 @@ input RoleOnRoleForRolesProtocolIdForeignUsingRolesPkeyUpdate {
 """Represents an update to a `Role`. Fields that are set will be updated."""
 input RolePatch {
   definitionsUsingId: DefinitionsRoleIdForeignInverseInput
-  id: Int
-  name: String
-  protocolId: Int
+  id: String
+  protocolId: String
   protocolToProtocolId: RolesProtocolIdForeignInput
 }
 
 """The fields on `role` to look up the row to connect."""
+input RoleRolesIdProtocolIdUniqueConnect {
+  id: String!
+  protocolId: String!
+}
+
+"""The fields on `role` to look up the row to delete."""
+input RoleRolesIdProtocolIdUniqueDelete {
+  id: String!
+  protocolId: String!
+}
+
+"""The fields on `role` to look up the row to connect."""
 input RoleRolesPkeyConnect {
-  id: Int!
+  id: String!
 }
 
 """The fields on `role` to look up the row to delete."""
 input RoleRolesPkeyDelete {
-  id: Int!
+  id: String!
 }
 
 """Methods to use when ordering `Role`."""
 enum RolesOrderBy {
   ID_ASC
   ID_DESC
-  NAME_ASC
-  NAME_DESC
   NATURAL
   PRIMARY_KEY_ASC
   PRIMARY_KEY_DESC
@@ -2996,6 +3014,9 @@ input RolesProtocolIdForeignInverseInput {
   connectById: [RoleRolesPkeyConnect!]
 
   """The primary key(s) for `role` for the far side of the relationship."""
+  connectByIdAndProtocolId: [RoleRolesIdProtocolIdUniqueConnect!]
+
+  """The primary key(s) for `role` for the far side of the relationship."""
   connectByNodeId: [RoleNodeIdConnect!]
 
   """
@@ -3005,6 +3026,9 @@ input RolesProtocolIdForeignInverseInput {
 
   """The primary key(s) for `role` for the far side of the relationship."""
   deleteById: [RoleRolesPkeyDelete!]
+
+  """The primary key(s) for `role` for the far side of the relationship."""
+  deleteByIdAndProtocolId: [RoleRolesIdProtocolIdUniqueDelete!]
 
   """The primary key(s) for `role` for the far side of the relationship."""
   deleteByNodeId: [RoleNodeIdDelete!]
@@ -3022,14 +3046,18 @@ input RolesProtocolIdForeignInverseInput {
   """
   The primary key(s) and patch data for `role` for the far side of the relationship.
   """
+  updateByIdAndProtocolId: [RoleOnRoleForRolesProtocolIdForeignUsingRolesIdProtocolIdUniqueUpdate!]
+
+  """
+  The primary key(s) and patch data for `role` for the far side of the relationship.
+  """
   updateByNodeId: [ProtocolOnRoleForRolesProtocolIdForeignNodeIdUpdate!]
 }
 
 """The `protocol` to be created by this mutation."""
 input RolesProtocolIdForeignProtocolsCreateInput {
   definitionsUsingId: DefinitionsProtocolIdForeignInverseInput
-  id: Int
-  name: String!
+  id: String!
   rankingsUsingId: RankingsProtocolIdForeignInverseInput
   rolesUsingId: RolesProtocolIdForeignInverseInput
 }
@@ -3037,60 +3065,8 @@ input RolesProtocolIdForeignProtocolsCreateInput {
 """The `role` to be created by this mutation."""
 input RolesProtocolIdForeignRolesCreateInput {
   definitionsUsingId: DefinitionsRoleIdForeignInverseInput
-  id: Int
-  name: String!
-  protocolToProtocolId: RolesProtocolIdForeignInput
-}
-
-"""All input for the `updateAccountById` mutation."""
-input UpdateAccountByIdInput {
-  """
-  An object where the defined keys will be set on the `Account` being updated.
-  """
-  accountPatch: AccountPatch!
-
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
   id: String!
-}
-
-"""All input for the `updateAccount` mutation."""
-input UpdateAccountInput {
-  """
-  An object where the defined keys will be set on the `Account` being updated.
-  """
-  accountPatch: AccountPatch!
-
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-
-  """
-  The globally unique `ID` which will identify a single `Account` to be updated.
-  """
-  nodeId: ID!
-}
-
-"""The output of our update `Account` mutation."""
-type UpdateAccountPayload {
-  """The `Account` that was updated by this mutation."""
-  account: Account
-
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
+  protocolToProtocolId: RolesProtocolIdForeignInput
 }
 
 """All input for the `updateAwardById` mutation."""
@@ -3129,9 +3105,6 @@ input UpdateAwardInput {
 
 """The output of our update `Award` mutation."""
 type UpdateAwardPayload {
-  """Reads a single `Account` that is related to this `Award`."""
-  accountByAccountId: Account
-
   """The `Award` that was updated by this mutation."""
   award: Award
 
@@ -3148,6 +3121,25 @@ type UpdateAwardPayload {
   Our root query field type. Allows us to run any query from our mutation payload.
   """
   query: Query
+
+  """Reads a single `Winner` that is related to this `Award`."""
+  winnerByWinnerId: Winner
+}
+
+"""All input for the `updateDefinitionByIdAndProtocolId` mutation."""
+input UpdateDefinitionByIdAndProtocolIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `Definition` being updated.
+  """
+  definitionPatch: DefinitionPatch!
+  id: String!
+  protocolId: String!
 }
 
 """All input for the `updateDefinitionById` mutation."""
@@ -3162,7 +3154,7 @@ input UpdateDefinitionByIdInput {
   An object where the defined keys will be set on the `Definition` being updated.
   """
   definitionPatch: DefinitionPatch!
-  id: Int!
+  id: String!
 }
 
 """All input for the `updateDefinition` mutation."""
@@ -3316,7 +3308,7 @@ input UpdateProtocolByIdInput {
   payload verbatim. May be used to track mutations by the client.
   """
   clientMutationId: String
-  id: Int!
+  id: String!
 
   """
   An object where the defined keys will be set on the `Protocol` being updated.
@@ -3396,9 +3388,6 @@ input UpdateRankingInput {
 
 """The output of our update `Ranking` mutation."""
 type UpdateRankingPayload {
-  """Reads a single `Account` that is related to this `Ranking`."""
-  accountByAccountId: Account
-
   """
   The exact same `clientMutationId` that was provided in the mutation input,
   unchanged and unused. May be used by a client to track mutations.
@@ -3415,6 +3404,25 @@ type UpdateRankingPayload {
 
   """The `Ranking` that was updated by this mutation."""
   ranking: Ranking
+
+  """Reads a single `Winner` that is related to this `Ranking`."""
+  winnerByWinnerId: Winner
+}
+
+"""All input for the `updateRoleByIdAndProtocolId` mutation."""
+input UpdateRoleByIdAndProtocolIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: String!
+  protocolId: String!
+
+  """
+  An object where the defined keys will be set on the `Role` being updated.
+  """
+  rolePatch: RolePatch!
 }
 
 """All input for the `updateRoleById` mutation."""
@@ -3424,7 +3432,7 @@ input UpdateRoleByIdInput {
   payload verbatim. May be used to track mutations by the client.
   """
   clientMutationId: String
-  id: Int!
+  id: String!
 
   """
   An object where the defined keys will be set on the `Role` being updated.
@@ -3471,24 +3479,45 @@ type UpdateRolePayload {
   role: Role
 }
 
-"""All input for the upsert `Account` mutation."""
-input UpsertAccountInput {
-  """The `Account` to be upserted by this mutation."""
-  account: AccountInput!
-
+"""All input for the `updateWinnerById` mutation."""
+input UpdateWinnerByIdInput {
   """
-  An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client.
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
   """
   clientMutationId: String
-}
-
-"""The output of our upsert `Account` mutation."""
-type UpsertAccountPayload {
-  """The `Account` that were upserted by this mutation."""
-  account: Account
+  id: String!
 
   """
-  The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations.
+  An object where the defined keys will be set on the `Winner` being updated.
+  """
+  winnerPatch: WinnerPatch!
+}
+
+"""All input for the `updateWinner` mutation."""
+input UpdateWinnerInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Winner` to be updated.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `Winner` being updated.
+  """
+  winnerPatch: WinnerPatch!
+}
+
+"""The output of our update `Winner` mutation."""
+type UpdateWinnerPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
   """
   clientMutationId: String
 
@@ -3496,6 +3525,9 @@ type UpsertAccountPayload {
   Our root query field type. Allows us to run any query from our mutation payload.
   """
   query: Query
+
+  """The `Winner` that was updated by this mutation."""
+  winner: Winner
 }
 
 """All input for the upsert `Award` mutation."""
@@ -3511,9 +3543,6 @@ input UpsertAwardInput {
 
 """The output of our upsert `Award` mutation."""
 type UpsertAwardPayload {
-  """Reads a single `Account` that is related to this `Award`."""
-  accountByAccountId: Account
-
   """The `Award` that were upserted by this mutation."""
   award: Award
 
@@ -3529,6 +3558,9 @@ type UpsertAwardPayload {
   Our root query field type. Allows us to run any query from our mutation payload.
   """
   query: Query
+
+  """Reads a single `Winner` that is related to this `Award`."""
+  winnerByWinnerId: Winner
 }
 
 """All input for the upsert `Definition` mutation."""
@@ -3658,9 +3690,6 @@ input UpsertRankingInput {
 
 """The output of our upsert `Ranking` mutation."""
 type UpsertRankingPayload {
-  """Reads a single `Account` that is related to this `Ranking`."""
-  accountByAccountId: Account
-
   """
   The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations.
   """
@@ -3676,6 +3705,9 @@ type UpsertRankingPayload {
 
   """The `Ranking` that were upserted by this mutation."""
   ranking: Ranking
+
+  """Reads a single `Winner` that is related to this `Ranking`."""
+  winnerByWinnerId: Winner
 }
 
 """All input for the upsert `Role` mutation."""
@@ -3708,52 +3740,214 @@ type UpsertRolePayload {
   role: Role
 }
 
-"""
-An object where the defined keys will be set on the `account` being updated.
-"""
-input updateAccountOnAwardForAwardsAccountIdForeignPatch {
-  awardsUsingId: AwardsAccountIdForeignInverseInput
+"""All input for the upsert `Winner` mutation."""
+input UpsertWinnerInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Winner` to be upserted by this mutation."""
+  winner: WinnerInput!
+}
+
+"""The output of our upsert `Winner` mutation."""
+type UpsertWinnerPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """The `Winner` that were upserted by this mutation."""
+  winner: Winner
+}
+
+type Winner implements Node {
+  """Reads and enables pagination through a set of `Award`."""
+  awardsByWinnerIdList(
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: AwardCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Skip the first `n` values."""
+    offset: Int
+
+    """The method to use when ordering `Award`."""
+    orderBy: [AwardsOrderBy!]
+  ): [Award!]!
   ens: String
-  id: String
-  rankingsUsingId: RankingsAccountIdForeignInverseInput
+  id: String!
+
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+
+  """Reads and enables pagination through a set of `Ranking`."""
+  rankingsByWinnerIdList(
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: RankingCondition
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Skip the first `n` values."""
+    offset: Int
+
+    """The method to use when ordering `Ranking`."""
+    orderBy: [RankingsOrderBy!]
+  ): [Ranking!]!
 }
 
 """
-An object where the defined keys will be set on the `account` being updated.
+A condition to be used against `Winner` object types. All fields are tested for equality and combined with a logical ‘and.’
 """
-input updateAccountOnRankingForRankingsAccountIdForeignPatch {
-  awardsUsingId: AwardsAccountIdForeignInverseInput
+input WinnerCondition {
+  """Checks for equality with the object’s `ens` field."""
   ens: String
+
+  """Checks for equality with the object’s `id` field."""
   id: String
-  rankingsUsingId: RankingsAccountIdForeignInverseInput
+}
+
+"""An input for mutations affecting `Winner`"""
+input WinnerInput {
+  awardsUsingId: AwardsWinnerIdForeignInverseInput
+  ens: String
+  id: String!
+  rankingsUsingId: RankingsWinnerIdForeignInverseInput
+}
+
+"""The globally unique `ID` look up for the row to connect."""
+input WinnerNodeIdConnect {
+  """
+  The globally unique `ID` which identifies a single `winner` to be connected.
+  """
+  nodeId: ID!
+}
+
+"""The globally unique `ID` look up for the row to delete."""
+input WinnerNodeIdDelete {
+  """
+  The globally unique `ID` which identifies a single `winner` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""The globally unique `ID` look up for the row to update."""
+input WinnerOnAwardForAwardsWinnerIdForeignNodeIdUpdate {
+  """
+  An object where the defined keys will be set on the `award` being updated.
+  """
+  awardPatch: AwardPatch!
+
+  """
+  The globally unique `ID` which identifies a single `award` to be connected.
+  """
+  nodeId: ID!
+}
+
+"""The fields on `winner` to look up the row to update."""
+input WinnerOnAwardForAwardsWinnerIdForeignUsingWinnersPkeyUpdate {
+  id: String!
+
+  """
+  An object where the defined keys will be set on the `winner` being updated.
+  """
+  winnerPatch: updateWinnerOnAwardForAwardsWinnerIdForeignPatch!
+}
+
+"""The globally unique `ID` look up for the row to update."""
+input WinnerOnRankingForRankingsWinnerIdForeignNodeIdUpdate {
+  """
+  The globally unique `ID` which identifies a single `ranking` to be connected.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `ranking` being updated.
+  """
+  rankingPatch: RankingPatch!
+}
+
+"""The fields on `winner` to look up the row to update."""
+input WinnerOnRankingForRankingsWinnerIdForeignUsingWinnersPkeyUpdate {
+  id: String!
+
+  """
+  An object where the defined keys will be set on the `winner` being updated.
+  """
+  winnerPatch: updateWinnerOnRankingForRankingsWinnerIdForeignPatch!
 }
 
 """
-An object where the defined keys will be set on the `award` being updated.
+Represents an update to a `Winner`. Fields that are set will be updated.
 """
-input updateAwardOnAwardForAwardsAccountIdForeignPatch {
-  accountToAccountId: AwardsAccountIdForeignInput
-  awardNumber: String
-  blockAwarded: Int
-  definitionId: Int
-  definitionToDefinitionId: AwardsDefinitionIdForeignInput
-  globalAwardNumber: String
-  id: Int
-  transactionHash: String
+input WinnerPatch {
+  awardsUsingId: AwardsWinnerIdForeignInverseInput
+  ens: String
+  id: String
+  rankingsUsingId: RankingsWinnerIdForeignInverseInput
+}
+
+"""The fields on `winner` to look up the row to connect."""
+input WinnerWinnersPkeyConnect {
+  id: String!
+}
+
+"""The fields on `winner` to look up the row to delete."""
+input WinnerWinnersPkeyDelete {
+  id: String!
+}
+
+"""Methods to use when ordering `Winner`."""
+enum WinnersOrderBy {
+  ENS_ASC
+  ENS_DESC
+  ID_ASC
+  ID_DESC
+  NATURAL
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
 }
 
 """
 An object where the defined keys will be set on the `award` being updated.
 """
 input updateAwardOnAwardForAwardsDefinitionIdForeignPatch {
-  accountId: String
-  accountToAccountId: AwardsAccountIdForeignInput
   awardNumber: String
   blockAwarded: Int
   definitionToDefinitionId: AwardsDefinitionIdForeignInput
   globalAwardNumber: String
   id: Int
   transactionHash: String
+  winnerId: String
+  winnerToWinnerId: AwardsWinnerIdForeignInput
+}
+
+"""
+An object where the defined keys will be set on the `award` being updated.
+"""
+input updateAwardOnAwardForAwardsWinnerIdForeignPatch {
+  awardNumber: String
+  blockAwarded: Int
+  definitionId: String
+  definitionToDefinitionId: AwardsDefinitionIdForeignInput
+  globalAwardNumber: String
+  id: Int
+  transactionHash: String
+  winnerToWinnerId: AwardsWinnerIdForeignInput
 }
 
 """
@@ -3762,13 +3956,13 @@ An object where the defined keys will be set on the `definition` being updated.
 input updateDefinitionOnAwardForAwardsDefinitionIdForeignPatch {
   awardsUsingId: AwardsDefinitionIdForeignInverseInput
   definition: String
-  id: Int
-  ipfs: String
+  id: String
+  ipfsUri: String
   metric: String
   name: String
-  protocolId: Int
+  protocolId: String
   protocolToProtocolId: DefinitionsProtocolIdForeignInput
-  roleId: Int
+  roleId: String
   roleToRoleId: DefinitionsRoleIdForeignInput
   threshold: String
 }
@@ -3779,12 +3973,12 @@ An object where the defined keys will be set on the `definition` being updated.
 input updateDefinitionOnDefinitionForDefinitionsProtocolIdForeignPatch {
   awardsUsingId: AwardsDefinitionIdForeignInverseInput
   definition: String
-  id: Int
-  ipfs: String
+  id: String
+  ipfsUri: String
   metric: String
   name: String
   protocolToProtocolId: DefinitionsProtocolIdForeignInput
-  roleId: Int
+  roleId: String
   roleToRoleId: DefinitionsRoleIdForeignInput
   threshold: String
 }
@@ -3795,11 +3989,11 @@ An object where the defined keys will be set on the `definition` being updated.
 input updateDefinitionOnDefinitionForDefinitionsRoleIdForeignPatch {
   awardsUsingId: AwardsDefinitionIdForeignInverseInput
   definition: String
-  id: Int
-  ipfs: String
+  id: String
+  ipfsUri: String
   metric: String
   name: String
-  protocolId: Int
+  protocolId: String
   protocolToProtocolId: DefinitionsProtocolIdForeignInput
   roleToRoleId: DefinitionsRoleIdForeignInput
   threshold: String
@@ -3810,8 +4004,7 @@ An object where the defined keys will be set on the `protocol` being updated.
 """
 input updateProtocolOnDefinitionForDefinitionsProtocolIdForeignPatch {
   definitionsUsingId: DefinitionsProtocolIdForeignInverseInput
-  id: Int
-  name: String
+  id: String
   rankingsUsingId: RankingsProtocolIdForeignInverseInput
   rolesUsingId: RolesProtocolIdForeignInverseInput
 }
@@ -3821,8 +4014,7 @@ An object where the defined keys will be set on the `protocol` being updated.
 """
 input updateProtocolOnRankingForRankingsProtocolIdForeignPatch {
   definitionsUsingId: DefinitionsProtocolIdForeignInverseInput
-  id: Int
-  name: String
+  id: String
   rankingsUsingId: RankingsProtocolIdForeignInverseInput
   rolesUsingId: RolesProtocolIdForeignInverseInput
 }
@@ -3832,8 +4024,7 @@ An object where the defined keys will be set on the `protocol` being updated.
 """
 input updateProtocolOnRoleForRolesProtocolIdForeignPatch {
   definitionsUsingId: DefinitionsProtocolIdForeignInverseInput
-  id: Int
-  name: String
+  id: String
   rankingsUsingId: RankingsProtocolIdForeignInverseInput
   rolesUsingId: RolesProtocolIdForeignInverseInput
 }
@@ -3841,23 +4032,23 @@ input updateProtocolOnRoleForRolesProtocolIdForeignPatch {
 """
 An object where the defined keys will be set on the `ranking` being updated.
 """
-input updateRankingOnRankingForRankingsAccountIdForeignPatch {
-  accountToAccountId: RankingsAccountIdForeignInput
+input updateRankingOnRankingForRankingsProtocolIdForeignPatch {
   id: Int
-  protocolId: Int
   protocolToProtocolId: RankingsProtocolIdForeignInput
   rank: Int
+  winnerId: String
+  winnerToWinnerId: RankingsWinnerIdForeignInput
 }
 
 """
 An object where the defined keys will be set on the `ranking` being updated.
 """
-input updateRankingOnRankingForRankingsProtocolIdForeignPatch {
-  accountId: String
-  accountToAccountId: RankingsAccountIdForeignInput
+input updateRankingOnRankingForRankingsWinnerIdForeignPatch {
   id: Int
+  protocolId: String
   protocolToProtocolId: RankingsProtocolIdForeignInput
   rank: Int
+  winnerToWinnerId: RankingsWinnerIdForeignInput
 }
 
 """
@@ -3865,9 +4056,8 @@ An object where the defined keys will be set on the `role` being updated.
 """
 input updateRoleOnDefinitionForDefinitionsRoleIdForeignPatch {
   definitionsUsingId: DefinitionsRoleIdForeignInverseInput
-  id: Int
-  name: String
-  protocolId: Int
+  id: String
+  protocolId: String
   protocolToProtocolId: RolesProtocolIdForeignInput
 }
 
@@ -3876,7 +4066,26 @@ An object where the defined keys will be set on the `role` being updated.
 """
 input updateRoleOnRoleForRolesProtocolIdForeignPatch {
   definitionsUsingId: DefinitionsRoleIdForeignInverseInput
-  id: Int
-  name: String
+  id: String
   protocolToProtocolId: RolesProtocolIdForeignInput
+}
+
+"""
+An object where the defined keys will be set on the `winner` being updated.
+"""
+input updateWinnerOnAwardForAwardsWinnerIdForeignPatch {
+  awardsUsingId: AwardsWinnerIdForeignInverseInput
+  ens: String
+  id: String
+  rankingsUsingId: RankingsWinnerIdForeignInverseInput
+}
+
+"""
+An object where the defined keys will be set on the `winner` being updated.
+"""
+input updateWinnerOnRankingForRankingsWinnerIdForeignPatch {
+  awardsUsingId: AwardsWinnerIdForeignInverseInput
+  ens: String
+  id: String
+  rankingsUsingId: RankingsWinnerIdForeignInverseInput
 }
