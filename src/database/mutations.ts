@@ -42,6 +42,24 @@ export const upsertWinner = gql`
   }
 `;
 
+export const upsertRanking = gql`
+  mutation UpsertRankings(
+    $winnerId: String!
+    $protocolId: String!
+    $rank: Int!
+  ) {
+    upsertRanking(
+      input: {
+        ranking: { winnerId: $winnerId, protocolId: $protocolId, rank: $rank }
+      }
+    ) {
+      ranking {
+        winnerId
+      }
+    }
+  }
+`;
+
 export const upsertEarnedBadge = gql`
   mutation UpsertEarnedBadge(
     $id: String!

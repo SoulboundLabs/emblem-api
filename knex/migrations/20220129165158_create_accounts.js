@@ -22,10 +22,10 @@ const createRoles = (knex) => {
 
 const createRankings = (knex) => {
   return knex.schema.createTable("rankings", (table) => {
-    table.increments("id").primary();
-    table.integer("rank").notNullable();
     table.string("winner_id").references("winners.id").notNullable();
     table.string("protocol_id").references("protocols.id").notNullable();
+    table.integer("rank").notNullable();
+    table.primary(["winner_id", "protocol_id"]);
   });
 };
 

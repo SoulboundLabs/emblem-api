@@ -4,12 +4,12 @@ import {
   upsertBadgeDefinition,
   upsertEarnedBadge,
   upsertProtocol,
+  upsertRanking,
   upsertTrack,
   upsertWinner,
 } from "./database/mutations";
 import {
   queryLastEarnedBadge,
-  queryWinnersByProtocol,
   queryWinnersWithProtocolBadgeCountKnex,
 } from "./database/queries";
 import { removeRomanNumerals } from "./string";
@@ -103,24 +103,11 @@ export const populateWinnerMetadataAndRank = async (
   protocolId: string,
   queryRunner: any
 ) => {
-  const { data } = await queryRunner.query(queryWinnersByProtocol, {
-    protocolId,
-  });
+  const winners: Winner[] = await queryWinnersWithProtocolBadgeCountKnex(
+    protocolId
+  );
 
-  const winnerIds = data.allWinnersList.map(({ id }: Winner) => id);
-
-  // const badgeCounts = await queryRunner.query(
-  //   queryWinnersByProtocolBadgeCount,
-  //   {
-  //     protocolId,
-  //   }
-  // );
-
-  // console.log(badgeCounts);
-
-  const winners = await queryWinnersWithProtocolBadgeCountKnex();
-
-  console.log(winners);
+  const winnerIds = winners.map(({ id }) => id);
 
   const chunkSize = 100;
   const nestedWinnerENSDomains: string[][] = await Promise.all(
@@ -139,5 +126,14 @@ export const populateWinnerMetadataAndRank = async (
     })
   );
 
+  const winnerRankings = winners.map((winner, i) =>
+    queryRunner.query(upsertRanking, {
+      winnerId: winner.id,
+      protocolId: protocolId,
+      rank: i + 1,
+    })
+  );
+
   await Promise.all(upsertWinnerPromises);
+  await Promise.all(winnerRankings);
 };

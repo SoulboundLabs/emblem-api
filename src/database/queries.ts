@@ -40,18 +40,11 @@ export const queryWinnersByProtocol = gql`
 //   }
 // `;
 
-export const queryWinnersWithProtocolBadgeCountKnex = () =>
+export const queryWinnersWithProtocolBadgeCountKnex = (protocolId: string) =>
   knex
     .from("earned_badges")
     .select(knex.raw("winners.*, COUNT(*) as badge_count"))
     .join("winners", "earned_badges.winner_id", "=", "winners.id")
     .groupBy("earned_badges.winner_id", "winners.id")
-    .where("protocol_id", "the-graph")
+    .where("protocol_id", protocolId)
     .orderBy("badge_count", "desc");
-// export const queryWinnersWithProtocolBadgeCountSQL = `SELECT winners.*, COUNT(*) as badge_count
-// FROM earned_badges
-// INNER JOIN winners
-// ON winners.id = earned_badges.winner_id
-// WHERE earned_badges.protocol_id = 'the-graph'
-// GROUP BY earned_badges.winner_id, winners.id
-// ORDER BY badge_count DESC`
