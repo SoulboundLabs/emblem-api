@@ -1,3 +1,4 @@
+import PgAggregatesPlugin from "@graphile/pg-aggregates";
 import PgPubsub from "@graphile/pg-pubsub";
 import { makePluginHook, PostGraphileOptions } from "postgraphile";
 import ConnectionFilterPlugin from "postgraphile-plugin-connection-filter";
@@ -20,11 +21,12 @@ export const getPostgraphileOptions = ({
   isMiddleware: boolean;
 }) => {
   const plugins = isMiddleware
-    ? [ConnectionFilterPlugin]
+    ? [ConnectionFilterPlugin, PgAggregatesPlugin]
     : [
+        ConnectionFilterPlugin,
+        PgAggregatesPlugin,
         PostGraphileNestedMutations,
         PgMutationUpsertPlugin,
-        ConnectionFilterPlugin,
       ];
   return {
     disableDefaultMutations: isMiddleware,

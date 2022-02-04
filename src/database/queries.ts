@@ -26,3 +26,16 @@ export const queryWinnersByProtocol = gql`
     }
   }
 `;
+
+// export const queryWinnersByProtocolBadgeCount = gql`
+//   query WinnerByProtocolByBadgeCount($protocolId: String!) {
+//     allEarnedBadges(filter: { protocolId: { equalTo: $protocolId } }) {
+//       groupedAggregates(groupBy: [WINNER_ID]) {
+//         keys
+//         distinctCount {
+//           id
+//         }
+//       }
+//     }
+//   }
+// `;

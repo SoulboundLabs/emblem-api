@@ -108,6 +108,15 @@ export const populateWinnerMetadataAndRank = async (
 
   const winnerIds = data.allWinnersList.map(({ id }: Winner) => id);
 
+  // const badgeCounts = await queryRunner.query(
+  //   queryWinnersByProtocolBadgeCount,
+  //   {
+  //     protocolId,
+  //   }
+  // );
+
+  // console.log(badgeCounts);
+
   const chunkSize = 100;
   const nestedWinnerENSDomains: string[][] = await Promise.all(
     chunk(winnerIds, chunkSize).map(async (subWinnerIds) => {
