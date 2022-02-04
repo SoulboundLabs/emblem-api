@@ -14,42 +14,52 @@ export const schemas: string | string[] = ["public"];
 const pluginHook = makePluginHook([PgPubsub]);
 
 // PostGraphile options; see https://www.graphile.org/postgraphile/usage-library/#api-postgraphilepgconfig-schemaname-options
-export const options: PostGraphileOptions = {
-  pluginHook,
-  appendPlugins: [
-    PostGraphileNestedMutations,
-    PgMutationUpsertPlugin,
-    ConnectionFilterPlugin,
-  ],
-  pgSettings(req) {
-    // Adding this to ensure that all servers pass through the request in a
-    // good enough way that we can extract headers.
-    // CREATE FUNCTION current_user_id() RETURNS text AS $$ SELECT current_setting('graphile.test.x-user-id', TRUE); $$ LANGUAGE sql STABLE;
-    return {
-      "graphile.test.x-user-id":
-        req.headers["x-user-id"] ||
-        // `normalizedConnectionParams` comes from websocket connections, where
-        // the headers often cannot be customized by the client.
-        (req as any).normalizedConnectionParams?.["x-user-id"],
-    };
-  },
-  graphileBuildOptions: {
-    connectionFilterRelations: true,
-  },
-  watchPg: true,
-  graphiql: true,
-  enhanceGraphiql: true,
-  subscriptions: true,
-  dynamicJson: true,
-  simpleCollections: "only", // adds 'List' suffix to models for simpler querying
-  setofFunctionsContainNulls: false,
-  ignoreRBAC: false,
-  showErrorStack: "json",
-  extendedErrors: ["hint", "detail", "errcode"],
-  allowExplain: true,
-  legacyRelations: "omit",
-  exportGqlSchemaPath: `${__dirname}/schema.graphql`,
-  sortExport: true,
+export const getPostgraphileOptions = ({
+  isMiddleware,
+}: {
+  isMiddleware: boolean;
+}) => {
+  const plugins = isMiddleware
+    ? [ConnectionFilterPlugin]
+    : [
+        PostGraphileNestedMutations,
+        PgMutationUpsertPlugin,
+        ConnectionFilterPlugin,
+      ];
+  return {
+    disableDefaultMutations: isMiddleware,
+    pluginHook,
+    appendPlugins: plugins,
+    pgSettings(req: any) {
+      // Adding this to ensure that all servers pass through the request in a
+      // good enough way that we can extract headers.
+      // CREATE FUNCTION current_user_id() RETURNS text AS $$ SELECT current_setting('graphile.test.x-user-id', TRUE); $$ LANGUAGE sql STABLE;
+      return {
+        "graphile.test.x-user-id":
+          req.headers["x-user-id"] ||
+          // `normalizedConnectionParams` comes from websocket connections, where
+          // the headers often cannot be customized by the client.
+          (req as any).normalizedConnectionParams?.["x-user-id"],
+      };
+    },
+    graphileBuildOptions: {
+      connectionFilterRelations: true,
+    },
+    watchPg: true,
+    graphiql: true,
+    enhanceGraphiql: true,
+    subscriptions: true,
+    dynamicJson: true,
+    simpleCollections: "only", // adds 'List' suffix to models for simpler querying
+    setofFunctionsContainNulls: false,
+    ignoreRBAC: false,
+    showErrorStack: "json",
+    extendedErrors: ["hint", "detail", "errcode"],
+    allowExplain: true,
+    legacyRelations: "omit",
+    exportGqlSchemaPath: `${__dirname}/schema.graphql`,
+    sortExport: true,
+  } as PostGraphileOptions;
 };
 
 export const port: number = process.env.PORT

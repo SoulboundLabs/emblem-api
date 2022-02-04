@@ -1,4 +1,5 @@
-import { subgraphTheGraphBadges } from "./constants";
+import { chunk, flattenDeep } from "lodash";
+import { ensRecordsContract, subgraphTheGraphBadges } from "./constants";
 import {
   upsertBadgeDefinition,
   upsertEarnedBadge,
@@ -15,7 +16,11 @@ import {
   queryAllBadgeDefinitions,
   queryAllEarnedBadges,
 } from "./subgraph/queries";
-import { BadgeDefinition as BadgeDefinitionType, EarnedBadge } from "./types";
+import {
+  BadgeDefinition as BadgeDefinitionType,
+  EarnedBadge,
+  Winner,
+} from "./types";
 import { querySubgraph } from "./utils";
 
 export const populateBadgeTracksAndDefinitions = async (
@@ -101,37 +106,24 @@ export const populateWinnerMetadataAndRank = async (
     protocolId,
   });
 
-  console.log(data);
+  const winnerIds = data.allWinnersList.map(({ id }: Winner) => id);
 
-  // const lastGlobalAwardNumberSynced =
-  //   data.allEarnedBadgesList[0]?.globalAwardNumber || 0;
+  const chunkSize = 100;
+  const nestedWinnerENSDomains: string[][] = await Promise.all(
+    chunk(winnerIds, chunkSize).map(async (subWinnerIds) => {
+      // Chunking to not run into json-rpc 5s timeout
+      return await ensRecordsContract.getNames(subWinnerIds);
+    })
+  );
 
-  // const response: { earnedBadges: EarnedBadge[] } = await querySubgraph({
-  //   query: queryAllEarnedBadges,
-  //   subgraph: subgraphTheGraphBadges,
-  //   variables: { lastGlobalAwardNumberSynced },
-  // });
+  const winnerENSDomains = flattenDeep(nestedWinnerENSDomains);
 
-  // const earnedBadges = response.earnedBadges.map((award: EarnedBadge) => ({
-  //   ...award,
-  //   blockAwarded: Number(award.blockAwarded),
-  //   timestampAwarded: Number(award.timestampAwarded),
-  //   definitionId: award.definition.id,
-  //   protocolId: protocolId,
-  //   metadata: JSON.stringify(award.metadata),
-  // }));
+  const upsertWinnerPromises = winnerENSDomains.map((_ens, i) =>
+    queryRunner.query(upsertWinner, {
+      id: winnerIds[i],
+      ens: winnerENSDomains[i],
+    })
+  );
 
-  // for (const earnedBadge of earnedBadges) {
-  //   await queryRunner.query(upsertWinner, {
-  //     id: earnedBadge.badgeWinner.id,
-  //   });
-  //   await queryRunner.query(upsertEarnedBadge, {
-  //     ...earnedBadge,
-  //     protocolId,
-  //     definitionId: earnedBadge.definition.id,
-  //     winnerId: earnedBadge.badgeWinner.id,
-  //   });
-  // }
-
-  // return earnedBadges;
+  await Promise.all(upsertWinnerPromises);
 };
