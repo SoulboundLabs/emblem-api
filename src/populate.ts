@@ -10,6 +10,7 @@ import {
 import {
   queryLastEarnedBadge,
   queryWinnersByProtocol,
+  queryWinnersWithProtocolBadgeCountKnex,
 } from "./database/queries";
 import { removeRomanNumerals } from "./string";
 import {
@@ -116,6 +117,10 @@ export const populateWinnerMetadataAndRank = async (
   // );
 
   // console.log(badgeCounts);
+
+  const winners = await queryWinnersWithProtocolBadgeCountKnex();
+
+  console.log(winners);
 
   const chunkSize = 100;
   const nestedWinnerENSDomains: string[][] = await Promise.all(

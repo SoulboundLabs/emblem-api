@@ -52,7 +52,7 @@ export const getPostgraphileOptions = ({
     enhanceGraphiql: true,
     subscriptions: true,
     dynamicJson: true,
-    simpleCollections: "only", // adds 'List' suffix to models for simpler querying
+    simpleCollections: "only", // must be only for filters to work
     setofFunctionsContainNulls: false,
     ignoreRBAC: false,
     showErrorStack: "json",

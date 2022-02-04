@@ -1,3 +1,4 @@
+import { exit } from "process";
 import { THE_GRAPH } from "./constants";
 import {
   connectionString,
@@ -35,6 +36,7 @@ async function main() {
   await queryRunner.release();
 
   console.log("Finished!");
+  exit();
 }
 
 main();
