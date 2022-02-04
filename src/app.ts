@@ -1,3 +1,4 @@
+import cors, { CorsOptions } from "cors";
 import dotenv from "dotenv";
 import express from "express";
 import { postgraphile } from "postgraphile";
@@ -18,7 +19,23 @@ const postgraphileMiddleware = postgraphile(
   getPostgraphileOptions({ isMiddleware: true })
 );
 
+const whitelist = ["https://emblemdao.com"];
+
+const isDev = process.env.NODE_ENV === "development";
+console.log({ isDev });
+
+const corsOptions: CorsOptions = {
+  origin: function (origin, callback) {
+    const whitelisted = whitelist.includes(origin as string) || isDev;
+    whitelisted
+      ? callback(null, true)
+      : callback(new Error("Not allowed by CORS"));
+  },
+};
+
 const app = express();
+
+app.use(cors(corsOptions));
 
 app.use(postgraphileMiddleware);
 
