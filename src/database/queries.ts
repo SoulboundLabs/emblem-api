@@ -1,5 +1,6 @@
 import { gql } from "graphql-request";
 import knex from "../../knex/knex";
+import { MAX_FIRESTORE_BATCH } from "../constants";
 export const queryLastEarnedBadge = gql`
   query LastEarnedBadges($protocolId: String!) {
     allEarnedBadgesList(
@@ -39,6 +40,26 @@ export const queryWinnersByProtocol = gql`
 //     }
 //   }
 // `;
+
+export const queryRecentWinnersByProtocol = gql`
+  query RecentWinnerByProtocol($protocolId: String!) {
+    allWinnersList(
+      filter: {
+        earnedBadgesByWinnerIdList: {
+          some: { protocolId: { equalTo: $protocolId } }
+        }
+      }
+      orderBy: EARNED_BADGES_BY_WINNER_ID_MAX_GLOBAL_AWARD_NUMBER_DESC
+      first: ${MAX_FIRESTORE_BATCH}
+    ) {
+      id
+      earnedBadgesByWinnerIdList {
+        id
+        globalAwardNumber
+      }
+    }
+  }
+`;
 
 export const queryWinnersWithProtocolBadgeCountKnex = (protocolId: string) =>
   knex

@@ -14,6 +14,7 @@ import {
 } from "./database/mutations";
 import {
   queryLastEarnedBadge,
+  queryRecentWinnersByProtocol,
   queryWinnersWithProtocolBadgeCountKnex,
 } from "./database/queries";
 import { removeRomanNumerals } from "./string";
@@ -146,14 +147,15 @@ export const populateWinnerMetadataAndRank = async (
 };
 
 export const populateWinnersGraphDisplayName = async (
-  queryRunner: any,
-  protocolId: string
+  protocolId: string,
+  queryRunner: any
 ) => {
-  const response = await queryRunner.query(queryRecentWinnersByProtocol, {
+  const { data } = await queryRunner.query(queryRecentWinnersByProtocol, {
     protocolId,
   });
 
-  const winnerIDs = response.allWinnersList.map((winner: Winner) => winner.id);
+  const winnerIDs = data.allWinnersList.map((winner: Winner) => winner.id);
+
   const { graphAccounts }: { graphAccounts: GraphAccount[] } =
     await querySubgraph({
       query: queryGraphAccountsMainnetNetwork,
@@ -161,13 +163,18 @@ export const populateWinnersGraphDisplayName = async (
       variables: { beneficiaryIDs: winnerIDs },
     });
 
+  const queuedUpserts = [];
+
   for (const graphAccount of graphAccounts) {
-    const winner = winnerIDs.find((id: string) => id === graphAccount.id);
-    if (winner) {
-      await queryRunner.query(upsertWinner, {
-        id: winner.id,
+    const winnerId = winnerIDs.find((id: string) => id === graphAccount.id);
+    if (winnerId) {
+      const upsert = queryRunner.query(upsertWinner, {
+        id: winnerId,
         defaultDisplayName: graphAccount.defaultDisplayName + ".eth",
       });
+      queuedUpserts.push(upsert);
     }
   }
+
+  await Promise.all(queuedUpserts);
 };

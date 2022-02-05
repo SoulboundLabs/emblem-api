@@ -10,6 +10,7 @@ import {
   populateBadgeTracksAndDefinitions,
   populateEarnedBadges,
   populateWinnerMetadataAndRank,
+  populateWinnersGraphDisplayName,
 } from "./populate";
 
 const validProtocols = [THE_GRAPH];
@@ -25,18 +26,25 @@ async function main() {
     throw new Error("Protocol Not Found");
   }
 
-  const queryRunner = await makeQueryRunner(
-    connectionString,
-    schemas,
-    getPostgraphileOptions({ isMiddleware: false })
-  );
-  await populateBadgeTracksAndDefinitions(protocol, queryRunner);
-  await populateEarnedBadges(protocol, queryRunner);
-  await populateWinnerMetadataAndRank(protocol, queryRunner);
-  await queryRunner.release();
+  try {
+    const queryRunner = await makeQueryRunner(
+      connectionString,
+      schemas,
+      getPostgraphileOptions({ isMiddleware: false })
+    );
+    await populateBadgeTracksAndDefinitions(protocol, queryRunner);
+    await populateEarnedBadges(protocol, queryRunner);
+    await populateWinnerMetadataAndRank(protocol, queryRunner);
+    await populateWinnersGraphDisplayName(protocol, queryRunner);
+    queryRunner.release();
 
-  console.log("Finished!");
-  exit();
+    console.log("Finished!");
+  } catch (e) {
+    console.error(e);
+    exit(1);
+  } finally {
+    exit(0);
+  }
 }
 
 main();

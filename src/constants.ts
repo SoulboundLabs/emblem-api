@@ -30,7 +30,7 @@ export const BADGE_AWARDS = "badgesAwarded";
 export const subgraphTheGraphBadges = process.env
   .SUBGRAPH_THE_GRAPH_BADGES as string;
 export const subgraphTheGraphNetwork = process.env
-  .SUBGRAPH_THE_GRAPH_NETWORK as string;
+  .SUBGRAPH_THE_GRAPH_NETWORK_MAINNET as string;
 
 /* Smart Contracts */
 const infuraKey = process.env.INFURA_KEY;
