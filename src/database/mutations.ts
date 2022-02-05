@@ -33,8 +33,16 @@ export const upsertTrack = gql`
 `;
 
 export const upsertWinner = gql`
-  mutation UpsertWinnner($id: String!, $ens: String) {
-    upsertWinner(input: { winner: { id: $id, ens: $ens } }) {
+  mutation UpsertWinnner(
+    $id: String!
+    $ens: String
+    $defaultDisplayName: String
+  ) {
+    upsertWinner(
+      input: {
+        winner: { id: $id, ens: $ens, defaultDisplayName: $defaultDisplayName }
+      }
+    ) {
       winner {
         id
       }

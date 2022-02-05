@@ -2,6 +2,7 @@ const createWinners = (knex) => {
   return knex.schema.createTable("winners", (table) => {
     table.string("id").primary();
     table.string("ens");
+    table.string("default_display_name");
   });
 };
 
@@ -69,9 +70,10 @@ const createEarnedBadges = (knex) => {
 exports.up = async function (knex) {
   await createWinners(knex);
   await createProtocols(knex);
+  await createRoles(knex);
+
   await createTracks(knex);
 
-  await createRoles(knex);
   await createRankings(knex);
   await createDefinitions(knex);
   await createEarnedBadges(knex);

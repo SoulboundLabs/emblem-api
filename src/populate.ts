@@ -1,5 +1,9 @@
 import { chunk, flattenDeep } from "lodash";
-import { ensRecordsContract, subgraphTheGraphBadges } from "./constants";
+import {
+  ensRecordsContract,
+  subgraphTheGraphBadges,
+  subgraphTheGraphNetwork,
+} from "./constants";
 import {
   upsertBadgeDefinition,
   upsertEarnedBadge,
@@ -16,10 +20,12 @@ import { removeRomanNumerals } from "./string";
 import {
   queryAllBadgeDefinitions,
   queryAllEarnedBadges,
+  queryGraphAccountsMainnetNetwork,
 } from "./subgraph/queries";
 import {
   BadgeDefinition as BadgeDefinitionType,
   EarnedBadge,
+  GraphAccount,
   Winner,
 } from "./types";
 import { querySubgraph } from "./utils";
@@ -137,4 +143,31 @@ export const populateWinnerMetadataAndRank = async (
 
   await Promise.all(upsertWinnerPromises);
   await Promise.all(winnerRankings);
+};
+
+export const populateWinnersGraphDisplayName = async (
+  queryRunner: any,
+  protocolId: string
+) => {
+  const response = await queryRunner.query(queryRecentWinnersByProtocol, {
+    protocolId,
+  });
+
+  const winnerIDs = response.allWinnersList.map((winner: Winner) => winner.id);
+  const { graphAccounts }: { graphAccounts: GraphAccount[] } =
+    await querySubgraph({
+      query: queryGraphAccountsMainnetNetwork,
+      subgraph: subgraphTheGraphNetwork,
+      variables: { beneficiaryIDs: winnerIDs },
+    });
+
+  for (const graphAccount of graphAccounts) {
+    const winner = winnerIDs.find((id: string) => id === graphAccount.id);
+    if (winner) {
+      await queryRunner.query(upsertWinner, {
+        id: winner.id,
+        defaultDisplayName: graphAccount.defaultDisplayName + ".eth",
+      });
+    }
+  }
 };
