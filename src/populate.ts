@@ -38,6 +38,7 @@ export const populateBadgeTracksAndDefinitions = async (
     BadgeDefinitionType[]
   >((acc, definition) => {
     const trackId = removeRomanNumerals(definition.id);
+    console.log(trackId);
     return [...acc, { ...definition, trackId }];
   }, []);
 

@@ -9,5 +9,6 @@ export const idToUrlHandle = (id: string = "") => {
   return id.toLowerCase().split(" ").join("-");
 };
 
-export const removeRomanNumerals = (string: string) =>
-  string.replace(/^(X{0,3})(I?)(V?)(X?)(I{0,3}):\s+?$/gim, "").trim();
+export const removeRomanNumerals = (string: string) => {
+  return string.replace(/[IVX]+/g, "").trim();
+};

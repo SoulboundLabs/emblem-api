@@ -33,7 +33,6 @@ const createDefinitions = (knex) => {
   return knex.schema.createTable("definitions", (table) => {
     table.string("id").primary();
     table.string("protocol_id").references("protocols.id").notNullable();
-    table.string("role_id").references("roles.id");
     table.string("track_id").references("tracks.id").notNullable();
     table.string("definition");
     table.string("metric");
@@ -48,7 +47,7 @@ const createTracks = (knex) => {
   return knex.schema.createTable("tracks", (table) => {
     table.string("id").primary();
     table.string("protocol_id").references("protocols.id").notNullable();
-    table.unique(["id", "protocol_id"]);
+    table.string("role_id").references("roles.id");
   });
 };
 
