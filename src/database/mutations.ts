@@ -133,6 +133,7 @@ export const upsertBadgeDefinition = gql`
     $ipfsURI: String
     $trackId: String!
     $description: String
+    $level: Int
   ) {
     upsertDefinition(
       input: {
@@ -144,6 +145,7 @@ export const upsertBadgeDefinition = gql`
           trackId: $trackId
           protocolId: $protocolId
           description: $description
+          level: $level
         }
       }
     ) {

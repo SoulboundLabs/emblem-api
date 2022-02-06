@@ -6,7 +6,7 @@ import {
   THE_GRAPH,
 } from "../lib/constants";
 
-export const rolesByTrack: Record<string, Record<string, string>> = {
+export const badgeIPFS: Record<string, Record<string, string>> = {
   [THE_GRAPH]: {
     Allegiance: INDEXER,
     Beacon: SUBGRAPH_DEVELOPER,

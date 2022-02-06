@@ -18,7 +18,7 @@ export const queryWinnersByProtocol = gql`
   query WinnerByProtocol($protocolId: String!) {
     allWinnersList(
       filter: {
-        earnedBadgesByWinnerIdList: {
+        earnedBadgesByWinnerId: {
           some: { protocolId: { equalTo: $protocolId } }
         }
       }
@@ -45,7 +45,7 @@ export const queryRecentWinnersByProtocol = gql`
   query RecentWinnerByProtocol($protocolId: String!) {
     allWinnersList(
       filter: {
-        earnedBadgesByWinnerIdList: {
+        earnedBadgesByWinnerId: {
           some: { protocolId: { equalTo: $protocolId } }
         }
       }

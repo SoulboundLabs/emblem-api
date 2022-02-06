@@ -52,7 +52,7 @@ export const getPostgraphileOptions = ({
     enhanceGraphiql: true,
     subscriptions: true,
     dynamicJson: true,
-    simpleCollections: "only", // must be only for filters to work
+    simpleCollections: "both",
     setofFunctionsContainNulls: false,
     ignoreRBAC: false,
     showErrorStack: "json",

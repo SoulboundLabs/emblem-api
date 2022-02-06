@@ -28,6 +28,7 @@ export const queryAllBadgeDefinitions = gql`
       threshold
       ipfsURI
       description
+      level
     }
   }
 `;

@@ -39,6 +39,7 @@ const createDefinitions = (knex) => {
     table.string("metric");
     table.float("threshold");
     table.string("ipfs_uri");
+    table.integer("level");
 
     table.unique(["id", "protocol_id"]);
   });
