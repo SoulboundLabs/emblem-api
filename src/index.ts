@@ -1,17 +1,17 @@
 import { exit } from "process";
-import { THE_GRAPH } from "./constants";
 import {
   connectionString,
   getPostgraphileOptions,
   schemas,
 } from "./database/database";
 import { makeQueryRunner } from "./database/query-runner";
+import { THE_GRAPH } from "./lib/constants";
 import {
   populateBadgeTracksAndDefinitions,
   populateEarnedBadges,
   populateWinnerMetadataAndRank,
   populateWinnersGraphDisplayName,
-} from "./populate";
+} from "./lib/populate";
 
 const validProtocols = [THE_GRAPH];
 

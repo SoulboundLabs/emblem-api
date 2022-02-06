@@ -35,9 +35,9 @@ const createDefinitions = (knex) => {
     table.string("id").primary();
     table.string("protocol_id").references("protocols.id").notNullable();
     table.string("track_id").references("tracks.id").notNullable();
-    table.string("definition");
+    table.string("description");
     table.string("metric");
-    table.string("threshold");
+    table.float("threshold");
     table.string("ipfs_uri");
 
     table.unique(["id", "protocol_id"]);

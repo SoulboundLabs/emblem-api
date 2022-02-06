@@ -1,6 +1,6 @@
 import { gql } from "graphql-request";
 import knex from "../../knex/knex";
-import { MAX_FIRESTORE_BATCH } from "../constants";
+import { MAX_FIRESTORE_BATCH } from "../lib/constants";
 export const queryLastEarnedBadge = gql`
   query LastEarnedBadges($protocolId: String!) {
     allEarnedBadgesList(

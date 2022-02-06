@@ -1,7 +1,7 @@
 import { Contract } from "@ethersproject/contracts";
 import { InfuraProvider } from "@ethersproject/providers";
 import dotenv from "dotenv";
-import ReverseRecordsABI from "./abis/ReverseRecords.json";
+import ReverseRecordsABI from "../abis/ReverseRecords.json";
 
 dotenv.config();
 
@@ -25,6 +25,13 @@ export const WINNERS = "winners";
 export const BADGE_DEFINITIONS = "badgeDefinitions";
 export const BADGE_TRACKS = "badgeTracks";
 export const BADGE_AWARDS = "badgesAwarded";
+
+/* Roles */
+export const DELEGATOR = "Delegator";
+export const INDEXER = "Indexer";
+export const CURATOR = "Curator";
+export const CONSUMER = "Consumer";
+export const SUBGRAPH_DEVELOPER = "Subgraph Developer";
 
 /* Subgraphs */
 export const subgraphTheGraphBadges = process.env

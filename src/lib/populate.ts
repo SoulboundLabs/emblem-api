@@ -1,34 +1,37 @@
 import { chunk, flattenDeep } from "lodash";
-import {
-  ensRecordsContract,
-  subgraphTheGraphBadges,
-  subgraphTheGraphNetwork,
-} from "./constants";
+import { definitionDescriptions } from "../data/definitionDescriptions";
+import { rolesByTrack } from "../data/rolesByTrack";
 import {
   upsertBadgeDefinition,
   upsertEarnedBadge,
   upsertProtocol,
   upsertRanking,
+  upsertRole,
   upsertTrack,
   upsertWinner,
-} from "./database/mutations";
+} from "../database/mutations";
 import {
   queryLastEarnedBadge,
   queryRecentWinnersByProtocol,
   queryWinnersWithProtocolBadgeCountKnex,
-} from "./database/queries";
-import { removeRomanNumerals } from "./string";
+} from "../database/queries";
 import {
   queryAllBadgeDefinitions,
   queryAllEarnedBadges,
   queryGraphAccountsMainnetNetwork,
-} from "./subgraph/queries";
+} from "../subgraph/queries";
 import {
   BadgeDefinition as BadgeDefinitionType,
   EarnedBadge,
   GraphAccount,
   Winner,
-} from "./types";
+} from "../types";
+import {
+  ensRecordsContract,
+  subgraphTheGraphBadges,
+  subgraphTheGraphNetwork,
+} from "./constants";
+import { removeRomanNumerals } from "./string";
 import { querySubgraph } from "./utils";
 
 export const populateBadgeTracksAndDefinitions = async (
@@ -45,7 +48,6 @@ export const populateBadgeTracksAndDefinitions = async (
     BadgeDefinitionType[]
   >((acc, definition) => {
     const trackId = removeRomanNumerals(definition.id);
-    console.log(trackId);
     return [...acc, { ...definition, trackId }];
   }, []);
 
@@ -54,14 +56,29 @@ export const populateBadgeTracksAndDefinitions = async (
   });
 
   for (const definition of badgeDefinitionsWithTrack) {
+    const trackId = definition.trackId as string;
+    const threshold = Number(definition.threshold);
+    const role = rolesByTrack[protocolId][trackId];
+
+    const definitionDescription =
+      definitionDescriptions[protocolId][trackId](threshold);
+
+    await queryRunner.query(upsertRole, {
+      id: role,
+      protocolId,
+    });
+
     await queryRunner.query(upsertTrack, {
       id: definition.trackId,
       protocolId,
+      roleId: role,
     });
 
     await queryRunner.query(upsertBadgeDefinition, {
       ...definition,
       protocolId,
+      threshold,
+      description: definitionDescription,
     });
   }
 };
