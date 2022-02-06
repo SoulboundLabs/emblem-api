@@ -1,6 +1,7 @@
 import { THE_GRAPH } from "../lib/constants";
 import { pluralize } from "../lib/pluralize";
 
+/* Not being used right now until dynamic badges are live */
 export const definitionDescriptions: Record<
   string,
   Record<string, (threshold: number) => string>

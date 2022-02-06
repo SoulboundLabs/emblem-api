@@ -27,6 +27,7 @@ export const queryAllBadgeDefinitions = gql`
       metric
       threshold
       ipfsURI
+      description
     }
   }
 `;

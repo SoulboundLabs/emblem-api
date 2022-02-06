@@ -1,6 +1,5 @@
 import { chunk, flattenDeep } from "lodash";
-import { definitionDescriptions } from "../data/definitionDescriptions";
-import { rolesByTrack } from "../data/rolesByTrack";
+import { rolesByTrack } from "../data/track-roles";
 import {
   upsertBadgeDefinition,
   upsertEarnedBadge,
@@ -60,8 +59,8 @@ export const populateBadgeTracksAndDefinitions = async (
     const threshold = Number(definition.threshold);
     const role = rolesByTrack[protocolId][trackId];
 
-    const definitionDescription =
-      definitionDescriptions[protocolId][trackId](threshold);
+    // const definitionDescription =
+    //   definitionDescriptions[protocolId][trackId](threshold);
 
     await queryRunner.query(upsertRole, {
       id: role,
@@ -78,7 +77,6 @@ export const populateBadgeTracksAndDefinitions = async (
       ...definition,
       protocolId,
       threshold,
-      description: definitionDescription,
     });
   }
 };
