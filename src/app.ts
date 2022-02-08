@@ -1,5 +1,6 @@
+require("dotenv").config();
+
 import cors, { CorsOptions } from "cors";
-import dotenv from "dotenv";
 import express from "express";
 import { postgraphile } from "postgraphile";
 import {
@@ -11,8 +12,6 @@ import {
 
 require("express-async-errors");
 
-dotenv.config();
-
 const postgraphileMiddleware = postgraphile(
   connectionString,
   schemas,
@@ -22,7 +21,7 @@ const postgraphileMiddleware = postgraphile(
 const whitelist = ["https://emblemdao.com"];
 
 const isDev = process.env.NODE_ENV === "development";
-console.log({ isDev });
+console.log({ NODE_ENV: process.env.NODE_ENV });
 
 const corsOptions: CorsOptions = {
   origin: function (origin, callback) {

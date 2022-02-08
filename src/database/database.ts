@@ -6,6 +6,7 @@ import { PgMutationUpsertPlugin } from "postgraphile-upsert-plugin";
 const PostGraphileNestedMutations = require("postgraphile-plugin-nested-mutations");
 
 // Connection string (or pg.Pool) for PostGraphile to use
+console.log("process.env.DATABASE_URL", process.env.DATABASE_URL);
 export const connectionString: string = process.env.DATABASE_URL || "emblem";
 
 // Database schemas to use
