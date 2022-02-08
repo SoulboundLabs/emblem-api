@@ -25,7 +25,8 @@ console.log({ NODE_ENV: process.env.NODE_ENV });
 
 const corsOptions: CorsOptions = {
   origin: function (origin, callback) {
-    const whitelisted = whitelist.includes(origin as string) || isDev;
+    // const whitelisted = whitelist.includes(origin as string) || isDev;
+    const whitelisted = true; // TODO: Lock down to only allow whitelisted origins
     whitelisted
       ? callback(null, true)
       : callback(new Error("Not allowed by CORS"));
