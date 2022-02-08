@@ -9,14 +9,6 @@ import {
   port,
   schemas,
 } from "./database/database";
-import { makeQueryRunner } from "./database/query-runner";
-import { THE_GRAPH } from "./lib/constants";
-import {
-  populateBadgeTracksAndDefinitions,
-  populateEarnedBadges,
-  populateWinnerMetadataAndRank,
-  populateWinnersGraphDisplayName,
-} from "./lib/populate";
 
 require("express-async-errors");
 
@@ -49,35 +41,4 @@ app.use(postgraphileMiddleware);
 
 app.listen(port, () => {
   console.log(`PostGraphile listening on ${port} 🚀`);
-});
-
-app.get("/populate/:protocol", async (req, res) => {
-  const protocol = req.params.protocol;
-  const validProtocols = [THE_GRAPH];
-
-  console.log(
-    `Populating tracks, definitions, earned badges, winners, and rankings for: ${protocol}...`
-  );
-
-  if (!validProtocols.includes(protocol)) {
-    throw new Error("Protocol Not Found");
-  }
-
-  try {
-    const queryRunner = await makeQueryRunner(
-      connectionString,
-      schemas,
-      getPostgraphileOptions({ isMiddleware: false })
-    );
-    await populateBadgeTracksAndDefinitions(protocol, queryRunner);
-    await populateEarnedBadges(protocol, queryRunner);
-    await populateWinnerMetadataAndRank(protocol, queryRunner);
-    await populateWinnersGraphDisplayName(protocol, queryRunner);
-    queryRunner.release();
-
-    res.send("Finished!");
-  } catch (e) {
-    console.log(e);
-    res.sendStatus(500);
-  }
 });
