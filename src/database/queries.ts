@@ -1,6 +1,6 @@
 import { gql } from "graphql-request";
 import knex from "../../knex/knex";
-import { MAX_FIRESTORE_BATCH } from "../lib/constants";
+import { MAX_RESULTS } from "../lib/constants";
 export const queryLastEarnedBadge = gql`
   query LastEarnedBadges($protocolId: String!) {
     allEarnedBadgesList(
@@ -37,7 +37,7 @@ export const queryRecentWinnersByProtocol = gql`
         }
       }
       orderBy: EARNED_BADGES_BY_WINNER_ID_MAX_GLOBAL_AWARD_NUMBER_DESC
-      first: ${MAX_FIRESTORE_BATCH}
+      first: ${MAX_RESULTS}
     ) {
       id
       earnedBadgesByWinnerIdList {

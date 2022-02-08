@@ -51,4 +51,4 @@ export const ensRecordsContract = new Contract(
 );
 
 /* Misc */
-export const MAX_FIRESTORE_BATCH = 497;
+export const MAX_RESULTS = 100;

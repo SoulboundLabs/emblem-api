@@ -1,9 +1,9 @@
 import { gql } from "graphql-request";
-import { MAX_FIRESTORE_BATCH } from "../lib/constants";
+import { MAX_RESULTS } from "../lib/constants";
 
 export const queryAllBadgeTracks = gql`
   query AllBadgeTracks {
-    badgeTracks(first: ${MAX_FIRESTORE_BATCH}) {
+    badgeTracks(first: ${MAX_RESULTS}) {
       id
       protocolRole
       protocol {
@@ -22,7 +22,7 @@ export const queryAllBadgeTracks = gql`
 
 export const queryAllBadgeDefinitions = gql`
   query AllBadgeDefinitions {
-    badgeDefinitions(first: ${MAX_FIRESTORE_BATCH}) {
+    badgeDefinitions(first: ${MAX_RESULTS}) {
       id
       metric
       threshold
@@ -35,7 +35,7 @@ export const queryAllBadgeDefinitions = gql`
 
 export const queryAllEarnedBadges = gql`
   query AllEarnedBadges($lastGlobalAwardNumberSynced: Int) {
-    earnedBadges(first: ${MAX_FIRESTORE_BATCH}, orderBy: globalAwardNumber, orderDirection: asc, where: { globalAwardNumber_gt: $lastGlobalAwardNumberSynced }) {
+    earnedBadges(first: ${MAX_RESULTS}, orderBy: globalAwardNumber, orderDirection: asc, where: { globalAwardNumber_gt: $lastGlobalAwardNumberSynced }) {
       id
       blockAwarded
       transactionHash
