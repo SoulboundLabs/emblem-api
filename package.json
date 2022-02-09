@@ -7,6 +7,7 @@
     "dev": "nodemon src/app.ts",
     "prod": "node dist/src/app.js",
     "build": "tsc",
+    "restart": "npm run remigrate && ./populate.sh && ./populate.sh && ./populate.sh && ./populate.sh;",
     "remigrate": "npx knex migrate:rollback && npx knex migrate:latest;"
   },
   "author": "",
