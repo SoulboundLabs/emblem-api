@@ -11,7 +11,8 @@ import { THE_GRAPH } from "./lib/constants";
 import {
   populateBadgeTracksAndDefinitions,
   populateEarnedBadges,
-  populateWinnerMetadataAndRank,
+  populateWinnerEns,
+  populateWinnerRank,
   populateWinnersGraphDisplayName,
 } from "./lib/populate";
 
@@ -36,7 +37,8 @@ async function main() {
     );
     await populateBadgeTracksAndDefinitions(protocol, queryRunner);
     await populateEarnedBadges(protocol, queryRunner);
-    await populateWinnerMetadataAndRank(protocol, queryRunner);
+    await populateWinnerRank(protocol, queryRunner);
+    await populateWinnerEns(protocol, queryRunner);
     await populateWinnersGraphDisplayName(protocol, queryRunner);
     queryRunner.release();
 

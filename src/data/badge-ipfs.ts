@@ -16,7 +16,7 @@ export const badgeIPFS: Record<string, Record<string, string>> = {
     Pathfinder: CURATOR,
     "Planet of the Aped": CURATOR,
     "Query Collector": INDEXER,
-    "Subgraph Alchemist": INDEXER,
+    Alchemist: INDEXER,
     "Subgraph Smith": SUBGRAPH_DEVELOPER,
   },
 };

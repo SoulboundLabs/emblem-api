@@ -14,3 +14,6 @@ export const querySubgraph = async ({
   const { data } = await graphQLClient.rawRequest(query, variables);
   return data;
 };
+
+export const delay = (ms: number) =>
+  new Promise((resolve) => setTimeout(resolve, ms));

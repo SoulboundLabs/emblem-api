@@ -31,12 +31,13 @@ import {
   subgraphTheGraphNetwork,
 } from "./constants";
 import { removeRomanNumerals } from "./string";
-import { querySubgraph } from "./utils";
+import { delay, querySubgraph } from "./utils";
 
 export const populateBadgeTracksAndDefinitions = async (
   protocolId: string,
   queryRunner: any
 ) => {
+  console.log(`Populating badge tracks and definitions for ${protocolId}...`);
   const { badgeDefinitions }: { badgeDefinitions: BadgeDefinitionType[] } =
     await querySubgraph({
       query: queryAllBadgeDefinitions,
@@ -85,6 +86,7 @@ export const populateEarnedBadges = async (
   protocolId: string,
   queryRunner: any
 ) => {
+  console.log(`Populating earned badges for ${protocolId}`);
   const { data } = await queryRunner.query(queryLastEarnedBadge, {
     protocolId,
   });
@@ -122,31 +124,13 @@ export const populateEarnedBadges = async (
   return earnedBadges;
 };
 
-export const populateWinnerMetadataAndRank = async (
+export const populateWinnerRank = async (
   protocolId: string,
   queryRunner: any
 ) => {
+  console.log("Populating winner rank");
   const winners: Winner[] = await queryWinnersWithProtocolBadgeCountKnex(
     protocolId
-  );
-
-  const winnerIds = winners.map(({ id }) => id);
-
-  const chunkSize = 100;
-  const nestedWinnerENSDomains: string[][] = await Promise.all(
-    chunk(winnerIds, chunkSize).map(async (subWinnerIds) => {
-      // Chunking to not run into json-rpc 5s timeout
-      return await ensRecordsContract.getNames(subWinnerIds);
-    })
-  );
-
-  const winnerENSDomains = flattenDeep(nestedWinnerENSDomains);
-
-  const upsertWinnerPromises = winnerENSDomains.map((_ens, i) =>
-    queryRunner.query(upsertWinner, {
-      id: winnerIds[i],
-      ens: winnerENSDomains[i],
-    })
   );
 
   const winnerRankings = winners.map((winner, i) =>
@@ -157,14 +141,48 @@ export const populateWinnerMetadataAndRank = async (
     })
   );
 
-  await Promise.all(upsertWinnerPromises);
   await Promise.all(winnerRankings);
+};
+
+export const populateWinnerEns = async (
+  protocolId: string,
+  queryRunner: any
+) => {
+  console.log("Populating winner ens");
+  const { data } = await queryRunner.query(queryRecentWinnersByProtocol, {
+    protocolId,
+  });
+
+  const winnerIds = data.allWinnersList.map((winner: Winner) => winner.id);
+
+  const chunkSize = 100;
+
+  const nestedWinnerEnsDomains = [];
+
+  for (const subWinnerIds of chunk(winnerIds, chunkSize)) {
+    // Chunking && delaying to not run into json-rpc 5s timeout
+    const ensDomains = await ensRecordsContract.getNames(subWinnerIds);
+    nestedWinnerEnsDomains.push(ensDomains);
+    delay(1000);
+  }
+
+  const winnerENSDomains = flattenDeep(nestedWinnerEnsDomains);
+
+  const upsertWinnerPromises = winnerENSDomains.map((_ens, i) =>
+    queryRunner.query(upsertWinner, {
+      id: winnerIds[i],
+      ens: winnerENSDomains[i],
+    })
+  );
+
+  await Promise.all(upsertWinnerPromises);
 };
 
 export const populateWinnersGraphDisplayName = async (
   protocolId: string,
   queryRunner: any
 ) => {
+  console.log("Populating graph display names");
   const { data } = await queryRunner.query(queryRecentWinnersByProtocol, {
     protocolId,
   });
