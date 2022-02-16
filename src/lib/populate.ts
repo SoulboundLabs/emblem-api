@@ -50,12 +50,9 @@ export const populateBadgeTracksAndDefinitions = async (
     .sort((a, b) => a.threshold - b.threshold)
     .reduce<BadgeDefinitionType[]>((acc, definition) => {
       const trackId = removeRomanNumerals(definition.id);
-      const prevLevel = trackLevelCount[trackId] || 0;
-      trackLevelCount[trackId] = prevLevel + 1;
-      return [
-        ...acc,
-        { ...definition, trackId, level: trackLevelCount[trackId] },
-      ];
+      const level = trackLevelCount[trackId] ? trackLevelCount[trackId] + 1 : 0;
+      trackLevelCount[trackId] = level;
+      return [...acc, { ...definition, trackId, level }];
     }, []);
 
   await queryRunner.query(upsertProtocol, {
