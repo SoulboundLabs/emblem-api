@@ -36,7 +36,7 @@ export const queryAllBadgeDefinitions = gql`
 
 export const queryAllEarnedBadges = gql`
   query AllEarnedBadges($lastGlobalBadgeNumberSynced: Int) {
-    earnedBadgeCounts(first: ${MAX_RESULTS}, orderBy: globalBadgeNumber, orderDirection: desc) {
+    earnedBadgeCounts(first: ${MAX_RESULTS}, orderBy: globalBadgeNumber, orderDirection: asc, where: { globalBadgeNumber_gt: $lastGlobalBadgeNumberSynced }) {
       globalBadgeNumber
       earnedBadge {
         id
