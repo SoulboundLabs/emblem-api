@@ -6,10 +6,10 @@ export const queryLastEarnedBadge = gql`
     allEarnedBadgesList(
       filter: { protocolId: { equalTo: $protocolId } }
       first: 1
-      orderBy: GLOBAL_AWARD_NUMBER_DESC
+      orderBy: GLOBAL_BADGE_NUMBER_DESC
     ) {
       id
-      globalAwardNumber
+      globalBadgeNumber
     }
   }
 `;
@@ -36,13 +36,13 @@ export const queryRecentWinnersByProtocol = gql`
           some: { protocolId: { equalTo: $protocolId } }
         }
       }
-      orderBy: EARNED_BADGES_BY_WINNER_ID_MAX_GLOBAL_AWARD_NUMBER_DESC
+      orderBy: EARNED_BADGES_BY_WINNER_ID_MAX_GLOBAL_BADGE_NUMBER_DESC
       first: ${MAX_RESULTS}
     ) {
       id
       earnedBadgesByWinnerIdList {
         id
-        globalAwardNumber
+        globalBadgeNumber
       }
     }
   }

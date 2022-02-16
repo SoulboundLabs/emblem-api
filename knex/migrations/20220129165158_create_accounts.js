@@ -63,7 +63,7 @@ const createEarnedBadges = (knex) => {
     table.string("transaction_hash");
     table.integer("timestampAwarded");
     table.integer("award_number");
-    table.integer("global_award_number");
+    table.integer("global_badge_number");
     table.jsonb("metadata");
   });
 };

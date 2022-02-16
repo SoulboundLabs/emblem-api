@@ -24,35 +24,37 @@ export const queryAllBadgeDefinitions = gql`
   query AllBadgeDefinitions {
     badgeDefinitions(first: ${MAX_RESULTS}) {
       id
-      metric
+      metric {
+        id
+      }
       threshold
       ipfsURI
       description
-      level
     }
   }
 `;
 
 export const queryAllEarnedBadges = gql`
-  query AllEarnedBadges($lastGlobalAwardNumberSynced: Int) {
-    earnedBadges(first: ${MAX_RESULTS}, orderBy: globalAwardNumber, orderDirection: asc, where: { globalAwardNumber_gt: $lastGlobalAwardNumberSynced }) {
-      id
-      blockAwarded
-      transactionHash
-      timestampAwarded
-      globalAwardNumber
-      awardNumber
-      badgeWinner {
+  query AllEarnedBadges($lastGlobalBadgeNumberSynced: Int) {
+    earnedBadgeCounts(first: ${MAX_RESULTS}, orderBy: globalBadgeNumber, orderDirection: desc) {
+      globalBadgeNumber
+      earnedBadge {
         id
+        blockAwarded
+        transactionHash
+        timestampAwarded
+        awardNumber
+        badgeWinner {
+          id
+        }
+        metadata {
+          name
+          value
+        }
+        definition {
+          id
+        }
       }
-      metadata {
-        name
-        value
-      }
-      definition {
-        id
-      }
-     
     }
   }
 `;

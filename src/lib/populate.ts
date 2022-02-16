@@ -44,12 +44,17 @@ export const populateBadgeTracksAndDefinitions = async (
       subgraph: subgraphTheGraphBadges,
     });
 
-  const badgeDefinitionsWithTrack = badgeDefinitions.reduce<
-    BadgeDefinitionType[]
-  >((acc, definition) => {
-    const trackId = removeRomanNumerals(definition.id);
-    return [...acc, { ...definition, trackId }];
-  }, []);
+  const trackCount: Record<string, number> = {};
+
+  const badgeDefinitionsWithTrack = badgeDefinitions
+    .sort((a, b) => a.threshold - b.threshold)
+
+    .reduce<BadgeDefinitionType[]>((acc, definition) => {
+      const trackId = removeRomanNumerals(definition.id);
+      const currentCount = trackCount[trackId] || 0;
+      trackCount[trackId] = currentCount + 1;
+      return [...acc, { ...definition, trackId }];
+    }, []);
 
   await queryRunner.query(upsertProtocol, {
     id: protocolId,
@@ -57,6 +62,7 @@ export const populateBadgeTracksAndDefinitions = async (
 
   for (const definition of badgeDefinitionsWithTrack) {
     const trackId = definition.trackId as string;
+    const metric = definition.metric.id;
     const threshold = Number(definition.threshold);
     const role = rolesByTrack[protocolId][trackId];
 
@@ -78,6 +84,7 @@ export const populateBadgeTracksAndDefinitions = async (
       ...definition,
       protocolId,
       threshold,
+      metric,
     });
   }
 };
@@ -91,23 +98,31 @@ export const populateEarnedBadges = async (
     protocolId,
   });
 
-  const lastGlobalAwardNumberSynced =
-    data.allEarnedBadgesList[0]?.globalAwardNumber || 0;
+  const lastGlobalBadgeNumberSynced =
+    data.allEarnedBadgesList[0]?.globalBadgeNumber || 0;
 
-  const response: { earnedBadges: EarnedBadge[] } = await querySubgraph({
+  const response: {
+    earnedBadgeCounts: {
+      globalBadgeNumber: number;
+      earnedBadge: EarnedBadge;
+    }[];
+  } = await querySubgraph({
     query: queryAllEarnedBadges,
     subgraph: subgraphTheGraphBadges,
-    variables: { lastGlobalAwardNumberSynced },
+    variables: { lastGlobalBadgeNumberSynced },
   });
 
-  const earnedBadges = response.earnedBadges.map((award: EarnedBadge) => ({
-    ...award,
-    blockAwarded: Number(award.blockAwarded),
-    timestampAwarded: Number(award.timestampAwarded),
-    definitionId: award.definition.id,
-    protocolId: protocolId,
-    metadata: JSON.stringify(award.metadata),
-  }));
+  const earnedBadges = response.earnedBadgeCounts.map(
+    ({ earnedBadge, globalBadgeNumber }) => ({
+      ...earnedBadge,
+      globalBadgeNumber: Number(globalBadgeNumber),
+      blockAwarded: Number(earnedBadge.blockAwarded),
+      timestampAwarded: Number(earnedBadge.timestampAwarded),
+      definitionId: earnedBadge.definition.id,
+      protocolId: protocolId,
+      metadata: JSON.stringify(earnedBadge.metadata),
+    })
+  );
 
   for (const earnedBadge of earnedBadges) {
     await queryRunner.query(upsertWinner, {

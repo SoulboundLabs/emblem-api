@@ -87,7 +87,7 @@ export const upsertEarnedBadge = gql`
     $blockAwarded: Int!
     $transactionHash: String!
     $timestampAwarded: Int!
-    $globalAwardNumber: Int!
+    $globalBadgeNumber: Int!
     $awardNumber: Int!
     $metadata: JSON!
     $definitionId: String!
@@ -101,7 +101,7 @@ export const upsertEarnedBadge = gql`
           blockAwarded: $blockAwarded
           transactionHash: $transactionHash
           timestampAwarded: $timestampAwarded
-          globalAwardNumber: $globalAwardNumber
+          globalBadgeNumber: $globalBadgeNumber
           awardNumber: $awardNumber
           metadata: $metadata
           definitionId: $definitionId
@@ -114,7 +114,7 @@ export const upsertEarnedBadge = gql`
         blockAwarded
         transactionHash
         timestampAwarded
-        globalAwardNumber
+        globalBadgeNumber
         awardNumber
         metadata
         definitionId

@@ -6,7 +6,7 @@ export interface EarnedBadge {
   timestampAwardedFormatted: string;
   definition: BadgeDefinition;
   transactionHash: string;
-  globalAwardNumber: number;
+  earnedBadgeCount: { id: number };
   awardNumber: number;
   metadata: string;
 }
@@ -45,12 +45,16 @@ export interface Winner {
 
 export interface BadgeDefinition {
   id: string;
-  metric: string;
+  metric: Metric;
   threshold: number;
   ipfsURI?: string;
   trackId?: string;
   // awardCount: number;
   // winnerCount?: number;
+}
+
+export interface Metric {
+  id: string;
 }
 
 export interface BadgeTrack {

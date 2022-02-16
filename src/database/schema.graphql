@@ -12,16 +12,24 @@ input BigFloatFilter {
   """
   distinctFrom: BigFloat
 
-  """Equal to the specified value."""
+  """
+  Equal to the specified value.
+  """
   equalTo: BigFloat
 
-  """Greater than the specified value."""
+  """
+  Greater than the specified value.
+  """
   greaterThan: BigFloat
 
-  """Greater than or equal to the specified value."""
+  """
+  Greater than or equal to the specified value.
+  """
   greaterThanOrEqualTo: BigFloat
 
-  """Included in the specified list."""
+  """
+  Included in the specified list.
+  """
   in: [BigFloat!]
 
   """
@@ -29,19 +37,29 @@ input BigFloatFilter {
   """
   isNull: Boolean
 
-  """Less than the specified value."""
+  """
+  Less than the specified value.
+  """
   lessThan: BigFloat
 
-  """Less than or equal to the specified value."""
+  """
+  Less than or equal to the specified value.
+  """
   lessThanOrEqualTo: BigFloat
 
-  """Equal to the specified value, treating null like an ordinary value."""
+  """
+  Equal to the specified value, treating null like an ordinary value.
+  """
   notDistinctFrom: BigFloat
 
-  """Not equal to the specified value."""
+  """
+  Not equal to the specified value.
+  """
   notEqualTo: BigFloat
 
-  """Not included in the specified list."""
+  """
+  Not included in the specified list.
+  """
   notIn: [BigFloat!]
 }
 
@@ -61,16 +79,24 @@ input BigIntFilter {
   """
   distinctFrom: BigInt
 
-  """Equal to the specified value."""
+  """
+  Equal to the specified value.
+  """
   equalTo: BigInt
 
-  """Greater than the specified value."""
+  """
+  Greater than the specified value.
+  """
   greaterThan: BigInt
 
-  """Greater than or equal to the specified value."""
+  """
+  Greater than or equal to the specified value.
+  """
   greaterThanOrEqualTo: BigInt
 
-  """Included in the specified list."""
+  """
+  Included in the specified list.
+  """
   in: [BigInt!]
 
   """
@@ -78,23 +104,35 @@ input BigIntFilter {
   """
   isNull: Boolean
 
-  """Less than the specified value."""
+  """
+  Less than the specified value.
+  """
   lessThan: BigInt
 
-  """Less than or equal to the specified value."""
+  """
+  Less than or equal to the specified value.
+  """
   lessThanOrEqualTo: BigInt
 
-  """Equal to the specified value, treating null like an ordinary value."""
+  """
+  Equal to the specified value, treating null like an ordinary value.
+  """
   notDistinctFrom: BigInt
 
-  """Not equal to the specified value."""
+  """
+  Not equal to the specified value.
+  """
   notEqualTo: BigInt
 
-  """Not included in the specified list."""
+  """
+  Not included in the specified list.
+  """
   notIn: [BigInt!]
 }
 
-"""A location in a connection that can be used for resuming pagination."""
+"""
+A location in a connection that can be used for resuming pagination.
+"""
 scalar Cursor
 
 """
@@ -112,16 +150,24 @@ input DatetimeFilter {
   """
   distinctFrom: Datetime
 
-  """Equal to the specified value."""
+  """
+  Equal to the specified value.
+  """
   equalTo: Datetime
 
-  """Greater than the specified value."""
+  """
+  Greater than the specified value.
+  """
   greaterThan: Datetime
 
-  """Greater than or equal to the specified value."""
+  """
+  Greater than or equal to the specified value.
+  """
   greaterThanOrEqualTo: Datetime
 
-  """Included in the specified list."""
+  """
+  Included in the specified list.
+  """
   in: [Datetime!]
 
   """
@@ -129,31 +175,47 @@ input DatetimeFilter {
   """
   isNull: Boolean
 
-  """Less than the specified value."""
+  """
+  Less than the specified value.
+  """
   lessThan: Datetime
 
-  """Less than or equal to the specified value."""
+  """
+  Less than or equal to the specified value.
+  """
   lessThanOrEqualTo: Datetime
 
-  """Equal to the specified value, treating null like an ordinary value."""
+  """
+  Equal to the specified value, treating null like an ordinary value.
+  """
   notDistinctFrom: Datetime
 
-  """Not equal to the specified value."""
+  """
+  Not equal to the specified value.
+  """
   notEqualTo: Datetime
 
-  """Not included in the specified list."""
+  """
+  Not included in the specified list.
+  """
   notIn: [Datetime!]
 }
 
 type Definition implements Node {
   description: String
 
-  """Reads and enables pagination through a set of `EarnedBadge`."""
+  """
+  Reads and enables pagination through a set of `EarnedBadge`.
+  """
   earnedBadgesByDefinitionId(
-    """Read all values in the set after (below) this cursor."""
+    """
+    Read all values in the set after (below) this cursor.
+    """
     after: Cursor
 
-    """Read all values in the set before (above) this cursor."""
+    """
+    Read all values in the set before (above) this cursor.
+    """
     before: Cursor
 
     """
@@ -166,10 +228,14 @@ type Definition implements Node {
     """
     filter: EarnedBadgeFilter
 
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Only read the last `n` values of the set."""
+    """
+    Only read the last `n` values of the set.
+    """
     last: Int
 
     """
@@ -178,11 +244,15 @@ type Definition implements Node {
     """
     offset: Int
 
-    """The method to use when ordering `EarnedBadge`."""
+    """
+    The method to use when ordering `EarnedBadge`.
+    """
     orderBy: [EarnedBadgesOrderBy!] = [PRIMARY_KEY_ASC]
   ): EarnedBadgesConnection!
 
-  """Reads and enables pagination through a set of `EarnedBadge`."""
+  """
+  Reads and enables pagination through a set of `EarnedBadge`.
+  """
   earnedBadgesByDefinitionIdList(
     """
     A condition to be used in determining which values should be returned by the collection.
@@ -194,13 +264,19 @@ type Definition implements Node {
     """
     filter: EarnedBadgeFilter
 
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Skip the first `n` values."""
+    """
+    Skip the first `n` values.
+    """
     offset: Int
 
-    """The method to use when ordering `EarnedBadge`."""
+    """
+    The method to use when ordering `EarnedBadge`.
+    """
     orderBy: [EarnedBadgesOrderBy!]
   ): [EarnedBadge!]!
   id: String!
@@ -213,12 +289,16 @@ type Definition implements Node {
   """
   nodeId: ID!
 
-  """Reads a single `Protocol` that is related to this `Definition`."""
+  """
+  Reads a single `Protocol` that is related to this `Definition`.
+  """
   protocolByProtocolId: Protocol
   protocolId: String!
   threshold: Float
 
-  """Reads a single `Track` that is related to this `Definition`."""
+  """
+  Reads a single `Track` that is related to this `Definition`.
+  """
   trackByTrackId: Track
   trackId: String!
 }
@@ -271,12 +351,18 @@ type DefinitionAggregates {
   varianceSample: DefinitionVarianceSampleAggregates
 }
 
-"""A filter to be used against aggregates of `Definition` object types."""
+"""
+A filter to be used against aggregates of `Definition` object types.
+"""
 input DefinitionAggregatesFilter {
-  """Mean average aggregate over matching `Definition` objects."""
+  """
+  Mean average aggregate over matching `Definition` objects.
+  """
   average: DefinitionAverageAggregateFilter
 
-  """Distinct count aggregate over matching `Definition` objects."""
+  """
+  Distinct count aggregate over matching `Definition` objects.
+  """
   distinctCount: DefinitionDistinctCountAggregateFilter
 
   """
@@ -284,10 +370,14 @@ input DefinitionAggregatesFilter {
   """
   filter: DefinitionFilter
 
-  """Maximum aggregate over matching `Definition` objects."""
+  """
+  Maximum aggregate over matching `Definition` objects.
+  """
   max: DefinitionMaxAggregateFilter
 
-  """Minimum aggregate over matching `Definition` objects."""
+  """
+  Minimum aggregate over matching `Definition` objects.
+  """
   min: DefinitionMinAggregateFilter
 
   """
@@ -300,13 +390,19 @@ input DefinitionAggregatesFilter {
   """
   stddevSample: DefinitionStddevSampleAggregateFilter
 
-  """Sum aggregate over matching `Definition` objects."""
+  """
+  Sum aggregate over matching `Definition` objects.
+  """
   sum: DefinitionSumAggregateFilter
 
-  """Population variance aggregate over matching `Definition` objects."""
+  """
+  Population variance aggregate over matching `Definition` objects.
+  """
   variancePopulation: DefinitionVariancePopulationAggregateFilter
 
-  """Sample variance aggregate over matching `Definition` objects."""
+  """
+  Sample variance aggregate over matching `Definition` objects.
+  """
   varianceSample: DefinitionVarianceSampleAggregateFilter
 }
 
@@ -316,10 +412,14 @@ input DefinitionAverageAggregateFilter {
 }
 
 type DefinitionAverageAggregates {
-  """Mean average of level across the matching connection"""
+  """
+  Mean average of level across the matching connection
+  """
   level: BigFloat
 
-  """Mean average of threshold across the matching connection"""
+  """
+  Mean average of threshold across the matching connection
+  """
   threshold: Float
 }
 
@@ -328,28 +428,44 @@ A condition to be used against `Definition` object types. All fields are tested
 for equality and combined with a logical ‘and.’
 """
 input DefinitionCondition {
-  """Checks for equality with the object’s `description` field."""
+  """
+  Checks for equality with the object’s `description` field.
+  """
   description: String
 
-  """Checks for equality with the object’s `id` field."""
+  """
+  Checks for equality with the object’s `id` field.
+  """
   id: String
 
-  """Checks for equality with the object’s `ipfsUri` field."""
+  """
+  Checks for equality with the object’s `ipfsUri` field.
+  """
   ipfsUri: String
 
-  """Checks for equality with the object’s `level` field."""
+  """
+  Checks for equality with the object’s `level` field.
+  """
   level: Int
 
-  """Checks for equality with the object’s `metric` field."""
+  """
+  Checks for equality with the object’s `metric` field.
+  """
   metric: String
 
-  """Checks for equality with the object’s `protocolId` field."""
+  """
+  Checks for equality with the object’s `protocolId` field.
+  """
   protocolId: String
 
-  """Checks for equality with the object’s `threshold` field."""
+  """
+  Checks for equality with the object’s `threshold` field.
+  """
   threshold: Float
 
-  """Checks for equality with the object’s `trackId` field."""
+  """
+  Checks for equality with the object’s `trackId` field.
+  """
   trackId: String
 }
 
@@ -365,28 +481,44 @@ input DefinitionDistinctCountAggregateFilter {
 }
 
 type DefinitionDistinctCountAggregates {
-  """Distinct count of description across the matching connection"""
+  """
+  Distinct count of description across the matching connection
+  """
   description: BigInt
 
-  """Distinct count of id across the matching connection"""
+  """
+  Distinct count of id across the matching connection
+  """
   id: BigInt
 
-  """Distinct count of ipfsUri across the matching connection"""
+  """
+  Distinct count of ipfsUri across the matching connection
+  """
   ipfsUri: BigInt
 
-  """Distinct count of level across the matching connection"""
+  """
+  Distinct count of level across the matching connection
+  """
   level: BigInt
 
-  """Distinct count of metric across the matching connection"""
+  """
+  Distinct count of metric across the matching connection
+  """
   metric: BigInt
 
-  """Distinct count of protocolId across the matching connection"""
+  """
+  Distinct count of protocolId across the matching connection
+  """
   protocolId: BigInt
 
-  """Distinct count of threshold across the matching connection"""
+  """
+  Distinct count of threshold across the matching connection
+  """
   threshold: BigInt
 
-  """Distinct count of trackId across the matching connection"""
+  """
+  Distinct count of trackId across the matching connection
+  """
   trackId: BigInt
 }
 
@@ -394,49 +526,79 @@ type DefinitionDistinctCountAggregates {
 A filter to be used against `Definition` object types. All fields are combined with a logical ‘and.’
 """
 input DefinitionFilter {
-  """Checks for all expressions in this list."""
+  """
+  Checks for all expressions in this list.
+  """
   and: [DefinitionFilter!]
 
-  """Filter by the object’s `description` field."""
+  """
+  Filter by the object’s `description` field.
+  """
   description: StringFilter
 
-  """Filter by the object’s `earnedBadgesByDefinitionId` relation."""
+  """
+  Filter by the object’s `earnedBadgesByDefinitionId` relation.
+  """
   earnedBadgesByDefinitionId: DefinitionToManyEarnedBadgeFilter
 
-  """Some related `earnedBadgesByDefinitionId` exist."""
+  """
+  Some related `earnedBadgesByDefinitionId` exist.
+  """
   earnedBadgesByDefinitionIdExist: Boolean
 
-  """Filter by the object’s `id` field."""
+  """
+  Filter by the object’s `id` field.
+  """
   id: StringFilter
 
-  """Filter by the object’s `ipfsUri` field."""
+  """
+  Filter by the object’s `ipfsUri` field.
+  """
   ipfsUri: StringFilter
 
-  """Filter by the object’s `level` field."""
+  """
+  Filter by the object’s `level` field.
+  """
   level: IntFilter
 
-  """Filter by the object’s `metric` field."""
+  """
+  Filter by the object’s `metric` field.
+  """
   metric: StringFilter
 
-  """Negates the expression."""
+  """
+  Negates the expression.
+  """
   not: DefinitionFilter
 
-  """Checks for any expressions in this list."""
+  """
+  Checks for any expressions in this list.
+  """
   or: [DefinitionFilter!]
 
-  """Filter by the object’s `protocolByProtocolId` relation."""
+  """
+  Filter by the object’s `protocolByProtocolId` relation.
+  """
   protocolByProtocolId: ProtocolFilter
 
-  """Filter by the object’s `protocolId` field."""
+  """
+  Filter by the object’s `protocolId` field.
+  """
   protocolId: StringFilter
 
-  """Filter by the object’s `threshold` field."""
+  """
+  Filter by the object’s `threshold` field.
+  """
   threshold: FloatFilter
 
-  """Filter by the object’s `trackByTrackId` relation."""
+  """
+  Filter by the object’s `trackByTrackId` relation.
+  """
   trackByTrackId: TrackFilter
 
-  """Filter by the object’s `trackId` field."""
+  """
+  Filter by the object’s `trackId` field.
+  """
   trackId: StringFilter
 }
 
@@ -446,10 +608,14 @@ input DefinitionMaxAggregateFilter {
 }
 
 type DefinitionMaxAggregates {
-  """Maximum of level across the matching connection"""
+  """
+  Maximum of level across the matching connection
+  """
   level: Int
 
-  """Maximum of threshold across the matching connection"""
+  """
+  Maximum of threshold across the matching connection
+  """
   threshold: Float
 }
 
@@ -459,10 +625,14 @@ input DefinitionMinAggregateFilter {
 }
 
 type DefinitionMinAggregates {
-  """Minimum of level across the matching connection"""
+  """
+  Minimum of level across the matching connection
+  """
   level: Int
 
-  """Minimum of threshold across the matching connection"""
+  """
+  Minimum of threshold across the matching connection
+  """
   threshold: Float
 }
 
@@ -472,7 +642,9 @@ input DefinitionStddevPopulationAggregateFilter {
 }
 
 type DefinitionStddevPopulationAggregates {
-  """Population standard deviation of level across the matching connection"""
+  """
+  Population standard deviation of level across the matching connection
+  """
   level: BigFloat
 
   """
@@ -487,10 +659,14 @@ input DefinitionStddevSampleAggregateFilter {
 }
 
 type DefinitionStddevSampleAggregates {
-  """Sample standard deviation of level across the matching connection"""
+  """
+  Sample standard deviation of level across the matching connection
+  """
   level: BigFloat
 
-  """Sample standard deviation of threshold across the matching connection"""
+  """
+  Sample standard deviation of threshold across the matching connection
+  """
   threshold: Float
 }
 
@@ -500,10 +676,14 @@ input DefinitionSumAggregateFilter {
 }
 
 type DefinitionSumAggregates {
-  """Sum of level across the matching connection"""
+  """
+  Sum of level across the matching connection
+  """
   level: BigInt!
 
-  """Sum of threshold across the matching connection"""
+  """
+  Sum of threshold across the matching connection
+  """
   threshold: Float!
 }
 
@@ -511,7 +691,9 @@ type DefinitionSumAggregates {
 A filter to be used against many `EarnedBadge` object types. All fields are combined with a logical ‘and.’
 """
 input DefinitionToManyEarnedBadgeFilter {
-  """Aggregates across related `EarnedBadge` match the filter criteria."""
+  """
+  Aggregates across related `EarnedBadge` match the filter criteria.
+  """
   aggregates: EarnedBadgeAggregatesFilter
 
   """
@@ -536,10 +718,14 @@ input DefinitionVariancePopulationAggregateFilter {
 }
 
 type DefinitionVariancePopulationAggregates {
-  """Population variance of level across the matching connection"""
+  """
+  Population variance of level across the matching connection
+  """
   level: BigFloat
 
-  """Population variance of threshold across the matching connection"""
+  """
+  Population variance of threshold across the matching connection
+  """
   threshold: Float
 }
 
@@ -549,14 +735,20 @@ input DefinitionVarianceSampleAggregateFilter {
 }
 
 type DefinitionVarianceSampleAggregates {
-  """Sample variance of level across the matching connection"""
+  """
+  Sample variance of level across the matching connection
+  """
   level: BigFloat
 
-  """Sample variance of threshold across the matching connection"""
+  """
+  Sample variance of threshold across the matching connection
+  """
   threshold: Float
 }
 
-"""A connection to a list of `Definition` values."""
+"""
+A connection to a list of `Definition` values.
+"""
 type DefinitionsConnection {
   """
   Aggregates across the matching connection (ignoring before/after/first/last/offset)
@@ -572,33 +764,51 @@ type DefinitionsConnection {
   Grouped aggregates across the matching connection (ignoring before/after/first/last/offset)
   """
   groupedAggregates(
-    """The method to use when grouping `Definition` for these aggregates."""
+    """
+    The method to use when grouping `Definition` for these aggregates.
+    """
     groupBy: [DefinitionsGroupBy!]!
 
-    """Conditions on the grouped aggregates."""
+    """
+    Conditions on the grouped aggregates.
+    """
     having: DefinitionsHavingInput
   ): [DefinitionAggregates!]
 
-  """A list of `Definition` objects."""
+  """
+  A list of `Definition` objects.
+  """
   nodes: [Definition!]!
 
-  """Information to aid in pagination."""
+  """
+  Information to aid in pagination.
+  """
   pageInfo: PageInfo!
 
-  """The count of *all* `Definition` you could get from the connection."""
+  """
+  The count of *all* `Definition` you could get from the connection.
+  """
   totalCount: Int!
 }
 
-"""A `Definition` edge in the connection."""
+"""
+A `Definition` edge in the connection.
+"""
 type DefinitionsEdge {
-  """A cursor for use in pagination."""
+  """
+  A cursor for use in pagination.
+  """
   cursor: Cursor
 
-  """The `Definition` at the end of the edge."""
+  """
+  The `Definition` at the end of the edge.
+  """
   node: Definition!
 }
 
-"""Grouping methods for `Definition` for usage during aggregation."""
+"""
+Grouping methods for `Definition` for usage during aggregation.
+"""
 enum DefinitionsGroupBy {
   DESCRIPTION
   IPFS_URI
@@ -619,7 +829,9 @@ input DefinitionsHavingDistinctCountInput {
   threshold: HavingFloatFilter
 }
 
-"""Conditions for `Definition` aggregates."""
+"""
+Conditions for `Definition` aggregates.
+"""
 input DefinitionsHavingInput {
   AND: [DefinitionsHavingInput!]
   OR: [DefinitionsHavingInput!]
@@ -669,7 +881,9 @@ input DefinitionsHavingVarianceSampleInput {
   threshold: HavingFloatFilter
 }
 
-"""Methods to use when ordering `Definition`."""
+"""
+Methods to use when ordering `Definition`.
+"""
 enum DefinitionsOrderBy {
   DESCRIPTION_ASC
   DESCRIPTION_DESC
@@ -679,8 +893,8 @@ enum DefinitionsOrderBy {
   EARNED_BADGES_BY_DEFINITION_ID_AVERAGE_BLOCK_AWARDED_DESC
   EARNED_BADGES_BY_DEFINITION_ID_AVERAGE_DEFINITION_ID_ASC
   EARNED_BADGES_BY_DEFINITION_ID_AVERAGE_DEFINITION_ID_DESC
-  EARNED_BADGES_BY_DEFINITION_ID_AVERAGE_GLOBAL_AWARD_NUMBER_ASC
-  EARNED_BADGES_BY_DEFINITION_ID_AVERAGE_GLOBAL_AWARD_NUMBER_DESC
+  EARNED_BADGES_BY_DEFINITION_ID_AVERAGE_GLOBAL_BADGE_NUMBER_ASC
+  EARNED_BADGES_BY_DEFINITION_ID_AVERAGE_GLOBAL_BADGE_NUMBER_DESC
   EARNED_BADGES_BY_DEFINITION_ID_AVERAGE_ID_ASC
   EARNED_BADGES_BY_DEFINITION_ID_AVERAGE_ID_DESC
   EARNED_BADGES_BY_DEFINITION_ID_AVERAGE_METADATA_ASC
@@ -701,8 +915,8 @@ enum DefinitionsOrderBy {
   EARNED_BADGES_BY_DEFINITION_ID_DISTINCT_COUNT_BLOCK_AWARDED_DESC
   EARNED_BADGES_BY_DEFINITION_ID_DISTINCT_COUNT_DEFINITION_ID_ASC
   EARNED_BADGES_BY_DEFINITION_ID_DISTINCT_COUNT_DEFINITION_ID_DESC
-  EARNED_BADGES_BY_DEFINITION_ID_DISTINCT_COUNT_GLOBAL_AWARD_NUMBER_ASC
-  EARNED_BADGES_BY_DEFINITION_ID_DISTINCT_COUNT_GLOBAL_AWARD_NUMBER_DESC
+  EARNED_BADGES_BY_DEFINITION_ID_DISTINCT_COUNT_GLOBAL_BADGE_NUMBER_ASC
+  EARNED_BADGES_BY_DEFINITION_ID_DISTINCT_COUNT_GLOBAL_BADGE_NUMBER_DESC
   EARNED_BADGES_BY_DEFINITION_ID_DISTINCT_COUNT_ID_ASC
   EARNED_BADGES_BY_DEFINITION_ID_DISTINCT_COUNT_ID_DESC
   EARNED_BADGES_BY_DEFINITION_ID_DISTINCT_COUNT_METADATA_ASC
@@ -721,8 +935,8 @@ enum DefinitionsOrderBy {
   EARNED_BADGES_BY_DEFINITION_ID_MAX_BLOCK_AWARDED_DESC
   EARNED_BADGES_BY_DEFINITION_ID_MAX_DEFINITION_ID_ASC
   EARNED_BADGES_BY_DEFINITION_ID_MAX_DEFINITION_ID_DESC
-  EARNED_BADGES_BY_DEFINITION_ID_MAX_GLOBAL_AWARD_NUMBER_ASC
-  EARNED_BADGES_BY_DEFINITION_ID_MAX_GLOBAL_AWARD_NUMBER_DESC
+  EARNED_BADGES_BY_DEFINITION_ID_MAX_GLOBAL_BADGE_NUMBER_ASC
+  EARNED_BADGES_BY_DEFINITION_ID_MAX_GLOBAL_BADGE_NUMBER_DESC
   EARNED_BADGES_BY_DEFINITION_ID_MAX_ID_ASC
   EARNED_BADGES_BY_DEFINITION_ID_MAX_ID_DESC
   EARNED_BADGES_BY_DEFINITION_ID_MAX_METADATA_ASC
@@ -741,8 +955,8 @@ enum DefinitionsOrderBy {
   EARNED_BADGES_BY_DEFINITION_ID_MIN_BLOCK_AWARDED_DESC
   EARNED_BADGES_BY_DEFINITION_ID_MIN_DEFINITION_ID_ASC
   EARNED_BADGES_BY_DEFINITION_ID_MIN_DEFINITION_ID_DESC
-  EARNED_BADGES_BY_DEFINITION_ID_MIN_GLOBAL_AWARD_NUMBER_ASC
-  EARNED_BADGES_BY_DEFINITION_ID_MIN_GLOBAL_AWARD_NUMBER_DESC
+  EARNED_BADGES_BY_DEFINITION_ID_MIN_GLOBAL_BADGE_NUMBER_ASC
+  EARNED_BADGES_BY_DEFINITION_ID_MIN_GLOBAL_BADGE_NUMBER_DESC
   EARNED_BADGES_BY_DEFINITION_ID_MIN_ID_ASC
   EARNED_BADGES_BY_DEFINITION_ID_MIN_ID_DESC
   EARNED_BADGES_BY_DEFINITION_ID_MIN_METADATA_ASC
@@ -761,8 +975,8 @@ enum DefinitionsOrderBy {
   EARNED_BADGES_BY_DEFINITION_ID_STDDEV_POPULATION_BLOCK_AWARDED_DESC
   EARNED_BADGES_BY_DEFINITION_ID_STDDEV_POPULATION_DEFINITION_ID_ASC
   EARNED_BADGES_BY_DEFINITION_ID_STDDEV_POPULATION_DEFINITION_ID_DESC
-  EARNED_BADGES_BY_DEFINITION_ID_STDDEV_POPULATION_GLOBAL_AWARD_NUMBER_ASC
-  EARNED_BADGES_BY_DEFINITION_ID_STDDEV_POPULATION_GLOBAL_AWARD_NUMBER_DESC
+  EARNED_BADGES_BY_DEFINITION_ID_STDDEV_POPULATION_GLOBAL_BADGE_NUMBER_ASC
+  EARNED_BADGES_BY_DEFINITION_ID_STDDEV_POPULATION_GLOBAL_BADGE_NUMBER_DESC
   EARNED_BADGES_BY_DEFINITION_ID_STDDEV_POPULATION_ID_ASC
   EARNED_BADGES_BY_DEFINITION_ID_STDDEV_POPULATION_ID_DESC
   EARNED_BADGES_BY_DEFINITION_ID_STDDEV_POPULATION_METADATA_ASC
@@ -781,8 +995,8 @@ enum DefinitionsOrderBy {
   EARNED_BADGES_BY_DEFINITION_ID_STDDEV_SAMPLE_BLOCK_AWARDED_DESC
   EARNED_BADGES_BY_DEFINITION_ID_STDDEV_SAMPLE_DEFINITION_ID_ASC
   EARNED_BADGES_BY_DEFINITION_ID_STDDEV_SAMPLE_DEFINITION_ID_DESC
-  EARNED_BADGES_BY_DEFINITION_ID_STDDEV_SAMPLE_GLOBAL_AWARD_NUMBER_ASC
-  EARNED_BADGES_BY_DEFINITION_ID_STDDEV_SAMPLE_GLOBAL_AWARD_NUMBER_DESC
+  EARNED_BADGES_BY_DEFINITION_ID_STDDEV_SAMPLE_GLOBAL_BADGE_NUMBER_ASC
+  EARNED_BADGES_BY_DEFINITION_ID_STDDEV_SAMPLE_GLOBAL_BADGE_NUMBER_DESC
   EARNED_BADGES_BY_DEFINITION_ID_STDDEV_SAMPLE_ID_ASC
   EARNED_BADGES_BY_DEFINITION_ID_STDDEV_SAMPLE_ID_DESC
   EARNED_BADGES_BY_DEFINITION_ID_STDDEV_SAMPLE_METADATA_ASC
@@ -801,8 +1015,8 @@ enum DefinitionsOrderBy {
   EARNED_BADGES_BY_DEFINITION_ID_SUM_BLOCK_AWARDED_DESC
   EARNED_BADGES_BY_DEFINITION_ID_SUM_DEFINITION_ID_ASC
   EARNED_BADGES_BY_DEFINITION_ID_SUM_DEFINITION_ID_DESC
-  EARNED_BADGES_BY_DEFINITION_ID_SUM_GLOBAL_AWARD_NUMBER_ASC
-  EARNED_BADGES_BY_DEFINITION_ID_SUM_GLOBAL_AWARD_NUMBER_DESC
+  EARNED_BADGES_BY_DEFINITION_ID_SUM_GLOBAL_BADGE_NUMBER_ASC
+  EARNED_BADGES_BY_DEFINITION_ID_SUM_GLOBAL_BADGE_NUMBER_DESC
   EARNED_BADGES_BY_DEFINITION_ID_SUM_ID_ASC
   EARNED_BADGES_BY_DEFINITION_ID_SUM_ID_DESC
   EARNED_BADGES_BY_DEFINITION_ID_SUM_METADATA_ASC
@@ -821,8 +1035,8 @@ enum DefinitionsOrderBy {
   EARNED_BADGES_BY_DEFINITION_ID_VARIANCE_POPULATION_BLOCK_AWARDED_DESC
   EARNED_BADGES_BY_DEFINITION_ID_VARIANCE_POPULATION_DEFINITION_ID_ASC
   EARNED_BADGES_BY_DEFINITION_ID_VARIANCE_POPULATION_DEFINITION_ID_DESC
-  EARNED_BADGES_BY_DEFINITION_ID_VARIANCE_POPULATION_GLOBAL_AWARD_NUMBER_ASC
-  EARNED_BADGES_BY_DEFINITION_ID_VARIANCE_POPULATION_GLOBAL_AWARD_NUMBER_DESC
+  EARNED_BADGES_BY_DEFINITION_ID_VARIANCE_POPULATION_GLOBAL_BADGE_NUMBER_ASC
+  EARNED_BADGES_BY_DEFINITION_ID_VARIANCE_POPULATION_GLOBAL_BADGE_NUMBER_DESC
   EARNED_BADGES_BY_DEFINITION_ID_VARIANCE_POPULATION_ID_ASC
   EARNED_BADGES_BY_DEFINITION_ID_VARIANCE_POPULATION_ID_DESC
   EARNED_BADGES_BY_DEFINITION_ID_VARIANCE_POPULATION_METADATA_ASC
@@ -841,8 +1055,8 @@ enum DefinitionsOrderBy {
   EARNED_BADGES_BY_DEFINITION_ID_VARIANCE_SAMPLE_BLOCK_AWARDED_DESC
   EARNED_BADGES_BY_DEFINITION_ID_VARIANCE_SAMPLE_DEFINITION_ID_ASC
   EARNED_BADGES_BY_DEFINITION_ID_VARIANCE_SAMPLE_DEFINITION_ID_DESC
-  EARNED_BADGES_BY_DEFINITION_ID_VARIANCE_SAMPLE_GLOBAL_AWARD_NUMBER_ASC
-  EARNED_BADGES_BY_DEFINITION_ID_VARIANCE_SAMPLE_GLOBAL_AWARD_NUMBER_DESC
+  EARNED_BADGES_BY_DEFINITION_ID_VARIANCE_SAMPLE_GLOBAL_BADGE_NUMBER_ASC
+  EARNED_BADGES_BY_DEFINITION_ID_VARIANCE_SAMPLE_GLOBAL_BADGE_NUMBER_DESC
   EARNED_BADGES_BY_DEFINITION_ID_VARIANCE_SAMPLE_ID_ASC
   EARNED_BADGES_BY_DEFINITION_ID_VARIANCE_SAMPLE_ID_DESC
   EARNED_BADGES_BY_DEFINITION_ID_VARIANCE_SAMPLE_METADATA_ASC
@@ -878,10 +1092,12 @@ type EarnedBadge implements Node {
   awardNumber: Int
   blockAwarded: Int
 
-  """Reads a single `Definition` that is related to this `EarnedBadge`."""
+  """
+  Reads a single `Definition` that is related to this `EarnedBadge`.
+  """
   definitionByDefinitionId: Definition
   definitionId: String!
-  globalAwardNumber: Int
+  globalBadgeNumber: Int
   id: String!
   metadata: JSON
 
@@ -890,13 +1106,17 @@ type EarnedBadge implements Node {
   """
   nodeId: ID!
 
-  """Reads a single `Protocol` that is related to this `EarnedBadge`."""
+  """
+  Reads a single `Protocol` that is related to this `EarnedBadge`.
+  """
   protocolByProtocolId: Protocol
   protocolId: String!
   timestampAwarded: Int
   transactionHash: String
 
-  """Reads a single `Winner` that is related to this `EarnedBadge`."""
+  """
+  Reads a single `Winner` that is related to this `EarnedBadge`.
+  """
   winnerByWinnerId: Winner
   winnerId: String!
 }
@@ -949,12 +1169,18 @@ type EarnedBadgeAggregates {
   varianceSample: EarnedBadgeVarianceSampleAggregates
 }
 
-"""A filter to be used against aggregates of `EarnedBadge` object types."""
+"""
+A filter to be used against aggregates of `EarnedBadge` object types.
+"""
 input EarnedBadgeAggregatesFilter {
-  """Mean average aggregate over matching `EarnedBadge` objects."""
+  """
+  Mean average aggregate over matching `EarnedBadge` objects.
+  """
   average: EarnedBadgeAverageAggregateFilter
 
-  """Distinct count aggregate over matching `EarnedBadge` objects."""
+  """
+  Distinct count aggregate over matching `EarnedBadge` objects.
+  """
   distinctCount: EarnedBadgeDistinctCountAggregateFilter
 
   """
@@ -962,10 +1188,14 @@ input EarnedBadgeAggregatesFilter {
   """
   filter: EarnedBadgeFilter
 
-  """Maximum aggregate over matching `EarnedBadge` objects."""
+  """
+  Maximum aggregate over matching `EarnedBadge` objects.
+  """
   max: EarnedBadgeMaxAggregateFilter
 
-  """Minimum aggregate over matching `EarnedBadge` objects."""
+  """
+  Minimum aggregate over matching `EarnedBadge` objects.
+  """
   min: EarnedBadgeMinAggregateFilter
 
   """
@@ -978,34 +1208,48 @@ input EarnedBadgeAggregatesFilter {
   """
   stddevSample: EarnedBadgeStddevSampleAggregateFilter
 
-  """Sum aggregate over matching `EarnedBadge` objects."""
+  """
+  Sum aggregate over matching `EarnedBadge` objects.
+  """
   sum: EarnedBadgeSumAggregateFilter
 
-  """Population variance aggregate over matching `EarnedBadge` objects."""
+  """
+  Population variance aggregate over matching `EarnedBadge` objects.
+  """
   variancePopulation: EarnedBadgeVariancePopulationAggregateFilter
 
-  """Sample variance aggregate over matching `EarnedBadge` objects."""
+  """
+  Sample variance aggregate over matching `EarnedBadge` objects.
+  """
   varianceSample: EarnedBadgeVarianceSampleAggregateFilter
 }
 
 input EarnedBadgeAverageAggregateFilter {
   awardNumber: BigFloatFilter
   blockAwarded: BigFloatFilter
-  globalAwardNumber: BigFloatFilter
+  globalBadgeNumber: BigFloatFilter
   timestampAwarded: BigFloatFilter
 }
 
 type EarnedBadgeAverageAggregates {
-  """Mean average of awardNumber across the matching connection"""
+  """
+  Mean average of awardNumber across the matching connection
+  """
   awardNumber: BigFloat
 
-  """Mean average of blockAwarded across the matching connection"""
+  """
+  Mean average of blockAwarded across the matching connection
+  """
   blockAwarded: BigFloat
 
-  """Mean average of globalAwardNumber across the matching connection"""
-  globalAwardNumber: BigFloat
+  """
+  Mean average of globalBadgeNumber across the matching connection
+  """
+  globalBadgeNumber: BigFloat
 
-  """Mean average of timestampAwarded across the matching connection"""
+  """
+  Mean average of timestampAwarded across the matching connection
+  """
   timestampAwarded: BigFloat
 }
 
@@ -1014,34 +1258,54 @@ A condition to be used against `EarnedBadge` object types. All fields are tested
 for equality and combined with a logical ‘and.’
 """
 input EarnedBadgeCondition {
-  """Checks for equality with the object’s `awardNumber` field."""
+  """
+  Checks for equality with the object’s `awardNumber` field.
+  """
   awardNumber: Int
 
-  """Checks for equality with the object’s `blockAwarded` field."""
+  """
+  Checks for equality with the object’s `blockAwarded` field.
+  """
   blockAwarded: Int
 
-  """Checks for equality with the object’s `definitionId` field."""
+  """
+  Checks for equality with the object’s `definitionId` field.
+  """
   definitionId: String
 
-  """Checks for equality with the object’s `globalAwardNumber` field."""
-  globalAwardNumber: Int
+  """
+  Checks for equality with the object’s `globalBadgeNumber` field.
+  """
+  globalBadgeNumber: Int
 
-  """Checks for equality with the object’s `id` field."""
+  """
+  Checks for equality with the object’s `id` field.
+  """
   id: String
 
-  """Checks for equality with the object’s `metadata` field."""
+  """
+  Checks for equality with the object’s `metadata` field.
+  """
   metadata: JSON
 
-  """Checks for equality with the object’s `protocolId` field."""
+  """
+  Checks for equality with the object’s `protocolId` field.
+  """
   protocolId: String
 
-  """Checks for equality with the object’s `timestampAwarded` field."""
+  """
+  Checks for equality with the object’s `timestampAwarded` field.
+  """
   timestampAwarded: Int
 
-  """Checks for equality with the object’s `transactionHash` field."""
+  """
+  Checks for equality with the object’s `transactionHash` field.
+  """
   transactionHash: String
 
-  """Checks for equality with the object’s `winnerId` field."""
+  """
+  Checks for equality with the object’s `winnerId` field.
+  """
   winnerId: String
 }
 
@@ -1049,7 +1313,7 @@ input EarnedBadgeDistinctCountAggregateFilter {
   awardNumber: BigIntFilter
   blockAwarded: BigIntFilter
   definitionId: BigIntFilter
-  globalAwardNumber: BigIntFilter
+  globalBadgeNumber: BigIntFilter
   id: BigIntFilter
   metadata: BigIntFilter
   protocolId: BigIntFilter
@@ -1059,34 +1323,54 @@ input EarnedBadgeDistinctCountAggregateFilter {
 }
 
 type EarnedBadgeDistinctCountAggregates {
-  """Distinct count of awardNumber across the matching connection"""
+  """
+  Distinct count of awardNumber across the matching connection
+  """
   awardNumber: BigInt
 
-  """Distinct count of blockAwarded across the matching connection"""
+  """
+  Distinct count of blockAwarded across the matching connection
+  """
   blockAwarded: BigInt
 
-  """Distinct count of definitionId across the matching connection"""
+  """
+  Distinct count of definitionId across the matching connection
+  """
   definitionId: BigInt
 
-  """Distinct count of globalAwardNumber across the matching connection"""
-  globalAwardNumber: BigInt
+  """
+  Distinct count of globalBadgeNumber across the matching connection
+  """
+  globalBadgeNumber: BigInt
 
-  """Distinct count of id across the matching connection"""
+  """
+  Distinct count of id across the matching connection
+  """
   id: BigInt
 
-  """Distinct count of metadata across the matching connection"""
+  """
+  Distinct count of metadata across the matching connection
+  """
   metadata: BigInt
 
-  """Distinct count of protocolId across the matching connection"""
+  """
+  Distinct count of protocolId across the matching connection
+  """
   protocolId: BigInt
 
-  """Distinct count of timestampAwarded across the matching connection"""
+  """
+  Distinct count of timestampAwarded across the matching connection
+  """
   timestampAwarded: BigInt
 
-  """Distinct count of transactionHash across the matching connection"""
+  """
+  Distinct count of transactionHash across the matching connection
+  """
   transactionHash: BigInt
 
-  """Distinct count of winnerId across the matching connection"""
+  """
+  Distinct count of winnerId across the matching connection
+  """
   winnerId: BigInt
 }
 
@@ -1094,101 +1378,149 @@ type EarnedBadgeDistinctCountAggregates {
 A filter to be used against `EarnedBadge` object types. All fields are combined with a logical ‘and.’
 """
 input EarnedBadgeFilter {
-  """Checks for all expressions in this list."""
+  """
+  Checks for all expressions in this list.
+  """
   and: [EarnedBadgeFilter!]
 
-  """Filter by the object’s `awardNumber` field."""
+  """
+  Filter by the object’s `awardNumber` field.
+  """
   awardNumber: IntFilter
 
-  """Filter by the object’s `blockAwarded` field."""
+  """
+  Filter by the object’s `blockAwarded` field.
+  """
   blockAwarded: IntFilter
 
-  """Filter by the object’s `definitionByDefinitionId` relation."""
+  """
+  Filter by the object’s `definitionByDefinitionId` relation.
+  """
   definitionByDefinitionId: DefinitionFilter
 
-  """Filter by the object’s `definitionId` field."""
+  """
+  Filter by the object’s `definitionId` field.
+  """
   definitionId: StringFilter
 
-  """Filter by the object’s `globalAwardNumber` field."""
-  globalAwardNumber: IntFilter
+  """
+  Filter by the object’s `globalBadgeNumber` field.
+  """
+  globalBadgeNumber: IntFilter
 
-  """Filter by the object’s `id` field."""
+  """
+  Filter by the object’s `id` field.
+  """
   id: StringFilter
 
-  """Filter by the object’s `metadata` field."""
+  """
+  Filter by the object’s `metadata` field.
+  """
   metadata: JSONFilter
 
-  """Negates the expression."""
+  """
+  Negates the expression.
+  """
   not: EarnedBadgeFilter
 
-  """Checks for any expressions in this list."""
+  """
+  Checks for any expressions in this list.
+  """
   or: [EarnedBadgeFilter!]
 
-  """Filter by the object’s `protocolByProtocolId` relation."""
+  """
+  Filter by the object’s `protocolByProtocolId` relation.
+  """
   protocolByProtocolId: ProtocolFilter
 
-  """Filter by the object’s `protocolId` field."""
+  """
+  Filter by the object’s `protocolId` field.
+  """
   protocolId: StringFilter
 
-  """Filter by the object’s `timestampAwarded` field."""
+  """
+  Filter by the object’s `timestampAwarded` field.
+  """
   timestampAwarded: IntFilter
 
-  """Filter by the object’s `transactionHash` field."""
+  """
+  Filter by the object’s `transactionHash` field.
+  """
   transactionHash: StringFilter
 
-  """Filter by the object’s `winnerByWinnerId` relation."""
+  """
+  Filter by the object’s `winnerByWinnerId` relation.
+  """
   winnerByWinnerId: WinnerFilter
 
-  """Filter by the object’s `winnerId` field."""
+  """
+  Filter by the object’s `winnerId` field.
+  """
   winnerId: StringFilter
 }
 
 input EarnedBadgeMaxAggregateFilter {
   awardNumber: IntFilter
   blockAwarded: IntFilter
-  globalAwardNumber: IntFilter
+  globalBadgeNumber: IntFilter
   timestampAwarded: IntFilter
 }
 
 type EarnedBadgeMaxAggregates {
-  """Maximum of awardNumber across the matching connection"""
+  """
+  Maximum of awardNumber across the matching connection
+  """
   awardNumber: Int
 
-  """Maximum of blockAwarded across the matching connection"""
+  """
+  Maximum of blockAwarded across the matching connection
+  """
   blockAwarded: Int
 
-  """Maximum of globalAwardNumber across the matching connection"""
-  globalAwardNumber: Int
+  """
+  Maximum of globalBadgeNumber across the matching connection
+  """
+  globalBadgeNumber: Int
 
-  """Maximum of timestampAwarded across the matching connection"""
+  """
+  Maximum of timestampAwarded across the matching connection
+  """
   timestampAwarded: Int
 }
 
 input EarnedBadgeMinAggregateFilter {
   awardNumber: IntFilter
   blockAwarded: IntFilter
-  globalAwardNumber: IntFilter
+  globalBadgeNumber: IntFilter
   timestampAwarded: IntFilter
 }
 
 type EarnedBadgeMinAggregates {
-  """Minimum of awardNumber across the matching connection"""
+  """
+  Minimum of awardNumber across the matching connection
+  """
   awardNumber: Int
 
-  """Minimum of blockAwarded across the matching connection"""
+  """
+  Minimum of blockAwarded across the matching connection
+  """
   blockAwarded: Int
 
-  """Minimum of globalAwardNumber across the matching connection"""
-  globalAwardNumber: Int
+  """
+  Minimum of globalBadgeNumber across the matching connection
+  """
+  globalBadgeNumber: Int
 
-  """Minimum of timestampAwarded across the matching connection"""
+  """
+  Minimum of timestampAwarded across the matching connection
+  """
   timestampAwarded: Int
 }
 
 input EarnedBadgeStddevPopulationAggregateFilter {
   awardNumber: BigFloatFilter
   blockAwarded: BigFloatFilter
-  globalAwardNumber: BigFloatFilter
+  globalBadgeNumber: BigFloatFilter
   timestampAwarded: BigFloatFilter
 }
 
@@ -1204,9 +1536,9 @@ type EarnedBadgeStddevPopulationAggregates {
   blockAwarded: BigFloat
 
   """
-  Population standard deviation of globalAwardNumber across the matching connection
+  Population standard deviation of globalBadgeNumber across the matching connection
   """
-  globalAwardNumber: BigFloat
+  globalBadgeNumber: BigFloat
 
   """
   Population standard deviation of timestampAwarded across the matching connection
@@ -1217,7 +1549,7 @@ type EarnedBadgeStddevPopulationAggregates {
 input EarnedBadgeStddevSampleAggregateFilter {
   awardNumber: BigFloatFilter
   blockAwarded: BigFloatFilter
-  globalAwardNumber: BigFloatFilter
+  globalBadgeNumber: BigFloatFilter
   timestampAwarded: BigFloatFilter
 }
 
@@ -1233,9 +1565,9 @@ type EarnedBadgeStddevSampleAggregates {
   blockAwarded: BigFloat
 
   """
-  Sample standard deviation of globalAwardNumber across the matching connection
+  Sample standard deviation of globalBadgeNumber across the matching connection
   """
-  globalAwardNumber: BigFloat
+  globalBadgeNumber: BigFloat
 
   """
   Sample standard deviation of timestampAwarded across the matching connection
@@ -1246,69 +1578,93 @@ type EarnedBadgeStddevSampleAggregates {
 input EarnedBadgeSumAggregateFilter {
   awardNumber: BigIntFilter
   blockAwarded: BigIntFilter
-  globalAwardNumber: BigIntFilter
+  globalBadgeNumber: BigIntFilter
   timestampAwarded: BigIntFilter
 }
 
 type EarnedBadgeSumAggregates {
-  """Sum of awardNumber across the matching connection"""
+  """
+  Sum of awardNumber across the matching connection
+  """
   awardNumber: BigInt!
 
-  """Sum of blockAwarded across the matching connection"""
+  """
+  Sum of blockAwarded across the matching connection
+  """
   blockAwarded: BigInt!
 
-  """Sum of globalAwardNumber across the matching connection"""
-  globalAwardNumber: BigInt!
+  """
+  Sum of globalBadgeNumber across the matching connection
+  """
+  globalBadgeNumber: BigInt!
 
-  """Sum of timestampAwarded across the matching connection"""
+  """
+  Sum of timestampAwarded across the matching connection
+  """
   timestampAwarded: BigInt!
 }
 
 input EarnedBadgeVariancePopulationAggregateFilter {
   awardNumber: BigFloatFilter
   blockAwarded: BigFloatFilter
-  globalAwardNumber: BigFloatFilter
+  globalBadgeNumber: BigFloatFilter
   timestampAwarded: BigFloatFilter
 }
 
 type EarnedBadgeVariancePopulationAggregates {
-  """Population variance of awardNumber across the matching connection"""
+  """
+  Population variance of awardNumber across the matching connection
+  """
   awardNumber: BigFloat
 
-  """Population variance of blockAwarded across the matching connection"""
+  """
+  Population variance of blockAwarded across the matching connection
+  """
   blockAwarded: BigFloat
 
   """
-  Population variance of globalAwardNumber across the matching connection
+  Population variance of globalBadgeNumber across the matching connection
   """
-  globalAwardNumber: BigFloat
+  globalBadgeNumber: BigFloat
 
-  """Population variance of timestampAwarded across the matching connection"""
+  """
+  Population variance of timestampAwarded across the matching connection
+  """
   timestampAwarded: BigFloat
 }
 
 input EarnedBadgeVarianceSampleAggregateFilter {
   awardNumber: BigFloatFilter
   blockAwarded: BigFloatFilter
-  globalAwardNumber: BigFloatFilter
+  globalBadgeNumber: BigFloatFilter
   timestampAwarded: BigFloatFilter
 }
 
 type EarnedBadgeVarianceSampleAggregates {
-  """Sample variance of awardNumber across the matching connection"""
+  """
+  Sample variance of awardNumber across the matching connection
+  """
   awardNumber: BigFloat
 
-  """Sample variance of blockAwarded across the matching connection"""
+  """
+  Sample variance of blockAwarded across the matching connection
+  """
   blockAwarded: BigFloat
 
-  """Sample variance of globalAwardNumber across the matching connection"""
-  globalAwardNumber: BigFloat
+  """
+  Sample variance of globalBadgeNumber across the matching connection
+  """
+  globalBadgeNumber: BigFloat
 
-  """Sample variance of timestampAwarded across the matching connection"""
+  """
+  Sample variance of timestampAwarded across the matching connection
+  """
   timestampAwarded: BigFloat
 }
 
-"""A connection to a list of `EarnedBadge` values."""
+"""
+A connection to a list of `EarnedBadge` values.
+"""
 type EarnedBadgesConnection {
   """
   Aggregates across the matching connection (ignoring before/after/first/last/offset)
@@ -1324,38 +1680,56 @@ type EarnedBadgesConnection {
   Grouped aggregates across the matching connection (ignoring before/after/first/last/offset)
   """
   groupedAggregates(
-    """The method to use when grouping `EarnedBadge` for these aggregates."""
+    """
+    The method to use when grouping `EarnedBadge` for these aggregates.
+    """
     groupBy: [EarnedBadgesGroupBy!]!
 
-    """Conditions on the grouped aggregates."""
+    """
+    Conditions on the grouped aggregates.
+    """
     having: EarnedBadgesHavingInput
   ): [EarnedBadgeAggregates!]
 
-  """A list of `EarnedBadge` objects."""
+  """
+  A list of `EarnedBadge` objects.
+  """
   nodes: [EarnedBadge!]!
 
-  """Information to aid in pagination."""
+  """
+  Information to aid in pagination.
+  """
   pageInfo: PageInfo!
 
-  """The count of *all* `EarnedBadge` you could get from the connection."""
+  """
+  The count of *all* `EarnedBadge` you could get from the connection.
+  """
   totalCount: Int!
 }
 
-"""A `EarnedBadge` edge in the connection."""
+"""
+A `EarnedBadge` edge in the connection.
+"""
 type EarnedBadgesEdge {
-  """A cursor for use in pagination."""
+  """
+  A cursor for use in pagination.
+  """
   cursor: Cursor
 
-  """The `EarnedBadge` at the end of the edge."""
+  """
+  The `EarnedBadge` at the end of the edge.
+  """
   node: EarnedBadge!
 }
 
-"""Grouping methods for `EarnedBadge` for usage during aggregation."""
+"""
+Grouping methods for `EarnedBadge` for usage during aggregation.
+"""
 enum EarnedBadgesGroupBy {
   AWARD_NUMBER
   BLOCK_AWARDED
   DEFINITION_ID
-  GLOBAL_AWARD_NUMBER
+  GLOBAL_BADGE_NUMBER
   METADATA
   PROTOCOL_ID
   TIMESTAMP_AWARDED
@@ -1366,18 +1740,20 @@ enum EarnedBadgesGroupBy {
 input EarnedBadgesHavingAverageInput {
   awardNumber: HavingIntFilter
   blockAwarded: HavingIntFilter
-  globalAwardNumber: HavingIntFilter
+  globalBadgeNumber: HavingIntFilter
   timestampAwarded: HavingIntFilter
 }
 
 input EarnedBadgesHavingDistinctCountInput {
   awardNumber: HavingIntFilter
   blockAwarded: HavingIntFilter
-  globalAwardNumber: HavingIntFilter
+  globalBadgeNumber: HavingIntFilter
   timestampAwarded: HavingIntFilter
 }
 
-"""Conditions for `EarnedBadge` aggregates."""
+"""
+Conditions for `EarnedBadge` aggregates.
+"""
 input EarnedBadgesHavingInput {
   AND: [EarnedBadgesHavingInput!]
   OR: [EarnedBadgesHavingInput!]
@@ -1395,53 +1771,55 @@ input EarnedBadgesHavingInput {
 input EarnedBadgesHavingMaxInput {
   awardNumber: HavingIntFilter
   blockAwarded: HavingIntFilter
-  globalAwardNumber: HavingIntFilter
+  globalBadgeNumber: HavingIntFilter
   timestampAwarded: HavingIntFilter
 }
 
 input EarnedBadgesHavingMinInput {
   awardNumber: HavingIntFilter
   blockAwarded: HavingIntFilter
-  globalAwardNumber: HavingIntFilter
+  globalBadgeNumber: HavingIntFilter
   timestampAwarded: HavingIntFilter
 }
 
 input EarnedBadgesHavingStddevPopulationInput {
   awardNumber: HavingIntFilter
   blockAwarded: HavingIntFilter
-  globalAwardNumber: HavingIntFilter
+  globalBadgeNumber: HavingIntFilter
   timestampAwarded: HavingIntFilter
 }
 
 input EarnedBadgesHavingStddevSampleInput {
   awardNumber: HavingIntFilter
   blockAwarded: HavingIntFilter
-  globalAwardNumber: HavingIntFilter
+  globalBadgeNumber: HavingIntFilter
   timestampAwarded: HavingIntFilter
 }
 
 input EarnedBadgesHavingSumInput {
   awardNumber: HavingIntFilter
   blockAwarded: HavingIntFilter
-  globalAwardNumber: HavingIntFilter
+  globalBadgeNumber: HavingIntFilter
   timestampAwarded: HavingIntFilter
 }
 
 input EarnedBadgesHavingVariancePopulationInput {
   awardNumber: HavingIntFilter
   blockAwarded: HavingIntFilter
-  globalAwardNumber: HavingIntFilter
+  globalBadgeNumber: HavingIntFilter
   timestampAwarded: HavingIntFilter
 }
 
 input EarnedBadgesHavingVarianceSampleInput {
   awardNumber: HavingIntFilter
   blockAwarded: HavingIntFilter
-  globalAwardNumber: HavingIntFilter
+  globalBadgeNumber: HavingIntFilter
   timestampAwarded: HavingIntFilter
 }
 
-"""Methods to use when ordering `EarnedBadge`."""
+"""
+Methods to use when ordering `EarnedBadge`.
+"""
 enum EarnedBadgesOrderBy {
   AWARD_NUMBER_ASC
   AWARD_NUMBER_DESC
@@ -1449,8 +1827,8 @@ enum EarnedBadgesOrderBy {
   BLOCK_AWARDED_DESC
   DEFINITION_ID_ASC
   DEFINITION_ID_DESC
-  GLOBAL_AWARD_NUMBER_ASC
-  GLOBAL_AWARD_NUMBER_DESC
+  GLOBAL_BADGE_NUMBER_ASC
+  GLOBAL_BADGE_NUMBER_DESC
   ID_ASC
   ID_DESC
   METADATA_ASC
@@ -1477,16 +1855,24 @@ input FloatFilter {
   """
   distinctFrom: Float
 
-  """Equal to the specified value."""
+  """
+  Equal to the specified value.
+  """
   equalTo: Float
 
-  """Greater than the specified value."""
+  """
+  Greater than the specified value.
+  """
   greaterThan: Float
 
-  """Greater than or equal to the specified value."""
+  """
+  Greater than or equal to the specified value.
+  """
   greaterThanOrEqualTo: Float
 
-  """Included in the specified list."""
+  """
+  Included in the specified list.
+  """
   in: [Float!]
 
   """
@@ -1494,19 +1880,29 @@ input FloatFilter {
   """
   isNull: Boolean
 
-  """Less than the specified value."""
+  """
+  Less than the specified value.
+  """
   lessThan: Float
 
-  """Less than or equal to the specified value."""
+  """
+  Less than or equal to the specified value.
+  """
   lessThanOrEqualTo: Float
 
-  """Equal to the specified value, treating null like an ordinary value."""
+  """
+  Equal to the specified value, treating null like an ordinary value.
+  """
   notDistinctFrom: Float
 
-  """Not equal to the specified value."""
+  """
+  Not equal to the specified value.
+  """
   notEqualTo: Float
 
-  """Not included in the specified list."""
+  """
+  Not included in the specified list.
+  """
   notIn: [Float!]
 }
 
@@ -1546,16 +1942,24 @@ input IntFilter {
   """
   distinctFrom: Int
 
-  """Equal to the specified value."""
+  """
+  Equal to the specified value.
+  """
   equalTo: Int
 
-  """Greater than the specified value."""
+  """
+  Greater than the specified value.
+  """
   greaterThan: Int
 
-  """Greater than or equal to the specified value."""
+  """
+  Greater than or equal to the specified value.
+  """
   greaterThanOrEqualTo: Int
 
-  """Included in the specified list."""
+  """
+  Included in the specified list.
+  """
   in: [Int!]
 
   """
@@ -1563,19 +1967,29 @@ input IntFilter {
   """
   isNull: Boolean
 
-  """Less than the specified value."""
+  """
+  Less than the specified value.
+  """
   lessThan: Int
 
-  """Less than or equal to the specified value."""
+  """
+  Less than or equal to the specified value.
+  """
   lessThanOrEqualTo: Int
 
-  """Equal to the specified value, treating null like an ordinary value."""
+  """
+  Equal to the specified value, treating null like an ordinary value.
+  """
   notDistinctFrom: Int
 
-  """Not equal to the specified value."""
+  """
+  Not equal to the specified value.
+  """
   notEqualTo: Int
 
-  """Not included in the specified list."""
+  """
+  Not included in the specified list.
+  """
   notIn: [Int!]
 }
 
@@ -1588,19 +2002,29 @@ scalar JSON
 A filter to be used against JSON fields. All fields are combined with a logical ‘and.’
 """
 input JSONFilter {
-  """Contained by the specified JSON."""
+  """
+  Contained by the specified JSON.
+  """
   containedBy: JSON
 
-  """Contains the specified JSON."""
+  """
+  Contains the specified JSON.
+  """
   contains: JSON
 
-  """Contains all of the specified keys."""
+  """
+  Contains all of the specified keys.
+  """
   containsAllKeys: [String!]
 
-  """Contains any of the specified keys."""
+  """
+  Contains any of the specified keys.
+  """
   containsAnyKeys: [String!]
 
-  """Contains the specified key."""
+  """
+  Contains the specified key.
+  """
   containsKey: String
 
   """
@@ -1608,16 +2032,24 @@ input JSONFilter {
   """
   distinctFrom: JSON
 
-  """Equal to the specified value."""
+  """
+  Equal to the specified value.
+  """
   equalTo: JSON
 
-  """Greater than the specified value."""
+  """
+  Greater than the specified value.
+  """
   greaterThan: JSON
 
-  """Greater than or equal to the specified value."""
+  """
+  Greater than or equal to the specified value.
+  """
   greaterThanOrEqualTo: JSON
 
-  """Included in the specified list."""
+  """
+  Included in the specified list.
+  """
   in: [JSON!]
 
   """
@@ -1625,19 +2057,29 @@ input JSONFilter {
   """
   isNull: Boolean
 
-  """Less than the specified value."""
+  """
+  Less than the specified value.
+  """
   lessThan: JSON
 
-  """Less than or equal to the specified value."""
+  """
+  Less than or equal to the specified value.
+  """
   lessThanOrEqualTo: JSON
 
-  """Equal to the specified value, treating null like an ordinary value."""
+  """
+  Equal to the specified value, treating null like an ordinary value.
+  """
   notDistinctFrom: JSON
 
-  """Not equal to the specified value."""
+  """
+  Not equal to the specified value.
+  """
   notEqualTo: JSON
 
-  """Not included in the specified list."""
+  """
+  Not included in the specified list.
+  """
   notIn: [JSON!]
 }
 
@@ -1702,10 +2144,14 @@ type KnexMigrationAggregates {
 }
 
 type KnexMigrationAverageAggregates {
-  """Mean average of batch across the matching connection"""
+  """
+  Mean average of batch across the matching connection
+  """
   batch: BigFloat
 
-  """Mean average of id across the matching connection"""
+  """
+  Mean average of id across the matching connection
+  """
   id: BigFloat
 }
 
@@ -1714,30 +2160,46 @@ A condition to be used against `KnexMigration` object types. All fields are
 tested for equality and combined with a logical ‘and.’
 """
 input KnexMigrationCondition {
-  """Checks for equality with the object’s `batch` field."""
+  """
+  Checks for equality with the object’s `batch` field.
+  """
   batch: Int
 
-  """Checks for equality with the object’s `id` field."""
+  """
+  Checks for equality with the object’s `id` field.
+  """
   id: Int
 
-  """Checks for equality with the object’s `migrationTime` field."""
+  """
+  Checks for equality with the object’s `migrationTime` field.
+  """
   migrationTime: Datetime
 
-  """Checks for equality with the object’s `name` field."""
+  """
+  Checks for equality with the object’s `name` field.
+  """
   name: String
 }
 
 type KnexMigrationDistinctCountAggregates {
-  """Distinct count of batch across the matching connection"""
+  """
+  Distinct count of batch across the matching connection
+  """
   batch: BigInt
 
-  """Distinct count of id across the matching connection"""
+  """
+  Distinct count of id across the matching connection
+  """
   id: BigInt
 
-  """Distinct count of migrationTime across the matching connection"""
+  """
+  Distinct count of migrationTime across the matching connection
+  """
   migrationTime: BigInt
 
-  """Distinct count of name across the matching connection"""
+  """
+  Distinct count of name across the matching connection
+  """
   name: BigInt
 }
 
@@ -1745,85 +2207,129 @@ type KnexMigrationDistinctCountAggregates {
 A filter to be used against `KnexMigration` object types. All fields are combined with a logical ‘and.’
 """
 input KnexMigrationFilter {
-  """Checks for all expressions in this list."""
+  """
+  Checks for all expressions in this list.
+  """
   and: [KnexMigrationFilter!]
 
-  """Filter by the object’s `batch` field."""
+  """
+  Filter by the object’s `batch` field.
+  """
   batch: IntFilter
 
-  """Filter by the object’s `id` field."""
+  """
+  Filter by the object’s `id` field.
+  """
   id: IntFilter
 
-  """Filter by the object’s `migrationTime` field."""
+  """
+  Filter by the object’s `migrationTime` field.
+  """
   migrationTime: DatetimeFilter
 
-  """Filter by the object’s `name` field."""
+  """
+  Filter by the object’s `name` field.
+  """
   name: StringFilter
 
-  """Negates the expression."""
+  """
+  Negates the expression.
+  """
   not: KnexMigrationFilter
 
-  """Checks for any expressions in this list."""
+  """
+  Checks for any expressions in this list.
+  """
   or: [KnexMigrationFilter!]
 }
 
 type KnexMigrationMaxAggregates {
-  """Maximum of batch across the matching connection"""
+  """
+  Maximum of batch across the matching connection
+  """
   batch: Int
 
-  """Maximum of id across the matching connection"""
+  """
+  Maximum of id across the matching connection
+  """
   id: Int
 }
 
 type KnexMigrationMinAggregates {
-  """Minimum of batch across the matching connection"""
+  """
+  Minimum of batch across the matching connection
+  """
   batch: Int
 
-  """Minimum of id across the matching connection"""
+  """
+  Minimum of id across the matching connection
+  """
   id: Int
 }
 
 type KnexMigrationStddevPopulationAggregates {
-  """Population standard deviation of batch across the matching connection"""
+  """
+  Population standard deviation of batch across the matching connection
+  """
   batch: BigFloat
 
-  """Population standard deviation of id across the matching connection"""
+  """
+  Population standard deviation of id across the matching connection
+  """
   id: BigFloat
 }
 
 type KnexMigrationStddevSampleAggregates {
-  """Sample standard deviation of batch across the matching connection"""
+  """
+  Sample standard deviation of batch across the matching connection
+  """
   batch: BigFloat
 
-  """Sample standard deviation of id across the matching connection"""
+  """
+  Sample standard deviation of id across the matching connection
+  """
   id: BigFloat
 }
 
 type KnexMigrationSumAggregates {
-  """Sum of batch across the matching connection"""
+  """
+  Sum of batch across the matching connection
+  """
   batch: BigInt!
 
-  """Sum of id across the matching connection"""
+  """
+  Sum of id across the matching connection
+  """
   id: BigInt!
 }
 
 type KnexMigrationVariancePopulationAggregates {
-  """Population variance of batch across the matching connection"""
+  """
+  Population variance of batch across the matching connection
+  """
   batch: BigFloat
 
-  """Population variance of id across the matching connection"""
+  """
+  Population variance of id across the matching connection
+  """
   id: BigFloat
 }
 
 type KnexMigrationVarianceSampleAggregates {
-  """Sample variance of batch across the matching connection"""
+  """
+  Sample variance of batch across the matching connection
+  """
   batch: BigFloat
 
-  """Sample variance of id across the matching connection"""
+  """
+  Sample variance of id across the matching connection
+  """
   id: BigFloat
 }
 
-"""A connection to a list of `KnexMigration` values."""
+"""
+A connection to a list of `KnexMigration` values.
+"""
 type KnexMigrationsConnection {
   """
   Aggregates across the matching connection (ignoring before/after/first/last/offset)
@@ -1839,33 +2345,51 @@ type KnexMigrationsConnection {
   Grouped aggregates across the matching connection (ignoring before/after/first/last/offset)
   """
   groupedAggregates(
-    """The method to use when grouping `KnexMigration` for these aggregates."""
+    """
+    The method to use when grouping `KnexMigration` for these aggregates.
+    """
     groupBy: [KnexMigrationsGroupBy!]!
 
-    """Conditions on the grouped aggregates."""
+    """
+    Conditions on the grouped aggregates.
+    """
     having: KnexMigrationsHavingInput
   ): [KnexMigrationAggregates!]
 
-  """A list of `KnexMigration` objects."""
+  """
+  A list of `KnexMigration` objects.
+  """
   nodes: [KnexMigration!]!
 
-  """Information to aid in pagination."""
+  """
+  Information to aid in pagination.
+  """
   pageInfo: PageInfo!
 
-  """The count of *all* `KnexMigration` you could get from the connection."""
+  """
+  The count of *all* `KnexMigration` you could get from the connection.
+  """
   totalCount: Int!
 }
 
-"""A `KnexMigration` edge in the connection."""
+"""
+A `KnexMigration` edge in the connection.
+"""
 type KnexMigrationsEdge {
-  """A cursor for use in pagination."""
+  """
+  A cursor for use in pagination.
+  """
   cursor: Cursor
 
-  """The `KnexMigration` at the end of the edge."""
+  """
+  The `KnexMigration` at the end of the edge.
+  """
   node: KnexMigration!
 }
 
-"""Grouping methods for `KnexMigration` for usage during aggregation."""
+"""
+Grouping methods for `KnexMigration` for usage during aggregation.
+"""
 enum KnexMigrationsGroupBy {
   BATCH
   MIGRATION_TIME
@@ -1886,7 +2410,9 @@ input KnexMigrationsHavingDistinctCountInput {
   migrationTime: HavingDatetimeFilter
 }
 
-"""Conditions for `KnexMigration` aggregates."""
+"""
+Conditions for `KnexMigration` aggregates.
+"""
 input KnexMigrationsHavingInput {
   AND: [KnexMigrationsHavingInput!]
   OR: [KnexMigrationsHavingInput!]
@@ -2002,10 +2528,14 @@ type KnexMigrationsLockAggregates {
 }
 
 type KnexMigrationsLockAverageAggregates {
-  """Mean average of index across the matching connection"""
+  """
+  Mean average of index across the matching connection
+  """
   index: BigFloat
 
-  """Mean average of isLocked across the matching connection"""
+  """
+  Mean average of isLocked across the matching connection
+  """
   isLocked: BigFloat
 }
 
@@ -2014,18 +2544,26 @@ A condition to be used against `KnexMigrationsLock` object types. All fields are
 tested for equality and combined with a logical ‘and.’
 """
 input KnexMigrationsLockCondition {
-  """Checks for equality with the object’s `index` field."""
+  """
+  Checks for equality with the object’s `index` field.
+  """
   index: Int
 
-  """Checks for equality with the object’s `isLocked` field."""
+  """
+  Checks for equality with the object’s `isLocked` field.
+  """
   isLocked: Int
 }
 
 type KnexMigrationsLockDistinctCountAggregates {
-  """Distinct count of index across the matching connection"""
+  """
+  Distinct count of index across the matching connection
+  """
   index: BigInt
 
-  """Distinct count of isLocked across the matching connection"""
+  """
+  Distinct count of isLocked across the matching connection
+  """
   isLocked: BigInt
 }
 
@@ -2033,19 +2571,29 @@ type KnexMigrationsLockDistinctCountAggregates {
 A filter to be used against `KnexMigrationsLock` object types. All fields are combined with a logical ‘and.’
 """
 input KnexMigrationsLockFilter {
-  """Checks for all expressions in this list."""
+  """
+  Checks for all expressions in this list.
+  """
   and: [KnexMigrationsLockFilter!]
 
-  """Filter by the object’s `index` field."""
+  """
+  Filter by the object’s `index` field.
+  """
   index: IntFilter
 
-  """Filter by the object’s `isLocked` field."""
+  """
+  Filter by the object’s `isLocked` field.
+  """
   isLocked: IntFilter
 
-  """Negates the expression."""
+  """
+  Negates the expression.
+  """
   not: KnexMigrationsLockFilter
 
-  """Checks for any expressions in this list."""
+  """
+  Checks for any expressions in this list.
+  """
   or: [KnexMigrationsLockFilter!]
 }
 
@@ -2066,7 +2614,9 @@ input KnexMigrationsLockHavingDistinctCountInput {
   isLocked: HavingIntFilter
 }
 
-"""Conditions for `KnexMigrationsLock` aggregates."""
+"""
+Conditions for `KnexMigrationsLock` aggregates.
+"""
 input KnexMigrationsLockHavingInput {
   AND: [KnexMigrationsLockHavingInput!]
   OR: [KnexMigrationsLockHavingInput!]
@@ -2117,23 +2667,33 @@ input KnexMigrationsLockHavingVarianceSampleInput {
 }
 
 type KnexMigrationsLockMaxAggregates {
-  """Maximum of index across the matching connection"""
+  """
+  Maximum of index across the matching connection
+  """
   index: Int
 
-  """Maximum of isLocked across the matching connection"""
+  """
+  Maximum of isLocked across the matching connection
+  """
   isLocked: Int
 }
 
 type KnexMigrationsLockMinAggregates {
-  """Minimum of index across the matching connection"""
+  """
+  Minimum of index across the matching connection
+  """
   index: Int
 
-  """Minimum of isLocked across the matching connection"""
+  """
+  Minimum of isLocked across the matching connection
+  """
   isLocked: Int
 }
 
 type KnexMigrationsLockStddevPopulationAggregates {
-  """Population standard deviation of index across the matching connection"""
+  """
+  Population standard deviation of index across the matching connection
+  """
   index: BigFloat
 
   """
@@ -2143,38 +2703,56 @@ type KnexMigrationsLockStddevPopulationAggregates {
 }
 
 type KnexMigrationsLockStddevSampleAggregates {
-  """Sample standard deviation of index across the matching connection"""
+  """
+  Sample standard deviation of index across the matching connection
+  """
   index: BigFloat
 
-  """Sample standard deviation of isLocked across the matching connection"""
+  """
+  Sample standard deviation of isLocked across the matching connection
+  """
   isLocked: BigFloat
 }
 
 type KnexMigrationsLockSumAggregates {
-  """Sum of index across the matching connection"""
+  """
+  Sum of index across the matching connection
+  """
   index: BigInt!
 
-  """Sum of isLocked across the matching connection"""
+  """
+  Sum of isLocked across the matching connection
+  """
   isLocked: BigInt!
 }
 
 type KnexMigrationsLockVariancePopulationAggregates {
-  """Population variance of index across the matching connection"""
+  """
+  Population variance of index across the matching connection
+  """
   index: BigFloat
 
-  """Population variance of isLocked across the matching connection"""
+  """
+  Population variance of isLocked across the matching connection
+  """
   isLocked: BigFloat
 }
 
 type KnexMigrationsLockVarianceSampleAggregates {
-  """Sample variance of index across the matching connection"""
+  """
+  Sample variance of index across the matching connection
+  """
   index: BigFloat
 
-  """Sample variance of isLocked across the matching connection"""
+  """
+  Sample variance of isLocked across the matching connection
+  """
   isLocked: BigFloat
 }
 
-"""A connection to a list of `KnexMigrationsLock` values."""
+"""
+A connection to a list of `KnexMigrationsLock` values.
+"""
 type KnexMigrationsLocksConnection {
   """
   Aggregates across the matching connection (ignoring before/after/first/last/offset)
@@ -2195,14 +2773,20 @@ type KnexMigrationsLocksConnection {
     """
     groupBy: [KnexMigrationsLockGroupBy!]!
 
-    """Conditions on the grouped aggregates."""
+    """
+    Conditions on the grouped aggregates.
+    """
     having: KnexMigrationsLockHavingInput
   ): [KnexMigrationsLockAggregates!]
 
-  """A list of `KnexMigrationsLock` objects."""
+  """
+  A list of `KnexMigrationsLock` objects.
+  """
   nodes: [KnexMigrationsLock!]!
 
-  """Information to aid in pagination."""
+  """
+  Information to aid in pagination.
+  """
   pageInfo: PageInfo!
 
   """
@@ -2211,16 +2795,24 @@ type KnexMigrationsLocksConnection {
   totalCount: Int!
 }
 
-"""A `KnexMigrationsLock` edge in the connection."""
+"""
+A `KnexMigrationsLock` edge in the connection.
+"""
 type KnexMigrationsLocksEdge {
-  """A cursor for use in pagination."""
+  """
+  A cursor for use in pagination.
+  """
   cursor: Cursor
 
-  """The `KnexMigrationsLock` at the end of the edge."""
+  """
+  The `KnexMigrationsLock` at the end of the edge.
+  """
   node: KnexMigrationsLock!
 }
 
-"""Methods to use when ordering `KnexMigrationsLock`."""
+"""
+Methods to use when ordering `KnexMigrationsLock`.
+"""
 enum KnexMigrationsLocksOrderBy {
   INDEX_ASC
   INDEX_DESC
@@ -2231,7 +2823,9 @@ enum KnexMigrationsLocksOrderBy {
   PRIMARY_KEY_DESC
 }
 
-"""Methods to use when ordering `KnexMigration`."""
+"""
+Methods to use when ordering `KnexMigration`.
+"""
 enum KnexMigrationsOrderBy {
   BATCH_ASC
   BATCH_DESC
@@ -2246,7 +2840,9 @@ enum KnexMigrationsOrderBy {
   PRIMARY_KEY_DESC
 }
 
-"""An object with a globally unique `ID`."""
+"""
+An object with a globally unique `ID`.
+"""
 interface Node {
   """
   A globally unique identifier. Can be used in various places throughout the system to identify this single value.
@@ -2254,28 +2850,44 @@ interface Node {
   nodeId: ID!
 }
 
-"""Information about pagination in a connection."""
+"""
+Information about pagination in a connection.
+"""
 type PageInfo {
-  """When paginating forwards, the cursor to continue."""
+  """
+  When paginating forwards, the cursor to continue.
+  """
   endCursor: Cursor
 
-  """When paginating forwards, are there more items?"""
+  """
+  When paginating forwards, are there more items?
+  """
   hasNextPage: Boolean!
 
-  """When paginating backwards, are there more items?"""
+  """
+  When paginating backwards, are there more items?
+  """
   hasPreviousPage: Boolean!
 
-  """When paginating backwards, the cursor to continue."""
+  """
+  When paginating backwards, the cursor to continue.
+  """
   startCursor: Cursor
 }
 
 type Protocol implements Node {
-  """Reads and enables pagination through a set of `Definition`."""
+  """
+  Reads and enables pagination through a set of `Definition`.
+  """
   definitionsByProtocolId(
-    """Read all values in the set after (below) this cursor."""
+    """
+    Read all values in the set after (below) this cursor.
+    """
     after: Cursor
 
-    """Read all values in the set before (above) this cursor."""
+    """
+    Read all values in the set before (above) this cursor.
+    """
     before: Cursor
 
     """
@@ -2288,10 +2900,14 @@ type Protocol implements Node {
     """
     filter: DefinitionFilter
 
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Only read the last `n` values of the set."""
+    """
+    Only read the last `n` values of the set.
+    """
     last: Int
 
     """
@@ -2300,11 +2916,15 @@ type Protocol implements Node {
     """
     offset: Int
 
-    """The method to use when ordering `Definition`."""
+    """
+    The method to use when ordering `Definition`.
+    """
     orderBy: [DefinitionsOrderBy!] = [PRIMARY_KEY_ASC]
   ): DefinitionsConnection!
 
-  """Reads and enables pagination through a set of `Definition`."""
+  """
+  Reads and enables pagination through a set of `Definition`.
+  """
   definitionsByProtocolIdList(
     """
     A condition to be used in determining which values should be returned by the collection.
@@ -2316,22 +2936,34 @@ type Protocol implements Node {
     """
     filter: DefinitionFilter
 
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Skip the first `n` values."""
+    """
+    Skip the first `n` values.
+    """
     offset: Int
 
-    """The method to use when ordering `Definition`."""
+    """
+    The method to use when ordering `Definition`.
+    """
     orderBy: [DefinitionsOrderBy!]
   ): [Definition!]!
 
-  """Reads and enables pagination through a set of `EarnedBadge`."""
+  """
+  Reads and enables pagination through a set of `EarnedBadge`.
+  """
   earnedBadgesByProtocolId(
-    """Read all values in the set after (below) this cursor."""
+    """
+    Read all values in the set after (below) this cursor.
+    """
     after: Cursor
 
-    """Read all values in the set before (above) this cursor."""
+    """
+    Read all values in the set before (above) this cursor.
+    """
     before: Cursor
 
     """
@@ -2344,10 +2976,14 @@ type Protocol implements Node {
     """
     filter: EarnedBadgeFilter
 
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Only read the last `n` values of the set."""
+    """
+    Only read the last `n` values of the set.
+    """
     last: Int
 
     """
@@ -2356,11 +2992,15 @@ type Protocol implements Node {
     """
     offset: Int
 
-    """The method to use when ordering `EarnedBadge`."""
+    """
+    The method to use when ordering `EarnedBadge`.
+    """
     orderBy: [EarnedBadgesOrderBy!] = [PRIMARY_KEY_ASC]
   ): EarnedBadgesConnection!
 
-  """Reads and enables pagination through a set of `EarnedBadge`."""
+  """
+  Reads and enables pagination through a set of `EarnedBadge`.
+  """
   earnedBadgesByProtocolIdList(
     """
     A condition to be used in determining which values should be returned by the collection.
@@ -2372,13 +3012,19 @@ type Protocol implements Node {
     """
     filter: EarnedBadgeFilter
 
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Skip the first `n` values."""
+    """
+    Skip the first `n` values.
+    """
     offset: Int
 
-    """The method to use when ordering `EarnedBadge`."""
+    """
+    The method to use when ordering `EarnedBadge`.
+    """
     orderBy: [EarnedBadgesOrderBy!]
   ): [EarnedBadge!]!
   id: String!
@@ -2388,12 +3034,18 @@ type Protocol implements Node {
   """
   nodeId: ID!
 
-  """Reads and enables pagination through a set of `Ranking`."""
+  """
+  Reads and enables pagination through a set of `Ranking`.
+  """
   rankingsByProtocolId(
-    """Read all values in the set after (below) this cursor."""
+    """
+    Read all values in the set after (below) this cursor.
+    """
     after: Cursor
 
-    """Read all values in the set before (above) this cursor."""
+    """
+    Read all values in the set before (above) this cursor.
+    """
     before: Cursor
 
     """
@@ -2406,10 +3058,14 @@ type Protocol implements Node {
     """
     filter: RankingFilter
 
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Only read the last `n` values of the set."""
+    """
+    Only read the last `n` values of the set.
+    """
     last: Int
 
     """
@@ -2418,11 +3074,15 @@ type Protocol implements Node {
     """
     offset: Int
 
-    """The method to use when ordering `Ranking`."""
+    """
+    The method to use when ordering `Ranking`.
+    """
     orderBy: [RankingsOrderBy!] = [PRIMARY_KEY_ASC]
   ): RankingsConnection!
 
-  """Reads and enables pagination through a set of `Ranking`."""
+  """
+  Reads and enables pagination through a set of `Ranking`.
+  """
   rankingsByProtocolIdList(
     """
     A condition to be used in determining which values should be returned by the collection.
@@ -2434,22 +3094,34 @@ type Protocol implements Node {
     """
     filter: RankingFilter
 
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Skip the first `n` values."""
+    """
+    Skip the first `n` values.
+    """
     offset: Int
 
-    """The method to use when ordering `Ranking`."""
+    """
+    The method to use when ordering `Ranking`.
+    """
     orderBy: [RankingsOrderBy!]
   ): [Ranking!]!
 
-  """Reads and enables pagination through a set of `Role`."""
+  """
+  Reads and enables pagination through a set of `Role`.
+  """
   rolesByProtocolId(
-    """Read all values in the set after (below) this cursor."""
+    """
+    Read all values in the set after (below) this cursor.
+    """
     after: Cursor
 
-    """Read all values in the set before (above) this cursor."""
+    """
+    Read all values in the set before (above) this cursor.
+    """
     before: Cursor
 
     """
@@ -2462,10 +3134,14 @@ type Protocol implements Node {
     """
     filter: RoleFilter
 
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Only read the last `n` values of the set."""
+    """
+    Only read the last `n` values of the set.
+    """
     last: Int
 
     """
@@ -2474,11 +3150,15 @@ type Protocol implements Node {
     """
     offset: Int
 
-    """The method to use when ordering `Role`."""
+    """
+    The method to use when ordering `Role`.
+    """
     orderBy: [RolesOrderBy!] = [PRIMARY_KEY_ASC]
   ): RolesConnection!
 
-  """Reads and enables pagination through a set of `Role`."""
+  """
+  Reads and enables pagination through a set of `Role`.
+  """
   rolesByProtocolIdList(
     """
     A condition to be used in determining which values should be returned by the collection.
@@ -2490,22 +3170,34 @@ type Protocol implements Node {
     """
     filter: RoleFilter
 
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Skip the first `n` values."""
+    """
+    Skip the first `n` values.
+    """
     offset: Int
 
-    """The method to use when ordering `Role`."""
+    """
+    The method to use when ordering `Role`.
+    """
     orderBy: [RolesOrderBy!]
   ): [Role!]!
 
-  """Reads and enables pagination through a set of `Track`."""
+  """
+  Reads and enables pagination through a set of `Track`.
+  """
   tracksByProtocolId(
-    """Read all values in the set after (below) this cursor."""
+    """
+    Read all values in the set after (below) this cursor.
+    """
     after: Cursor
 
-    """Read all values in the set before (above) this cursor."""
+    """
+    Read all values in the set before (above) this cursor.
+    """
     before: Cursor
 
     """
@@ -2518,10 +3210,14 @@ type Protocol implements Node {
     """
     filter: TrackFilter
 
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Only read the last `n` values of the set."""
+    """
+    Only read the last `n` values of the set.
+    """
     last: Int
 
     """
@@ -2530,11 +3226,15 @@ type Protocol implements Node {
     """
     offset: Int
 
-    """The method to use when ordering `Track`."""
+    """
+    The method to use when ordering `Track`.
+    """
     orderBy: [TracksOrderBy!] = [PRIMARY_KEY_ASC]
   ): TracksConnection!
 
-  """Reads and enables pagination through a set of `Track`."""
+  """
+  Reads and enables pagination through a set of `Track`.
+  """
   tracksByProtocolIdList(
     """
     A condition to be used in determining which values should be returned by the collection.
@@ -2546,13 +3246,19 @@ type Protocol implements Node {
     """
     filter: TrackFilter
 
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Skip the first `n` values."""
+    """
+    Skip the first `n` values.
+    """
     offset: Int
 
-    """The method to use when ordering `Track`."""
+    """
+    The method to use when ordering `Track`.
+    """
     orderBy: [TracksOrderBy!]
   ): [Track!]!
 }
@@ -2570,12 +3276,16 @@ A condition to be used against `Protocol` object types. All fields are tested
 for equality and combined with a logical ‘and.’
 """
 input ProtocolCondition {
-  """Checks for equality with the object’s `id` field."""
+  """
+  Checks for equality with the object’s `id` field.
+  """
   id: String
 }
 
 type ProtocolDistinctCountAggregates {
-  """Distinct count of id across the matching connection"""
+  """
+  Distinct count of id across the matching connection
+  """
   id: BigInt
 }
 
@@ -2583,46 +3293,74 @@ type ProtocolDistinctCountAggregates {
 A filter to be used against `Protocol` object types. All fields are combined with a logical ‘and.’
 """
 input ProtocolFilter {
-  """Checks for all expressions in this list."""
+  """
+  Checks for all expressions in this list.
+  """
   and: [ProtocolFilter!]
 
-  """Filter by the object’s `definitionsByProtocolId` relation."""
+  """
+  Filter by the object’s `definitionsByProtocolId` relation.
+  """
   definitionsByProtocolId: ProtocolToManyDefinitionFilter
 
-  """Some related `definitionsByProtocolId` exist."""
+  """
+  Some related `definitionsByProtocolId` exist.
+  """
   definitionsByProtocolIdExist: Boolean
 
-  """Filter by the object’s `earnedBadgesByProtocolId` relation."""
+  """
+  Filter by the object’s `earnedBadgesByProtocolId` relation.
+  """
   earnedBadgesByProtocolId: ProtocolToManyEarnedBadgeFilter
 
-  """Some related `earnedBadgesByProtocolId` exist."""
+  """
+  Some related `earnedBadgesByProtocolId` exist.
+  """
   earnedBadgesByProtocolIdExist: Boolean
 
-  """Filter by the object’s `id` field."""
+  """
+  Filter by the object’s `id` field.
+  """
   id: StringFilter
 
-  """Negates the expression."""
+  """
+  Negates the expression.
+  """
   not: ProtocolFilter
 
-  """Checks for any expressions in this list."""
+  """
+  Checks for any expressions in this list.
+  """
   or: [ProtocolFilter!]
 
-  """Filter by the object’s `rankingsByProtocolId` relation."""
+  """
+  Filter by the object’s `rankingsByProtocolId` relation.
+  """
   rankingsByProtocolId: ProtocolToManyRankingFilter
 
-  """Some related `rankingsByProtocolId` exist."""
+  """
+  Some related `rankingsByProtocolId` exist.
+  """
   rankingsByProtocolIdExist: Boolean
 
-  """Filter by the object’s `rolesByProtocolId` relation."""
+  """
+  Filter by the object’s `rolesByProtocolId` relation.
+  """
   rolesByProtocolId: ProtocolToManyRoleFilter
 
-  """Some related `rolesByProtocolId` exist."""
+  """
+  Some related `rolesByProtocolId` exist.
+  """
   rolesByProtocolIdExist: Boolean
 
-  """Filter by the object’s `tracksByProtocolId` relation."""
+  """
+  Filter by the object’s `tracksByProtocolId` relation.
+  """
   tracksByProtocolId: ProtocolToManyTrackFilter
 
-  """Some related `tracksByProtocolId` exist."""
+  """
+  Some related `tracksByProtocolId` exist.
+  """
   tracksByProtocolIdExist: Boolean
 }
 
@@ -2630,7 +3368,9 @@ input ProtocolFilter {
 A filter to be used against many `Definition` object types. All fields are combined with a logical ‘and.’
 """
 input ProtocolToManyDefinitionFilter {
-  """Aggregates across related `Definition` match the filter criteria."""
+  """
+  Aggregates across related `Definition` match the filter criteria.
+  """
   aggregates: DefinitionAggregatesFilter
 
   """
@@ -2653,7 +3393,9 @@ input ProtocolToManyDefinitionFilter {
 A filter to be used against many `EarnedBadge` object types. All fields are combined with a logical ‘and.’
 """
 input ProtocolToManyEarnedBadgeFilter {
-  """Aggregates across related `EarnedBadge` match the filter criteria."""
+  """
+  Aggregates across related `EarnedBadge` match the filter criteria.
+  """
   aggregates: EarnedBadgeAggregatesFilter
 
   """
@@ -2676,7 +3418,9 @@ input ProtocolToManyEarnedBadgeFilter {
 A filter to be used against many `Ranking` object types. All fields are combined with a logical ‘and.’
 """
 input ProtocolToManyRankingFilter {
-  """Aggregates across related `Ranking` match the filter criteria."""
+  """
+  Aggregates across related `Ranking` match the filter criteria.
+  """
   aggregates: RankingAggregatesFilter
 
   """
@@ -2699,7 +3443,9 @@ input ProtocolToManyRankingFilter {
 A filter to be used against many `Role` object types. All fields are combined with a logical ‘and.’
 """
 input ProtocolToManyRoleFilter {
-  """Aggregates across related `Role` match the filter criteria."""
+  """
+  Aggregates across related `Role` match the filter criteria.
+  """
   aggregates: RoleAggregatesFilter
 
   """
@@ -2722,7 +3468,9 @@ input ProtocolToManyRoleFilter {
 A filter to be used against many `Track` object types. All fields are combined with a logical ‘and.’
 """
 input ProtocolToManyTrackFilter {
-  """Aggregates across related `Track` match the filter criteria."""
+  """
+  Aggregates across related `Track` match the filter criteria.
+  """
   aggregates: TrackAggregatesFilter
 
   """
@@ -2741,7 +3489,9 @@ input ProtocolToManyTrackFilter {
   some: TrackFilter
 }
 
-"""A connection to a list of `Protocol` values."""
+"""
+A connection to a list of `Protocol` values.
+"""
 type ProtocolsConnection {
   """
   Aggregates across the matching connection (ignoring before/after/first/last/offset)
@@ -2753,26 +3503,40 @@ type ProtocolsConnection {
   """
   edges: [ProtocolsEdge!]!
 
-  """A list of `Protocol` objects."""
+  """
+  A list of `Protocol` objects.
+  """
   nodes: [Protocol!]!
 
-  """Information to aid in pagination."""
+  """
+  Information to aid in pagination.
+  """
   pageInfo: PageInfo!
 
-  """The count of *all* `Protocol` you could get from the connection."""
+  """
+  The count of *all* `Protocol` you could get from the connection.
+  """
   totalCount: Int!
 }
 
-"""A `Protocol` edge in the connection."""
+"""
+A `Protocol` edge in the connection.
+"""
 type ProtocolsEdge {
-  """A cursor for use in pagination."""
+  """
+  A cursor for use in pagination.
+  """
   cursor: Cursor
 
-  """The `Protocol` at the end of the edge."""
+  """
+  The `Protocol` at the end of the edge.
+  """
   node: Protocol!
 }
 
-"""Methods to use when ordering `Protocol`."""
+"""
+Methods to use when ordering `Protocol`.
+"""
 enum ProtocolsOrderBy {
   DEFINITIONS_BY_PROTOCOL_ID_AVERAGE_DESCRIPTION_ASC
   DEFINITIONS_BY_PROTOCOL_ID_AVERAGE_DESCRIPTION_DESC
@@ -2926,8 +3690,8 @@ enum ProtocolsOrderBy {
   EARNED_BADGES_BY_PROTOCOL_ID_AVERAGE_BLOCK_AWARDED_DESC
   EARNED_BADGES_BY_PROTOCOL_ID_AVERAGE_DEFINITION_ID_ASC
   EARNED_BADGES_BY_PROTOCOL_ID_AVERAGE_DEFINITION_ID_DESC
-  EARNED_BADGES_BY_PROTOCOL_ID_AVERAGE_GLOBAL_AWARD_NUMBER_ASC
-  EARNED_BADGES_BY_PROTOCOL_ID_AVERAGE_GLOBAL_AWARD_NUMBER_DESC
+  EARNED_BADGES_BY_PROTOCOL_ID_AVERAGE_GLOBAL_BADGE_NUMBER_ASC
+  EARNED_BADGES_BY_PROTOCOL_ID_AVERAGE_GLOBAL_BADGE_NUMBER_DESC
   EARNED_BADGES_BY_PROTOCOL_ID_AVERAGE_ID_ASC
   EARNED_BADGES_BY_PROTOCOL_ID_AVERAGE_ID_DESC
   EARNED_BADGES_BY_PROTOCOL_ID_AVERAGE_METADATA_ASC
@@ -2948,8 +3712,8 @@ enum ProtocolsOrderBy {
   EARNED_BADGES_BY_PROTOCOL_ID_DISTINCT_COUNT_BLOCK_AWARDED_DESC
   EARNED_BADGES_BY_PROTOCOL_ID_DISTINCT_COUNT_DEFINITION_ID_ASC
   EARNED_BADGES_BY_PROTOCOL_ID_DISTINCT_COUNT_DEFINITION_ID_DESC
-  EARNED_BADGES_BY_PROTOCOL_ID_DISTINCT_COUNT_GLOBAL_AWARD_NUMBER_ASC
-  EARNED_BADGES_BY_PROTOCOL_ID_DISTINCT_COUNT_GLOBAL_AWARD_NUMBER_DESC
+  EARNED_BADGES_BY_PROTOCOL_ID_DISTINCT_COUNT_GLOBAL_BADGE_NUMBER_ASC
+  EARNED_BADGES_BY_PROTOCOL_ID_DISTINCT_COUNT_GLOBAL_BADGE_NUMBER_DESC
   EARNED_BADGES_BY_PROTOCOL_ID_DISTINCT_COUNT_ID_ASC
   EARNED_BADGES_BY_PROTOCOL_ID_DISTINCT_COUNT_ID_DESC
   EARNED_BADGES_BY_PROTOCOL_ID_DISTINCT_COUNT_METADATA_ASC
@@ -2968,8 +3732,8 @@ enum ProtocolsOrderBy {
   EARNED_BADGES_BY_PROTOCOL_ID_MAX_BLOCK_AWARDED_DESC
   EARNED_BADGES_BY_PROTOCOL_ID_MAX_DEFINITION_ID_ASC
   EARNED_BADGES_BY_PROTOCOL_ID_MAX_DEFINITION_ID_DESC
-  EARNED_BADGES_BY_PROTOCOL_ID_MAX_GLOBAL_AWARD_NUMBER_ASC
-  EARNED_BADGES_BY_PROTOCOL_ID_MAX_GLOBAL_AWARD_NUMBER_DESC
+  EARNED_BADGES_BY_PROTOCOL_ID_MAX_GLOBAL_BADGE_NUMBER_ASC
+  EARNED_BADGES_BY_PROTOCOL_ID_MAX_GLOBAL_BADGE_NUMBER_DESC
   EARNED_BADGES_BY_PROTOCOL_ID_MAX_ID_ASC
   EARNED_BADGES_BY_PROTOCOL_ID_MAX_ID_DESC
   EARNED_BADGES_BY_PROTOCOL_ID_MAX_METADATA_ASC
@@ -2988,8 +3752,8 @@ enum ProtocolsOrderBy {
   EARNED_BADGES_BY_PROTOCOL_ID_MIN_BLOCK_AWARDED_DESC
   EARNED_BADGES_BY_PROTOCOL_ID_MIN_DEFINITION_ID_ASC
   EARNED_BADGES_BY_PROTOCOL_ID_MIN_DEFINITION_ID_DESC
-  EARNED_BADGES_BY_PROTOCOL_ID_MIN_GLOBAL_AWARD_NUMBER_ASC
-  EARNED_BADGES_BY_PROTOCOL_ID_MIN_GLOBAL_AWARD_NUMBER_DESC
+  EARNED_BADGES_BY_PROTOCOL_ID_MIN_GLOBAL_BADGE_NUMBER_ASC
+  EARNED_BADGES_BY_PROTOCOL_ID_MIN_GLOBAL_BADGE_NUMBER_DESC
   EARNED_BADGES_BY_PROTOCOL_ID_MIN_ID_ASC
   EARNED_BADGES_BY_PROTOCOL_ID_MIN_ID_DESC
   EARNED_BADGES_BY_PROTOCOL_ID_MIN_METADATA_ASC
@@ -3008,8 +3772,8 @@ enum ProtocolsOrderBy {
   EARNED_BADGES_BY_PROTOCOL_ID_STDDEV_POPULATION_BLOCK_AWARDED_DESC
   EARNED_BADGES_BY_PROTOCOL_ID_STDDEV_POPULATION_DEFINITION_ID_ASC
   EARNED_BADGES_BY_PROTOCOL_ID_STDDEV_POPULATION_DEFINITION_ID_DESC
-  EARNED_BADGES_BY_PROTOCOL_ID_STDDEV_POPULATION_GLOBAL_AWARD_NUMBER_ASC
-  EARNED_BADGES_BY_PROTOCOL_ID_STDDEV_POPULATION_GLOBAL_AWARD_NUMBER_DESC
+  EARNED_BADGES_BY_PROTOCOL_ID_STDDEV_POPULATION_GLOBAL_BADGE_NUMBER_ASC
+  EARNED_BADGES_BY_PROTOCOL_ID_STDDEV_POPULATION_GLOBAL_BADGE_NUMBER_DESC
   EARNED_BADGES_BY_PROTOCOL_ID_STDDEV_POPULATION_ID_ASC
   EARNED_BADGES_BY_PROTOCOL_ID_STDDEV_POPULATION_ID_DESC
   EARNED_BADGES_BY_PROTOCOL_ID_STDDEV_POPULATION_METADATA_ASC
@@ -3028,8 +3792,8 @@ enum ProtocolsOrderBy {
   EARNED_BADGES_BY_PROTOCOL_ID_STDDEV_SAMPLE_BLOCK_AWARDED_DESC
   EARNED_BADGES_BY_PROTOCOL_ID_STDDEV_SAMPLE_DEFINITION_ID_ASC
   EARNED_BADGES_BY_PROTOCOL_ID_STDDEV_SAMPLE_DEFINITION_ID_DESC
-  EARNED_BADGES_BY_PROTOCOL_ID_STDDEV_SAMPLE_GLOBAL_AWARD_NUMBER_ASC
-  EARNED_BADGES_BY_PROTOCOL_ID_STDDEV_SAMPLE_GLOBAL_AWARD_NUMBER_DESC
+  EARNED_BADGES_BY_PROTOCOL_ID_STDDEV_SAMPLE_GLOBAL_BADGE_NUMBER_ASC
+  EARNED_BADGES_BY_PROTOCOL_ID_STDDEV_SAMPLE_GLOBAL_BADGE_NUMBER_DESC
   EARNED_BADGES_BY_PROTOCOL_ID_STDDEV_SAMPLE_ID_ASC
   EARNED_BADGES_BY_PROTOCOL_ID_STDDEV_SAMPLE_ID_DESC
   EARNED_BADGES_BY_PROTOCOL_ID_STDDEV_SAMPLE_METADATA_ASC
@@ -3048,8 +3812,8 @@ enum ProtocolsOrderBy {
   EARNED_BADGES_BY_PROTOCOL_ID_SUM_BLOCK_AWARDED_DESC
   EARNED_BADGES_BY_PROTOCOL_ID_SUM_DEFINITION_ID_ASC
   EARNED_BADGES_BY_PROTOCOL_ID_SUM_DEFINITION_ID_DESC
-  EARNED_BADGES_BY_PROTOCOL_ID_SUM_GLOBAL_AWARD_NUMBER_ASC
-  EARNED_BADGES_BY_PROTOCOL_ID_SUM_GLOBAL_AWARD_NUMBER_DESC
+  EARNED_BADGES_BY_PROTOCOL_ID_SUM_GLOBAL_BADGE_NUMBER_ASC
+  EARNED_BADGES_BY_PROTOCOL_ID_SUM_GLOBAL_BADGE_NUMBER_DESC
   EARNED_BADGES_BY_PROTOCOL_ID_SUM_ID_ASC
   EARNED_BADGES_BY_PROTOCOL_ID_SUM_ID_DESC
   EARNED_BADGES_BY_PROTOCOL_ID_SUM_METADATA_ASC
@@ -3068,8 +3832,8 @@ enum ProtocolsOrderBy {
   EARNED_BADGES_BY_PROTOCOL_ID_VARIANCE_POPULATION_BLOCK_AWARDED_DESC
   EARNED_BADGES_BY_PROTOCOL_ID_VARIANCE_POPULATION_DEFINITION_ID_ASC
   EARNED_BADGES_BY_PROTOCOL_ID_VARIANCE_POPULATION_DEFINITION_ID_DESC
-  EARNED_BADGES_BY_PROTOCOL_ID_VARIANCE_POPULATION_GLOBAL_AWARD_NUMBER_ASC
-  EARNED_BADGES_BY_PROTOCOL_ID_VARIANCE_POPULATION_GLOBAL_AWARD_NUMBER_DESC
+  EARNED_BADGES_BY_PROTOCOL_ID_VARIANCE_POPULATION_GLOBAL_BADGE_NUMBER_ASC
+  EARNED_BADGES_BY_PROTOCOL_ID_VARIANCE_POPULATION_GLOBAL_BADGE_NUMBER_DESC
   EARNED_BADGES_BY_PROTOCOL_ID_VARIANCE_POPULATION_ID_ASC
   EARNED_BADGES_BY_PROTOCOL_ID_VARIANCE_POPULATION_ID_DESC
   EARNED_BADGES_BY_PROTOCOL_ID_VARIANCE_POPULATION_METADATA_ASC
@@ -3088,8 +3852,8 @@ enum ProtocolsOrderBy {
   EARNED_BADGES_BY_PROTOCOL_ID_VARIANCE_SAMPLE_BLOCK_AWARDED_DESC
   EARNED_BADGES_BY_PROTOCOL_ID_VARIANCE_SAMPLE_DEFINITION_ID_ASC
   EARNED_BADGES_BY_PROTOCOL_ID_VARIANCE_SAMPLE_DEFINITION_ID_DESC
-  EARNED_BADGES_BY_PROTOCOL_ID_VARIANCE_SAMPLE_GLOBAL_AWARD_NUMBER_ASC
-  EARNED_BADGES_BY_PROTOCOL_ID_VARIANCE_SAMPLE_GLOBAL_AWARD_NUMBER_DESC
+  EARNED_BADGES_BY_PROTOCOL_ID_VARIANCE_SAMPLE_GLOBAL_BADGE_NUMBER_ASC
+  EARNED_BADGES_BY_PROTOCOL_ID_VARIANCE_SAMPLE_GLOBAL_BADGE_NUMBER_DESC
   EARNED_BADGES_BY_PROTOCOL_ID_VARIANCE_SAMPLE_ID_ASC
   EARNED_BADGES_BY_PROTOCOL_ID_VARIANCE_SAMPLE_ID_DESC
   EARNED_BADGES_BY_PROTOCOL_ID_VARIANCE_SAMPLE_METADATA_ASC
@@ -3259,14 +4023,22 @@ enum ProtocolsOrderBy {
   TRACKS_BY_PROTOCOL_ID_VARIANCE_SAMPLE_ROLE_ID_DESC
 }
 
-"""The root query type which gives access points into the data universe."""
+"""
+The root query type which gives access points into the data universe.
+"""
 type Query implements Node {
-  """Reads and enables pagination through a set of `Definition`."""
+  """
+  Reads and enables pagination through a set of `Definition`.
+  """
   allDefinitions(
-    """Read all values in the set after (below) this cursor."""
+    """
+    Read all values in the set after (below) this cursor.
+    """
     after: Cursor
 
-    """Read all values in the set before (above) this cursor."""
+    """
+    Read all values in the set before (above) this cursor.
+    """
     before: Cursor
 
     """
@@ -3279,10 +4051,14 @@ type Query implements Node {
     """
     filter: DefinitionFilter
 
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Only read the last `n` values of the set."""
+    """
+    Only read the last `n` values of the set.
+    """
     last: Int
 
     """
@@ -3291,11 +4067,15 @@ type Query implements Node {
     """
     offset: Int
 
-    """The method to use when ordering `Definition`."""
+    """
+    The method to use when ordering `Definition`.
+    """
     orderBy: [DefinitionsOrderBy!] = [PRIMARY_KEY_ASC]
   ): DefinitionsConnection
 
-  """Reads a set of `Definition`."""
+  """
+  Reads a set of `Definition`.
+  """
   allDefinitionsList(
     """
     A condition to be used in determining which values should be returned by the collection.
@@ -3307,22 +4087,34 @@ type Query implements Node {
     """
     filter: DefinitionFilter
 
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Skip the first `n` values."""
+    """
+    Skip the first `n` values.
+    """
     offset: Int
 
-    """The method to use when ordering `Definition`."""
+    """
+    The method to use when ordering `Definition`.
+    """
     orderBy: [DefinitionsOrderBy!]
   ): [Definition!]
 
-  """Reads and enables pagination through a set of `EarnedBadge`."""
+  """
+  Reads and enables pagination through a set of `EarnedBadge`.
+  """
   allEarnedBadges(
-    """Read all values in the set after (below) this cursor."""
+    """
+    Read all values in the set after (below) this cursor.
+    """
     after: Cursor
 
-    """Read all values in the set before (above) this cursor."""
+    """
+    Read all values in the set before (above) this cursor.
+    """
     before: Cursor
 
     """
@@ -3335,10 +4127,14 @@ type Query implements Node {
     """
     filter: EarnedBadgeFilter
 
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Only read the last `n` values of the set."""
+    """
+    Only read the last `n` values of the set.
+    """
     last: Int
 
     """
@@ -3347,11 +4143,15 @@ type Query implements Node {
     """
     offset: Int
 
-    """The method to use when ordering `EarnedBadge`."""
+    """
+    The method to use when ordering `EarnedBadge`.
+    """
     orderBy: [EarnedBadgesOrderBy!] = [PRIMARY_KEY_ASC]
   ): EarnedBadgesConnection
 
-  """Reads a set of `EarnedBadge`."""
+  """
+  Reads a set of `EarnedBadge`.
+  """
   allEarnedBadgesList(
     """
     A condition to be used in determining which values should be returned by the collection.
@@ -3363,22 +4163,34 @@ type Query implements Node {
     """
     filter: EarnedBadgeFilter
 
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Skip the first `n` values."""
+    """
+    Skip the first `n` values.
+    """
     offset: Int
 
-    """The method to use when ordering `EarnedBadge`."""
+    """
+    The method to use when ordering `EarnedBadge`.
+    """
     orderBy: [EarnedBadgesOrderBy!]
   ): [EarnedBadge!]
 
-  """Reads and enables pagination through a set of `KnexMigration`."""
+  """
+  Reads and enables pagination through a set of `KnexMigration`.
+  """
   allKnexMigrations(
-    """Read all values in the set after (below) this cursor."""
+    """
+    Read all values in the set after (below) this cursor.
+    """
     after: Cursor
 
-    """Read all values in the set before (above) this cursor."""
+    """
+    Read all values in the set before (above) this cursor.
+    """
     before: Cursor
 
     """
@@ -3391,10 +4203,14 @@ type Query implements Node {
     """
     filter: KnexMigrationFilter
 
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Only read the last `n` values of the set."""
+    """
+    Only read the last `n` values of the set.
+    """
     last: Int
 
     """
@@ -3403,11 +4219,15 @@ type Query implements Node {
     """
     offset: Int
 
-    """The method to use when ordering `KnexMigration`."""
+    """
+    The method to use when ordering `KnexMigration`.
+    """
     orderBy: [KnexMigrationsOrderBy!] = [PRIMARY_KEY_ASC]
   ): KnexMigrationsConnection
 
-  """Reads a set of `KnexMigration`."""
+  """
+  Reads a set of `KnexMigration`.
+  """
   allKnexMigrationsList(
     """
     A condition to be used in determining which values should be returned by the collection.
@@ -3419,22 +4239,34 @@ type Query implements Node {
     """
     filter: KnexMigrationFilter
 
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Skip the first `n` values."""
+    """
+    Skip the first `n` values.
+    """
     offset: Int
 
-    """The method to use when ordering `KnexMigration`."""
+    """
+    The method to use when ordering `KnexMigration`.
+    """
     orderBy: [KnexMigrationsOrderBy!]
   ): [KnexMigration!]
 
-  """Reads and enables pagination through a set of `KnexMigrationsLock`."""
+  """
+  Reads and enables pagination through a set of `KnexMigrationsLock`.
+  """
   allKnexMigrationsLocks(
-    """Read all values in the set after (below) this cursor."""
+    """
+    Read all values in the set after (below) this cursor.
+    """
     after: Cursor
 
-    """Read all values in the set before (above) this cursor."""
+    """
+    Read all values in the set before (above) this cursor.
+    """
     before: Cursor
 
     """
@@ -3447,10 +4279,14 @@ type Query implements Node {
     """
     filter: KnexMigrationsLockFilter
 
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Only read the last `n` values of the set."""
+    """
+    Only read the last `n` values of the set.
+    """
     last: Int
 
     """
@@ -3459,11 +4295,15 @@ type Query implements Node {
     """
     offset: Int
 
-    """The method to use when ordering `KnexMigrationsLock`."""
+    """
+    The method to use when ordering `KnexMigrationsLock`.
+    """
     orderBy: [KnexMigrationsLocksOrderBy!] = [PRIMARY_KEY_ASC]
   ): KnexMigrationsLocksConnection
 
-  """Reads a set of `KnexMigrationsLock`."""
+  """
+  Reads a set of `KnexMigrationsLock`.
+  """
   allKnexMigrationsLocksList(
     """
     A condition to be used in determining which values should be returned by the collection.
@@ -3475,22 +4315,34 @@ type Query implements Node {
     """
     filter: KnexMigrationsLockFilter
 
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Skip the first `n` values."""
+    """
+    Skip the first `n` values.
+    """
     offset: Int
 
-    """The method to use when ordering `KnexMigrationsLock`."""
+    """
+    The method to use when ordering `KnexMigrationsLock`.
+    """
     orderBy: [KnexMigrationsLocksOrderBy!]
   ): [KnexMigrationsLock!]
 
-  """Reads and enables pagination through a set of `Protocol`."""
+  """
+  Reads and enables pagination through a set of `Protocol`.
+  """
   allProtocols(
-    """Read all values in the set after (below) this cursor."""
+    """
+    Read all values in the set after (below) this cursor.
+    """
     after: Cursor
 
-    """Read all values in the set before (above) this cursor."""
+    """
+    Read all values in the set before (above) this cursor.
+    """
     before: Cursor
 
     """
@@ -3503,10 +4355,14 @@ type Query implements Node {
     """
     filter: ProtocolFilter
 
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Only read the last `n` values of the set."""
+    """
+    Only read the last `n` values of the set.
+    """
     last: Int
 
     """
@@ -3515,11 +4371,15 @@ type Query implements Node {
     """
     offset: Int
 
-    """The method to use when ordering `Protocol`."""
+    """
+    The method to use when ordering `Protocol`.
+    """
     orderBy: [ProtocolsOrderBy!] = [PRIMARY_KEY_ASC]
   ): ProtocolsConnection
 
-  """Reads a set of `Protocol`."""
+  """
+  Reads a set of `Protocol`.
+  """
   allProtocolsList(
     """
     A condition to be used in determining which values should be returned by the collection.
@@ -3531,22 +4391,34 @@ type Query implements Node {
     """
     filter: ProtocolFilter
 
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Skip the first `n` values."""
+    """
+    Skip the first `n` values.
+    """
     offset: Int
 
-    """The method to use when ordering `Protocol`."""
+    """
+    The method to use when ordering `Protocol`.
+    """
     orderBy: [ProtocolsOrderBy!]
   ): [Protocol!]
 
-  """Reads and enables pagination through a set of `Ranking`."""
+  """
+  Reads and enables pagination through a set of `Ranking`.
+  """
   allRankings(
-    """Read all values in the set after (below) this cursor."""
+    """
+    Read all values in the set after (below) this cursor.
+    """
     after: Cursor
 
-    """Read all values in the set before (above) this cursor."""
+    """
+    Read all values in the set before (above) this cursor.
+    """
     before: Cursor
 
     """
@@ -3559,10 +4431,14 @@ type Query implements Node {
     """
     filter: RankingFilter
 
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Only read the last `n` values of the set."""
+    """
+    Only read the last `n` values of the set.
+    """
     last: Int
 
     """
@@ -3571,11 +4447,15 @@ type Query implements Node {
     """
     offset: Int
 
-    """The method to use when ordering `Ranking`."""
+    """
+    The method to use when ordering `Ranking`.
+    """
     orderBy: [RankingsOrderBy!] = [PRIMARY_KEY_ASC]
   ): RankingsConnection
 
-  """Reads a set of `Ranking`."""
+  """
+  Reads a set of `Ranking`.
+  """
   allRankingsList(
     """
     A condition to be used in determining which values should be returned by the collection.
@@ -3587,22 +4467,34 @@ type Query implements Node {
     """
     filter: RankingFilter
 
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Skip the first `n` values."""
+    """
+    Skip the first `n` values.
+    """
     offset: Int
 
-    """The method to use when ordering `Ranking`."""
+    """
+    The method to use when ordering `Ranking`.
+    """
     orderBy: [RankingsOrderBy!]
   ): [Ranking!]
 
-  """Reads and enables pagination through a set of `Role`."""
+  """
+  Reads and enables pagination through a set of `Role`.
+  """
   allRoles(
-    """Read all values in the set after (below) this cursor."""
+    """
+    Read all values in the set after (below) this cursor.
+    """
     after: Cursor
 
-    """Read all values in the set before (above) this cursor."""
+    """
+    Read all values in the set before (above) this cursor.
+    """
     before: Cursor
 
     """
@@ -3615,10 +4507,14 @@ type Query implements Node {
     """
     filter: RoleFilter
 
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Only read the last `n` values of the set."""
+    """
+    Only read the last `n` values of the set.
+    """
     last: Int
 
     """
@@ -3627,11 +4523,15 @@ type Query implements Node {
     """
     offset: Int
 
-    """The method to use when ordering `Role`."""
+    """
+    The method to use when ordering `Role`.
+    """
     orderBy: [RolesOrderBy!] = [PRIMARY_KEY_ASC]
   ): RolesConnection
 
-  """Reads a set of `Role`."""
+  """
+  Reads a set of `Role`.
+  """
   allRolesList(
     """
     A condition to be used in determining which values should be returned by the collection.
@@ -3643,22 +4543,34 @@ type Query implements Node {
     """
     filter: RoleFilter
 
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Skip the first `n` values."""
+    """
+    Skip the first `n` values.
+    """
     offset: Int
 
-    """The method to use when ordering `Role`."""
+    """
+    The method to use when ordering `Role`.
+    """
     orderBy: [RolesOrderBy!]
   ): [Role!]
 
-  """Reads and enables pagination through a set of `Track`."""
+  """
+  Reads and enables pagination through a set of `Track`.
+  """
   allTracks(
-    """Read all values in the set after (below) this cursor."""
+    """
+    Read all values in the set after (below) this cursor.
+    """
     after: Cursor
 
-    """Read all values in the set before (above) this cursor."""
+    """
+    Read all values in the set before (above) this cursor.
+    """
     before: Cursor
 
     """
@@ -3671,10 +4583,14 @@ type Query implements Node {
     """
     filter: TrackFilter
 
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Only read the last `n` values of the set."""
+    """
+    Only read the last `n` values of the set.
+    """
     last: Int
 
     """
@@ -3683,11 +4599,15 @@ type Query implements Node {
     """
     offset: Int
 
-    """The method to use when ordering `Track`."""
+    """
+    The method to use when ordering `Track`.
+    """
     orderBy: [TracksOrderBy!] = [PRIMARY_KEY_ASC]
   ): TracksConnection
 
-  """Reads a set of `Track`."""
+  """
+  Reads a set of `Track`.
+  """
   allTracksList(
     """
     A condition to be used in determining which values should be returned by the collection.
@@ -3699,22 +4619,34 @@ type Query implements Node {
     """
     filter: TrackFilter
 
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Skip the first `n` values."""
+    """
+    Skip the first `n` values.
+    """
     offset: Int
 
-    """The method to use when ordering `Track`."""
+    """
+    The method to use when ordering `Track`.
+    """
     orderBy: [TracksOrderBy!]
   ): [Track!]
 
-  """Reads and enables pagination through a set of `Winner`."""
+  """
+  Reads and enables pagination through a set of `Winner`.
+  """
   allWinners(
-    """Read all values in the set after (below) this cursor."""
+    """
+    Read all values in the set after (below) this cursor.
+    """
     after: Cursor
 
-    """Read all values in the set before (above) this cursor."""
+    """
+    Read all values in the set before (above) this cursor.
+    """
     before: Cursor
 
     """
@@ -3727,10 +4659,14 @@ type Query implements Node {
     """
     filter: WinnerFilter
 
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Only read the last `n` values of the set."""
+    """
+    Only read the last `n` values of the set.
+    """
     last: Int
 
     """
@@ -3739,11 +4675,15 @@ type Query implements Node {
     """
     offset: Int
 
-    """The method to use when ordering `Winner`."""
+    """
+    The method to use when ordering `Winner`.
+    """
     orderBy: [WinnersOrderBy!] = [PRIMARY_KEY_ASC]
   ): WinnersConnection
 
-  """Reads a set of `Winner`."""
+  """
+  Reads a set of `Winner`.
+  """
   allWinnersList(
     """
     A condition to be used in determining which values should be returned by the collection.
@@ -3755,17 +4695,25 @@ type Query implements Node {
     """
     filter: WinnerFilter
 
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Skip the first `n` values."""
+    """
+    Skip the first `n` values.
+    """
     offset: Int
 
-    """The method to use when ordering `Winner`."""
+    """
+    The method to use when ordering `Winner`.
+    """
     orderBy: [WinnersOrderBy!]
   ): [Winner!]
 
-  """Reads a single `Definition` using its globally unique `ID`."""
+  """
+  Reads a single `Definition` using its globally unique `ID`.
+  """
   definition(
     """
     The globally unique `ID` to be used in selecting a single `Definition`.
@@ -3775,7 +4723,9 @@ type Query implements Node {
   definitionById(id: String!): Definition
   definitionByIdAndProtocolId(id: String!, protocolId: String!): Definition
 
-  """Reads a single `EarnedBadge` using its globally unique `ID`."""
+  """
+  Reads a single `EarnedBadge` using its globally unique `ID`.
+  """
   earnedBadge(
     """
     The globally unique `ID` to be used in selecting a single `EarnedBadge`.
@@ -3784,7 +4734,9 @@ type Query implements Node {
   ): EarnedBadge
   earnedBadgeById(id: String!): EarnedBadge
 
-  """Reads a single `KnexMigration` using its globally unique `ID`."""
+  """
+  Reads a single `KnexMigration` using its globally unique `ID`.
+  """
   knexMigration(
     """
     The globally unique `ID` to be used in selecting a single `KnexMigration`.
@@ -3793,7 +4745,9 @@ type Query implements Node {
   ): KnexMigration
   knexMigrationById(id: Int!): KnexMigration
 
-  """Reads a single `KnexMigrationsLock` using its globally unique `ID`."""
+  """
+  Reads a single `KnexMigrationsLock` using its globally unique `ID`.
+  """
   knexMigrationsLock(
     """
     The globally unique `ID` to be used in selecting a single `KnexMigrationsLock`.
@@ -3802,9 +4756,13 @@ type Query implements Node {
   ): KnexMigrationsLock
   knexMigrationsLockByIndex(index: Int!): KnexMigrationsLock
 
-  """Fetches an object given its globally unique `ID`."""
+  """
+  Fetches an object given its globally unique `ID`.
+  """
   node(
-    """The globally unique `ID`."""
+    """
+    The globally unique `ID`.
+    """
     nodeId: ID!
   ): Node
 
@@ -3813,9 +4771,13 @@ type Query implements Node {
   """
   nodeId: ID!
 
-  """Reads a single `Protocol` using its globally unique `ID`."""
+  """
+  Reads a single `Protocol` using its globally unique `ID`.
+  """
   protocol(
-    """The globally unique `ID` to be used in selecting a single `Protocol`."""
+    """
+    The globally unique `ID` to be used in selecting a single `Protocol`.
+    """
     nodeId: ID!
   ): Protocol
   protocolById(id: String!): Protocol
@@ -3826,31 +4788,50 @@ type Query implements Node {
   """
   query: Query!
 
-  """Reads a single `Ranking` using its globally unique `ID`."""
+  """
+  Reads a single `Ranking` using its globally unique `ID`.
+  """
   ranking(
-    """The globally unique `ID` to be used in selecting a single `Ranking`."""
+    """
+    The globally unique `ID` to be used in selecting a single `Ranking`.
+    """
     nodeId: ID!
   ): Ranking
-  rankingByWinnerIdAndProtocolId(protocolId: String!, winnerId: String!): Ranking
+  rankingByWinnerIdAndProtocolId(
+    protocolId: String!
+    winnerId: String!
+  ): Ranking
 
-  """Reads a single `Role` using its globally unique `ID`."""
+  """
+  Reads a single `Role` using its globally unique `ID`.
+  """
   role(
-    """The globally unique `ID` to be used in selecting a single `Role`."""
+    """
+    The globally unique `ID` to be used in selecting a single `Role`.
+    """
     nodeId: ID!
   ): Role
   roleById(id: String!): Role
   roleByIdAndProtocolId(id: String!, protocolId: String!): Role
 
-  """Reads a single `Track` using its globally unique `ID`."""
+  """
+  Reads a single `Track` using its globally unique `ID`.
+  """
   track(
-    """The globally unique `ID` to be used in selecting a single `Track`."""
+    """
+    The globally unique `ID` to be used in selecting a single `Track`.
+    """
     nodeId: ID!
   ): Track
   trackById(id: String!): Track
 
-  """Reads a single `Winner` using its globally unique `ID`."""
+  """
+  Reads a single `Winner` using its globally unique `ID`.
+  """
   winner(
-    """The globally unique `ID` to be used in selecting a single `Winner`."""
+    """
+    The globally unique `ID` to be used in selecting a single `Winner`.
+    """
     nodeId: ID!
   ): Winner
   winnerById(id: String!): Winner
@@ -3862,12 +4843,16 @@ type Ranking implements Node {
   """
   nodeId: ID!
 
-  """Reads a single `Protocol` that is related to this `Ranking`."""
+  """
+  Reads a single `Protocol` that is related to this `Ranking`.
+  """
   protocolByProtocolId: Protocol
   protocolId: String!
   rank: Int!
 
-  """Reads a single `Winner` that is related to this `Ranking`."""
+  """
+  Reads a single `Winner` that is related to this `Ranking`.
+  """
   winnerByWinnerId: Winner
   winnerId: String!
 }
@@ -3920,12 +4905,18 @@ type RankingAggregates {
   varianceSample: RankingVarianceSampleAggregates
 }
 
-"""A filter to be used against aggregates of `Ranking` object types."""
+"""
+A filter to be used against aggregates of `Ranking` object types.
+"""
 input RankingAggregatesFilter {
-  """Mean average aggregate over matching `Ranking` objects."""
+  """
+  Mean average aggregate over matching `Ranking` objects.
+  """
   average: RankingAverageAggregateFilter
 
-  """Distinct count aggregate over matching `Ranking` objects."""
+  """
+  Distinct count aggregate over matching `Ranking` objects.
+  """
   distinctCount: RankingDistinctCountAggregateFilter
 
   """
@@ -3933,10 +4924,14 @@ input RankingAggregatesFilter {
   """
   filter: RankingFilter
 
-  """Maximum aggregate over matching `Ranking` objects."""
+  """
+  Maximum aggregate over matching `Ranking` objects.
+  """
   max: RankingMaxAggregateFilter
 
-  """Minimum aggregate over matching `Ranking` objects."""
+  """
+  Minimum aggregate over matching `Ranking` objects.
+  """
   min: RankingMinAggregateFilter
 
   """
@@ -3944,16 +4939,24 @@ input RankingAggregatesFilter {
   """
   stddevPopulation: RankingStddevPopulationAggregateFilter
 
-  """Sample standard deviation aggregate over matching `Ranking` objects."""
+  """
+  Sample standard deviation aggregate over matching `Ranking` objects.
+  """
   stddevSample: RankingStddevSampleAggregateFilter
 
-  """Sum aggregate over matching `Ranking` objects."""
+  """
+  Sum aggregate over matching `Ranking` objects.
+  """
   sum: RankingSumAggregateFilter
 
-  """Population variance aggregate over matching `Ranking` objects."""
+  """
+  Population variance aggregate over matching `Ranking` objects.
+  """
   variancePopulation: RankingVariancePopulationAggregateFilter
 
-  """Sample variance aggregate over matching `Ranking` objects."""
+  """
+  Sample variance aggregate over matching `Ranking` objects.
+  """
   varianceSample: RankingVarianceSampleAggregateFilter
 }
 
@@ -3962,7 +4965,9 @@ input RankingAverageAggregateFilter {
 }
 
 type RankingAverageAggregates {
-  """Mean average of rank across the matching connection"""
+  """
+  Mean average of rank across the matching connection
+  """
   rank: BigFloat
 }
 
@@ -3970,13 +4975,19 @@ type RankingAverageAggregates {
 A condition to be used against `Ranking` object types. All fields are tested for equality and combined with a logical ‘and.’
 """
 input RankingCondition {
-  """Checks for equality with the object’s `protocolId` field."""
+  """
+  Checks for equality with the object’s `protocolId` field.
+  """
   protocolId: String
 
-  """Checks for equality with the object’s `rank` field."""
+  """
+  Checks for equality with the object’s `rank` field.
+  """
   rank: Int
 
-  """Checks for equality with the object’s `winnerId` field."""
+  """
+  Checks for equality with the object’s `winnerId` field.
+  """
   winnerId: String
 }
 
@@ -3987,13 +4998,19 @@ input RankingDistinctCountAggregateFilter {
 }
 
 type RankingDistinctCountAggregates {
-  """Distinct count of protocolId across the matching connection"""
+  """
+  Distinct count of protocolId across the matching connection
+  """
   protocolId: BigInt
 
-  """Distinct count of rank across the matching connection"""
+  """
+  Distinct count of rank across the matching connection
+  """
   rank: BigInt
 
-  """Distinct count of winnerId across the matching connection"""
+  """
+  Distinct count of winnerId across the matching connection
+  """
   winnerId: BigInt
 }
 
@@ -4001,28 +5018,44 @@ type RankingDistinctCountAggregates {
 A filter to be used against `Ranking` object types. All fields are combined with a logical ‘and.’
 """
 input RankingFilter {
-  """Checks for all expressions in this list."""
+  """
+  Checks for all expressions in this list.
+  """
   and: [RankingFilter!]
 
-  """Negates the expression."""
+  """
+  Negates the expression.
+  """
   not: RankingFilter
 
-  """Checks for any expressions in this list."""
+  """
+  Checks for any expressions in this list.
+  """
   or: [RankingFilter!]
 
-  """Filter by the object’s `protocolByProtocolId` relation."""
+  """
+  Filter by the object’s `protocolByProtocolId` relation.
+  """
   protocolByProtocolId: ProtocolFilter
 
-  """Filter by the object’s `protocolId` field."""
+  """
+  Filter by the object’s `protocolId` field.
+  """
   protocolId: StringFilter
 
-  """Filter by the object’s `rank` field."""
+  """
+  Filter by the object’s `rank` field.
+  """
   rank: IntFilter
 
-  """Filter by the object’s `winnerByWinnerId` relation."""
+  """
+  Filter by the object’s `winnerByWinnerId` relation.
+  """
   winnerByWinnerId: WinnerFilter
 
-  """Filter by the object’s `winnerId` field."""
+  """
+  Filter by the object’s `winnerId` field.
+  """
   winnerId: StringFilter
 }
 
@@ -4031,7 +5064,9 @@ input RankingMaxAggregateFilter {
 }
 
 type RankingMaxAggregates {
-  """Maximum of rank across the matching connection"""
+  """
+  Maximum of rank across the matching connection
+  """
   rank: Int
 }
 
@@ -4040,7 +5075,9 @@ input RankingMinAggregateFilter {
 }
 
 type RankingMinAggregates {
-  """Minimum of rank across the matching connection"""
+  """
+  Minimum of rank across the matching connection
+  """
   rank: Int
 }
 
@@ -4049,7 +5086,9 @@ input RankingStddevPopulationAggregateFilter {
 }
 
 type RankingStddevPopulationAggregates {
-  """Population standard deviation of rank across the matching connection"""
+  """
+  Population standard deviation of rank across the matching connection
+  """
   rank: BigFloat
 }
 
@@ -4058,7 +5097,9 @@ input RankingStddevSampleAggregateFilter {
 }
 
 type RankingStddevSampleAggregates {
-  """Sample standard deviation of rank across the matching connection"""
+  """
+  Sample standard deviation of rank across the matching connection
+  """
   rank: BigFloat
 }
 
@@ -4067,7 +5108,9 @@ input RankingSumAggregateFilter {
 }
 
 type RankingSumAggregates {
-  """Sum of rank across the matching connection"""
+  """
+  Sum of rank across the matching connection
+  """
   rank: BigInt!
 }
 
@@ -4076,7 +5119,9 @@ input RankingVariancePopulationAggregateFilter {
 }
 
 type RankingVariancePopulationAggregates {
-  """Population variance of rank across the matching connection"""
+  """
+  Population variance of rank across the matching connection
+  """
   rank: BigFloat
 }
 
@@ -4085,11 +5130,15 @@ input RankingVarianceSampleAggregateFilter {
 }
 
 type RankingVarianceSampleAggregates {
-  """Sample variance of rank across the matching connection"""
+  """
+  Sample variance of rank across the matching connection
+  """
   rank: BigFloat
 }
 
-"""A connection to a list of `Ranking` values."""
+"""
+A connection to a list of `Ranking` values.
+"""
 type RankingsConnection {
   """
   Aggregates across the matching connection (ignoring before/after/first/last/offset)
@@ -4105,33 +5154,51 @@ type RankingsConnection {
   Grouped aggregates across the matching connection (ignoring before/after/first/last/offset)
   """
   groupedAggregates(
-    """The method to use when grouping `Ranking` for these aggregates."""
+    """
+    The method to use when grouping `Ranking` for these aggregates.
+    """
     groupBy: [RankingsGroupBy!]!
 
-    """Conditions on the grouped aggregates."""
+    """
+    Conditions on the grouped aggregates.
+    """
     having: RankingsHavingInput
   ): [RankingAggregates!]
 
-  """A list of `Ranking` objects."""
+  """
+  A list of `Ranking` objects.
+  """
   nodes: [Ranking!]!
 
-  """Information to aid in pagination."""
+  """
+  Information to aid in pagination.
+  """
   pageInfo: PageInfo!
 
-  """The count of *all* `Ranking` you could get from the connection."""
+  """
+  The count of *all* `Ranking` you could get from the connection.
+  """
   totalCount: Int!
 }
 
-"""A `Ranking` edge in the connection."""
+"""
+A `Ranking` edge in the connection.
+"""
 type RankingsEdge {
-  """A cursor for use in pagination."""
+  """
+  A cursor for use in pagination.
+  """
   cursor: Cursor
 
-  """The `Ranking` at the end of the edge."""
+  """
+  The `Ranking` at the end of the edge.
+  """
   node: Ranking!
 }
 
-"""Grouping methods for `Ranking` for usage during aggregation."""
+"""
+Grouping methods for `Ranking` for usage during aggregation.
+"""
 enum RankingsGroupBy {
   PROTOCOL_ID
   RANK
@@ -4146,7 +5213,9 @@ input RankingsHavingDistinctCountInput {
   rank: HavingIntFilter
 }
 
-"""Conditions for `Ranking` aggregates."""
+"""
+Conditions for `Ranking` aggregates.
+"""
 input RankingsHavingInput {
   AND: [RankingsHavingInput!]
   OR: [RankingsHavingInput!]
@@ -4189,7 +5258,9 @@ input RankingsHavingVarianceSampleInput {
   rank: HavingIntFilter
 }
 
-"""Methods to use when ordering `Ranking`."""
+"""
+Methods to use when ordering `Ranking`.
+"""
 enum RankingsOrderBy {
   NATURAL
   PRIMARY_KEY_ASC
@@ -4210,16 +5281,24 @@ type Role implements Node {
   """
   nodeId: ID!
 
-  """Reads a single `Protocol` that is related to this `Role`."""
+  """
+  Reads a single `Protocol` that is related to this `Role`.
+  """
   protocolByProtocolId: Protocol
   protocolId: String!
 
-  """Reads and enables pagination through a set of `Track`."""
+  """
+  Reads and enables pagination through a set of `Track`.
+  """
   tracksByRoleId(
-    """Read all values in the set after (below) this cursor."""
+    """
+    Read all values in the set after (below) this cursor.
+    """
     after: Cursor
 
-    """Read all values in the set before (above) this cursor."""
+    """
+    Read all values in the set before (above) this cursor.
+    """
     before: Cursor
 
     """
@@ -4232,10 +5311,14 @@ type Role implements Node {
     """
     filter: TrackFilter
 
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Only read the last `n` values of the set."""
+    """
+    Only read the last `n` values of the set.
+    """
     last: Int
 
     """
@@ -4244,11 +5327,15 @@ type Role implements Node {
     """
     offset: Int
 
-    """The method to use when ordering `Track`."""
+    """
+    The method to use when ordering `Track`.
+    """
     orderBy: [TracksOrderBy!] = [PRIMARY_KEY_ASC]
   ): TracksConnection!
 
-  """Reads and enables pagination through a set of `Track`."""
+  """
+  Reads and enables pagination through a set of `Track`.
+  """
   tracksByRoleIdList(
     """
     A condition to be used in determining which values should be returned by the collection.
@@ -4260,13 +5347,19 @@ type Role implements Node {
     """
     filter: TrackFilter
 
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Skip the first `n` values."""
+    """
+    Skip the first `n` values.
+    """
     offset: Int
 
-    """The method to use when ordering `Track`."""
+    """
+    The method to use when ordering `Track`.
+    """
     orderBy: [TracksOrderBy!]
   ): [Track!]!
 }
@@ -4279,9 +5372,13 @@ type RoleAggregates {
   keys: [String!]
 }
 
-"""A filter to be used against aggregates of `Role` object types."""
+"""
+A filter to be used against aggregates of `Role` object types.
+"""
 input RoleAggregatesFilter {
-  """Distinct count aggregate over matching `Role` objects."""
+  """
+  Distinct count aggregate over matching `Role` objects.
+  """
   distinctCount: RoleDistinctCountAggregateFilter
 
   """
@@ -4294,10 +5391,14 @@ input RoleAggregatesFilter {
 A condition to be used against `Role` object types. All fields are tested for equality and combined with a logical ‘and.’
 """
 input RoleCondition {
-  """Checks for equality with the object’s `id` field."""
+  """
+  Checks for equality with the object’s `id` field.
+  """
   id: String
 
-  """Checks for equality with the object’s `protocolId` field."""
+  """
+  Checks for equality with the object’s `protocolId` field.
+  """
   protocolId: String
 }
 
@@ -4307,10 +5408,14 @@ input RoleDistinctCountAggregateFilter {
 }
 
 type RoleDistinctCountAggregates {
-  """Distinct count of id across the matching connection"""
+  """
+  Distinct count of id across the matching connection
+  """
   id: BigInt
 
-  """Distinct count of protocolId across the matching connection"""
+  """
+  Distinct count of protocolId across the matching connection
+  """
   protocolId: BigInt
 }
 
@@ -4318,28 +5423,44 @@ type RoleDistinctCountAggregates {
 A filter to be used against `Role` object types. All fields are combined with a logical ‘and.’
 """
 input RoleFilter {
-  """Checks for all expressions in this list."""
+  """
+  Checks for all expressions in this list.
+  """
   and: [RoleFilter!]
 
-  """Filter by the object’s `id` field."""
+  """
+  Filter by the object’s `id` field.
+  """
   id: StringFilter
 
-  """Negates the expression."""
+  """
+  Negates the expression.
+  """
   not: RoleFilter
 
-  """Checks for any expressions in this list."""
+  """
+  Checks for any expressions in this list.
+  """
   or: [RoleFilter!]
 
-  """Filter by the object’s `protocolByProtocolId` relation."""
+  """
+  Filter by the object’s `protocolByProtocolId` relation.
+  """
   protocolByProtocolId: ProtocolFilter
 
-  """Filter by the object’s `protocolId` field."""
+  """
+  Filter by the object’s `protocolId` field.
+  """
   protocolId: StringFilter
 
-  """Filter by the object’s `tracksByRoleId` relation."""
+  """
+  Filter by the object’s `tracksByRoleId` relation.
+  """
   tracksByRoleId: RoleToManyTrackFilter
 
-  """Some related `tracksByRoleId` exist."""
+  """
+  Some related `tracksByRoleId` exist.
+  """
   tracksByRoleIdExist: Boolean
 }
 
@@ -4347,7 +5468,9 @@ input RoleFilter {
 A filter to be used against many `Track` object types. All fields are combined with a logical ‘and.’
 """
 input RoleToManyTrackFilter {
-  """Aggregates across related `Track` match the filter criteria."""
+  """
+  Aggregates across related `Track` match the filter criteria.
+  """
   aggregates: TrackAggregatesFilter
 
   """
@@ -4366,7 +5489,9 @@ input RoleToManyTrackFilter {
   some: TrackFilter
 }
 
-"""A connection to a list of `Role` values."""
+"""
+A connection to a list of `Role` values.
+"""
 type RolesConnection {
   """
   Aggregates across the matching connection (ignoring before/after/first/last/offset)
@@ -4382,44 +5507,66 @@ type RolesConnection {
   Grouped aggregates across the matching connection (ignoring before/after/first/last/offset)
   """
   groupedAggregates(
-    """The method to use when grouping `Role` for these aggregates."""
+    """
+    The method to use when grouping `Role` for these aggregates.
+    """
     groupBy: [RolesGroupBy!]!
 
-    """Conditions on the grouped aggregates."""
+    """
+    Conditions on the grouped aggregates.
+    """
     having: RolesHavingInput
   ): [RoleAggregates!]
 
-  """A list of `Role` objects."""
+  """
+  A list of `Role` objects.
+  """
   nodes: [Role!]!
 
-  """Information to aid in pagination."""
+  """
+  Information to aid in pagination.
+  """
   pageInfo: PageInfo!
 
-  """The count of *all* `Role` you could get from the connection."""
+  """
+  The count of *all* `Role` you could get from the connection.
+  """
   totalCount: Int!
 }
 
-"""A `Role` edge in the connection."""
+"""
+A `Role` edge in the connection.
+"""
 type RolesEdge {
-  """A cursor for use in pagination."""
+  """
+  A cursor for use in pagination.
+  """
   cursor: Cursor
 
-  """The `Role` at the end of the edge."""
+  """
+  The `Role` at the end of the edge.
+  """
   node: Role!
 }
 
-"""Grouping methods for `Role` for usage during aggregation."""
+"""
+Grouping methods for `Role` for usage during aggregation.
+"""
 enum RolesGroupBy {
   PROTOCOL_ID
 }
 
-"""Conditions for `Role` aggregates."""
+"""
+Conditions for `Role` aggregates.
+"""
 input RolesHavingInput {
   AND: [RolesHavingInput!]
   OR: [RolesHavingInput!]
 }
 
-"""Methods to use when ordering `Role`."""
+"""
+Methods to use when ordering `Role`.
+"""
 enum RolesOrderBy {
   ID_ASC
   ID_DESC
@@ -4500,40 +5647,64 @@ input StringFilter {
   """
   distinctFromInsensitive: String
 
-  """Ends with the specified string (case-sensitive)."""
+  """
+  Ends with the specified string (case-sensitive).
+  """
   endsWith: String
 
-  """Ends with the specified string (case-insensitive)."""
+  """
+  Ends with the specified string (case-insensitive).
+  """
   endsWithInsensitive: String
 
-  """Equal to the specified value."""
+  """
+  Equal to the specified value.
+  """
   equalTo: String
 
-  """Equal to the specified value (case-insensitive)."""
+  """
+  Equal to the specified value (case-insensitive).
+  """
   equalToInsensitive: String
 
-  """Greater than the specified value."""
+  """
+  Greater than the specified value.
+  """
   greaterThan: String
 
-  """Greater than the specified value (case-insensitive)."""
+  """
+  Greater than the specified value (case-insensitive).
+  """
   greaterThanInsensitive: String
 
-  """Greater than or equal to the specified value."""
+  """
+  Greater than or equal to the specified value.
+  """
   greaterThanOrEqualTo: String
 
-  """Greater than or equal to the specified value (case-insensitive)."""
+  """
+  Greater than or equal to the specified value (case-insensitive).
+  """
   greaterThanOrEqualToInsensitive: String
 
-  """Included in the specified list."""
+  """
+  Included in the specified list.
+  """
   in: [String!]
 
-  """Included in the specified list (case-insensitive)."""
+  """
+  Included in the specified list (case-insensitive).
+  """
   inInsensitive: [String!]
 
-  """Contains the specified string (case-sensitive)."""
+  """
+  Contains the specified string (case-sensitive).
+  """
   includes: String
 
-  """Contains the specified string (case-insensitive)."""
+  """
+  Contains the specified string (case-insensitive).
+  """
   includesInsensitive: String
 
   """
@@ -4541,16 +5712,24 @@ input StringFilter {
   """
   isNull: Boolean
 
-  """Less than the specified value."""
+  """
+  Less than the specified value.
+  """
   lessThan: String
 
-  """Less than the specified value (case-insensitive)."""
+  """
+  Less than the specified value (case-insensitive).
+  """
   lessThanInsensitive: String
 
-  """Less than or equal to the specified value."""
+  """
+  Less than or equal to the specified value.
+  """
   lessThanOrEqualTo: String
 
-  """Less than or equal to the specified value (case-insensitive)."""
+  """
+  Less than or equal to the specified value (case-insensitive).
+  """
   lessThanOrEqualToInsensitive: String
 
   """
@@ -4563,7 +5742,9 @@ input StringFilter {
   """
   likeInsensitive: String
 
-  """Equal to the specified value, treating null like an ordinary value."""
+  """
+  Equal to the specified value, treating null like an ordinary value.
+  """
   notDistinctFrom: String
 
   """
@@ -4571,28 +5752,44 @@ input StringFilter {
   """
   notDistinctFromInsensitive: String
 
-  """Does not end with the specified string (case-sensitive)."""
+  """
+  Does not end with the specified string (case-sensitive).
+  """
   notEndsWith: String
 
-  """Does not end with the specified string (case-insensitive)."""
+  """
+  Does not end with the specified string (case-insensitive).
+  """
   notEndsWithInsensitive: String
 
-  """Not equal to the specified value."""
+  """
+  Not equal to the specified value.
+  """
   notEqualTo: String
 
-  """Not equal to the specified value (case-insensitive)."""
+  """
+  Not equal to the specified value (case-insensitive).
+  """
   notEqualToInsensitive: String
 
-  """Not included in the specified list."""
+  """
+  Not included in the specified list.
+  """
   notIn: [String!]
 
-  """Not included in the specified list (case-insensitive)."""
+  """
+  Not included in the specified list (case-insensitive).
+  """
   notInInsensitive: [String!]
 
-  """Does not contain the specified string (case-sensitive)."""
+  """
+  Does not contain the specified string (case-sensitive).
+  """
   notIncludes: String
 
-  """Does not contain the specified string (case-insensitive)."""
+  """
+  Does not contain the specified string (case-insensitive).
+  """
   notIncludesInsensitive: String
 
   """
@@ -4605,26 +5802,40 @@ input StringFilter {
   """
   notLikeInsensitive: String
 
-  """Does not start with the specified string (case-sensitive)."""
+  """
+  Does not start with the specified string (case-sensitive).
+  """
   notStartsWith: String
 
-  """Does not start with the specified string (case-insensitive)."""
+  """
+  Does not start with the specified string (case-insensitive).
+  """
   notStartsWithInsensitive: String
 
-  """Starts with the specified string (case-sensitive)."""
+  """
+  Starts with the specified string (case-sensitive).
+  """
   startsWith: String
 
-  """Starts with the specified string (case-insensitive)."""
+  """
+  Starts with the specified string (case-insensitive).
+  """
   startsWithInsensitive: String
 }
 
 type Track implements Node {
-  """Reads and enables pagination through a set of `Definition`."""
+  """
+  Reads and enables pagination through a set of `Definition`.
+  """
   definitionsByTrackId(
-    """Read all values in the set after (below) this cursor."""
+    """
+    Read all values in the set after (below) this cursor.
+    """
     after: Cursor
 
-    """Read all values in the set before (above) this cursor."""
+    """
+    Read all values in the set before (above) this cursor.
+    """
     before: Cursor
 
     """
@@ -4637,10 +5848,14 @@ type Track implements Node {
     """
     filter: DefinitionFilter
 
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Only read the last `n` values of the set."""
+    """
+    Only read the last `n` values of the set.
+    """
     last: Int
 
     """
@@ -4649,11 +5864,15 @@ type Track implements Node {
     """
     offset: Int
 
-    """The method to use when ordering `Definition`."""
+    """
+    The method to use when ordering `Definition`.
+    """
     orderBy: [DefinitionsOrderBy!] = [PRIMARY_KEY_ASC]
   ): DefinitionsConnection!
 
-  """Reads and enables pagination through a set of `Definition`."""
+  """
+  Reads and enables pagination through a set of `Definition`.
+  """
   definitionsByTrackIdList(
     """
     A condition to be used in determining which values should be returned by the collection.
@@ -4665,13 +5884,19 @@ type Track implements Node {
     """
     filter: DefinitionFilter
 
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Skip the first `n` values."""
+    """
+    Skip the first `n` values.
+    """
     offset: Int
 
-    """The method to use when ordering `Definition`."""
+    """
+    The method to use when ordering `Definition`.
+    """
     orderBy: [DefinitionsOrderBy!]
   ): [Definition!]!
   id: String!
@@ -4681,11 +5906,15 @@ type Track implements Node {
   """
   nodeId: ID!
 
-  """Reads a single `Protocol` that is related to this `Track`."""
+  """
+  Reads a single `Protocol` that is related to this `Track`.
+  """
   protocolByProtocolId: Protocol
   protocolId: String!
 
-  """Reads a single `Role` that is related to this `Track`."""
+  """
+  Reads a single `Role` that is related to this `Track`.
+  """
   roleByRoleId: Role
   roleId: String
 }
@@ -4698,9 +5927,13 @@ type TrackAggregates {
   keys: [String!]
 }
 
-"""A filter to be used against aggregates of `Track` object types."""
+"""
+A filter to be used against aggregates of `Track` object types.
+"""
 input TrackAggregatesFilter {
-  """Distinct count aggregate over matching `Track` objects."""
+  """
+  Distinct count aggregate over matching `Track` objects.
+  """
   distinctCount: TrackDistinctCountAggregateFilter
 
   """
@@ -4713,13 +5946,19 @@ input TrackAggregatesFilter {
 A condition to be used against `Track` object types. All fields are tested for equality and combined with a logical ‘and.’
 """
 input TrackCondition {
-  """Checks for equality with the object’s `id` field."""
+  """
+  Checks for equality with the object’s `id` field.
+  """
   id: String
 
-  """Checks for equality with the object’s `protocolId` field."""
+  """
+  Checks for equality with the object’s `protocolId` field.
+  """
   protocolId: String
 
-  """Checks for equality with the object’s `roleId` field."""
+  """
+  Checks for equality with the object’s `roleId` field.
+  """
   roleId: String
 }
 
@@ -4730,13 +5969,19 @@ input TrackDistinctCountAggregateFilter {
 }
 
 type TrackDistinctCountAggregates {
-  """Distinct count of id across the matching connection"""
+  """
+  Distinct count of id across the matching connection
+  """
   id: BigInt
 
-  """Distinct count of protocolId across the matching connection"""
+  """
+  Distinct count of protocolId across the matching connection
+  """
   protocolId: BigInt
 
-  """Distinct count of roleId across the matching connection"""
+  """
+  Distinct count of roleId across the matching connection
+  """
   roleId: BigInt
 }
 
@@ -4744,37 +5989,59 @@ type TrackDistinctCountAggregates {
 A filter to be used against `Track` object types. All fields are combined with a logical ‘and.’
 """
 input TrackFilter {
-  """Checks for all expressions in this list."""
+  """
+  Checks for all expressions in this list.
+  """
   and: [TrackFilter!]
 
-  """Filter by the object’s `definitionsByTrackId` relation."""
+  """
+  Filter by the object’s `definitionsByTrackId` relation.
+  """
   definitionsByTrackId: TrackToManyDefinitionFilter
 
-  """Some related `definitionsByTrackId` exist."""
+  """
+  Some related `definitionsByTrackId` exist.
+  """
   definitionsByTrackIdExist: Boolean
 
-  """Filter by the object’s `id` field."""
+  """
+  Filter by the object’s `id` field.
+  """
   id: StringFilter
 
-  """Negates the expression."""
+  """
+  Negates the expression.
+  """
   not: TrackFilter
 
-  """Checks for any expressions in this list."""
+  """
+  Checks for any expressions in this list.
+  """
   or: [TrackFilter!]
 
-  """Filter by the object’s `protocolByProtocolId` relation."""
+  """
+  Filter by the object’s `protocolByProtocolId` relation.
+  """
   protocolByProtocolId: ProtocolFilter
 
-  """Filter by the object’s `protocolId` field."""
+  """
+  Filter by the object’s `protocolId` field.
+  """
   protocolId: StringFilter
 
-  """Filter by the object’s `roleByRoleId` relation."""
+  """
+  Filter by the object’s `roleByRoleId` relation.
+  """
   roleByRoleId: RoleFilter
 
-  """A related `roleByRoleId` exists."""
+  """
+  A related `roleByRoleId` exists.
+  """
   roleByRoleIdExists: Boolean
 
-  """Filter by the object’s `roleId` field."""
+  """
+  Filter by the object’s `roleId` field.
+  """
   roleId: StringFilter
 }
 
@@ -4782,7 +6049,9 @@ input TrackFilter {
 A filter to be used against many `Definition` object types. All fields are combined with a logical ‘and.’
 """
 input TrackToManyDefinitionFilter {
-  """Aggregates across related `Definition` match the filter criteria."""
+  """
+  Aggregates across related `Definition` match the filter criteria.
+  """
   aggregates: DefinitionAggregatesFilter
 
   """
@@ -4801,7 +6070,9 @@ input TrackToManyDefinitionFilter {
   some: DefinitionFilter
 }
 
-"""A connection to a list of `Track` values."""
+"""
+A connection to a list of `Track` values.
+"""
 type TracksConnection {
   """
   Aggregates across the matching connection (ignoring before/after/first/last/offset)
@@ -4817,45 +6088,67 @@ type TracksConnection {
   Grouped aggregates across the matching connection (ignoring before/after/first/last/offset)
   """
   groupedAggregates(
-    """The method to use when grouping `Track` for these aggregates."""
+    """
+    The method to use when grouping `Track` for these aggregates.
+    """
     groupBy: [TracksGroupBy!]!
 
-    """Conditions on the grouped aggregates."""
+    """
+    Conditions on the grouped aggregates.
+    """
     having: TracksHavingInput
   ): [TrackAggregates!]
 
-  """A list of `Track` objects."""
+  """
+  A list of `Track` objects.
+  """
   nodes: [Track!]!
 
-  """Information to aid in pagination."""
+  """
+  Information to aid in pagination.
+  """
   pageInfo: PageInfo!
 
-  """The count of *all* `Track` you could get from the connection."""
+  """
+  The count of *all* `Track` you could get from the connection.
+  """
   totalCount: Int!
 }
 
-"""A `Track` edge in the connection."""
+"""
+A `Track` edge in the connection.
+"""
 type TracksEdge {
-  """A cursor for use in pagination."""
+  """
+  A cursor for use in pagination.
+  """
   cursor: Cursor
 
-  """The `Track` at the end of the edge."""
+  """
+  The `Track` at the end of the edge.
+  """
   node: Track!
 }
 
-"""Grouping methods for `Track` for usage during aggregation."""
+"""
+Grouping methods for `Track` for usage during aggregation.
+"""
 enum TracksGroupBy {
   PROTOCOL_ID
   ROLE_ID
 }
 
-"""Conditions for `Track` aggregates."""
+"""
+Conditions for `Track` aggregates.
+"""
 input TracksHavingInput {
   AND: [TracksHavingInput!]
   OR: [TracksHavingInput!]
 }
 
-"""Methods to use when ordering `Track`."""
+"""
+Methods to use when ordering `Track`.
+"""
 enum TracksOrderBy {
   DEFINITIONS_BY_TRACK_ID_AVERAGE_DESCRIPTION_ASC
   DEFINITIONS_BY_TRACK_ID_AVERAGE_DESCRIPTION_DESC
@@ -5017,12 +6310,18 @@ enum TracksOrderBy {
 type Winner implements Node {
   defaultDisplayName: String
 
-  """Reads and enables pagination through a set of `EarnedBadge`."""
+  """
+  Reads and enables pagination through a set of `EarnedBadge`.
+  """
   earnedBadgesByWinnerId(
-    """Read all values in the set after (below) this cursor."""
+    """
+    Read all values in the set after (below) this cursor.
+    """
     after: Cursor
 
-    """Read all values in the set before (above) this cursor."""
+    """
+    Read all values in the set before (above) this cursor.
+    """
     before: Cursor
 
     """
@@ -5035,10 +6334,14 @@ type Winner implements Node {
     """
     filter: EarnedBadgeFilter
 
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Only read the last `n` values of the set."""
+    """
+    Only read the last `n` values of the set.
+    """
     last: Int
 
     """
@@ -5047,11 +6350,15 @@ type Winner implements Node {
     """
     offset: Int
 
-    """The method to use when ordering `EarnedBadge`."""
+    """
+    The method to use when ordering `EarnedBadge`.
+    """
     orderBy: [EarnedBadgesOrderBy!] = [PRIMARY_KEY_ASC]
   ): EarnedBadgesConnection!
 
-  """Reads and enables pagination through a set of `EarnedBadge`."""
+  """
+  Reads and enables pagination through a set of `EarnedBadge`.
+  """
   earnedBadgesByWinnerIdList(
     """
     A condition to be used in determining which values should be returned by the collection.
@@ -5063,13 +6370,19 @@ type Winner implements Node {
     """
     filter: EarnedBadgeFilter
 
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Skip the first `n` values."""
+    """
+    Skip the first `n` values.
+    """
     offset: Int
 
-    """The method to use when ordering `EarnedBadge`."""
+    """
+    The method to use when ordering `EarnedBadge`.
+    """
     orderBy: [EarnedBadgesOrderBy!]
   ): [EarnedBadge!]!
   ens: String
@@ -5080,12 +6393,18 @@ type Winner implements Node {
   """
   nodeId: ID!
 
-  """Reads and enables pagination through a set of `Ranking`."""
+  """
+  Reads and enables pagination through a set of `Ranking`.
+  """
   rankingsByWinnerId(
-    """Read all values in the set after (below) this cursor."""
+    """
+    Read all values in the set after (below) this cursor.
+    """
     after: Cursor
 
-    """Read all values in the set before (above) this cursor."""
+    """
+    Read all values in the set before (above) this cursor.
+    """
     before: Cursor
 
     """
@@ -5098,10 +6417,14 @@ type Winner implements Node {
     """
     filter: RankingFilter
 
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Only read the last `n` values of the set."""
+    """
+    Only read the last `n` values of the set.
+    """
     last: Int
 
     """
@@ -5110,11 +6433,15 @@ type Winner implements Node {
     """
     offset: Int
 
-    """The method to use when ordering `Ranking`."""
+    """
+    The method to use when ordering `Ranking`.
+    """
     orderBy: [RankingsOrderBy!] = [PRIMARY_KEY_ASC]
   ): RankingsConnection!
 
-  """Reads and enables pagination through a set of `Ranking`."""
+  """
+  Reads and enables pagination through a set of `Ranking`.
+  """
   rankingsByWinnerIdList(
     """
     A condition to be used in determining which values should be returned by the collection.
@@ -5126,13 +6453,19 @@ type Winner implements Node {
     """
     filter: RankingFilter
 
-    """Only read the first `n` values of the set."""
+    """
+    Only read the first `n` values of the set.
+    """
     first: Int
 
-    """Skip the first `n` values."""
+    """
+    Skip the first `n` values.
+    """
     offset: Int
 
-    """The method to use when ordering `Ranking`."""
+    """
+    The method to use when ordering `Ranking`.
+    """
     orderBy: [RankingsOrderBy!]
   ): [Ranking!]!
 }
@@ -5149,24 +6482,36 @@ type WinnerAggregates {
 A condition to be used against `Winner` object types. All fields are tested for equality and combined with a logical ‘and.’
 """
 input WinnerCondition {
-  """Checks for equality with the object’s `defaultDisplayName` field."""
+  """
+  Checks for equality with the object’s `defaultDisplayName` field.
+  """
   defaultDisplayName: String
 
-  """Checks for equality with the object’s `ens` field."""
+  """
+  Checks for equality with the object’s `ens` field.
+  """
   ens: String
 
-  """Checks for equality with the object’s `id` field."""
+  """
+  Checks for equality with the object’s `id` field.
+  """
   id: String
 }
 
 type WinnerDistinctCountAggregates {
-  """Distinct count of defaultDisplayName across the matching connection"""
+  """
+  Distinct count of defaultDisplayName across the matching connection
+  """
   defaultDisplayName: BigInt
 
-  """Distinct count of ens across the matching connection"""
+  """
+  Distinct count of ens across the matching connection
+  """
   ens: BigInt
 
-  """Distinct count of id across the matching connection"""
+  """
+  Distinct count of id across the matching connection
+  """
   id: BigInt
 }
 
@@ -5174,34 +6519,54 @@ type WinnerDistinctCountAggregates {
 A filter to be used against `Winner` object types. All fields are combined with a logical ‘and.’
 """
 input WinnerFilter {
-  """Checks for all expressions in this list."""
+  """
+  Checks for all expressions in this list.
+  """
   and: [WinnerFilter!]
 
-  """Filter by the object’s `defaultDisplayName` field."""
+  """
+  Filter by the object’s `defaultDisplayName` field.
+  """
   defaultDisplayName: StringFilter
 
-  """Filter by the object’s `earnedBadgesByWinnerId` relation."""
+  """
+  Filter by the object’s `earnedBadgesByWinnerId` relation.
+  """
   earnedBadgesByWinnerId: WinnerToManyEarnedBadgeFilter
 
-  """Some related `earnedBadgesByWinnerId` exist."""
+  """
+  Some related `earnedBadgesByWinnerId` exist.
+  """
   earnedBadgesByWinnerIdExist: Boolean
 
-  """Filter by the object’s `ens` field."""
+  """
+  Filter by the object’s `ens` field.
+  """
   ens: StringFilter
 
-  """Filter by the object’s `id` field."""
+  """
+  Filter by the object’s `id` field.
+  """
   id: StringFilter
 
-  """Negates the expression."""
+  """
+  Negates the expression.
+  """
   not: WinnerFilter
 
-  """Checks for any expressions in this list."""
+  """
+  Checks for any expressions in this list.
+  """
   or: [WinnerFilter!]
 
-  """Filter by the object’s `rankingsByWinnerId` relation."""
+  """
+  Filter by the object’s `rankingsByWinnerId` relation.
+  """
   rankingsByWinnerId: WinnerToManyRankingFilter
 
-  """Some related `rankingsByWinnerId` exist."""
+  """
+  Some related `rankingsByWinnerId` exist.
+  """
   rankingsByWinnerIdExist: Boolean
 }
 
@@ -5209,7 +6574,9 @@ input WinnerFilter {
 A filter to be used against many `EarnedBadge` object types. All fields are combined with a logical ‘and.’
 """
 input WinnerToManyEarnedBadgeFilter {
-  """Aggregates across related `EarnedBadge` match the filter criteria."""
+  """
+  Aggregates across related `EarnedBadge` match the filter criteria.
+  """
   aggregates: EarnedBadgeAggregatesFilter
 
   """
@@ -5232,7 +6599,9 @@ input WinnerToManyEarnedBadgeFilter {
 A filter to be used against many `Ranking` object types. All fields are combined with a logical ‘and.’
 """
 input WinnerToManyRankingFilter {
-  """Aggregates across related `Ranking` match the filter criteria."""
+  """
+  Aggregates across related `Ranking` match the filter criteria.
+  """
   aggregates: RankingAggregatesFilter
 
   """
@@ -5251,7 +6620,9 @@ input WinnerToManyRankingFilter {
   some: RankingFilter
 }
 
-"""A connection to a list of `Winner` values."""
+"""
+A connection to a list of `Winner` values.
+"""
 type WinnersConnection {
   """
   Aggregates across the matching connection (ignoring before/after/first/last/offset)
@@ -5267,45 +6638,67 @@ type WinnersConnection {
   Grouped aggregates across the matching connection (ignoring before/after/first/last/offset)
   """
   groupedAggregates(
-    """The method to use when grouping `Winner` for these aggregates."""
+    """
+    The method to use when grouping `Winner` for these aggregates.
+    """
     groupBy: [WinnersGroupBy!]!
 
-    """Conditions on the grouped aggregates."""
+    """
+    Conditions on the grouped aggregates.
+    """
     having: WinnersHavingInput
   ): [WinnerAggregates!]
 
-  """A list of `Winner` objects."""
+  """
+  A list of `Winner` objects.
+  """
   nodes: [Winner!]!
 
-  """Information to aid in pagination."""
+  """
+  Information to aid in pagination.
+  """
   pageInfo: PageInfo!
 
-  """The count of *all* `Winner` you could get from the connection."""
+  """
+  The count of *all* `Winner` you could get from the connection.
+  """
   totalCount: Int!
 }
 
-"""A `Winner` edge in the connection."""
+"""
+A `Winner` edge in the connection.
+"""
 type WinnersEdge {
-  """A cursor for use in pagination."""
+  """
+  A cursor for use in pagination.
+  """
   cursor: Cursor
 
-  """The `Winner` at the end of the edge."""
+  """
+  The `Winner` at the end of the edge.
+  """
   node: Winner!
 }
 
-"""Grouping methods for `Winner` for usage during aggregation."""
+"""
+Grouping methods for `Winner` for usage during aggregation.
+"""
 enum WinnersGroupBy {
   DEFAULT_DISPLAY_NAME
   ENS
 }
 
-"""Conditions for `Winner` aggregates."""
+"""
+Conditions for `Winner` aggregates.
+"""
 input WinnersHavingInput {
   AND: [WinnersHavingInput!]
   OR: [WinnersHavingInput!]
 }
 
-"""Methods to use when ordering `Winner`."""
+"""
+Methods to use when ordering `Winner`.
+"""
 enum WinnersOrderBy {
   DEFAULT_DISPLAY_NAME_ASC
   DEFAULT_DISPLAY_NAME_DESC
@@ -5315,8 +6708,8 @@ enum WinnersOrderBy {
   EARNED_BADGES_BY_WINNER_ID_AVERAGE_BLOCK_AWARDED_DESC
   EARNED_BADGES_BY_WINNER_ID_AVERAGE_DEFINITION_ID_ASC
   EARNED_BADGES_BY_WINNER_ID_AVERAGE_DEFINITION_ID_DESC
-  EARNED_BADGES_BY_WINNER_ID_AVERAGE_GLOBAL_AWARD_NUMBER_ASC
-  EARNED_BADGES_BY_WINNER_ID_AVERAGE_GLOBAL_AWARD_NUMBER_DESC
+  EARNED_BADGES_BY_WINNER_ID_AVERAGE_GLOBAL_BADGE_NUMBER_ASC
+  EARNED_BADGES_BY_WINNER_ID_AVERAGE_GLOBAL_BADGE_NUMBER_DESC
   EARNED_BADGES_BY_WINNER_ID_AVERAGE_ID_ASC
   EARNED_BADGES_BY_WINNER_ID_AVERAGE_ID_DESC
   EARNED_BADGES_BY_WINNER_ID_AVERAGE_METADATA_ASC
@@ -5337,8 +6730,8 @@ enum WinnersOrderBy {
   EARNED_BADGES_BY_WINNER_ID_DISTINCT_COUNT_BLOCK_AWARDED_DESC
   EARNED_BADGES_BY_WINNER_ID_DISTINCT_COUNT_DEFINITION_ID_ASC
   EARNED_BADGES_BY_WINNER_ID_DISTINCT_COUNT_DEFINITION_ID_DESC
-  EARNED_BADGES_BY_WINNER_ID_DISTINCT_COUNT_GLOBAL_AWARD_NUMBER_ASC
-  EARNED_BADGES_BY_WINNER_ID_DISTINCT_COUNT_GLOBAL_AWARD_NUMBER_DESC
+  EARNED_BADGES_BY_WINNER_ID_DISTINCT_COUNT_GLOBAL_BADGE_NUMBER_ASC
+  EARNED_BADGES_BY_WINNER_ID_DISTINCT_COUNT_GLOBAL_BADGE_NUMBER_DESC
   EARNED_BADGES_BY_WINNER_ID_DISTINCT_COUNT_ID_ASC
   EARNED_BADGES_BY_WINNER_ID_DISTINCT_COUNT_ID_DESC
   EARNED_BADGES_BY_WINNER_ID_DISTINCT_COUNT_METADATA_ASC
@@ -5357,8 +6750,8 @@ enum WinnersOrderBy {
   EARNED_BADGES_BY_WINNER_ID_MAX_BLOCK_AWARDED_DESC
   EARNED_BADGES_BY_WINNER_ID_MAX_DEFINITION_ID_ASC
   EARNED_BADGES_BY_WINNER_ID_MAX_DEFINITION_ID_DESC
-  EARNED_BADGES_BY_WINNER_ID_MAX_GLOBAL_AWARD_NUMBER_ASC
-  EARNED_BADGES_BY_WINNER_ID_MAX_GLOBAL_AWARD_NUMBER_DESC
+  EARNED_BADGES_BY_WINNER_ID_MAX_GLOBAL_BADGE_NUMBER_ASC
+  EARNED_BADGES_BY_WINNER_ID_MAX_GLOBAL_BADGE_NUMBER_DESC
   EARNED_BADGES_BY_WINNER_ID_MAX_ID_ASC
   EARNED_BADGES_BY_WINNER_ID_MAX_ID_DESC
   EARNED_BADGES_BY_WINNER_ID_MAX_METADATA_ASC
@@ -5377,8 +6770,8 @@ enum WinnersOrderBy {
   EARNED_BADGES_BY_WINNER_ID_MIN_BLOCK_AWARDED_DESC
   EARNED_BADGES_BY_WINNER_ID_MIN_DEFINITION_ID_ASC
   EARNED_BADGES_BY_WINNER_ID_MIN_DEFINITION_ID_DESC
-  EARNED_BADGES_BY_WINNER_ID_MIN_GLOBAL_AWARD_NUMBER_ASC
-  EARNED_BADGES_BY_WINNER_ID_MIN_GLOBAL_AWARD_NUMBER_DESC
+  EARNED_BADGES_BY_WINNER_ID_MIN_GLOBAL_BADGE_NUMBER_ASC
+  EARNED_BADGES_BY_WINNER_ID_MIN_GLOBAL_BADGE_NUMBER_DESC
   EARNED_BADGES_BY_WINNER_ID_MIN_ID_ASC
   EARNED_BADGES_BY_WINNER_ID_MIN_ID_DESC
   EARNED_BADGES_BY_WINNER_ID_MIN_METADATA_ASC
@@ -5397,8 +6790,8 @@ enum WinnersOrderBy {
   EARNED_BADGES_BY_WINNER_ID_STDDEV_POPULATION_BLOCK_AWARDED_DESC
   EARNED_BADGES_BY_WINNER_ID_STDDEV_POPULATION_DEFINITION_ID_ASC
   EARNED_BADGES_BY_WINNER_ID_STDDEV_POPULATION_DEFINITION_ID_DESC
-  EARNED_BADGES_BY_WINNER_ID_STDDEV_POPULATION_GLOBAL_AWARD_NUMBER_ASC
-  EARNED_BADGES_BY_WINNER_ID_STDDEV_POPULATION_GLOBAL_AWARD_NUMBER_DESC
+  EARNED_BADGES_BY_WINNER_ID_STDDEV_POPULATION_GLOBAL_BADGE_NUMBER_ASC
+  EARNED_BADGES_BY_WINNER_ID_STDDEV_POPULATION_GLOBAL_BADGE_NUMBER_DESC
   EARNED_BADGES_BY_WINNER_ID_STDDEV_POPULATION_ID_ASC
   EARNED_BADGES_BY_WINNER_ID_STDDEV_POPULATION_ID_DESC
   EARNED_BADGES_BY_WINNER_ID_STDDEV_POPULATION_METADATA_ASC
@@ -5417,8 +6810,8 @@ enum WinnersOrderBy {
   EARNED_BADGES_BY_WINNER_ID_STDDEV_SAMPLE_BLOCK_AWARDED_DESC
   EARNED_BADGES_BY_WINNER_ID_STDDEV_SAMPLE_DEFINITION_ID_ASC
   EARNED_BADGES_BY_WINNER_ID_STDDEV_SAMPLE_DEFINITION_ID_DESC
-  EARNED_BADGES_BY_WINNER_ID_STDDEV_SAMPLE_GLOBAL_AWARD_NUMBER_ASC
-  EARNED_BADGES_BY_WINNER_ID_STDDEV_SAMPLE_GLOBAL_AWARD_NUMBER_DESC
+  EARNED_BADGES_BY_WINNER_ID_STDDEV_SAMPLE_GLOBAL_BADGE_NUMBER_ASC
+  EARNED_BADGES_BY_WINNER_ID_STDDEV_SAMPLE_GLOBAL_BADGE_NUMBER_DESC
   EARNED_BADGES_BY_WINNER_ID_STDDEV_SAMPLE_ID_ASC
   EARNED_BADGES_BY_WINNER_ID_STDDEV_SAMPLE_ID_DESC
   EARNED_BADGES_BY_WINNER_ID_STDDEV_SAMPLE_METADATA_ASC
@@ -5437,8 +6830,8 @@ enum WinnersOrderBy {
   EARNED_BADGES_BY_WINNER_ID_SUM_BLOCK_AWARDED_DESC
   EARNED_BADGES_BY_WINNER_ID_SUM_DEFINITION_ID_ASC
   EARNED_BADGES_BY_WINNER_ID_SUM_DEFINITION_ID_DESC
-  EARNED_BADGES_BY_WINNER_ID_SUM_GLOBAL_AWARD_NUMBER_ASC
-  EARNED_BADGES_BY_WINNER_ID_SUM_GLOBAL_AWARD_NUMBER_DESC
+  EARNED_BADGES_BY_WINNER_ID_SUM_GLOBAL_BADGE_NUMBER_ASC
+  EARNED_BADGES_BY_WINNER_ID_SUM_GLOBAL_BADGE_NUMBER_DESC
   EARNED_BADGES_BY_WINNER_ID_SUM_ID_ASC
   EARNED_BADGES_BY_WINNER_ID_SUM_ID_DESC
   EARNED_BADGES_BY_WINNER_ID_SUM_METADATA_ASC
@@ -5457,8 +6850,8 @@ enum WinnersOrderBy {
   EARNED_BADGES_BY_WINNER_ID_VARIANCE_POPULATION_BLOCK_AWARDED_DESC
   EARNED_BADGES_BY_WINNER_ID_VARIANCE_POPULATION_DEFINITION_ID_ASC
   EARNED_BADGES_BY_WINNER_ID_VARIANCE_POPULATION_DEFINITION_ID_DESC
-  EARNED_BADGES_BY_WINNER_ID_VARIANCE_POPULATION_GLOBAL_AWARD_NUMBER_ASC
-  EARNED_BADGES_BY_WINNER_ID_VARIANCE_POPULATION_GLOBAL_AWARD_NUMBER_DESC
+  EARNED_BADGES_BY_WINNER_ID_VARIANCE_POPULATION_GLOBAL_BADGE_NUMBER_ASC
+  EARNED_BADGES_BY_WINNER_ID_VARIANCE_POPULATION_GLOBAL_BADGE_NUMBER_DESC
   EARNED_BADGES_BY_WINNER_ID_VARIANCE_POPULATION_ID_ASC
   EARNED_BADGES_BY_WINNER_ID_VARIANCE_POPULATION_ID_DESC
   EARNED_BADGES_BY_WINNER_ID_VARIANCE_POPULATION_METADATA_ASC
@@ -5477,8 +6870,8 @@ enum WinnersOrderBy {
   EARNED_BADGES_BY_WINNER_ID_VARIANCE_SAMPLE_BLOCK_AWARDED_DESC
   EARNED_BADGES_BY_WINNER_ID_VARIANCE_SAMPLE_DEFINITION_ID_ASC
   EARNED_BADGES_BY_WINNER_ID_VARIANCE_SAMPLE_DEFINITION_ID_DESC
-  EARNED_BADGES_BY_WINNER_ID_VARIANCE_SAMPLE_GLOBAL_AWARD_NUMBER_ASC
-  EARNED_BADGES_BY_WINNER_ID_VARIANCE_SAMPLE_GLOBAL_AWARD_NUMBER_DESC
+  EARNED_BADGES_BY_WINNER_ID_VARIANCE_SAMPLE_GLOBAL_BADGE_NUMBER_ASC
+  EARNED_BADGES_BY_WINNER_ID_VARIANCE_SAMPLE_GLOBAL_BADGE_NUMBER_DESC
   EARNED_BADGES_BY_WINNER_ID_VARIANCE_SAMPLE_ID_ASC
   EARNED_BADGES_BY_WINNER_ID_VARIANCE_SAMPLE_ID_DESC
   EARNED_BADGES_BY_WINNER_ID_VARIANCE_SAMPLE_METADATA_ASC
