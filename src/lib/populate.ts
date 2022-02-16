@@ -44,16 +44,18 @@ export const populateBadgeTracksAndDefinitions = async (
       subgraph: subgraphTheGraphBadges,
     });
 
-  const trackCount: Record<string, number> = {};
+  const trackLevelCount: Record<string, number> = {};
 
   const badgeDefinitionsWithTrack = badgeDefinitions
     .sort((a, b) => a.threshold - b.threshold)
-
     .reduce<BadgeDefinitionType[]>((acc, definition) => {
       const trackId = removeRomanNumerals(definition.id);
-      const currentCount = trackCount[trackId] || 0;
-      trackCount[trackId] = currentCount + 1;
-      return [...acc, { ...definition, trackId }];
+      const prevLevel = trackLevelCount[trackId] || 0;
+      trackLevelCount[trackId] = prevLevel + 1;
+      return [
+        ...acc,
+        { ...definition, trackId, level: trackLevelCount[trackId] },
+      ];
     }, []);
 
   await queryRunner.query(upsertProtocol, {
