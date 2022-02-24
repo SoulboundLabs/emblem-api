@@ -28,6 +28,7 @@ export const queryAllBadgeDefinitions = gql`
         id
       }
       threshold
+      soulPower
       ipfsURI
       description
     }

@@ -128,6 +128,7 @@ export const upsertBadgeDefinition = gql`
   mutation UpsertBadgeDefinition(
     $id: String!
     $protocolId: String!
+    $soulPower: Int
     $threshold: Float!
     $metric: String!
     $ipfsURI: String
@@ -143,6 +144,7 @@ export const upsertBadgeDefinition = gql`
           threshold: $threshold
           ipfsUri: $ipfsURI
           trackId: $trackId
+          soulPower: $soulPower
           protocolId: $protocolId
           description: $description
           level: $level

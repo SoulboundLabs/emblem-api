@@ -40,6 +40,7 @@ const createDefinitions = (knex) => {
     table.float("threshold");
     table.string("ipfs_uri");
     table.integer("level");
+    table.integer("soul_power");
 
     table.unique(["id", "protocol_id"]);
   });

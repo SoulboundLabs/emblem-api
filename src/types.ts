@@ -48,6 +48,7 @@ export interface BadgeDefinition {
   metric: Metric;
   threshold: number;
   ipfsURI?: string;
+  soulPower?: number;
   trackId?: string;
   // awardCount: number;
   // winnerCount?: number;

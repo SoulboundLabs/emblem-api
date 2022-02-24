@@ -63,10 +63,8 @@ export const populateBadgeTracksAndDefinitions = async (
     const trackId = definition.trackId as string;
     const metric = definition.metric.id;
     const threshold = Number(definition.threshold);
+    const soulPower = Number(definition.soulPower);
     const role = rolesByTrack[protocolId][trackId];
-
-    // const definitionDescription =
-    //   definitionDescriptions[protocolId][trackId](threshold);
 
     await queryRunner.query(upsertRole, {
       id: role,
@@ -82,6 +80,7 @@ export const populateBadgeTracksAndDefinitions = async (
     await queryRunner.query(upsertBadgeDefinition, {
       ...definition,
       protocolId,
+      soulPower,
       threshold,
       metric,
     });
