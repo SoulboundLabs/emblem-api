@@ -8,15 +8,13 @@ import {
 
 export const rolesByTrack: Record<string, Record<string, string>> = {
   [THE_GRAPH]: {
-    Allegiance: INDEXER,
-    Beacon: SUBGRAPH_DEVELOPER,
-    Guardian: DELEGATOR,
-    "House Odds": CURATOR,
-    Nexus: INDEXER,
-    Pathfinder: CURATOR,
-    "Planet of the Aped": CURATOR,
+    "Delegation Received": INDEXER,
+    "Signal Acquired": SUBGRAPH_DEVELOPER,
+    "Delegation Diversity": DELEGATOR,
+    "Allocation Opened": INDEXER,
+    "Signal Diversity": CURATOR,
     "Query Collector": INDEXER,
-    Alchemist: INDEXER,
-    "Subgraph Smith": SUBGRAPH_DEVELOPER,
+    "Indexing Diversity": INDEXER,
+    "Subgraph Deployed": SUBGRAPH_DEVELOPER,
   },
 };
