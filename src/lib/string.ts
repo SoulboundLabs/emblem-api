@@ -10,5 +10,8 @@ export const idToUrlHandle = (id: string = "") => {
 };
 
 export const removeRomanNumerals = (string: string) => {
-  return string.replace(/[IVX]+/g, "").trim();
+  return string
+    .slice()
+    .replace(/I$|II$|III$|IV$|V$|VI$|VII$|VIII$|IX$|X$/g, "")
+    .trim();
 };
