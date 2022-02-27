@@ -31,11 +31,19 @@ export interface GraphAccount {
   tokenLockWallets: TokenLockWallet[];
 }
 
+export interface Ranking {
+  winnerId: string;
+  protocolId: string;
+  soulScore: string;
+  rank: number;
+}
+
 export interface Winner {
   id: string;
   awardCount: number;
   rank: number | null;
   badges: EarnedBadge[];
+  soulScore: number;
   ens?: string;
   protocolRoles: string[];
   lastEarnedBadge: EarnedBadge;
@@ -48,7 +56,7 @@ export interface BadgeDefinition {
   metric: Metric;
   threshold: number;
   ipfsURI?: string;
-  soulPower?: number;
+  soulScore?: number;
   trackId?: string;
   // awardCount: number;
   // winnerCount?: number;

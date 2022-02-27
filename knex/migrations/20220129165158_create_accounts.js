@@ -25,6 +25,7 @@ const createRankings = (knex) => {
   return knex.schema.createTable("rankings", (table) => {
     table.string("winner_id").references("winners.id").notNullable();
     table.string("protocol_id").references("protocols.id").notNullable();
+    table.integer("soul_score");
     table.integer("rank").notNullable();
     table.primary(["winner_id", "protocol_id"]);
   });
@@ -40,7 +41,7 @@ const createDefinitions = (knex) => {
     table.float("threshold");
     table.string("ipfs_uri");
     table.integer("level");
-    table.integer("soul_power");
+    table.integer("soul_score");
 
     table.unique(["id", "protocol_id"]);
   });

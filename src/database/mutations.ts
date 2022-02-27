@@ -67,11 +67,17 @@ export const upsertRanking = gql`
   mutation UpsertRankings(
     $winnerId: String!
     $protocolId: String!
+    $soulScore: Int
     $rank: Int!
   ) {
     upsertRanking(
       input: {
-        ranking: { winnerId: $winnerId, protocolId: $protocolId, rank: $rank }
+        ranking: {
+          winnerId: $winnerId
+          protocolId: $protocolId
+          rank: $rank
+          soulScore: $soulScore
+        }
       }
     ) {
       ranking {
@@ -128,7 +134,7 @@ export const upsertBadgeDefinition = gql`
   mutation UpsertBadgeDefinition(
     $id: String!
     $protocolId: String!
-    $soulPower: Int
+    $soulScore: Int
     $threshold: Float!
     $metric: String!
     $ipfsURI: String
@@ -144,7 +150,7 @@ export const upsertBadgeDefinition = gql`
           threshold: $threshold
           ipfsUri: $ipfsURI
           trackId: $trackId
-          soulPower: $soulPower
+          soulScore: $soulScore
           protocolId: $protocolId
           description: $description
           level: $level

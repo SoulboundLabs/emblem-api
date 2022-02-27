@@ -11,8 +11,8 @@ import {
 } from "../database/mutations";
 import {
   queryLastEarnedBadge,
+  queryRankings,
   queryRecentWinnersByProtocol,
-  queryWinnersWithProtocolBadgeCountKnex,
 } from "../database/queries";
 import {
   queryAllBadgeDefinitions,
@@ -23,6 +23,7 @@ import {
   BadgeDefinition as BadgeDefinitionType,
   EarnedBadge,
   GraphAccount,
+  Ranking,
   Winner,
 } from "../types";
 import {
@@ -63,7 +64,7 @@ export const populateBadgeTracksAndDefinitions = async (
     const trackId = definition.trackId as string;
     const metric = definition.metric.id;
     const threshold = Number(definition.threshold);
-    const soulPower = Number(definition.soulPower);
+    const soulScore = Number(definition.soulScore);
     const role = rolesByTrack[protocolId][trackId];
 
     await queryRunner.query(upsertRole, {
@@ -80,7 +81,7 @@ export const populateBadgeTracksAndDefinitions = async (
     await queryRunner.query(upsertBadgeDefinition, {
       ...definition,
       protocolId,
-      soulPower,
+      soulScore,
       threshold,
       metric,
     });
@@ -126,6 +127,12 @@ export const populateEarnedBadges = async (
     await queryRunner.query(upsertWinner, {
       id: earnedBadge.badgeWinner.id,
     });
+    await queryRunner.query(upsertRanking, {
+      winnerId: earnedBadge.badgeWinner.id,
+      soulScore: Number(earnedBadge.badgeWinner.soulScore),
+      protocolId,
+      rank: 0,
+    });
     await queryRunner.query(upsertEarnedBadge, {
       ...earnedBadge,
       protocolId,
@@ -142,16 +149,17 @@ export const populateWinnerRank = async (
   queryRunner: any
 ) => {
   console.log("Populating winner rank");
-  const winners: Winner[] = await queryWinnersWithProtocolBadgeCountKnex(
-    protocolId
-  );
+  const { data } = await queryRunner.query(queryRankings, {
+    protocolId,
+  });
 
-  const winnerRankings = winners.map((winner, i) =>
-    queryRunner.query(upsertRanking, {
-      winnerId: winner.id,
-      protocolId: protocolId,
-      rank: i + 1,
-    })
+  const winnerRankings = data.allRankingsList.map(
+    (ranking: Ranking, i: number) =>
+      queryRunner.query(upsertRanking, {
+        winnerId: ranking.winnerId,
+        protocolId: protocolId,
+        rank: i + 1,
+      })
   );
 
   await Promise.all(winnerRankings);

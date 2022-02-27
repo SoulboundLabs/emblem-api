@@ -1,6 +1,19 @@
 import { gql } from "graphql-request";
 import { MAX_RESULTS } from "../lib/constants";
 
+export const queryWinners = gql`
+  query AllWinners {
+    badgeWinners(first: ${MAX_RESULTS}, orderBy: soulScore, orderDirection: "desc") {
+      id
+      soulScore
+      roles {
+        id
+        soulScore
+      }
+    }
+  }
+`;
+
 export const queryAllBadgeTracks = gql`
   query AllBadgeTracks {
     badgeTracks(first: ${MAX_RESULTS}) {
@@ -28,7 +41,7 @@ export const queryAllBadgeDefinitions = gql`
         id
       }
       threshold
-      soulPower
+      soulScore
       ipfsURI
       description
     }
@@ -47,6 +60,7 @@ export const queryAllEarnedBadges = gql`
         awardNumber
         badgeWinner {
           id
+          soulScore 
         }
         metadata {
           name

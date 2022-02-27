@@ -216,7 +216,7 @@ type Definition implements Node {
   """Reads a single `Protocol` that is related to this `Definition`."""
   protocolByProtocolId: Protocol
   protocolId: String!
-  soulPower: Int
+  soulScore: Int
   threshold: Float
 
   """Reads a single `Track` that is related to this `Definition`."""
@@ -313,7 +313,7 @@ input DefinitionAggregatesFilter {
 
 input DefinitionAverageAggregateFilter {
   level: BigFloatFilter
-  soulPower: BigFloatFilter
+  soulScore: BigFloatFilter
   threshold: FloatFilter
 }
 
@@ -321,8 +321,8 @@ type DefinitionAverageAggregates {
   """Mean average of level across the matching connection"""
   level: BigFloat
 
-  """Mean average of soulPower across the matching connection"""
-  soulPower: BigFloat
+  """Mean average of soulScore across the matching connection"""
+  soulScore: BigFloat
 
   """Mean average of threshold across the matching connection"""
   threshold: Float
@@ -351,8 +351,8 @@ input DefinitionCondition {
   """Checks for equality with the object’s `protocolId` field."""
   protocolId: String
 
-  """Checks for equality with the object’s `soulPower` field."""
-  soulPower: Int
+  """Checks for equality with the object’s `soulScore` field."""
+  soulScore: Int
 
   """Checks for equality with the object’s `threshold` field."""
   threshold: Float
@@ -368,7 +368,7 @@ input DefinitionDistinctCountAggregateFilter {
   level: BigIntFilter
   metric: BigIntFilter
   protocolId: BigIntFilter
-  soulPower: BigIntFilter
+  soulScore: BigIntFilter
   threshold: BigIntFilter
   trackId: BigIntFilter
 }
@@ -392,8 +392,8 @@ type DefinitionDistinctCountAggregates {
   """Distinct count of protocolId across the matching connection"""
   protocolId: BigInt
 
-  """Distinct count of soulPower across the matching connection"""
-  soulPower: BigInt
+  """Distinct count of soulScore across the matching connection"""
+  soulScore: BigInt
 
   """Distinct count of threshold across the matching connection"""
   threshold: BigInt
@@ -442,8 +442,8 @@ input DefinitionFilter {
   """Filter by the object’s `protocolId` field."""
   protocolId: StringFilter
 
-  """Filter by the object’s `soulPower` field."""
-  soulPower: IntFilter
+  """Filter by the object’s `soulScore` field."""
+  soulScore: IntFilter
 
   """Filter by the object’s `threshold` field."""
   threshold: FloatFilter
@@ -457,7 +457,7 @@ input DefinitionFilter {
 
 input DefinitionMaxAggregateFilter {
   level: IntFilter
-  soulPower: IntFilter
+  soulScore: IntFilter
   threshold: FloatFilter
 }
 
@@ -465,8 +465,8 @@ type DefinitionMaxAggregates {
   """Maximum of level across the matching connection"""
   level: Int
 
-  """Maximum of soulPower across the matching connection"""
-  soulPower: Int
+  """Maximum of soulScore across the matching connection"""
+  soulScore: Int
 
   """Maximum of threshold across the matching connection"""
   threshold: Float
@@ -474,7 +474,7 @@ type DefinitionMaxAggregates {
 
 input DefinitionMinAggregateFilter {
   level: IntFilter
-  soulPower: IntFilter
+  soulScore: IntFilter
   threshold: FloatFilter
 }
 
@@ -482,8 +482,8 @@ type DefinitionMinAggregates {
   """Minimum of level across the matching connection"""
   level: Int
 
-  """Minimum of soulPower across the matching connection"""
-  soulPower: Int
+  """Minimum of soulScore across the matching connection"""
+  soulScore: Int
 
   """Minimum of threshold across the matching connection"""
   threshold: Float
@@ -491,7 +491,7 @@ type DefinitionMinAggregates {
 
 input DefinitionStddevPopulationAggregateFilter {
   level: BigFloatFilter
-  soulPower: BigFloatFilter
+  soulScore: BigFloatFilter
   threshold: FloatFilter
 }
 
@@ -500,9 +500,9 @@ type DefinitionStddevPopulationAggregates {
   level: BigFloat
 
   """
-  Population standard deviation of soulPower across the matching connection
+  Population standard deviation of soulScore across the matching connection
   """
-  soulPower: BigFloat
+  soulScore: BigFloat
 
   """
   Population standard deviation of threshold across the matching connection
@@ -512,7 +512,7 @@ type DefinitionStddevPopulationAggregates {
 
 input DefinitionStddevSampleAggregateFilter {
   level: BigFloatFilter
-  soulPower: BigFloatFilter
+  soulScore: BigFloatFilter
   threshold: FloatFilter
 }
 
@@ -520,8 +520,8 @@ type DefinitionStddevSampleAggregates {
   """Sample standard deviation of level across the matching connection"""
   level: BigFloat
 
-  """Sample standard deviation of soulPower across the matching connection"""
-  soulPower: BigFloat
+  """Sample standard deviation of soulScore across the matching connection"""
+  soulScore: BigFloat
 
   """Sample standard deviation of threshold across the matching connection"""
   threshold: Float
@@ -529,7 +529,7 @@ type DefinitionStddevSampleAggregates {
 
 input DefinitionSumAggregateFilter {
   level: BigIntFilter
-  soulPower: BigIntFilter
+  soulScore: BigIntFilter
   threshold: FloatFilter
 }
 
@@ -537,8 +537,8 @@ type DefinitionSumAggregates {
   """Sum of level across the matching connection"""
   level: BigInt!
 
-  """Sum of soulPower across the matching connection"""
-  soulPower: BigInt!
+  """Sum of soulScore across the matching connection"""
+  soulScore: BigInt!
 
   """Sum of threshold across the matching connection"""
   threshold: Float!
@@ -569,7 +569,7 @@ input DefinitionToManyEarnedBadgeFilter {
 
 input DefinitionVariancePopulationAggregateFilter {
   level: BigFloatFilter
-  soulPower: BigFloatFilter
+  soulScore: BigFloatFilter
   threshold: FloatFilter
 }
 
@@ -577,8 +577,8 @@ type DefinitionVariancePopulationAggregates {
   """Population variance of level across the matching connection"""
   level: BigFloat
 
-  """Population variance of soulPower across the matching connection"""
-  soulPower: BigFloat
+  """Population variance of soulScore across the matching connection"""
+  soulScore: BigFloat
 
   """Population variance of threshold across the matching connection"""
   threshold: Float
@@ -586,7 +586,7 @@ type DefinitionVariancePopulationAggregates {
 
 input DefinitionVarianceSampleAggregateFilter {
   level: BigFloatFilter
-  soulPower: BigFloatFilter
+  soulScore: BigFloatFilter
   threshold: FloatFilter
 }
 
@@ -594,8 +594,8 @@ type DefinitionVarianceSampleAggregates {
   """Sample variance of level across the matching connection"""
   level: BigFloat
 
-  """Sample variance of soulPower across the matching connection"""
-  soulPower: BigFloat
+  """Sample variance of soulScore across the matching connection"""
+  soulScore: BigFloat
 
   """Sample variance of threshold across the matching connection"""
   threshold: Float
@@ -650,20 +650,20 @@ enum DefinitionsGroupBy {
   LEVEL
   METRIC
   PROTOCOL_ID
-  SOUL_POWER
+  SOUL_SCORE
   THRESHOLD
   TRACK_ID
 }
 
 input DefinitionsHavingAverageInput {
   level: HavingIntFilter
-  soulPower: HavingIntFilter
+  soulScore: HavingIntFilter
   threshold: HavingFloatFilter
 }
 
 input DefinitionsHavingDistinctCountInput {
   level: HavingIntFilter
-  soulPower: HavingIntFilter
+  soulScore: HavingIntFilter
   threshold: HavingFloatFilter
 }
 
@@ -684,43 +684,43 @@ input DefinitionsHavingInput {
 
 input DefinitionsHavingMaxInput {
   level: HavingIntFilter
-  soulPower: HavingIntFilter
+  soulScore: HavingIntFilter
   threshold: HavingFloatFilter
 }
 
 input DefinitionsHavingMinInput {
   level: HavingIntFilter
-  soulPower: HavingIntFilter
+  soulScore: HavingIntFilter
   threshold: HavingFloatFilter
 }
 
 input DefinitionsHavingStddevPopulationInput {
   level: HavingIntFilter
-  soulPower: HavingIntFilter
+  soulScore: HavingIntFilter
   threshold: HavingFloatFilter
 }
 
 input DefinitionsHavingStddevSampleInput {
   level: HavingIntFilter
-  soulPower: HavingIntFilter
+  soulScore: HavingIntFilter
   threshold: HavingFloatFilter
 }
 
 input DefinitionsHavingSumInput {
   level: HavingIntFilter
-  soulPower: HavingIntFilter
+  soulScore: HavingIntFilter
   threshold: HavingFloatFilter
 }
 
 input DefinitionsHavingVariancePopulationInput {
   level: HavingIntFilter
-  soulPower: HavingIntFilter
+  soulScore: HavingIntFilter
   threshold: HavingFloatFilter
 }
 
 input DefinitionsHavingVarianceSampleInput {
   level: HavingIntFilter
-  soulPower: HavingIntFilter
+  soulScore: HavingIntFilter
   threshold: HavingFloatFilter
 }
 
@@ -923,8 +923,8 @@ enum DefinitionsOrderBy {
   PRIMARY_KEY_DESC
   PROTOCOL_ID_ASC
   PROTOCOL_ID_DESC
-  SOUL_POWER_ASC
-  SOUL_POWER_DESC
+  SOUL_SCORE_ASC
+  SOUL_SCORE_DESC
   THRESHOLD_ASC
   THRESHOLD_DESC
   TRACK_ID_ASC
@@ -2843,8 +2843,8 @@ enum ProtocolsOrderBy {
   DEFINITIONS_BY_PROTOCOL_ID_AVERAGE_METRIC_DESC
   DEFINITIONS_BY_PROTOCOL_ID_AVERAGE_PROTOCOL_ID_ASC
   DEFINITIONS_BY_PROTOCOL_ID_AVERAGE_PROTOCOL_ID_DESC
-  DEFINITIONS_BY_PROTOCOL_ID_AVERAGE_SOUL_POWER_ASC
-  DEFINITIONS_BY_PROTOCOL_ID_AVERAGE_SOUL_POWER_DESC
+  DEFINITIONS_BY_PROTOCOL_ID_AVERAGE_SOUL_SCORE_ASC
+  DEFINITIONS_BY_PROTOCOL_ID_AVERAGE_SOUL_SCORE_DESC
   DEFINITIONS_BY_PROTOCOL_ID_AVERAGE_THRESHOLD_ASC
   DEFINITIONS_BY_PROTOCOL_ID_AVERAGE_THRESHOLD_DESC
   DEFINITIONS_BY_PROTOCOL_ID_AVERAGE_TRACK_ID_ASC
@@ -2863,8 +2863,8 @@ enum ProtocolsOrderBy {
   DEFINITIONS_BY_PROTOCOL_ID_DISTINCT_COUNT_METRIC_DESC
   DEFINITIONS_BY_PROTOCOL_ID_DISTINCT_COUNT_PROTOCOL_ID_ASC
   DEFINITIONS_BY_PROTOCOL_ID_DISTINCT_COUNT_PROTOCOL_ID_DESC
-  DEFINITIONS_BY_PROTOCOL_ID_DISTINCT_COUNT_SOUL_POWER_ASC
-  DEFINITIONS_BY_PROTOCOL_ID_DISTINCT_COUNT_SOUL_POWER_DESC
+  DEFINITIONS_BY_PROTOCOL_ID_DISTINCT_COUNT_SOUL_SCORE_ASC
+  DEFINITIONS_BY_PROTOCOL_ID_DISTINCT_COUNT_SOUL_SCORE_DESC
   DEFINITIONS_BY_PROTOCOL_ID_DISTINCT_COUNT_THRESHOLD_ASC
   DEFINITIONS_BY_PROTOCOL_ID_DISTINCT_COUNT_THRESHOLD_DESC
   DEFINITIONS_BY_PROTOCOL_ID_DISTINCT_COUNT_TRACK_ID_ASC
@@ -2881,8 +2881,8 @@ enum ProtocolsOrderBy {
   DEFINITIONS_BY_PROTOCOL_ID_MAX_METRIC_DESC
   DEFINITIONS_BY_PROTOCOL_ID_MAX_PROTOCOL_ID_ASC
   DEFINITIONS_BY_PROTOCOL_ID_MAX_PROTOCOL_ID_DESC
-  DEFINITIONS_BY_PROTOCOL_ID_MAX_SOUL_POWER_ASC
-  DEFINITIONS_BY_PROTOCOL_ID_MAX_SOUL_POWER_DESC
+  DEFINITIONS_BY_PROTOCOL_ID_MAX_SOUL_SCORE_ASC
+  DEFINITIONS_BY_PROTOCOL_ID_MAX_SOUL_SCORE_DESC
   DEFINITIONS_BY_PROTOCOL_ID_MAX_THRESHOLD_ASC
   DEFINITIONS_BY_PROTOCOL_ID_MAX_THRESHOLD_DESC
   DEFINITIONS_BY_PROTOCOL_ID_MAX_TRACK_ID_ASC
@@ -2899,8 +2899,8 @@ enum ProtocolsOrderBy {
   DEFINITIONS_BY_PROTOCOL_ID_MIN_METRIC_DESC
   DEFINITIONS_BY_PROTOCOL_ID_MIN_PROTOCOL_ID_ASC
   DEFINITIONS_BY_PROTOCOL_ID_MIN_PROTOCOL_ID_DESC
-  DEFINITIONS_BY_PROTOCOL_ID_MIN_SOUL_POWER_ASC
-  DEFINITIONS_BY_PROTOCOL_ID_MIN_SOUL_POWER_DESC
+  DEFINITIONS_BY_PROTOCOL_ID_MIN_SOUL_SCORE_ASC
+  DEFINITIONS_BY_PROTOCOL_ID_MIN_SOUL_SCORE_DESC
   DEFINITIONS_BY_PROTOCOL_ID_MIN_THRESHOLD_ASC
   DEFINITIONS_BY_PROTOCOL_ID_MIN_THRESHOLD_DESC
   DEFINITIONS_BY_PROTOCOL_ID_MIN_TRACK_ID_ASC
@@ -2917,8 +2917,8 @@ enum ProtocolsOrderBy {
   DEFINITIONS_BY_PROTOCOL_ID_STDDEV_POPULATION_METRIC_DESC
   DEFINITIONS_BY_PROTOCOL_ID_STDDEV_POPULATION_PROTOCOL_ID_ASC
   DEFINITIONS_BY_PROTOCOL_ID_STDDEV_POPULATION_PROTOCOL_ID_DESC
-  DEFINITIONS_BY_PROTOCOL_ID_STDDEV_POPULATION_SOUL_POWER_ASC
-  DEFINITIONS_BY_PROTOCOL_ID_STDDEV_POPULATION_SOUL_POWER_DESC
+  DEFINITIONS_BY_PROTOCOL_ID_STDDEV_POPULATION_SOUL_SCORE_ASC
+  DEFINITIONS_BY_PROTOCOL_ID_STDDEV_POPULATION_SOUL_SCORE_DESC
   DEFINITIONS_BY_PROTOCOL_ID_STDDEV_POPULATION_THRESHOLD_ASC
   DEFINITIONS_BY_PROTOCOL_ID_STDDEV_POPULATION_THRESHOLD_DESC
   DEFINITIONS_BY_PROTOCOL_ID_STDDEV_POPULATION_TRACK_ID_ASC
@@ -2935,8 +2935,8 @@ enum ProtocolsOrderBy {
   DEFINITIONS_BY_PROTOCOL_ID_STDDEV_SAMPLE_METRIC_DESC
   DEFINITIONS_BY_PROTOCOL_ID_STDDEV_SAMPLE_PROTOCOL_ID_ASC
   DEFINITIONS_BY_PROTOCOL_ID_STDDEV_SAMPLE_PROTOCOL_ID_DESC
-  DEFINITIONS_BY_PROTOCOL_ID_STDDEV_SAMPLE_SOUL_POWER_ASC
-  DEFINITIONS_BY_PROTOCOL_ID_STDDEV_SAMPLE_SOUL_POWER_DESC
+  DEFINITIONS_BY_PROTOCOL_ID_STDDEV_SAMPLE_SOUL_SCORE_ASC
+  DEFINITIONS_BY_PROTOCOL_ID_STDDEV_SAMPLE_SOUL_SCORE_DESC
   DEFINITIONS_BY_PROTOCOL_ID_STDDEV_SAMPLE_THRESHOLD_ASC
   DEFINITIONS_BY_PROTOCOL_ID_STDDEV_SAMPLE_THRESHOLD_DESC
   DEFINITIONS_BY_PROTOCOL_ID_STDDEV_SAMPLE_TRACK_ID_ASC
@@ -2953,8 +2953,8 @@ enum ProtocolsOrderBy {
   DEFINITIONS_BY_PROTOCOL_ID_SUM_METRIC_DESC
   DEFINITIONS_BY_PROTOCOL_ID_SUM_PROTOCOL_ID_ASC
   DEFINITIONS_BY_PROTOCOL_ID_SUM_PROTOCOL_ID_DESC
-  DEFINITIONS_BY_PROTOCOL_ID_SUM_SOUL_POWER_ASC
-  DEFINITIONS_BY_PROTOCOL_ID_SUM_SOUL_POWER_DESC
+  DEFINITIONS_BY_PROTOCOL_ID_SUM_SOUL_SCORE_ASC
+  DEFINITIONS_BY_PROTOCOL_ID_SUM_SOUL_SCORE_DESC
   DEFINITIONS_BY_PROTOCOL_ID_SUM_THRESHOLD_ASC
   DEFINITIONS_BY_PROTOCOL_ID_SUM_THRESHOLD_DESC
   DEFINITIONS_BY_PROTOCOL_ID_SUM_TRACK_ID_ASC
@@ -2971,8 +2971,8 @@ enum ProtocolsOrderBy {
   DEFINITIONS_BY_PROTOCOL_ID_VARIANCE_POPULATION_METRIC_DESC
   DEFINITIONS_BY_PROTOCOL_ID_VARIANCE_POPULATION_PROTOCOL_ID_ASC
   DEFINITIONS_BY_PROTOCOL_ID_VARIANCE_POPULATION_PROTOCOL_ID_DESC
-  DEFINITIONS_BY_PROTOCOL_ID_VARIANCE_POPULATION_SOUL_POWER_ASC
-  DEFINITIONS_BY_PROTOCOL_ID_VARIANCE_POPULATION_SOUL_POWER_DESC
+  DEFINITIONS_BY_PROTOCOL_ID_VARIANCE_POPULATION_SOUL_SCORE_ASC
+  DEFINITIONS_BY_PROTOCOL_ID_VARIANCE_POPULATION_SOUL_SCORE_DESC
   DEFINITIONS_BY_PROTOCOL_ID_VARIANCE_POPULATION_THRESHOLD_ASC
   DEFINITIONS_BY_PROTOCOL_ID_VARIANCE_POPULATION_THRESHOLD_DESC
   DEFINITIONS_BY_PROTOCOL_ID_VARIANCE_POPULATION_TRACK_ID_ASC
@@ -2989,8 +2989,8 @@ enum ProtocolsOrderBy {
   DEFINITIONS_BY_PROTOCOL_ID_VARIANCE_SAMPLE_METRIC_DESC
   DEFINITIONS_BY_PROTOCOL_ID_VARIANCE_SAMPLE_PROTOCOL_ID_ASC
   DEFINITIONS_BY_PROTOCOL_ID_VARIANCE_SAMPLE_PROTOCOL_ID_DESC
-  DEFINITIONS_BY_PROTOCOL_ID_VARIANCE_SAMPLE_SOUL_POWER_ASC
-  DEFINITIONS_BY_PROTOCOL_ID_VARIANCE_SAMPLE_SOUL_POWER_DESC
+  DEFINITIONS_BY_PROTOCOL_ID_VARIANCE_SAMPLE_SOUL_SCORE_ASC
+  DEFINITIONS_BY_PROTOCOL_ID_VARIANCE_SAMPLE_SOUL_SCORE_DESC
   DEFINITIONS_BY_PROTOCOL_ID_VARIANCE_SAMPLE_THRESHOLD_ASC
   DEFINITIONS_BY_PROTOCOL_ID_VARIANCE_SAMPLE_THRESHOLD_DESC
   DEFINITIONS_BY_PROTOCOL_ID_VARIANCE_SAMPLE_TRACK_ID_ASC
@@ -3186,6 +3186,8 @@ enum ProtocolsOrderBy {
   RANKINGS_BY_PROTOCOL_ID_AVERAGE_PROTOCOL_ID_DESC
   RANKINGS_BY_PROTOCOL_ID_AVERAGE_RANK_ASC
   RANKINGS_BY_PROTOCOL_ID_AVERAGE_RANK_DESC
+  RANKINGS_BY_PROTOCOL_ID_AVERAGE_SOUL_SCORE_ASC
+  RANKINGS_BY_PROTOCOL_ID_AVERAGE_SOUL_SCORE_DESC
   RANKINGS_BY_PROTOCOL_ID_AVERAGE_WINNER_ID_ASC
   RANKINGS_BY_PROTOCOL_ID_AVERAGE_WINNER_ID_DESC
   RANKINGS_BY_PROTOCOL_ID_COUNT_ASC
@@ -3194,48 +3196,64 @@ enum ProtocolsOrderBy {
   RANKINGS_BY_PROTOCOL_ID_DISTINCT_COUNT_PROTOCOL_ID_DESC
   RANKINGS_BY_PROTOCOL_ID_DISTINCT_COUNT_RANK_ASC
   RANKINGS_BY_PROTOCOL_ID_DISTINCT_COUNT_RANK_DESC
+  RANKINGS_BY_PROTOCOL_ID_DISTINCT_COUNT_SOUL_SCORE_ASC
+  RANKINGS_BY_PROTOCOL_ID_DISTINCT_COUNT_SOUL_SCORE_DESC
   RANKINGS_BY_PROTOCOL_ID_DISTINCT_COUNT_WINNER_ID_ASC
   RANKINGS_BY_PROTOCOL_ID_DISTINCT_COUNT_WINNER_ID_DESC
   RANKINGS_BY_PROTOCOL_ID_MAX_PROTOCOL_ID_ASC
   RANKINGS_BY_PROTOCOL_ID_MAX_PROTOCOL_ID_DESC
   RANKINGS_BY_PROTOCOL_ID_MAX_RANK_ASC
   RANKINGS_BY_PROTOCOL_ID_MAX_RANK_DESC
+  RANKINGS_BY_PROTOCOL_ID_MAX_SOUL_SCORE_ASC
+  RANKINGS_BY_PROTOCOL_ID_MAX_SOUL_SCORE_DESC
   RANKINGS_BY_PROTOCOL_ID_MAX_WINNER_ID_ASC
   RANKINGS_BY_PROTOCOL_ID_MAX_WINNER_ID_DESC
   RANKINGS_BY_PROTOCOL_ID_MIN_PROTOCOL_ID_ASC
   RANKINGS_BY_PROTOCOL_ID_MIN_PROTOCOL_ID_DESC
   RANKINGS_BY_PROTOCOL_ID_MIN_RANK_ASC
   RANKINGS_BY_PROTOCOL_ID_MIN_RANK_DESC
+  RANKINGS_BY_PROTOCOL_ID_MIN_SOUL_SCORE_ASC
+  RANKINGS_BY_PROTOCOL_ID_MIN_SOUL_SCORE_DESC
   RANKINGS_BY_PROTOCOL_ID_MIN_WINNER_ID_ASC
   RANKINGS_BY_PROTOCOL_ID_MIN_WINNER_ID_DESC
   RANKINGS_BY_PROTOCOL_ID_STDDEV_POPULATION_PROTOCOL_ID_ASC
   RANKINGS_BY_PROTOCOL_ID_STDDEV_POPULATION_PROTOCOL_ID_DESC
   RANKINGS_BY_PROTOCOL_ID_STDDEV_POPULATION_RANK_ASC
   RANKINGS_BY_PROTOCOL_ID_STDDEV_POPULATION_RANK_DESC
+  RANKINGS_BY_PROTOCOL_ID_STDDEV_POPULATION_SOUL_SCORE_ASC
+  RANKINGS_BY_PROTOCOL_ID_STDDEV_POPULATION_SOUL_SCORE_DESC
   RANKINGS_BY_PROTOCOL_ID_STDDEV_POPULATION_WINNER_ID_ASC
   RANKINGS_BY_PROTOCOL_ID_STDDEV_POPULATION_WINNER_ID_DESC
   RANKINGS_BY_PROTOCOL_ID_STDDEV_SAMPLE_PROTOCOL_ID_ASC
   RANKINGS_BY_PROTOCOL_ID_STDDEV_SAMPLE_PROTOCOL_ID_DESC
   RANKINGS_BY_PROTOCOL_ID_STDDEV_SAMPLE_RANK_ASC
   RANKINGS_BY_PROTOCOL_ID_STDDEV_SAMPLE_RANK_DESC
+  RANKINGS_BY_PROTOCOL_ID_STDDEV_SAMPLE_SOUL_SCORE_ASC
+  RANKINGS_BY_PROTOCOL_ID_STDDEV_SAMPLE_SOUL_SCORE_DESC
   RANKINGS_BY_PROTOCOL_ID_STDDEV_SAMPLE_WINNER_ID_ASC
   RANKINGS_BY_PROTOCOL_ID_STDDEV_SAMPLE_WINNER_ID_DESC
   RANKINGS_BY_PROTOCOL_ID_SUM_PROTOCOL_ID_ASC
   RANKINGS_BY_PROTOCOL_ID_SUM_PROTOCOL_ID_DESC
   RANKINGS_BY_PROTOCOL_ID_SUM_RANK_ASC
   RANKINGS_BY_PROTOCOL_ID_SUM_RANK_DESC
+  RANKINGS_BY_PROTOCOL_ID_SUM_SOUL_SCORE_ASC
+  RANKINGS_BY_PROTOCOL_ID_SUM_SOUL_SCORE_DESC
   RANKINGS_BY_PROTOCOL_ID_SUM_WINNER_ID_ASC
   RANKINGS_BY_PROTOCOL_ID_SUM_WINNER_ID_DESC
   RANKINGS_BY_PROTOCOL_ID_VARIANCE_POPULATION_PROTOCOL_ID_ASC
   RANKINGS_BY_PROTOCOL_ID_VARIANCE_POPULATION_PROTOCOL_ID_DESC
   RANKINGS_BY_PROTOCOL_ID_VARIANCE_POPULATION_RANK_ASC
   RANKINGS_BY_PROTOCOL_ID_VARIANCE_POPULATION_RANK_DESC
+  RANKINGS_BY_PROTOCOL_ID_VARIANCE_POPULATION_SOUL_SCORE_ASC
+  RANKINGS_BY_PROTOCOL_ID_VARIANCE_POPULATION_SOUL_SCORE_DESC
   RANKINGS_BY_PROTOCOL_ID_VARIANCE_POPULATION_WINNER_ID_ASC
   RANKINGS_BY_PROTOCOL_ID_VARIANCE_POPULATION_WINNER_ID_DESC
   RANKINGS_BY_PROTOCOL_ID_VARIANCE_SAMPLE_PROTOCOL_ID_ASC
   RANKINGS_BY_PROTOCOL_ID_VARIANCE_SAMPLE_PROTOCOL_ID_DESC
   RANKINGS_BY_PROTOCOL_ID_VARIANCE_SAMPLE_RANK_ASC
   RANKINGS_BY_PROTOCOL_ID_VARIANCE_SAMPLE_RANK_DESC
+  RANKINGS_BY_PROTOCOL_ID_VARIANCE_SAMPLE_SOUL_SCORE_ASC
+  RANKINGS_BY_PROTOCOL_ID_VARIANCE_SAMPLE_SOUL_SCORE_DESC
   RANKINGS_BY_PROTOCOL_ID_VARIANCE_SAMPLE_WINNER_ID_ASC
   RANKINGS_BY_PROTOCOL_ID_VARIANCE_SAMPLE_WINNER_ID_DESC
   ROLES_BY_PROTOCOL_ID_AVERAGE_ID_ASC
@@ -3941,6 +3959,7 @@ type Ranking implements Node {
   protocolByProtocolId: Protocol
   protocolId: String!
   rank: Int!
+  soulScore: Int
 
   """Reads a single `Winner` that is related to this `Ranking`."""
   winnerByWinnerId: Winner
@@ -4034,11 +4053,15 @@ input RankingAggregatesFilter {
 
 input RankingAverageAggregateFilter {
   rank: BigFloatFilter
+  soulScore: BigFloatFilter
 }
 
 type RankingAverageAggregates {
   """Mean average of rank across the matching connection"""
   rank: BigFloat
+
+  """Mean average of soulScore across the matching connection"""
+  soulScore: BigFloat
 }
 
 """
@@ -4051,6 +4074,9 @@ input RankingCondition {
   """Checks for equality with the object’s `rank` field."""
   rank: Int
 
+  """Checks for equality with the object’s `soulScore` field."""
+  soulScore: Int
+
   """Checks for equality with the object’s `winnerId` field."""
   winnerId: String
 }
@@ -4058,6 +4084,7 @@ input RankingCondition {
 input RankingDistinctCountAggregateFilter {
   protocolId: BigIntFilter
   rank: BigIntFilter
+  soulScore: BigIntFilter
   winnerId: BigIntFilter
 }
 
@@ -4067,6 +4094,9 @@ type RankingDistinctCountAggregates {
 
   """Distinct count of rank across the matching connection"""
   rank: BigInt
+
+  """Distinct count of soulScore across the matching connection"""
+  soulScore: BigInt
 
   """Distinct count of winnerId across the matching connection"""
   winnerId: BigInt
@@ -4094,6 +4124,9 @@ input RankingFilter {
   """Filter by the object’s `rank` field."""
   rank: IntFilter
 
+  """Filter by the object’s `soulScore` field."""
+  soulScore: IntFilter
+
   """Filter by the object’s `winnerByWinnerId` relation."""
   winnerByWinnerId: WinnerFilter
 
@@ -4103,65 +4136,95 @@ input RankingFilter {
 
 input RankingMaxAggregateFilter {
   rank: IntFilter
+  soulScore: IntFilter
 }
 
 type RankingMaxAggregates {
   """Maximum of rank across the matching connection"""
   rank: Int
+
+  """Maximum of soulScore across the matching connection"""
+  soulScore: Int
 }
 
 input RankingMinAggregateFilter {
   rank: IntFilter
+  soulScore: IntFilter
 }
 
 type RankingMinAggregates {
   """Minimum of rank across the matching connection"""
   rank: Int
+
+  """Minimum of soulScore across the matching connection"""
+  soulScore: Int
 }
 
 input RankingStddevPopulationAggregateFilter {
   rank: BigFloatFilter
+  soulScore: BigFloatFilter
 }
 
 type RankingStddevPopulationAggregates {
   """Population standard deviation of rank across the matching connection"""
   rank: BigFloat
+
+  """
+  Population standard deviation of soulScore across the matching connection
+  """
+  soulScore: BigFloat
 }
 
 input RankingStddevSampleAggregateFilter {
   rank: BigFloatFilter
+  soulScore: BigFloatFilter
 }
 
 type RankingStddevSampleAggregates {
   """Sample standard deviation of rank across the matching connection"""
   rank: BigFloat
+
+  """Sample standard deviation of soulScore across the matching connection"""
+  soulScore: BigFloat
 }
 
 input RankingSumAggregateFilter {
   rank: BigIntFilter
+  soulScore: BigIntFilter
 }
 
 type RankingSumAggregates {
   """Sum of rank across the matching connection"""
   rank: BigInt!
+
+  """Sum of soulScore across the matching connection"""
+  soulScore: BigInt!
 }
 
 input RankingVariancePopulationAggregateFilter {
   rank: BigFloatFilter
+  soulScore: BigFloatFilter
 }
 
 type RankingVariancePopulationAggregates {
   """Population variance of rank across the matching connection"""
   rank: BigFloat
+
+  """Population variance of soulScore across the matching connection"""
+  soulScore: BigFloat
 }
 
 input RankingVarianceSampleAggregateFilter {
   rank: BigFloatFilter
+  soulScore: BigFloatFilter
 }
 
 type RankingVarianceSampleAggregates {
   """Sample variance of rank across the matching connection"""
   rank: BigFloat
+
+  """Sample variance of soulScore across the matching connection"""
+  soulScore: BigFloat
 }
 
 """A connection to a list of `Ranking` values."""
@@ -4210,15 +4273,18 @@ type RankingsEdge {
 enum RankingsGroupBy {
   PROTOCOL_ID
   RANK
+  SOUL_SCORE
   WINNER_ID
 }
 
 input RankingsHavingAverageInput {
   rank: HavingIntFilter
+  soulScore: HavingIntFilter
 }
 
 input RankingsHavingDistinctCountInput {
   rank: HavingIntFilter
+  soulScore: HavingIntFilter
 }
 
 """Conditions for `Ranking` aggregates."""
@@ -4238,30 +4304,37 @@ input RankingsHavingInput {
 
 input RankingsHavingMaxInput {
   rank: HavingIntFilter
+  soulScore: HavingIntFilter
 }
 
 input RankingsHavingMinInput {
   rank: HavingIntFilter
+  soulScore: HavingIntFilter
 }
 
 input RankingsHavingStddevPopulationInput {
   rank: HavingIntFilter
+  soulScore: HavingIntFilter
 }
 
 input RankingsHavingStddevSampleInput {
   rank: HavingIntFilter
+  soulScore: HavingIntFilter
 }
 
 input RankingsHavingSumInput {
   rank: HavingIntFilter
+  soulScore: HavingIntFilter
 }
 
 input RankingsHavingVariancePopulationInput {
   rank: HavingIntFilter
+  soulScore: HavingIntFilter
 }
 
 input RankingsHavingVarianceSampleInput {
   rank: HavingIntFilter
+  soulScore: HavingIntFilter
 }
 
 """Methods to use when ordering `Ranking`."""
@@ -4273,6 +4346,8 @@ enum RankingsOrderBy {
   PROTOCOL_ID_DESC
   RANK_ASC
   RANK_DESC
+  SOUL_SCORE_ASC
+  SOUL_SCORE_DESC
   WINNER_ID_ASC
   WINNER_ID_DESC
 }
@@ -4944,8 +5019,8 @@ enum TracksOrderBy {
   DEFINITIONS_BY_TRACK_ID_AVERAGE_METRIC_DESC
   DEFINITIONS_BY_TRACK_ID_AVERAGE_PROTOCOL_ID_ASC
   DEFINITIONS_BY_TRACK_ID_AVERAGE_PROTOCOL_ID_DESC
-  DEFINITIONS_BY_TRACK_ID_AVERAGE_SOUL_POWER_ASC
-  DEFINITIONS_BY_TRACK_ID_AVERAGE_SOUL_POWER_DESC
+  DEFINITIONS_BY_TRACK_ID_AVERAGE_SOUL_SCORE_ASC
+  DEFINITIONS_BY_TRACK_ID_AVERAGE_SOUL_SCORE_DESC
   DEFINITIONS_BY_TRACK_ID_AVERAGE_THRESHOLD_ASC
   DEFINITIONS_BY_TRACK_ID_AVERAGE_THRESHOLD_DESC
   DEFINITIONS_BY_TRACK_ID_AVERAGE_TRACK_ID_ASC
@@ -4964,8 +5039,8 @@ enum TracksOrderBy {
   DEFINITIONS_BY_TRACK_ID_DISTINCT_COUNT_METRIC_DESC
   DEFINITIONS_BY_TRACK_ID_DISTINCT_COUNT_PROTOCOL_ID_ASC
   DEFINITIONS_BY_TRACK_ID_DISTINCT_COUNT_PROTOCOL_ID_DESC
-  DEFINITIONS_BY_TRACK_ID_DISTINCT_COUNT_SOUL_POWER_ASC
-  DEFINITIONS_BY_TRACK_ID_DISTINCT_COUNT_SOUL_POWER_DESC
+  DEFINITIONS_BY_TRACK_ID_DISTINCT_COUNT_SOUL_SCORE_ASC
+  DEFINITIONS_BY_TRACK_ID_DISTINCT_COUNT_SOUL_SCORE_DESC
   DEFINITIONS_BY_TRACK_ID_DISTINCT_COUNT_THRESHOLD_ASC
   DEFINITIONS_BY_TRACK_ID_DISTINCT_COUNT_THRESHOLD_DESC
   DEFINITIONS_BY_TRACK_ID_DISTINCT_COUNT_TRACK_ID_ASC
@@ -4982,8 +5057,8 @@ enum TracksOrderBy {
   DEFINITIONS_BY_TRACK_ID_MAX_METRIC_DESC
   DEFINITIONS_BY_TRACK_ID_MAX_PROTOCOL_ID_ASC
   DEFINITIONS_BY_TRACK_ID_MAX_PROTOCOL_ID_DESC
-  DEFINITIONS_BY_TRACK_ID_MAX_SOUL_POWER_ASC
-  DEFINITIONS_BY_TRACK_ID_MAX_SOUL_POWER_DESC
+  DEFINITIONS_BY_TRACK_ID_MAX_SOUL_SCORE_ASC
+  DEFINITIONS_BY_TRACK_ID_MAX_SOUL_SCORE_DESC
   DEFINITIONS_BY_TRACK_ID_MAX_THRESHOLD_ASC
   DEFINITIONS_BY_TRACK_ID_MAX_THRESHOLD_DESC
   DEFINITIONS_BY_TRACK_ID_MAX_TRACK_ID_ASC
@@ -5000,8 +5075,8 @@ enum TracksOrderBy {
   DEFINITIONS_BY_TRACK_ID_MIN_METRIC_DESC
   DEFINITIONS_BY_TRACK_ID_MIN_PROTOCOL_ID_ASC
   DEFINITIONS_BY_TRACK_ID_MIN_PROTOCOL_ID_DESC
-  DEFINITIONS_BY_TRACK_ID_MIN_SOUL_POWER_ASC
-  DEFINITIONS_BY_TRACK_ID_MIN_SOUL_POWER_DESC
+  DEFINITIONS_BY_TRACK_ID_MIN_SOUL_SCORE_ASC
+  DEFINITIONS_BY_TRACK_ID_MIN_SOUL_SCORE_DESC
   DEFINITIONS_BY_TRACK_ID_MIN_THRESHOLD_ASC
   DEFINITIONS_BY_TRACK_ID_MIN_THRESHOLD_DESC
   DEFINITIONS_BY_TRACK_ID_MIN_TRACK_ID_ASC
@@ -5018,8 +5093,8 @@ enum TracksOrderBy {
   DEFINITIONS_BY_TRACK_ID_STDDEV_POPULATION_METRIC_DESC
   DEFINITIONS_BY_TRACK_ID_STDDEV_POPULATION_PROTOCOL_ID_ASC
   DEFINITIONS_BY_TRACK_ID_STDDEV_POPULATION_PROTOCOL_ID_DESC
-  DEFINITIONS_BY_TRACK_ID_STDDEV_POPULATION_SOUL_POWER_ASC
-  DEFINITIONS_BY_TRACK_ID_STDDEV_POPULATION_SOUL_POWER_DESC
+  DEFINITIONS_BY_TRACK_ID_STDDEV_POPULATION_SOUL_SCORE_ASC
+  DEFINITIONS_BY_TRACK_ID_STDDEV_POPULATION_SOUL_SCORE_DESC
   DEFINITIONS_BY_TRACK_ID_STDDEV_POPULATION_THRESHOLD_ASC
   DEFINITIONS_BY_TRACK_ID_STDDEV_POPULATION_THRESHOLD_DESC
   DEFINITIONS_BY_TRACK_ID_STDDEV_POPULATION_TRACK_ID_ASC
@@ -5036,8 +5111,8 @@ enum TracksOrderBy {
   DEFINITIONS_BY_TRACK_ID_STDDEV_SAMPLE_METRIC_DESC
   DEFINITIONS_BY_TRACK_ID_STDDEV_SAMPLE_PROTOCOL_ID_ASC
   DEFINITIONS_BY_TRACK_ID_STDDEV_SAMPLE_PROTOCOL_ID_DESC
-  DEFINITIONS_BY_TRACK_ID_STDDEV_SAMPLE_SOUL_POWER_ASC
-  DEFINITIONS_BY_TRACK_ID_STDDEV_SAMPLE_SOUL_POWER_DESC
+  DEFINITIONS_BY_TRACK_ID_STDDEV_SAMPLE_SOUL_SCORE_ASC
+  DEFINITIONS_BY_TRACK_ID_STDDEV_SAMPLE_SOUL_SCORE_DESC
   DEFINITIONS_BY_TRACK_ID_STDDEV_SAMPLE_THRESHOLD_ASC
   DEFINITIONS_BY_TRACK_ID_STDDEV_SAMPLE_THRESHOLD_DESC
   DEFINITIONS_BY_TRACK_ID_STDDEV_SAMPLE_TRACK_ID_ASC
@@ -5054,8 +5129,8 @@ enum TracksOrderBy {
   DEFINITIONS_BY_TRACK_ID_SUM_METRIC_DESC
   DEFINITIONS_BY_TRACK_ID_SUM_PROTOCOL_ID_ASC
   DEFINITIONS_BY_TRACK_ID_SUM_PROTOCOL_ID_DESC
-  DEFINITIONS_BY_TRACK_ID_SUM_SOUL_POWER_ASC
-  DEFINITIONS_BY_TRACK_ID_SUM_SOUL_POWER_DESC
+  DEFINITIONS_BY_TRACK_ID_SUM_SOUL_SCORE_ASC
+  DEFINITIONS_BY_TRACK_ID_SUM_SOUL_SCORE_DESC
   DEFINITIONS_BY_TRACK_ID_SUM_THRESHOLD_ASC
   DEFINITIONS_BY_TRACK_ID_SUM_THRESHOLD_DESC
   DEFINITIONS_BY_TRACK_ID_SUM_TRACK_ID_ASC
@@ -5072,8 +5147,8 @@ enum TracksOrderBy {
   DEFINITIONS_BY_TRACK_ID_VARIANCE_POPULATION_METRIC_DESC
   DEFINITIONS_BY_TRACK_ID_VARIANCE_POPULATION_PROTOCOL_ID_ASC
   DEFINITIONS_BY_TRACK_ID_VARIANCE_POPULATION_PROTOCOL_ID_DESC
-  DEFINITIONS_BY_TRACK_ID_VARIANCE_POPULATION_SOUL_POWER_ASC
-  DEFINITIONS_BY_TRACK_ID_VARIANCE_POPULATION_SOUL_POWER_DESC
+  DEFINITIONS_BY_TRACK_ID_VARIANCE_POPULATION_SOUL_SCORE_ASC
+  DEFINITIONS_BY_TRACK_ID_VARIANCE_POPULATION_SOUL_SCORE_DESC
   DEFINITIONS_BY_TRACK_ID_VARIANCE_POPULATION_THRESHOLD_ASC
   DEFINITIONS_BY_TRACK_ID_VARIANCE_POPULATION_THRESHOLD_DESC
   DEFINITIONS_BY_TRACK_ID_VARIANCE_POPULATION_TRACK_ID_ASC
@@ -5090,8 +5165,8 @@ enum TracksOrderBy {
   DEFINITIONS_BY_TRACK_ID_VARIANCE_SAMPLE_METRIC_DESC
   DEFINITIONS_BY_TRACK_ID_VARIANCE_SAMPLE_PROTOCOL_ID_ASC
   DEFINITIONS_BY_TRACK_ID_VARIANCE_SAMPLE_PROTOCOL_ID_DESC
-  DEFINITIONS_BY_TRACK_ID_VARIANCE_SAMPLE_SOUL_POWER_ASC
-  DEFINITIONS_BY_TRACK_ID_VARIANCE_SAMPLE_SOUL_POWER_DESC
+  DEFINITIONS_BY_TRACK_ID_VARIANCE_SAMPLE_SOUL_SCORE_ASC
+  DEFINITIONS_BY_TRACK_ID_VARIANCE_SAMPLE_SOUL_SCORE_DESC
   DEFINITIONS_BY_TRACK_ID_VARIANCE_SAMPLE_THRESHOLD_ASC
   DEFINITIONS_BY_TRACK_ID_VARIANCE_SAMPLE_THRESHOLD_DESC
   DEFINITIONS_BY_TRACK_ID_VARIANCE_SAMPLE_TRACK_ID_ASC
@@ -5595,6 +5670,8 @@ enum WinnersOrderBy {
   RANKINGS_BY_WINNER_ID_AVERAGE_PROTOCOL_ID_DESC
   RANKINGS_BY_WINNER_ID_AVERAGE_RANK_ASC
   RANKINGS_BY_WINNER_ID_AVERAGE_RANK_DESC
+  RANKINGS_BY_WINNER_ID_AVERAGE_SOUL_SCORE_ASC
+  RANKINGS_BY_WINNER_ID_AVERAGE_SOUL_SCORE_DESC
   RANKINGS_BY_WINNER_ID_AVERAGE_WINNER_ID_ASC
   RANKINGS_BY_WINNER_ID_AVERAGE_WINNER_ID_DESC
   RANKINGS_BY_WINNER_ID_COUNT_ASC
@@ -5603,48 +5680,64 @@ enum WinnersOrderBy {
   RANKINGS_BY_WINNER_ID_DISTINCT_COUNT_PROTOCOL_ID_DESC
   RANKINGS_BY_WINNER_ID_DISTINCT_COUNT_RANK_ASC
   RANKINGS_BY_WINNER_ID_DISTINCT_COUNT_RANK_DESC
+  RANKINGS_BY_WINNER_ID_DISTINCT_COUNT_SOUL_SCORE_ASC
+  RANKINGS_BY_WINNER_ID_DISTINCT_COUNT_SOUL_SCORE_DESC
   RANKINGS_BY_WINNER_ID_DISTINCT_COUNT_WINNER_ID_ASC
   RANKINGS_BY_WINNER_ID_DISTINCT_COUNT_WINNER_ID_DESC
   RANKINGS_BY_WINNER_ID_MAX_PROTOCOL_ID_ASC
   RANKINGS_BY_WINNER_ID_MAX_PROTOCOL_ID_DESC
   RANKINGS_BY_WINNER_ID_MAX_RANK_ASC
   RANKINGS_BY_WINNER_ID_MAX_RANK_DESC
+  RANKINGS_BY_WINNER_ID_MAX_SOUL_SCORE_ASC
+  RANKINGS_BY_WINNER_ID_MAX_SOUL_SCORE_DESC
   RANKINGS_BY_WINNER_ID_MAX_WINNER_ID_ASC
   RANKINGS_BY_WINNER_ID_MAX_WINNER_ID_DESC
   RANKINGS_BY_WINNER_ID_MIN_PROTOCOL_ID_ASC
   RANKINGS_BY_WINNER_ID_MIN_PROTOCOL_ID_DESC
   RANKINGS_BY_WINNER_ID_MIN_RANK_ASC
   RANKINGS_BY_WINNER_ID_MIN_RANK_DESC
+  RANKINGS_BY_WINNER_ID_MIN_SOUL_SCORE_ASC
+  RANKINGS_BY_WINNER_ID_MIN_SOUL_SCORE_DESC
   RANKINGS_BY_WINNER_ID_MIN_WINNER_ID_ASC
   RANKINGS_BY_WINNER_ID_MIN_WINNER_ID_DESC
   RANKINGS_BY_WINNER_ID_STDDEV_POPULATION_PROTOCOL_ID_ASC
   RANKINGS_BY_WINNER_ID_STDDEV_POPULATION_PROTOCOL_ID_DESC
   RANKINGS_BY_WINNER_ID_STDDEV_POPULATION_RANK_ASC
   RANKINGS_BY_WINNER_ID_STDDEV_POPULATION_RANK_DESC
+  RANKINGS_BY_WINNER_ID_STDDEV_POPULATION_SOUL_SCORE_ASC
+  RANKINGS_BY_WINNER_ID_STDDEV_POPULATION_SOUL_SCORE_DESC
   RANKINGS_BY_WINNER_ID_STDDEV_POPULATION_WINNER_ID_ASC
   RANKINGS_BY_WINNER_ID_STDDEV_POPULATION_WINNER_ID_DESC
   RANKINGS_BY_WINNER_ID_STDDEV_SAMPLE_PROTOCOL_ID_ASC
   RANKINGS_BY_WINNER_ID_STDDEV_SAMPLE_PROTOCOL_ID_DESC
   RANKINGS_BY_WINNER_ID_STDDEV_SAMPLE_RANK_ASC
   RANKINGS_BY_WINNER_ID_STDDEV_SAMPLE_RANK_DESC
+  RANKINGS_BY_WINNER_ID_STDDEV_SAMPLE_SOUL_SCORE_ASC
+  RANKINGS_BY_WINNER_ID_STDDEV_SAMPLE_SOUL_SCORE_DESC
   RANKINGS_BY_WINNER_ID_STDDEV_SAMPLE_WINNER_ID_ASC
   RANKINGS_BY_WINNER_ID_STDDEV_SAMPLE_WINNER_ID_DESC
   RANKINGS_BY_WINNER_ID_SUM_PROTOCOL_ID_ASC
   RANKINGS_BY_WINNER_ID_SUM_PROTOCOL_ID_DESC
   RANKINGS_BY_WINNER_ID_SUM_RANK_ASC
   RANKINGS_BY_WINNER_ID_SUM_RANK_DESC
+  RANKINGS_BY_WINNER_ID_SUM_SOUL_SCORE_ASC
+  RANKINGS_BY_WINNER_ID_SUM_SOUL_SCORE_DESC
   RANKINGS_BY_WINNER_ID_SUM_WINNER_ID_ASC
   RANKINGS_BY_WINNER_ID_SUM_WINNER_ID_DESC
   RANKINGS_BY_WINNER_ID_VARIANCE_POPULATION_PROTOCOL_ID_ASC
   RANKINGS_BY_WINNER_ID_VARIANCE_POPULATION_PROTOCOL_ID_DESC
   RANKINGS_BY_WINNER_ID_VARIANCE_POPULATION_RANK_ASC
   RANKINGS_BY_WINNER_ID_VARIANCE_POPULATION_RANK_DESC
+  RANKINGS_BY_WINNER_ID_VARIANCE_POPULATION_SOUL_SCORE_ASC
+  RANKINGS_BY_WINNER_ID_VARIANCE_POPULATION_SOUL_SCORE_DESC
   RANKINGS_BY_WINNER_ID_VARIANCE_POPULATION_WINNER_ID_ASC
   RANKINGS_BY_WINNER_ID_VARIANCE_POPULATION_WINNER_ID_DESC
   RANKINGS_BY_WINNER_ID_VARIANCE_SAMPLE_PROTOCOL_ID_ASC
   RANKINGS_BY_WINNER_ID_VARIANCE_SAMPLE_PROTOCOL_ID_DESC
   RANKINGS_BY_WINNER_ID_VARIANCE_SAMPLE_RANK_ASC
   RANKINGS_BY_WINNER_ID_VARIANCE_SAMPLE_RANK_DESC
+  RANKINGS_BY_WINNER_ID_VARIANCE_SAMPLE_SOUL_SCORE_ASC
+  RANKINGS_BY_WINNER_ID_VARIANCE_SAMPLE_SOUL_SCORE_DESC
   RANKINGS_BY_WINNER_ID_VARIANCE_SAMPLE_WINNER_ID_ASC
   RANKINGS_BY_WINNER_ID_VARIANCE_SAMPLE_WINNER_ID_DESC
 }

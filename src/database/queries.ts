@@ -48,6 +48,14 @@ export const queryRecentWinnersByProtocol = gql`
   }
 `;
 
+export const queryRankings = gql`
+  query Rankings {
+    allRankingsList(orderBy: SOUL_SCORE_DESC) {
+      winnerId
+    }
+  }
+`;
+
 export const queryWinnersWithProtocolBadgeCountKnex = (protocolId: string) =>
   knex
     .from("earned_badges")
