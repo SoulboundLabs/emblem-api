@@ -3186,6 +3186,8 @@ enum ProtocolsOrderBy {
   RANKINGS_BY_PROTOCOL_ID_AVERAGE_PROTOCOL_ID_DESC
   RANKINGS_BY_PROTOCOL_ID_AVERAGE_RANK_ASC
   RANKINGS_BY_PROTOCOL_ID_AVERAGE_RANK_DESC
+  RANKINGS_BY_PROTOCOL_ID_AVERAGE_ROLE_ID_ASC
+  RANKINGS_BY_PROTOCOL_ID_AVERAGE_ROLE_ID_DESC
   RANKINGS_BY_PROTOCOL_ID_AVERAGE_SOUL_SCORE_ASC
   RANKINGS_BY_PROTOCOL_ID_AVERAGE_SOUL_SCORE_DESC
   RANKINGS_BY_PROTOCOL_ID_AVERAGE_WINNER_ID_ASC
@@ -3196,6 +3198,8 @@ enum ProtocolsOrderBy {
   RANKINGS_BY_PROTOCOL_ID_DISTINCT_COUNT_PROTOCOL_ID_DESC
   RANKINGS_BY_PROTOCOL_ID_DISTINCT_COUNT_RANK_ASC
   RANKINGS_BY_PROTOCOL_ID_DISTINCT_COUNT_RANK_DESC
+  RANKINGS_BY_PROTOCOL_ID_DISTINCT_COUNT_ROLE_ID_ASC
+  RANKINGS_BY_PROTOCOL_ID_DISTINCT_COUNT_ROLE_ID_DESC
   RANKINGS_BY_PROTOCOL_ID_DISTINCT_COUNT_SOUL_SCORE_ASC
   RANKINGS_BY_PROTOCOL_ID_DISTINCT_COUNT_SOUL_SCORE_DESC
   RANKINGS_BY_PROTOCOL_ID_DISTINCT_COUNT_WINNER_ID_ASC
@@ -3204,6 +3208,8 @@ enum ProtocolsOrderBy {
   RANKINGS_BY_PROTOCOL_ID_MAX_PROTOCOL_ID_DESC
   RANKINGS_BY_PROTOCOL_ID_MAX_RANK_ASC
   RANKINGS_BY_PROTOCOL_ID_MAX_RANK_DESC
+  RANKINGS_BY_PROTOCOL_ID_MAX_ROLE_ID_ASC
+  RANKINGS_BY_PROTOCOL_ID_MAX_ROLE_ID_DESC
   RANKINGS_BY_PROTOCOL_ID_MAX_SOUL_SCORE_ASC
   RANKINGS_BY_PROTOCOL_ID_MAX_SOUL_SCORE_DESC
   RANKINGS_BY_PROTOCOL_ID_MAX_WINNER_ID_ASC
@@ -3212,6 +3218,8 @@ enum ProtocolsOrderBy {
   RANKINGS_BY_PROTOCOL_ID_MIN_PROTOCOL_ID_DESC
   RANKINGS_BY_PROTOCOL_ID_MIN_RANK_ASC
   RANKINGS_BY_PROTOCOL_ID_MIN_RANK_DESC
+  RANKINGS_BY_PROTOCOL_ID_MIN_ROLE_ID_ASC
+  RANKINGS_BY_PROTOCOL_ID_MIN_ROLE_ID_DESC
   RANKINGS_BY_PROTOCOL_ID_MIN_SOUL_SCORE_ASC
   RANKINGS_BY_PROTOCOL_ID_MIN_SOUL_SCORE_DESC
   RANKINGS_BY_PROTOCOL_ID_MIN_WINNER_ID_ASC
@@ -3220,6 +3228,8 @@ enum ProtocolsOrderBy {
   RANKINGS_BY_PROTOCOL_ID_STDDEV_POPULATION_PROTOCOL_ID_DESC
   RANKINGS_BY_PROTOCOL_ID_STDDEV_POPULATION_RANK_ASC
   RANKINGS_BY_PROTOCOL_ID_STDDEV_POPULATION_RANK_DESC
+  RANKINGS_BY_PROTOCOL_ID_STDDEV_POPULATION_ROLE_ID_ASC
+  RANKINGS_BY_PROTOCOL_ID_STDDEV_POPULATION_ROLE_ID_DESC
   RANKINGS_BY_PROTOCOL_ID_STDDEV_POPULATION_SOUL_SCORE_ASC
   RANKINGS_BY_PROTOCOL_ID_STDDEV_POPULATION_SOUL_SCORE_DESC
   RANKINGS_BY_PROTOCOL_ID_STDDEV_POPULATION_WINNER_ID_ASC
@@ -3228,6 +3238,8 @@ enum ProtocolsOrderBy {
   RANKINGS_BY_PROTOCOL_ID_STDDEV_SAMPLE_PROTOCOL_ID_DESC
   RANKINGS_BY_PROTOCOL_ID_STDDEV_SAMPLE_RANK_ASC
   RANKINGS_BY_PROTOCOL_ID_STDDEV_SAMPLE_RANK_DESC
+  RANKINGS_BY_PROTOCOL_ID_STDDEV_SAMPLE_ROLE_ID_ASC
+  RANKINGS_BY_PROTOCOL_ID_STDDEV_SAMPLE_ROLE_ID_DESC
   RANKINGS_BY_PROTOCOL_ID_STDDEV_SAMPLE_SOUL_SCORE_ASC
   RANKINGS_BY_PROTOCOL_ID_STDDEV_SAMPLE_SOUL_SCORE_DESC
   RANKINGS_BY_PROTOCOL_ID_STDDEV_SAMPLE_WINNER_ID_ASC
@@ -3236,6 +3248,8 @@ enum ProtocolsOrderBy {
   RANKINGS_BY_PROTOCOL_ID_SUM_PROTOCOL_ID_DESC
   RANKINGS_BY_PROTOCOL_ID_SUM_RANK_ASC
   RANKINGS_BY_PROTOCOL_ID_SUM_RANK_DESC
+  RANKINGS_BY_PROTOCOL_ID_SUM_ROLE_ID_ASC
+  RANKINGS_BY_PROTOCOL_ID_SUM_ROLE_ID_DESC
   RANKINGS_BY_PROTOCOL_ID_SUM_SOUL_SCORE_ASC
   RANKINGS_BY_PROTOCOL_ID_SUM_SOUL_SCORE_DESC
   RANKINGS_BY_PROTOCOL_ID_SUM_WINNER_ID_ASC
@@ -3244,6 +3258,8 @@ enum ProtocolsOrderBy {
   RANKINGS_BY_PROTOCOL_ID_VARIANCE_POPULATION_PROTOCOL_ID_DESC
   RANKINGS_BY_PROTOCOL_ID_VARIANCE_POPULATION_RANK_ASC
   RANKINGS_BY_PROTOCOL_ID_VARIANCE_POPULATION_RANK_DESC
+  RANKINGS_BY_PROTOCOL_ID_VARIANCE_POPULATION_ROLE_ID_ASC
+  RANKINGS_BY_PROTOCOL_ID_VARIANCE_POPULATION_ROLE_ID_DESC
   RANKINGS_BY_PROTOCOL_ID_VARIANCE_POPULATION_SOUL_SCORE_ASC
   RANKINGS_BY_PROTOCOL_ID_VARIANCE_POPULATION_SOUL_SCORE_DESC
   RANKINGS_BY_PROTOCOL_ID_VARIANCE_POPULATION_WINNER_ID_ASC
@@ -3252,6 +3268,8 @@ enum ProtocolsOrderBy {
   RANKINGS_BY_PROTOCOL_ID_VARIANCE_SAMPLE_PROTOCOL_ID_DESC
   RANKINGS_BY_PROTOCOL_ID_VARIANCE_SAMPLE_RANK_ASC
   RANKINGS_BY_PROTOCOL_ID_VARIANCE_SAMPLE_RANK_DESC
+  RANKINGS_BY_PROTOCOL_ID_VARIANCE_SAMPLE_ROLE_ID_ASC
+  RANKINGS_BY_PROTOCOL_ID_VARIANCE_SAMPLE_ROLE_ID_DESC
   RANKINGS_BY_PROTOCOL_ID_VARIANCE_SAMPLE_SOUL_SCORE_ASC
   RANKINGS_BY_PROTOCOL_ID_VARIANCE_SAMPLE_SOUL_SCORE_DESC
   RANKINGS_BY_PROTOCOL_ID_VARIANCE_SAMPLE_WINNER_ID_ASC
@@ -3802,6 +3820,62 @@ type Query implements Node {
     orderBy: [TracksOrderBy!]
   ): [Track!]
 
+  """Reads and enables pagination through a set of `WinnerRole`."""
+  allWinnerRoles(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: WinnerRoleCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: WinnerRoleFilter
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `WinnerRole`."""
+    orderBy: [WinnerRolesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): WinnerRolesConnection
+
+  """Reads a set of `WinnerRole`."""
+  allWinnerRolesList(
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: WinnerRoleCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: WinnerRoleFilter
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Skip the first `n` values."""
+    offset: Int
+
+    """The method to use when ordering `WinnerRole`."""
+    orderBy: [WinnerRolesOrderBy!]
+  ): [WinnerRole!]
+
   """Reads and enables pagination through a set of `Winner`."""
   allWinners(
     """Read all values in the set after (below) this cursor."""
@@ -3924,7 +3998,7 @@ type Query implements Node {
     """The globally unique `ID` to be used in selecting a single `Ranking`."""
     nodeId: ID!
   ): Ranking
-  rankingByWinnerIdAndProtocolId(protocolId: String!, winnerId: String!): Ranking
+  rankingByWinnerIdAndProtocolIdAndRoleId(protocolId: String!, roleId: String!, winnerId: String!): Ranking
 
   """Reads a single `Role` using its globally unique `ID`."""
   role(
@@ -3947,6 +4021,15 @@ type Query implements Node {
     nodeId: ID!
   ): Winner
   winnerById(id: String!): Winner
+
+  """Reads a single `WinnerRole` using its globally unique `ID`."""
+  winnerRole(
+    """
+    The globally unique `ID` to be used in selecting a single `WinnerRole`.
+    """
+    nodeId: ID!
+  ): WinnerRole
+  winnerRoleByWinnerIdAndProtocolIdAndRoleId(protocolId: String!, roleId: String!, winnerId: String!): WinnerRole
 }
 
 type Ranking implements Node {
@@ -3959,7 +4042,11 @@ type Ranking implements Node {
   protocolByProtocolId: Protocol
   protocolId: String!
   rank: Int!
-  soulScore: Int
+
+  """Reads a single `Role` that is related to this `Ranking`."""
+  roleByRoleId: Role
+  roleId: String!
+  soulScore: Int!
 
   """Reads a single `Winner` that is related to this `Ranking`."""
   winnerByWinnerId: Winner
@@ -4074,6 +4161,9 @@ input RankingCondition {
   """Checks for equality with the object’s `rank` field."""
   rank: Int
 
+  """Checks for equality with the object’s `roleId` field."""
+  roleId: String
+
   """Checks for equality with the object’s `soulScore` field."""
   soulScore: Int
 
@@ -4084,6 +4174,7 @@ input RankingCondition {
 input RankingDistinctCountAggregateFilter {
   protocolId: BigIntFilter
   rank: BigIntFilter
+  roleId: BigIntFilter
   soulScore: BigIntFilter
   winnerId: BigIntFilter
 }
@@ -4094,6 +4185,9 @@ type RankingDistinctCountAggregates {
 
   """Distinct count of rank across the matching connection"""
   rank: BigInt
+
+  """Distinct count of roleId across the matching connection"""
+  roleId: BigInt
 
   """Distinct count of soulScore across the matching connection"""
   soulScore: BigInt
@@ -4123,6 +4217,12 @@ input RankingFilter {
 
   """Filter by the object’s `rank` field."""
   rank: IntFilter
+
+  """Filter by the object’s `roleByRoleId` relation."""
+  roleByRoleId: RoleFilter
+
+  """Filter by the object’s `roleId` field."""
+  roleId: StringFilter
 
   """Filter by the object’s `soulScore` field."""
   soulScore: IntFilter
@@ -4273,6 +4373,7 @@ type RankingsEdge {
 enum RankingsGroupBy {
   PROTOCOL_ID
   RANK
+  ROLE_ID
   SOUL_SCORE
   WINNER_ID
 }
@@ -4346,6 +4447,8 @@ enum RankingsOrderBy {
   PROTOCOL_ID_DESC
   RANK_ASC
   RANK_DESC
+  ROLE_ID_ASC
+  ROLE_ID_DESC
   SOUL_SCORE_ASC
   SOUL_SCORE_DESC
   WINNER_ID_ASC
@@ -4363,6 +4466,62 @@ type Role implements Node {
   """Reads a single `Protocol` that is related to this `Role`."""
   protocolByProtocolId: Protocol
   protocolId: String!
+
+  """Reads and enables pagination through a set of `Ranking`."""
+  rankingsByRoleId(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: RankingCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: RankingFilter
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """The method to use when ordering `Ranking`."""
+    orderBy: [RankingsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): RankingsConnection!
+
+  """Reads and enables pagination through a set of `Ranking`."""
+  rankingsByRoleIdList(
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: RankingCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: RankingFilter
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Skip the first `n` values."""
+    offset: Int
+
+    """The method to use when ordering `Ranking`."""
+    orderBy: [RankingsOrderBy!]
+  ): [Ranking!]!
 
   """Reads and enables pagination through a set of `Track`."""
   tracksByRoleId(
@@ -4486,11 +4645,40 @@ input RoleFilter {
   """Filter by the object’s `protocolId` field."""
   protocolId: StringFilter
 
+  """Filter by the object’s `rankingsByRoleId` relation."""
+  rankingsByRoleId: RoleToManyRankingFilter
+
+  """Some related `rankingsByRoleId` exist."""
+  rankingsByRoleIdExist: Boolean
+
   """Filter by the object’s `tracksByRoleId` relation."""
   tracksByRoleId: RoleToManyTrackFilter
 
   """Some related `tracksByRoleId` exist."""
   tracksByRoleIdExist: Boolean
+}
+
+"""
+A filter to be used against many `Ranking` object types. All fields are combined with a logical ‘and.’
+"""
+input RoleToManyRankingFilter {
+  """Aggregates across related `Ranking` match the filter criteria."""
+  aggregates: RankingAggregatesFilter
+
+  """
+  Every related `Ranking` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  every: RankingFilter
+
+  """
+  No related `Ranking` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  none: RankingFilter
+
+  """
+  Some related `Ranking` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  some: RankingFilter
 }
 
 """
@@ -4578,6 +4766,98 @@ enum RolesOrderBy {
   PRIMARY_KEY_DESC
   PROTOCOL_ID_ASC
   PROTOCOL_ID_DESC
+  RANKINGS_BY_ROLE_ID_AVERAGE_PROTOCOL_ID_ASC
+  RANKINGS_BY_ROLE_ID_AVERAGE_PROTOCOL_ID_DESC
+  RANKINGS_BY_ROLE_ID_AVERAGE_RANK_ASC
+  RANKINGS_BY_ROLE_ID_AVERAGE_RANK_DESC
+  RANKINGS_BY_ROLE_ID_AVERAGE_ROLE_ID_ASC
+  RANKINGS_BY_ROLE_ID_AVERAGE_ROLE_ID_DESC
+  RANKINGS_BY_ROLE_ID_AVERAGE_SOUL_SCORE_ASC
+  RANKINGS_BY_ROLE_ID_AVERAGE_SOUL_SCORE_DESC
+  RANKINGS_BY_ROLE_ID_AVERAGE_WINNER_ID_ASC
+  RANKINGS_BY_ROLE_ID_AVERAGE_WINNER_ID_DESC
+  RANKINGS_BY_ROLE_ID_COUNT_ASC
+  RANKINGS_BY_ROLE_ID_COUNT_DESC
+  RANKINGS_BY_ROLE_ID_DISTINCT_COUNT_PROTOCOL_ID_ASC
+  RANKINGS_BY_ROLE_ID_DISTINCT_COUNT_PROTOCOL_ID_DESC
+  RANKINGS_BY_ROLE_ID_DISTINCT_COUNT_RANK_ASC
+  RANKINGS_BY_ROLE_ID_DISTINCT_COUNT_RANK_DESC
+  RANKINGS_BY_ROLE_ID_DISTINCT_COUNT_ROLE_ID_ASC
+  RANKINGS_BY_ROLE_ID_DISTINCT_COUNT_ROLE_ID_DESC
+  RANKINGS_BY_ROLE_ID_DISTINCT_COUNT_SOUL_SCORE_ASC
+  RANKINGS_BY_ROLE_ID_DISTINCT_COUNT_SOUL_SCORE_DESC
+  RANKINGS_BY_ROLE_ID_DISTINCT_COUNT_WINNER_ID_ASC
+  RANKINGS_BY_ROLE_ID_DISTINCT_COUNT_WINNER_ID_DESC
+  RANKINGS_BY_ROLE_ID_MAX_PROTOCOL_ID_ASC
+  RANKINGS_BY_ROLE_ID_MAX_PROTOCOL_ID_DESC
+  RANKINGS_BY_ROLE_ID_MAX_RANK_ASC
+  RANKINGS_BY_ROLE_ID_MAX_RANK_DESC
+  RANKINGS_BY_ROLE_ID_MAX_ROLE_ID_ASC
+  RANKINGS_BY_ROLE_ID_MAX_ROLE_ID_DESC
+  RANKINGS_BY_ROLE_ID_MAX_SOUL_SCORE_ASC
+  RANKINGS_BY_ROLE_ID_MAX_SOUL_SCORE_DESC
+  RANKINGS_BY_ROLE_ID_MAX_WINNER_ID_ASC
+  RANKINGS_BY_ROLE_ID_MAX_WINNER_ID_DESC
+  RANKINGS_BY_ROLE_ID_MIN_PROTOCOL_ID_ASC
+  RANKINGS_BY_ROLE_ID_MIN_PROTOCOL_ID_DESC
+  RANKINGS_BY_ROLE_ID_MIN_RANK_ASC
+  RANKINGS_BY_ROLE_ID_MIN_RANK_DESC
+  RANKINGS_BY_ROLE_ID_MIN_ROLE_ID_ASC
+  RANKINGS_BY_ROLE_ID_MIN_ROLE_ID_DESC
+  RANKINGS_BY_ROLE_ID_MIN_SOUL_SCORE_ASC
+  RANKINGS_BY_ROLE_ID_MIN_SOUL_SCORE_DESC
+  RANKINGS_BY_ROLE_ID_MIN_WINNER_ID_ASC
+  RANKINGS_BY_ROLE_ID_MIN_WINNER_ID_DESC
+  RANKINGS_BY_ROLE_ID_STDDEV_POPULATION_PROTOCOL_ID_ASC
+  RANKINGS_BY_ROLE_ID_STDDEV_POPULATION_PROTOCOL_ID_DESC
+  RANKINGS_BY_ROLE_ID_STDDEV_POPULATION_RANK_ASC
+  RANKINGS_BY_ROLE_ID_STDDEV_POPULATION_RANK_DESC
+  RANKINGS_BY_ROLE_ID_STDDEV_POPULATION_ROLE_ID_ASC
+  RANKINGS_BY_ROLE_ID_STDDEV_POPULATION_ROLE_ID_DESC
+  RANKINGS_BY_ROLE_ID_STDDEV_POPULATION_SOUL_SCORE_ASC
+  RANKINGS_BY_ROLE_ID_STDDEV_POPULATION_SOUL_SCORE_DESC
+  RANKINGS_BY_ROLE_ID_STDDEV_POPULATION_WINNER_ID_ASC
+  RANKINGS_BY_ROLE_ID_STDDEV_POPULATION_WINNER_ID_DESC
+  RANKINGS_BY_ROLE_ID_STDDEV_SAMPLE_PROTOCOL_ID_ASC
+  RANKINGS_BY_ROLE_ID_STDDEV_SAMPLE_PROTOCOL_ID_DESC
+  RANKINGS_BY_ROLE_ID_STDDEV_SAMPLE_RANK_ASC
+  RANKINGS_BY_ROLE_ID_STDDEV_SAMPLE_RANK_DESC
+  RANKINGS_BY_ROLE_ID_STDDEV_SAMPLE_ROLE_ID_ASC
+  RANKINGS_BY_ROLE_ID_STDDEV_SAMPLE_ROLE_ID_DESC
+  RANKINGS_BY_ROLE_ID_STDDEV_SAMPLE_SOUL_SCORE_ASC
+  RANKINGS_BY_ROLE_ID_STDDEV_SAMPLE_SOUL_SCORE_DESC
+  RANKINGS_BY_ROLE_ID_STDDEV_SAMPLE_WINNER_ID_ASC
+  RANKINGS_BY_ROLE_ID_STDDEV_SAMPLE_WINNER_ID_DESC
+  RANKINGS_BY_ROLE_ID_SUM_PROTOCOL_ID_ASC
+  RANKINGS_BY_ROLE_ID_SUM_PROTOCOL_ID_DESC
+  RANKINGS_BY_ROLE_ID_SUM_RANK_ASC
+  RANKINGS_BY_ROLE_ID_SUM_RANK_DESC
+  RANKINGS_BY_ROLE_ID_SUM_ROLE_ID_ASC
+  RANKINGS_BY_ROLE_ID_SUM_ROLE_ID_DESC
+  RANKINGS_BY_ROLE_ID_SUM_SOUL_SCORE_ASC
+  RANKINGS_BY_ROLE_ID_SUM_SOUL_SCORE_DESC
+  RANKINGS_BY_ROLE_ID_SUM_WINNER_ID_ASC
+  RANKINGS_BY_ROLE_ID_SUM_WINNER_ID_DESC
+  RANKINGS_BY_ROLE_ID_VARIANCE_POPULATION_PROTOCOL_ID_ASC
+  RANKINGS_BY_ROLE_ID_VARIANCE_POPULATION_PROTOCOL_ID_DESC
+  RANKINGS_BY_ROLE_ID_VARIANCE_POPULATION_RANK_ASC
+  RANKINGS_BY_ROLE_ID_VARIANCE_POPULATION_RANK_DESC
+  RANKINGS_BY_ROLE_ID_VARIANCE_POPULATION_ROLE_ID_ASC
+  RANKINGS_BY_ROLE_ID_VARIANCE_POPULATION_ROLE_ID_DESC
+  RANKINGS_BY_ROLE_ID_VARIANCE_POPULATION_SOUL_SCORE_ASC
+  RANKINGS_BY_ROLE_ID_VARIANCE_POPULATION_SOUL_SCORE_DESC
+  RANKINGS_BY_ROLE_ID_VARIANCE_POPULATION_WINNER_ID_ASC
+  RANKINGS_BY_ROLE_ID_VARIANCE_POPULATION_WINNER_ID_DESC
+  RANKINGS_BY_ROLE_ID_VARIANCE_SAMPLE_PROTOCOL_ID_ASC
+  RANKINGS_BY_ROLE_ID_VARIANCE_SAMPLE_PROTOCOL_ID_DESC
+  RANKINGS_BY_ROLE_ID_VARIANCE_SAMPLE_RANK_ASC
+  RANKINGS_BY_ROLE_ID_VARIANCE_SAMPLE_RANK_DESC
+  RANKINGS_BY_ROLE_ID_VARIANCE_SAMPLE_ROLE_ID_ASC
+  RANKINGS_BY_ROLE_ID_VARIANCE_SAMPLE_ROLE_ID_DESC
+  RANKINGS_BY_ROLE_ID_VARIANCE_SAMPLE_SOUL_SCORE_ASC
+  RANKINGS_BY_ROLE_ID_VARIANCE_SAMPLE_SOUL_SCORE_DESC
+  RANKINGS_BY_ROLE_ID_VARIANCE_SAMPLE_WINNER_ID_ASC
+  RANKINGS_BY_ROLE_ID_VARIANCE_SAMPLE_WINNER_ID_DESC
   TRACKS_BY_ROLE_ID_AVERAGE_ID_ASC
   TRACKS_BY_ROLE_ID_AVERAGE_ID_DESC
   TRACKS_BY_ROLE_ID_AVERAGE_PROTOCOL_ID_ASC
@@ -5373,6 +5653,281 @@ input WinnerFilter {
   rankingsByWinnerIdExist: Boolean
 }
 
+type WinnerRole implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  protocolId: String!
+  roleId: String!
+  soulScore: Int!
+  winnerId: String!
+}
+
+type WinnerRoleAggregates {
+  """
+  Mean average aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  average: WinnerRoleAverageAggregates
+
+  """
+  Distinct count aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  distinctCount: WinnerRoleDistinctCountAggregates
+  keys: [String!]
+
+  """
+  Maximum aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  max: WinnerRoleMaxAggregates
+
+  """
+  Minimum aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  min: WinnerRoleMinAggregates
+
+  """
+  Population standard deviation aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  stddevPopulation: WinnerRoleStddevPopulationAggregates
+
+  """
+  Sample standard deviation aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  stddevSample: WinnerRoleStddevSampleAggregates
+
+  """
+  Sum aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  sum: WinnerRoleSumAggregates
+
+  """
+  Population variance aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  variancePopulation: WinnerRoleVariancePopulationAggregates
+
+  """
+  Sample variance aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  varianceSample: WinnerRoleVarianceSampleAggregates
+}
+
+type WinnerRoleAverageAggregates {
+  """Mean average of soulScore across the matching connection"""
+  soulScore: BigFloat
+}
+
+"""
+A condition to be used against `WinnerRole` object types. All fields are tested
+for equality and combined with a logical ‘and.’
+"""
+input WinnerRoleCondition {
+  """Checks for equality with the object’s `protocolId` field."""
+  protocolId: String
+
+  """Checks for equality with the object’s `roleId` field."""
+  roleId: String
+
+  """Checks for equality with the object’s `soulScore` field."""
+  soulScore: Int
+
+  """Checks for equality with the object’s `winnerId` field."""
+  winnerId: String
+}
+
+type WinnerRoleDistinctCountAggregates {
+  """Distinct count of protocolId across the matching connection"""
+  protocolId: BigInt
+
+  """Distinct count of roleId across the matching connection"""
+  roleId: BigInt
+
+  """Distinct count of soulScore across the matching connection"""
+  soulScore: BigInt
+
+  """Distinct count of winnerId across the matching connection"""
+  winnerId: BigInt
+}
+
+"""
+A filter to be used against `WinnerRole` object types. All fields are combined with a logical ‘and.’
+"""
+input WinnerRoleFilter {
+  """Checks for all expressions in this list."""
+  and: [WinnerRoleFilter!]
+
+  """Negates the expression."""
+  not: WinnerRoleFilter
+
+  """Checks for any expressions in this list."""
+  or: [WinnerRoleFilter!]
+
+  """Filter by the object’s `protocolId` field."""
+  protocolId: StringFilter
+
+  """Filter by the object’s `roleId` field."""
+  roleId: StringFilter
+
+  """Filter by the object’s `soulScore` field."""
+  soulScore: IntFilter
+
+  """Filter by the object’s `winnerId` field."""
+  winnerId: StringFilter
+}
+
+type WinnerRoleMaxAggregates {
+  """Maximum of soulScore across the matching connection"""
+  soulScore: Int
+}
+
+type WinnerRoleMinAggregates {
+  """Minimum of soulScore across the matching connection"""
+  soulScore: Int
+}
+
+type WinnerRoleStddevPopulationAggregates {
+  """
+  Population standard deviation of soulScore across the matching connection
+  """
+  soulScore: BigFloat
+}
+
+type WinnerRoleStddevSampleAggregates {
+  """Sample standard deviation of soulScore across the matching connection"""
+  soulScore: BigFloat
+}
+
+type WinnerRoleSumAggregates {
+  """Sum of soulScore across the matching connection"""
+  soulScore: BigInt!
+}
+
+type WinnerRoleVariancePopulationAggregates {
+  """Population variance of soulScore across the matching connection"""
+  soulScore: BigFloat
+}
+
+type WinnerRoleVarianceSampleAggregates {
+  """Sample variance of soulScore across the matching connection"""
+  soulScore: BigFloat
+}
+
+"""A connection to a list of `WinnerRole` values."""
+type WinnerRolesConnection {
+  """
+  Aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  aggregates: WinnerRoleAggregates
+
+  """
+  A list of edges which contains the `WinnerRole` and cursor to aid in pagination.
+  """
+  edges: [WinnerRolesEdge!]!
+
+  """
+  Grouped aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  groupedAggregates(
+    """The method to use when grouping `WinnerRole` for these aggregates."""
+    groupBy: [WinnerRolesGroupBy!]!
+
+    """Conditions on the grouped aggregates."""
+    having: WinnerRolesHavingInput
+  ): [WinnerRoleAggregates!]
+
+  """A list of `WinnerRole` objects."""
+  nodes: [WinnerRole!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `WinnerRole` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `WinnerRole` edge in the connection."""
+type WinnerRolesEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `WinnerRole` at the end of the edge."""
+  node: WinnerRole!
+}
+
+"""Grouping methods for `WinnerRole` for usage during aggregation."""
+enum WinnerRolesGroupBy {
+  PROTOCOL_ID
+  ROLE_ID
+  SOUL_SCORE
+  WINNER_ID
+}
+
+input WinnerRolesHavingAverageInput {
+  soulScore: HavingIntFilter
+}
+
+input WinnerRolesHavingDistinctCountInput {
+  soulScore: HavingIntFilter
+}
+
+"""Conditions for `WinnerRole` aggregates."""
+input WinnerRolesHavingInput {
+  AND: [WinnerRolesHavingInput!]
+  OR: [WinnerRolesHavingInput!]
+  average: WinnerRolesHavingAverageInput
+  distinctCount: WinnerRolesHavingDistinctCountInput
+  max: WinnerRolesHavingMaxInput
+  min: WinnerRolesHavingMinInput
+  stddevPopulation: WinnerRolesHavingStddevPopulationInput
+  stddevSample: WinnerRolesHavingStddevSampleInput
+  sum: WinnerRolesHavingSumInput
+  variancePopulation: WinnerRolesHavingVariancePopulationInput
+  varianceSample: WinnerRolesHavingVarianceSampleInput
+}
+
+input WinnerRolesHavingMaxInput {
+  soulScore: HavingIntFilter
+}
+
+input WinnerRolesHavingMinInput {
+  soulScore: HavingIntFilter
+}
+
+input WinnerRolesHavingStddevPopulationInput {
+  soulScore: HavingIntFilter
+}
+
+input WinnerRolesHavingStddevSampleInput {
+  soulScore: HavingIntFilter
+}
+
+input WinnerRolesHavingSumInput {
+  soulScore: HavingIntFilter
+}
+
+input WinnerRolesHavingVariancePopulationInput {
+  soulScore: HavingIntFilter
+}
+
+input WinnerRolesHavingVarianceSampleInput {
+  soulScore: HavingIntFilter
+}
+
+"""Methods to use when ordering `WinnerRole`."""
+enum WinnerRolesOrderBy {
+  NATURAL
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+  PROTOCOL_ID_ASC
+  PROTOCOL_ID_DESC
+  ROLE_ID_ASC
+  ROLE_ID_DESC
+  SOUL_SCORE_ASC
+  SOUL_SCORE_DESC
+  WINNER_ID_ASC
+  WINNER_ID_DESC
+}
+
 """
 A filter to be used against many `EarnedBadge` object types. All fields are combined with a logical ‘and.’
 """
@@ -5670,6 +6225,8 @@ enum WinnersOrderBy {
   RANKINGS_BY_WINNER_ID_AVERAGE_PROTOCOL_ID_DESC
   RANKINGS_BY_WINNER_ID_AVERAGE_RANK_ASC
   RANKINGS_BY_WINNER_ID_AVERAGE_RANK_DESC
+  RANKINGS_BY_WINNER_ID_AVERAGE_ROLE_ID_ASC
+  RANKINGS_BY_WINNER_ID_AVERAGE_ROLE_ID_DESC
   RANKINGS_BY_WINNER_ID_AVERAGE_SOUL_SCORE_ASC
   RANKINGS_BY_WINNER_ID_AVERAGE_SOUL_SCORE_DESC
   RANKINGS_BY_WINNER_ID_AVERAGE_WINNER_ID_ASC
@@ -5680,6 +6237,8 @@ enum WinnersOrderBy {
   RANKINGS_BY_WINNER_ID_DISTINCT_COUNT_PROTOCOL_ID_DESC
   RANKINGS_BY_WINNER_ID_DISTINCT_COUNT_RANK_ASC
   RANKINGS_BY_WINNER_ID_DISTINCT_COUNT_RANK_DESC
+  RANKINGS_BY_WINNER_ID_DISTINCT_COUNT_ROLE_ID_ASC
+  RANKINGS_BY_WINNER_ID_DISTINCT_COUNT_ROLE_ID_DESC
   RANKINGS_BY_WINNER_ID_DISTINCT_COUNT_SOUL_SCORE_ASC
   RANKINGS_BY_WINNER_ID_DISTINCT_COUNT_SOUL_SCORE_DESC
   RANKINGS_BY_WINNER_ID_DISTINCT_COUNT_WINNER_ID_ASC
@@ -5688,6 +6247,8 @@ enum WinnersOrderBy {
   RANKINGS_BY_WINNER_ID_MAX_PROTOCOL_ID_DESC
   RANKINGS_BY_WINNER_ID_MAX_RANK_ASC
   RANKINGS_BY_WINNER_ID_MAX_RANK_DESC
+  RANKINGS_BY_WINNER_ID_MAX_ROLE_ID_ASC
+  RANKINGS_BY_WINNER_ID_MAX_ROLE_ID_DESC
   RANKINGS_BY_WINNER_ID_MAX_SOUL_SCORE_ASC
   RANKINGS_BY_WINNER_ID_MAX_SOUL_SCORE_DESC
   RANKINGS_BY_WINNER_ID_MAX_WINNER_ID_ASC
@@ -5696,6 +6257,8 @@ enum WinnersOrderBy {
   RANKINGS_BY_WINNER_ID_MIN_PROTOCOL_ID_DESC
   RANKINGS_BY_WINNER_ID_MIN_RANK_ASC
   RANKINGS_BY_WINNER_ID_MIN_RANK_DESC
+  RANKINGS_BY_WINNER_ID_MIN_ROLE_ID_ASC
+  RANKINGS_BY_WINNER_ID_MIN_ROLE_ID_DESC
   RANKINGS_BY_WINNER_ID_MIN_SOUL_SCORE_ASC
   RANKINGS_BY_WINNER_ID_MIN_SOUL_SCORE_DESC
   RANKINGS_BY_WINNER_ID_MIN_WINNER_ID_ASC
@@ -5704,6 +6267,8 @@ enum WinnersOrderBy {
   RANKINGS_BY_WINNER_ID_STDDEV_POPULATION_PROTOCOL_ID_DESC
   RANKINGS_BY_WINNER_ID_STDDEV_POPULATION_RANK_ASC
   RANKINGS_BY_WINNER_ID_STDDEV_POPULATION_RANK_DESC
+  RANKINGS_BY_WINNER_ID_STDDEV_POPULATION_ROLE_ID_ASC
+  RANKINGS_BY_WINNER_ID_STDDEV_POPULATION_ROLE_ID_DESC
   RANKINGS_BY_WINNER_ID_STDDEV_POPULATION_SOUL_SCORE_ASC
   RANKINGS_BY_WINNER_ID_STDDEV_POPULATION_SOUL_SCORE_DESC
   RANKINGS_BY_WINNER_ID_STDDEV_POPULATION_WINNER_ID_ASC
@@ -5712,6 +6277,8 @@ enum WinnersOrderBy {
   RANKINGS_BY_WINNER_ID_STDDEV_SAMPLE_PROTOCOL_ID_DESC
   RANKINGS_BY_WINNER_ID_STDDEV_SAMPLE_RANK_ASC
   RANKINGS_BY_WINNER_ID_STDDEV_SAMPLE_RANK_DESC
+  RANKINGS_BY_WINNER_ID_STDDEV_SAMPLE_ROLE_ID_ASC
+  RANKINGS_BY_WINNER_ID_STDDEV_SAMPLE_ROLE_ID_DESC
   RANKINGS_BY_WINNER_ID_STDDEV_SAMPLE_SOUL_SCORE_ASC
   RANKINGS_BY_WINNER_ID_STDDEV_SAMPLE_SOUL_SCORE_DESC
   RANKINGS_BY_WINNER_ID_STDDEV_SAMPLE_WINNER_ID_ASC
@@ -5720,6 +6287,8 @@ enum WinnersOrderBy {
   RANKINGS_BY_WINNER_ID_SUM_PROTOCOL_ID_DESC
   RANKINGS_BY_WINNER_ID_SUM_RANK_ASC
   RANKINGS_BY_WINNER_ID_SUM_RANK_DESC
+  RANKINGS_BY_WINNER_ID_SUM_ROLE_ID_ASC
+  RANKINGS_BY_WINNER_ID_SUM_ROLE_ID_DESC
   RANKINGS_BY_WINNER_ID_SUM_SOUL_SCORE_ASC
   RANKINGS_BY_WINNER_ID_SUM_SOUL_SCORE_DESC
   RANKINGS_BY_WINNER_ID_SUM_WINNER_ID_ASC
@@ -5728,6 +6297,8 @@ enum WinnersOrderBy {
   RANKINGS_BY_WINNER_ID_VARIANCE_POPULATION_PROTOCOL_ID_DESC
   RANKINGS_BY_WINNER_ID_VARIANCE_POPULATION_RANK_ASC
   RANKINGS_BY_WINNER_ID_VARIANCE_POPULATION_RANK_DESC
+  RANKINGS_BY_WINNER_ID_VARIANCE_POPULATION_ROLE_ID_ASC
+  RANKINGS_BY_WINNER_ID_VARIANCE_POPULATION_ROLE_ID_DESC
   RANKINGS_BY_WINNER_ID_VARIANCE_POPULATION_SOUL_SCORE_ASC
   RANKINGS_BY_WINNER_ID_VARIANCE_POPULATION_SOUL_SCORE_DESC
   RANKINGS_BY_WINNER_ID_VARIANCE_POPULATION_WINNER_ID_ASC
@@ -5736,6 +6307,8 @@ enum WinnersOrderBy {
   RANKINGS_BY_WINNER_ID_VARIANCE_SAMPLE_PROTOCOL_ID_DESC
   RANKINGS_BY_WINNER_ID_VARIANCE_SAMPLE_RANK_ASC
   RANKINGS_BY_WINNER_ID_VARIANCE_SAMPLE_RANK_DESC
+  RANKINGS_BY_WINNER_ID_VARIANCE_SAMPLE_ROLE_ID_ASC
+  RANKINGS_BY_WINNER_ID_VARIANCE_SAMPLE_ROLE_ID_DESC
   RANKINGS_BY_WINNER_ID_VARIANCE_SAMPLE_SOUL_SCORE_ASC
   RANKINGS_BY_WINNER_ID_VARIANCE_SAMPLE_SOUL_SCORE_DESC
   RANKINGS_BY_WINNER_ID_VARIANCE_SAMPLE_WINNER_ID_ASC

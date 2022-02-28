@@ -45,31 +45,6 @@ export const upsertRole = gql`
   }
 `;
 
-export const upsertWinnerRole = gql`
-  mutation UpsertRole(
-    $winnerId: String!
-    $protocolId: String!
-    $roleId: String!
-    $soulScore: Int!
-  ) {
-    upsertWinnerRole(
-      input: {
-        winnerRole: {
-          winnerId: $winnerId
-          protocolId: $protocolId
-          roleId: $roleId
-          soulScore: $soulScore
-        }
-      }
-    ) {
-      winnerRole {
-        winnerId
-        protocolId
-      }
-    }
-  }
-`;
-
 export const upsertWinner = gql`
   mutation UpsertWinnner(
     $id: String!
@@ -93,11 +68,14 @@ export const upsertRanking = gql`
     $winnerId: String!
     $protocolId: String!
     $soulScore: Int!
+    $roleId: String
     $rank: Int!
   ) {
     upsertRanking(
+      where: { roleId: $roleId, winnerId: $winnerId, protocolId: $protocolId }
       input: {
         ranking: {
+          roleId: $roleId
           winnerId: $winnerId
           protocolId: $protocolId
           rank: $rank
@@ -111,6 +89,16 @@ export const upsertRanking = gql`
     }
   }
 `;
+
+export const upsertRankingKnex = (
+  knex,
+  { winnerId, protocolId, soulScore, roleId, rank }
+) => {
+  return knex("rankings").upsert([
+    { winnerId, protocolId, roleId },
+    { winnerId, protocolId, soulScore, roleId, rank },
+  ]);
+};
 
 export const upsertEarnedBadge = gql`
   mutation UpsertEarnedBadge(

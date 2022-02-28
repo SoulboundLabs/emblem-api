@@ -40,6 +40,7 @@ export const queryRankings = gql`
       winnerId
       soulScore
       protocolId
+      roleId
       rank
     }
   }

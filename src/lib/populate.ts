@@ -7,7 +7,6 @@ import {
   upsertRole,
   upsertTrack,
   upsertWinner,
-  upsertWinnerRole,
 } from "../database/mutations";
 import {
   queryLastEarnedBadge,
@@ -73,7 +72,7 @@ export const populateBadgeTracksAndDefinitions = async (
     });
 
     await queryRunner.query(upsertTrack, {
-      id: definition.trackId,
+      id: trackId,
       protocolId,
       roleId: role,
     });
@@ -131,12 +130,6 @@ export const populateBadgesAndWinners = async (
     await queryRunner.query(upsertWinner, {
       id: winnerId,
     });
-    await queryRunner.query(upsertRanking, {
-      winnerId,
-      soulScore: totalSoulScore,
-      protocolId,
-      rank: 0,
-    });
 
     await queryRunner.query(upsertEarnedBadge, {
       ...earnedBadge,
@@ -145,15 +138,25 @@ export const populateBadgesAndWinners = async (
       winnerId,
     });
 
+    /* Cross-Protocol Ranking */
+    await queryRunner.query(upsertRanking, {
+      winnerId,
+      soulScore: totalSoulScore,
+      protocolId,
+      rank: 0,
+    });
+
+    /* Individual Role Rankings */
     for (const role of earnedBadge.badgeWinner.roles) {
       const roleId = role.protocolRole;
       const soulScore = Number(role.soulScore) || 0;
 
-      await queryRunner.query(upsertWinnerRole, {
+      await queryRunner.query(upsertRanking, {
         winnerId,
         roleId,
         soulScore,
         protocolId,
+        rank: 0,
       });
     }
   }
@@ -165,6 +168,7 @@ export const populateWinnerRank = async (
   protocolId: string,
   queryRunner: any
 ) => {
+  console.log("Populating winner rankings");
   const { data } = await queryRunner.query(queryRankings, {
     protocolId,
   });
