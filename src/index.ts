@@ -45,6 +45,10 @@ async function main() {
     console.log("Finished!");
   } catch (e) {
     console.error(e);
+    console.trace(
+      "It is difficult to get a man to understand something when his salary depends upon his not understanding it."
+    );
+
     exit(1);
   } finally {
     exit(0);

@@ -38,6 +38,9 @@ export const queryRankings = gql`
   query Rankings {
     allRankingsList(orderBy: SOUL_SCORE_DESC) {
       winnerId
+      soulScore
+      protocolId
+      rank
     }
   }
 `;

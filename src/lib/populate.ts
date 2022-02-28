@@ -172,8 +172,7 @@ export const populateWinnerRank = async (
   const winnerRankings = data.allRankingsList.map(
     (ranking: Ranking, i: number) =>
       queryRunner.query(upsertRanking, {
-        winnerId: ranking.winnerId,
-        protocolId: protocolId,
+        ...ranking,
         rank: i + 1,
       })
   );
