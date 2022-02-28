@@ -75,6 +75,11 @@ export interface ProtocolRole {
   soulScore: number;
 }
 
+export interface Role {
+  id: string;
+  protocolId: string;
+}
+
 export interface BadgeTrack {
   id: string;
   badgeDefinitions: BadgeDefinition[];

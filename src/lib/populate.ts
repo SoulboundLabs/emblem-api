@@ -10,8 +10,10 @@ import {
 } from "../database/mutations";
 import {
   queryLastEarnedBadge,
-  queryRankings,
+  queryProtocolRankings,
   queryRecentWinnersByProtocol,
+  queryRoleRankings,
+  queryRoles,
 } from "../database/queries";
 import {
   queryAllBadgeDefinitions,
@@ -23,6 +25,7 @@ import {
   EarnedBadge,
   GraphAccount,
   Ranking,
+  Role,
   Winner,
 } from "../types";
 import {
@@ -169,22 +172,38 @@ export const populateWinnerRank = async (
   queryRunner: any
 ) => {
   console.log("Populating winner rankings");
-  const { data } = await queryRunner.query(queryRankings, {
+
+  const rolesResponse = await queryRunner.query(queryRoles, {
     protocolId,
   });
 
-  const winnerRankings = data.allRankingsList.map(
-    (ranking: Ranking, i: number) =>
-      upsertRankingKnex({
-        winner_id: ranking.winnerId,
-        protocol_id: protocolId,
-        soul_score: ranking.soulScore,
-        role_id: ranking.roleId,
-        rank: i + 1,
-      })
-  );
+  const roles = rolesResponse.data.allRolesList.map((role: Role) => role.id);
 
-  await Promise.all(winnerRankings);
+  const updateLeaderboardRankings = async (query: string, role?: string) => {
+    const { data } = await queryRunner.query(query, {
+      protocolId,
+      roleId: role,
+    });
+
+    const winnerRankings = data.allRankingsList.map(
+      (ranking: Ranking, i: number) =>
+        upsertRankingKnex({
+          winner_id: ranking.winnerId,
+          protocol_id: protocolId,
+          soul_score: ranking.soulScore,
+          role_id: ranking.roleId,
+          rank: i + 1,
+        })
+    );
+
+    return await Promise.all(winnerRankings);
+  };
+
+  updateLeaderboardRankings(queryProtocolRankings);
+
+  for (const role of roles) {
+    await updateLeaderboardRankings(queryRoleRankings, role);
+  }
 };
 
 export const populateWinnerEns = async (

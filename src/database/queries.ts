@@ -34,14 +34,43 @@ export const queryRecentWinnersByProtocol = gql`
   }
 `;
 
-export const queryRankings = gql`
-  query Rankings {
-    allRankingsList(orderBy: SOUL_SCORE_DESC) {
+export const queryRoleRankings = gql`
+  query Rankings($protocolId: String!, $roleId: String) {
+    allRankingsList(
+      orderBy: SOUL_SCORE_DESC
+      filter: {
+        protocolId: { equalTo: $protocolId }
+        roleId: { equalTo: $roleId }
+      }
+    ) {
       winnerId
       soulScore
       protocolId
       roleId
       rank
+    }
+  }
+`;
+
+export const queryProtocolRankings = gql`
+  query Rankings($protocolId: String!) {
+    allRankingsList(
+      orderBy: SOUL_SCORE_DESC
+      filter: { protocolId: { equalTo: $protocolId }, roleId: { isNull: true } }
+    ) {
+      winnerId
+      soulScore
+      protocolId
+      roleId
+      rank
+    }
+  }
+`;
+
+export const queryRoles = gql`
+  query Roles($protocolId: String!) {
+    allRolesList(filter: { protocolId: { equalTo: $protocolId } }) {
+      id
     }
   }
 `;
