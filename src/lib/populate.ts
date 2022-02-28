@@ -3,7 +3,6 @@ import {
   upsertBadgeDefinition,
   upsertEarnedBadge,
   upsertProtocol,
-  upsertRanking,
   upsertRankingKnex,
   upsertRole,
   upsertTrack,
@@ -176,8 +175,11 @@ export const populateWinnerRank = async (
 
   const winnerRankings = data.allRankingsList.map(
     (ranking: Ranking, i: number) =>
-      queryRunner.query(upsertRanking, {
-        ...ranking,
+      upsertRankingKnex({
+        winner_id: ranking.winnerId,
+        protocol_id: protocolId,
+        soul_score: ranking.soulScore,
+        role_id: ranking.roleId,
         rank: i + 1,
       })
   );

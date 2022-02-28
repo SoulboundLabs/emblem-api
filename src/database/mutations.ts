@@ -119,7 +119,7 @@ export const upsertRankingKnex = ({
   return upsert(
     "rankings",
     { winner_id, protocol_id, soul_score, role_id, rank },
-    "rankings_unique"
+    "(winner_id, protocol_id, COALESCE(role_id, 'null'))"
   );
 };
 

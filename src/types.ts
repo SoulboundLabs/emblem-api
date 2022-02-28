@@ -33,8 +33,9 @@ export interface GraphAccount {
 
 export interface Ranking {
   winnerId: string;
+  roleId: string;
   protocolId: string;
-  soulScore: string;
+  soulScore: number;
   rank: number;
 }
 

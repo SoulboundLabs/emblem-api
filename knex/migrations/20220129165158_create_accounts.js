@@ -73,7 +73,7 @@ const createEarnedBadges = (knex) => {
 
 const createUniqueIndexForRankings = async (knex) => {
   await knex.schema.raw(
-    `CREATE UNIQUE INDEX rankings_unique ON rankings (winner_id, protocol_id, COALESCE(role_id, 'PROTOCOL_ROLE_DEFAULT'))`
+    `CREATE UNIQUE INDEX rankings_unique ON rankings (winner_id, protocol_id, COALESCE(role_id, 'null'))`
   );
 };
 
