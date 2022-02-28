@@ -27,9 +27,8 @@ const createRankings = (knex) => {
     table.string("winner_id").references("winners.id").notNullable();
     table.string("protocol_id").references("protocols.id").notNullable();
     table.integer("soul_score").notNullable();
-    table.string("role_id").references("roles.id").notNullable();
+    table.string("role_id").references("roles.id");
     table.integer("rank").notNullable();
-    table.unique(["winner_id", "protocol_id", "role_id"]);
   });
 };
 
@@ -72,6 +71,12 @@ const createEarnedBadges = (knex) => {
   });
 };
 
+const createUniqueIndexForRankings = async (knex) => {
+  await knex.schema.raw(
+    `CREATE UNIQUE INDEX rankings_unique ON rankings (winner_id, protocol_id, COALESCE(role_id, 'PROTOCOL_ROLE_DEFAULT'))`
+  );
+};
+
 exports.up = async function (knex) {
   await createWinners(knex);
   await createProtocols(knex);
@@ -82,6 +87,7 @@ exports.up = async function (knex) {
   await createRankings(knex);
   await createDefinitions(knex);
   await createEarnedBadges(knex);
+  await createUniqueIndexForRankings(knex);
   return true;
 };
 

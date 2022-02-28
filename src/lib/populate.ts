@@ -4,6 +4,7 @@ import {
   upsertEarnedBadge,
   upsertProtocol,
   upsertRanking,
+  upsertRankingKnex,
   upsertRole,
   upsertTrack,
   upsertWinner,
@@ -139,10 +140,10 @@ export const populateBadgesAndWinners = async (
     });
 
     /* Cross-Protocol Ranking */
-    await queryRunner.query(upsertRanking, {
-      winnerId,
-      soulScore: totalSoulScore,
-      protocolId,
+    await upsertRankingKnex({
+      winner_id: winnerId,
+      soul_score: totalSoulScore,
+      protocol_id: protocolId,
       rank: 0,
     });
 
@@ -151,11 +152,11 @@ export const populateBadgesAndWinners = async (
       const roleId = role.protocolRole;
       const soulScore = Number(role.soulScore) || 0;
 
-      await queryRunner.query(upsertRanking, {
-        winnerId,
-        roleId,
-        soulScore,
-        protocolId,
+      await upsertRankingKnex({
+        winner_id: winnerId,
+        role_id: roleId,
+        soul_score: soulScore,
+        protocol_id: protocolId,
         rank: 0,
       });
     }

@@ -1,5 +1,5 @@
 import { gql } from "graphql-request";
-
+import knex from "../../knex/knex";
 export const upsertAccount = gql`
   mutation UpsertAccount($ens: String) {
     upsertAccount(input: { account: { id: "55", ens: $ens } }) {
@@ -90,14 +90,37 @@ export const upsertRanking = gql`
   }
 `;
 
-export const upsertRankingKnex = (
-  knex,
-  { winnerId, protocolId, soulScore, roleId, rank }
+const upsert = (
+  table: string,
+  object: Record<string, any>,
+  constraint: string
 ) => {
-  return knex("rankings").upsert([
-    { winnerId, protocolId, roleId },
-    { winnerId, protocolId, soulScore, roleId, rank },
+  const insert = knex(table).insert(object);
+  const update = knex.queryBuilder().update(object);
+  return knex.raw(`? ON CONFLICT ${constraint} DO ? returning *`, [
+    insert,
+    update,
   ]);
+};
+
+export const upsertRankingKnex = ({
+  winner_id,
+  protocol_id,
+  soul_score,
+  role_id,
+  rank,
+}: {
+  winner_id: string;
+  protocol_id: string;
+  soul_score: number;
+  role_id?: string;
+  rank: number;
+}) => {
+  return upsert(
+    "rankings",
+    { winner_id, protocol_id, soul_score, role_id, rank },
+    "rankings_unique"
+  );
 };
 
 export const upsertEarnedBadge = gql`
