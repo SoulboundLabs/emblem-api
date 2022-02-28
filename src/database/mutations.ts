@@ -45,6 +45,31 @@ export const upsertRole = gql`
   }
 `;
 
+export const upsertWinnerRole = gql`
+  mutation UpsertRole(
+    $winnerId: String!
+    $protocolId: String!
+    $roleId: String!
+    $soulScore: Int!
+  ) {
+    upsertWinnerRole(
+      input: {
+        winnerRole: {
+          winnerId: $winnerId
+          protocolId: $protocolId
+          roleId: $roleId
+          soulScore: $soulScore
+        }
+      }
+    ) {
+      winnerRole {
+        winnerId
+        protocolId
+      }
+    }
+  }
+`;
+
 export const upsertWinner = gql`
   mutation UpsertWinnner(
     $id: String!
@@ -67,7 +92,7 @@ export const upsertRanking = gql`
   mutation UpsertRankings(
     $winnerId: String!
     $protocolId: String!
-    $soulScore: Int
+    $soulScore: Int!
     $rank: Int!
   ) {
     upsertRanking(

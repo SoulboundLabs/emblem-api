@@ -9,8 +9,8 @@ import {
 import { makeQueryRunner } from "./database/query-runner";
 import { THE_GRAPH } from "./lib/constants";
 import {
+  populateBadgesAndWinners,
   populateBadgeTracksAndDefinitions,
-  populateEarnedBadges,
   populateWinnerEns,
   populateWinnerRank,
   populateWinnersGraphDisplayName,
@@ -36,7 +36,7 @@ async function main() {
       getPostgraphileOptions({ isMiddleware: false })
     );
     await populateBadgeTracksAndDefinitions(protocol, queryRunner);
-    await populateEarnedBadges(protocol, queryRunner);
+    await populateBadgesAndWinners(protocol, queryRunner);
     await populateWinnerRank(protocol, queryRunner);
     await populateWinnerEns(protocol, queryRunner);
     await populateWinnersGraphDisplayName(protocol, queryRunner);

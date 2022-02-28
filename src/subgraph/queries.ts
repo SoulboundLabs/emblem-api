@@ -26,6 +26,7 @@ export const queryAllBadgeTracks = gql`
       badgeDefinitions {
         id
         description
+        protocolRole
         image
         awardCount
       }
@@ -41,6 +42,7 @@ export const queryAllBadgeDefinitions = gql`
         id
       }
       threshold
+      protocolRole
       soulScore
       ipfsURI
       description
@@ -61,6 +63,10 @@ export const queryAllEarnedBadges = gql`
         badgeWinner {
           id
           soulScore 
+          roles {
+            protocolRole
+            soulScore
+          }
         }
         metadata {
           name

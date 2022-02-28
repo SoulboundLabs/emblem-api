@@ -44,6 +44,7 @@ export interface Winner {
   rank: number | null;
   badges: EarnedBadge[];
   soulScore: number;
+  roles: ProtocolRole[];
   ens?: string;
   protocolRoles: string[];
   lastEarnedBadge: EarnedBadge;
@@ -57,6 +58,7 @@ export interface BadgeDefinition {
   threshold: number;
   ipfsURI?: string;
   soulScore?: number;
+  protocolRole: string;
   trackId?: string;
   // awardCount: number;
   // winnerCount?: number;
@@ -64,6 +66,12 @@ export interface BadgeDefinition {
 
 export interface Metric {
   id: string;
+}
+
+export interface ProtocolRole {
+  role: string;
+  protocolRole: string;
+  soulScore: number;
 }
 
 export interface BadgeTrack {

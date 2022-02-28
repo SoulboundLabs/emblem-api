@@ -21,11 +21,21 @@ const createRoles = (knex) => {
   });
 };
 
+const createWinnerRoles = (knex) => {
+  return knex.schema.createTable("winner_roles", (table) => {
+    table.string("protocol_id").references("protocols.id").notNullable();
+    table.string("winner_id").references("winners.id").notNullable();
+    table.string("role_id").references("roles.id").notNullable();
+    table.integer("soul_score").notNullable();
+    table.primary(["winner_id", "protocol_id", "role_id"]);
+  });
+};
+
 const createRankings = (knex) => {
   return knex.schema.createTable("rankings", (table) => {
     table.string("winner_id").references("winners.id").notNullable();
     table.string("protocol_id").references("protocols.id").notNullable();
-    table.integer("soul_score");
+    table.integer("soul_score").notNullable();
     table.integer("rank").notNullable();
     table.primary(["winner_id", "protocol_id"]);
   });
@@ -74,6 +84,7 @@ exports.up = async function (knex) {
   await createWinners(knex);
   await createProtocols(knex);
   await createRoles(knex);
+  await createWinnerRoles(knex);
 
   await createTracks(knex);
 
@@ -86,6 +97,7 @@ exports.up = async function (knex) {
 const tables = [
   "winners",
   "protocols",
+  "winner_roles",
   "rankings",
   "roles",
   "definitions",

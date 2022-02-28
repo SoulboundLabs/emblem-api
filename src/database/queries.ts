@@ -14,20 +14,6 @@ export const queryLastEarnedBadge = gql`
   }
 `;
 
-// export const queryWinnersByProtocol = gql`
-//   query WinnerByProtocol($protocolId: String!) {
-//     allWinnersList(
-//       filter: {
-//         earnedBadgesByWinnerId: {
-//           some: { protocolId: { equalTo: $protocolId } }
-//         }
-//       }
-//     ) {
-//       id
-//     }
-//   }
-// `;
-
 export const queryRecentWinnersByProtocol = gql`
   query RecentWinnerByProtocol($protocolId: String!) {
     allWinnersList(

@@ -1,5 +1,4 @@
 import { chunk, flattenDeep } from "lodash";
-import { rolesByTrack } from "../data/track-roles";
 import {
   upsertBadgeDefinition,
   upsertEarnedBadge,
@@ -8,6 +7,7 @@ import {
   upsertRole,
   upsertTrack,
   upsertWinner,
+  upsertWinnerRole,
 } from "../database/mutations";
 import {
   queryLastEarnedBadge,
@@ -65,7 +65,7 @@ export const populateBadgeTracksAndDefinitions = async (
     const metric = definition.metric.id;
     const threshold = Number(definition.threshold);
     const soulScore = Number(definition.soulScore);
-    const role = rolesByTrack[protocolId][trackId];
+    const role = definition.protocolRole;
 
     await queryRunner.query(upsertRole, {
       id: role,
@@ -88,7 +88,7 @@ export const populateBadgeTracksAndDefinitions = async (
   }
 };
 
-export const populateEarnedBadges = async (
+export const populateBadgesAndWinners = async (
   protocolId: string,
   queryRunner: any
 ) => {
@@ -124,21 +124,38 @@ export const populateEarnedBadges = async (
   );
 
   for (const earnedBadge of earnedBadges) {
+    const winnerId = earnedBadge.badgeWinner.id;
+    const totalSoulScore = Number(earnedBadge.badgeWinner.soulScore);
+    const definitionId = earnedBadge.definitionId;
+
     await queryRunner.query(upsertWinner, {
-      id: earnedBadge.badgeWinner.id,
+      id: winnerId,
     });
     await queryRunner.query(upsertRanking, {
-      winnerId: earnedBadge.badgeWinner.id,
-      soulScore: Number(earnedBadge.badgeWinner.soulScore),
+      winnerId,
+      soulScore: totalSoulScore,
       protocolId,
       rank: 0,
     });
+
     await queryRunner.query(upsertEarnedBadge, {
       ...earnedBadge,
       protocolId,
-      definitionId: earnedBadge.definition.id,
-      winnerId: earnedBadge.badgeWinner.id,
+      definitionId,
+      winnerId,
     });
+
+    for (const role of earnedBadge.badgeWinner.roles) {
+      const roleId = role.protocolRole;
+      const soulScore = Number(role.soulScore) || 0;
+
+      await queryRunner.query(upsertWinnerRole, {
+        winnerId,
+        roleId,
+        soulScore,
+        protocolId,
+      });
+    }
   }
 
   return earnedBadges;
@@ -148,7 +165,6 @@ export const populateWinnerRank = async (
   protocolId: string,
   queryRunner: any
 ) => {
-  console.log("Populating winner rank");
   const { data } = await queryRunner.query(queryRankings, {
     protocolId,
   });
